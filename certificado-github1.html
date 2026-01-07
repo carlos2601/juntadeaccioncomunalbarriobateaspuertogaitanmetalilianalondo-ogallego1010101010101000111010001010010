@@ -325,7 +325,7 @@
             to { transform: rotate(360deg); }
         }
         
-        /* Certificado styles */
+        /* Certificado styles - RESTAURADO EL OPACITY ORIGINAL */
         #contenido-certificado {
             font-family: Tahoma, sans-serif;
             width: 210mm;
@@ -349,7 +349,7 @@
             width: 100%;
             height: 100%;
             z-index: 1;
-            opacity: 0.1;
+            opacity: 0.5; /* RESTAURADO A 0.5 (50% de opacidad) como estaba originalmente */
             background-position: center;
             background-repeat: no-repeat;
             background-size: contain;
@@ -492,17 +492,23 @@
                 page-break-inside: avoid;
             }
             
-            .btn, .header, .search-container, .options-container, .edit-form,
-            .whatsapp-modal, .loading-overlay {
-                display: none !important;
+            /* IMPORTANTE: Forzar opacidad en impresión */
+            .certificado-background {
+                opacity: 0.5 !important; /* Misma opacidad que en pantalla */
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
             }
             
-            /* Forzar imágenes a mostrarse en impresión */
+            /* Forzar que las imágenes se muestren en impresión */
             img {
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
-                max-width: none !important;
-                max-height: none !important;
+                opacity: 1 !important;
+            }
+            
+            .btn, .header, .search-container, .options-container, .edit-form,
+            .whatsapp-modal, .loading-overlay {
+                display: none !important;
             }
             
             /* Ocultar encabezados y pies de página del navegador */
@@ -780,18 +786,11 @@
         let datosCargados = [];
         let tieneRestriccion = false;
 
-        // URLs de las imágenes en GitHub - Cambiar a URLs locales si es posible
+        // URLs de las imágenes en GitHub
         const IMAGENES_GITHUB = {
             logo: 'https://raw.githubusercontent.com/carlos2601/bateas/refs/heads/main/logo.jpg',
             sello3: 'https://raw.githubusercontent.com/carlos2601/bateas/refs/heads/main/sello3.png',
             sello2: 'https://raw.githubusercontent.com/carlos2601/bateas/refs/heads/main/sello2.png'
-        };
-        
-        // URLs alternativas o base64 si las de GitHub fallan
-        let imagenesCargadas = {
-            logo: null,
-            sello3: null,
-            sello2: null
         };
         
         // Inicializar la aplicación
@@ -807,8 +806,8 @@
             const today = new Date();
             document.getElementById('currentDate').textContent = today.toLocaleDateString('es-ES', options);
             
-            // Cargar imágenes con método mejorado
-            await cargarImagenes();
+            // Cargar imágenes
+            cargarImagenes();
             
             // Cargar datos automáticamente al iniciar
             await cargarDatosLocales();
@@ -850,43 +849,20 @@
             });
         }
 
-        // Cargar imágenes desde GitHub con fallback
-        async function cargarImagenes() {
+        // Cargar imágenes desde GitHub
+        function cargarImagenes() {
             const selloImg = document.getElementById('sello-img');
             const sello2Img = document.getElementById('sello2-img');
             const background = document.getElementById('certificadoBackground');
             
-            try {
-                // Intentar cargar cada imagen
-                await cargarImagenIndividual('sello3', IMAGENES_GITHUB.sello3, selloImg);
-                await cargarImagenIndividual('sello2', IMAGENES_GITHUB.sello2, sello2Img);
-                
-                // Para el fondo, usar una opacidad más baja
-                background.style.backgroundImage = `url(${IMAGENES_GITHUB.logo})`;
-                background.style.opacity = '0.05'; // Más transparente para impresión
-                
-            } catch (error) {
-                console.warn('Algunas imágenes no se pudieron cargar:', error);
-            }
-        }
-
-        // Función para cargar imagen individual
-        async function cargarImagenIndividual(nombre, url, elemento) {
-            return new Promise((resolve, reject) => {
-                const img = new Image();
+            // Usar imágenes de GitHub con crossOrigin para permitir CORS
+            selloImg.src = IMAGENES_GITHUB.sello3;
+            sello2Img.src = IMAGENES_GITHUB.sello2;
+            background.style.backgroundImage = `url(${IMAGENES_GITHUB.logo})`;
+            
+            // Configurar crossOrigin para todas las imágenes
+            [selloImg, sello2Img].forEach(img => {
                 img.crossOrigin = 'anonymous';
-                img.onload = function() {
-                    elemento.src = url;
-                    imagenesCargadas[nombre] = url;
-                    resolve();
-                };
-                img.onerror = function() {
-                    console.warn(`No se pudo cargar la imagen: ${nombre}`);
-                    // Si falla, dejar el elemento sin src
-                    elemento.style.display = 'none';
-                    reject(`Error cargando ${nombre}`);
-                };
-                img.src = url;
             });
         }
 
@@ -1396,7 +1372,7 @@
             }
         }
 
-        // NUEVA FUNCIÓN MEJORADA: Imprimir certificado con canvas
+        // FUNCIÓN MEJORADA: Imprimir certificado
         async function imprimirCertificado() {
             if (tieneRestriccion) {
                 mostrarRestriccion();
@@ -1406,85 +1382,74 @@
             try {
                 mostrarLoader('Preparando para impresión...');
                 
-                // 1. Primero capturar el certificado como imagen
-                const canvas = await capturarCertificado();
-                const imageDataUrl = canvas.toDataURL('image/png');
+                // Asegurarse de que el certificado esté visible
+                const certificado = document.getElementById("contenido-certificado");
+                const estadoOriginal = certificado.style.display;
+                certificado.style.display = 'block';
                 
-                // 2. Crear una nueva ventana/iframe para imprimir
-                const printWindow = window.open('', '_blank');
-                if (!printWindow) {
-                    throw new Error('No se pudo abrir la ventana de impresión. Por favor, permite ventanas emergentes.');
-                }
+                // Esperar a que las imágenes se carguen
+                await new Promise(resolve => setTimeout(resolve, 1000));
                 
-                // 3. Crear contenido HTML para imprimir
-                printWindow.document.write(`
-                    <!DOCTYPE html>
-                    <html>
-                    <head>
-                        <title>Certificado de Afiliación - ${personaEncontrada.nombre}</title>
-                        <style>
-                            @page {
-                                margin: 0;
-                                size: A4 portrait;
-                            }
-                            body {
-                                margin: 0;
-                                padding: 0;
-                                background: white;
-                            }
-                            .certificado-imagen {
-                                width: 210mm;
-                                height: 275mm;
-                                display: block;
-                            }
-                        </style>
-                    </head>
-                    <body>
-                        <img src="${imageDataUrl}" class="certificado-imagen" alt="Certificado de Afiliación">
-                        <script>
-                            // Imprimir automáticamente cuando se cargue la imagen
-                            window.onload = function() {
-                                setTimeout(function() {
-                                    window.print();
-                                    // Cerrar ventana después de imprimir
-                                    setTimeout(function() {
-                                        window.close();
-                                    }, 100);
-                                }, 500);
-                            };
-                            
-                            // También imprimir si hay error en la imagen
-                            window.onerror = function() {
-                                window.print();
-                                setTimeout(function() {
-                                    window.close();
-                                }, 100);
-                            };
-                        <\/script>
-                    </body>
-                    </html>
-                `);
-                
-                printWindow.document.close();
-                
-                ocultarLoader();
-                
-            } catch (error) {
-                ocultarLoader();
-                console.error("Error al imprimir:", error);
-                
-                // Método alternativo si falla el método canvas
+                // Crear una ventana de impresión con el método canvas (mejor calidad)
                 try {
-                    alert("Usando método alternativo de impresión...");
+                    const canvas = await html2canvas(certificado, {
+                        scale: 2,
+                        useCORS: true,
+                        allowTaint: false,
+                        backgroundColor: '#FFFFFF',
+                        logging: false
+                    });
                     
-                    const certificado = document.getElementById("contenido-certificado");
-                    const estadoOriginal = certificado.style.display;
-                    certificado.style.display = 'block';
+                    const imageDataUrl = canvas.toDataURL('image/png');
                     
-                    // Esperar a que se renderice
-                    await new Promise(resolve => setTimeout(resolve, 1000));
+                    const printWindow = window.open('', '_blank');
+                    if (!printWindow) {
+                        throw new Error('No se pudo abrir ventana de impresión');
+                    }
                     
-                    // Crear estilos de impresión
+                    printWindow.document.write(`
+                        <!DOCTYPE html>
+                        <html>
+                        <head>
+                            <title>Certificado de Afiliación</title>
+                            <style>
+                                @page {
+                                    margin: 0;
+                                    size: A4 portrait;
+                                }
+                                body {
+                                    margin: 0;
+                                    padding: 0;
+                                    background: white;
+                                }
+                                .certificado-imagen {
+                                    width: 210mm;
+                                    height: 275mm;
+                                    display: block;
+                                }
+                            </style>
+                        </head>
+                        <body>
+                            <img src="${imageDataUrl}" class="certificado-imagen" alt="Certificado de Afiliación">
+                            <script>
+                                window.onload = function() {
+                                    setTimeout(function() {
+                                        window.print();
+                                        setTimeout(function() {
+                                            window.close();
+                                        }, 100);
+                                    }, 500);
+                                };
+                            <\/script>
+                        </body>
+                        </html>
+                    `);
+                    printWindow.document.close();
+                    
+                } catch (canvasError) {
+                    console.warn('Error con canvas, usando método directo:', canvasError);
+                    
+                    // Método alternativo: imprimir directamente el HTML
                     const estilos = document.createElement('style');
                     estilos.innerHTML = `
                         @media print {
@@ -1508,6 +1473,20 @@
                                 box-shadow: none !important;
                                 background-color: white !important;
                             }
+                            .certificado-background {
+                                opacity: 0.5 !important;
+                                -webkit-print-color-adjust: exact !important;
+                                print-color-adjust: exact !important;
+                            }
+                            img {
+                                -webkit-print-color-adjust: exact !important;
+                                print-color-adjust: exact !important;
+                                opacity: 1 !important;
+                            }
+                            .btn, .header, .search-container, .options-container, .edit-form,
+                            .whatsapp-modal, .loading-overlay {
+                                display: none !important;
+                            }
                             @page {
                                 margin: 0 !important;
                                 size: A4 portrait;
@@ -1529,10 +1508,14 @@
                         certificado.style.display = estadoOriginal;
                         document.head.removeChild(estilos);
                     }, 500);
-                    
-                } catch (secondError) {
-                    alert("Error al imprimir: " + error.message + "\n\nSugerencia: Use la opción 'Descargar PDF' y luego imprima el PDF.");
                 }
+                
+                ocultarLoader();
+                
+            } catch (error) {
+                ocultarLoader();
+                console.error("Error al imprimir:", error);
+                alert("Error al imprimir: " + error.message + "\n\nSugerencia: Use la opción 'Descargar PDF' y luego imprima el PDF.");
             }
         }
 
