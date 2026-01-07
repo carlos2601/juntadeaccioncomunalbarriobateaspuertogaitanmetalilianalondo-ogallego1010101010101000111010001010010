@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema de Certificados</title>
+    <title>Certificado de Afiliación - Bateas Sector 3</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
@@ -349,7 +349,7 @@
             width: 100%;
             height: 100%;
             z-index: 1;
-            opacity: 5.7;
+            opacity: 0.1;
             background-position: center;
             background-repeat: no-repeat;
             background-size: contain;
@@ -469,6 +469,8 @@
         @media print {
             body * {
                 visibility: hidden;
+                margin: 0 !important;
+                padding: 0 !important;
             }
             
             #contenido-certificado,
@@ -477,19 +479,42 @@
             }
             
             #contenido-certificado {
-                position: absolute;
-                left: 0;
-                top: 0;
-                width: 210mm;
-                min-height: 275mm;
-                margin: 0;
-                padding: 05mm 15mm;
-                box-shadow: none;
-                background-color: white;
+                position: absolute !important;
+                left: 0 !important;
+                top: 0 !important;
+                width: 210mm !important;
+                min-height: 275mm !important;
+                margin: 0 !important;
+                padding: 05mm 15mm !important;
+                box-shadow: none !important;
+                background-color: white !important;
+                page-break-after: always;
+                page-break-inside: avoid;
             }
             
-            .btn, .header, .search-container, .options-container, .edit-form {
+            .btn, .header, .search-container, .options-container, .edit-form,
+            .whatsapp-modal, .loading-overlay {
                 display: none !important;
+            }
+            
+            /* Forzar imágenes a mostrarse en impresión */
+            img {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                max-width: none !important;
+                max-height: none !important;
+            }
+            
+            /* Ocultar encabezados y pies de página del navegador */
+            @page {
+                margin: 0 !important;
+                size: A4 portrait;
+            }
+            
+            /* Eliminar cualquier contenido adicional */
+            html, body {
+                height: auto !important;
+                overflow: visible !important;
             }
         }
         
@@ -755,11 +780,18 @@
         let datosCargados = [];
         let tieneRestriccion = false;
 
-        // URLs de las imágenes en GitHub
+        // URLs de las imágenes en GitHub - Cambiar a URLs locales si es posible
         const IMAGENES_GITHUB = {
             logo: 'https://raw.githubusercontent.com/carlos2601/bateas/refs/heads/main/logo.jpg',
             sello3: 'https://raw.githubusercontent.com/carlos2601/bateas/refs/heads/main/sello3.png',
             sello2: 'https://raw.githubusercontent.com/carlos2601/bateas/refs/heads/main/sello2.png'
+        };
+        
+        // URLs alternativas o base64 si las de GitHub fallan
+        let imagenesCargadas = {
+            logo: null,
+            sello3: null,
+            sello2: null
         };
         
         // Inicializar la aplicación
@@ -775,8 +807,8 @@
             const today = new Date();
             document.getElementById('currentDate').textContent = today.toLocaleDateString('es-ES', options);
             
-            // Cargar imágenes
-            cargarImagenes();
+            // Cargar imágenes con método mejorado
+            await cargarImagenes();
             
             // Cargar datos automáticamente al iniciar
             await cargarDatosLocales();
@@ -798,7 +830,7 @@
             document.getElementById('btnPNG').addEventListener('click', descargarPNG);
             document.getElementById('btnPDF').addEventListener('click', descargarPDF);
             document.getElementById('btnWord').addEventListener('click', descargarWord);
-            document.getElementById('btnImprimir').addEventListener('click', imprimirCertificado); // Nuevo botón imprimir
+            document.getElementById('btnImprimir').addEventListener('click', imprimirCertificado);
             document.getElementById('btnWhatsApp').addEventListener('click', abrirWhatsAppModal);
             document.getElementById('btnVolver').addEventListener('click', volverAlPanel);
             
@@ -818,20 +850,43 @@
             });
         }
 
-        // Cargar imágenes desde GitHub
-        function cargarImagenes() {
+        // Cargar imágenes desde GitHub con fallback
+        async function cargarImagenes() {
             const selloImg = document.getElementById('sello-img');
             const sello2Img = document.getElementById('sello2-img');
             const background = document.getElementById('certificadoBackground');
             
-            // Usar imágenes de GitHub con crossOrigin para permitir CORS
-            selloImg.src = IMAGENES_GITHUB.sello3;
-            sello2Img.src = IMAGENES_GITHUB.sello2;
-            background.style.backgroundImage = `url(${IMAGENES_GITHUB.logo})`;
-            
-            // Configurar crossOrigin para todas las imágenes
-            [selloImg, sello2Img].forEach(img => {
+            try {
+                // Intentar cargar cada imagen
+                await cargarImagenIndividual('sello3', IMAGENES_GITHUB.sello3, selloImg);
+                await cargarImagenIndividual('sello2', IMAGENES_GITHUB.sello2, sello2Img);
+                
+                // Para el fondo, usar una opacidad más baja
+                background.style.backgroundImage = `url(${IMAGENES_GITHUB.logo})`;
+                background.style.opacity = '0.05'; // Más transparente para impresión
+                
+            } catch (error) {
+                console.warn('Algunas imágenes no se pudieron cargar:', error);
+            }
+        }
+
+        // Función para cargar imagen individual
+        async function cargarImagenIndividual(nombre, url, elemento) {
+            return new Promise((resolve, reject) => {
+                const img = new Image();
                 img.crossOrigin = 'anonymous';
+                img.onload = function() {
+                    elemento.src = url;
+                    imagenesCargadas[nombre] = url;
+                    resolve();
+                };
+                img.onerror = function() {
+                    console.warn(`No se pudo cargar la imagen: ${nombre}`);
+                    // Si falla, dejar el elemento sin src
+                    elemento.style.display = 'none';
+                    reject(`Error cargando ${nombre}`);
+                };
+                img.src = url;
             });
         }
 
@@ -1341,64 +1396,143 @@
             }
         }
 
-        // NUEVA FUNCIÓN: Imprimir certificado
-        function imprimirCertificado() {
+        // NUEVA FUNCIÓN MEJORADA: Imprimir certificado con canvas
+        async function imprimirCertificado() {
             if (tieneRestriccion) {
                 mostrarRestriccion();
                 return;
             }
             
             try {
-                // Asegurarse de que el certificado esté visible
-                const certificado = document.getElementById("contenido-certificado");
-                const estadoOriginal = certificado.style.display;
-                certificado.style.display = 'block';
+                mostrarLoader('Preparando para impresión...');
                 
-                // Esperar un momento para que se renderice
-                setTimeout(() => {
-                    // Configurar estilos de impresión
+                // 1. Primero capturar el certificado como imagen
+                const canvas = await capturarCertificado();
+                const imageDataUrl = canvas.toDataURL('image/png');
+                
+                // 2. Crear una nueva ventana/iframe para imprimir
+                const printWindow = window.open('', '_blank');
+                if (!printWindow) {
+                    throw new Error('No se pudo abrir la ventana de impresión. Por favor, permite ventanas emergentes.');
+                }
+                
+                // 3. Crear contenido HTML para imprimir
+                printWindow.document.write(`
+                    <!DOCTYPE html>
+                    <html>
+                    <head>
+                        <title>Certificado de Afiliación - ${personaEncontrada.nombre}</title>
+                        <style>
+                            @page {
+                                margin: 0;
+                                size: A4 portrait;
+                            }
+                            body {
+                                margin: 0;
+                                padding: 0;
+                                background: white;
+                            }
+                            .certificado-imagen {
+                                width: 210mm;
+                                height: 275mm;
+                                display: block;
+                            }
+                        </style>
+                    </head>
+                    <body>
+                        <img src="${imageDataUrl}" class="certificado-imagen" alt="Certificado de Afiliación">
+                        <script>
+                            // Imprimir automáticamente cuando se cargue la imagen
+                            window.onload = function() {
+                                setTimeout(function() {
+                                    window.print();
+                                    // Cerrar ventana después de imprimir
+                                    setTimeout(function() {
+                                        window.close();
+                                    }, 100);
+                                }, 500);
+                            };
+                            
+                            // También imprimir si hay error en la imagen
+                            window.onerror = function() {
+                                window.print();
+                                setTimeout(function() {
+                                    window.close();
+                                }, 100);
+                            };
+                        <\/script>
+                    </body>
+                    </html>
+                `);
+                
+                printWindow.document.close();
+                
+                ocultarLoader();
+                
+            } catch (error) {
+                ocultarLoader();
+                console.error("Error al imprimir:", error);
+                
+                // Método alternativo si falla el método canvas
+                try {
+                    alert("Usando método alternativo de impresión...");
+                    
+                    const certificado = document.getElementById("contenido-certificado");
+                    const estadoOriginal = certificado.style.display;
+                    certificado.style.display = 'block';
+                    
+                    // Esperar a que se renderice
+                    await new Promise(resolve => setTimeout(resolve, 1000));
+                    
+                    // Crear estilos de impresión
                     const estilos = document.createElement('style');
                     estilos.innerHTML = `
                         @media print {
                             body * {
-                                visibility: hidden;
+                                visibility: hidden !important;
+                                margin: 0 !important;
+                                padding: 0 !important;
                             }
                             #contenido-certificado,
                             #contenido-certificado * {
-                                visibility: visible;
+                                visibility: visible !important;
                             }
                             #contenido-certificado {
-                                position: absolute;
-                                left: 0;
-                                top: 0;
-                                width: 210mm;
-                                min-height: 275mm;
-                                margin: 0;
-                                padding: 05mm 15mm;
-                                box-shadow: none;
-                                background-color: white;
+                                position: absolute !important;
+                                left: 0 !important;
+                                top: 0 !important;
+                                width: 210mm !important;
+                                min-height: 275mm !important;
+                                margin: 0 !important;
+                                padding: 05mm 15mm !important;
+                                box-shadow: none !important;
+                                background-color: white !important;
                             }
-                            .btn, .header, .search-container, .options-container, .edit-form {
-                                display: none !important;
+                            @page {
+                                margin: 0 !important;
+                                size: A4 portrait;
+                            }
+                            html, body {
+                                height: auto !important;
+                                overflow: visible !important;
                             }
                         }
                     `;
+                    
                     document.head.appendChild(estilos);
                     
                     // Imprimir
                     window.print();
                     
-                    // Restaurar estado
+                    // Restaurar
                     setTimeout(() => {
                         certificado.style.display = estadoOriginal;
                         document.head.removeChild(estilos);
-                    }, 100);
+                    }, 500);
                     
-                }, 500);
-                
-            } catch (error) {
-                console.error("Error al imprimir:", error);
-                alert("Error al imprimir el certificado. Asegúrese de que el certificado esté visible.");
+                } catch (secondError) {
+                    alert("Error al imprimir: " + error.message + "\n\nSugerencia: Use la opción 'Descargar PDF' y luego imprima el PDF.");
+                }
             }
         }
 
