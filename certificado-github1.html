@@ -402,56 +402,7 @@
             z-index: 3;
         }
         
-        .sello2-fondo {
-            width: 180px;
-            position: absolute;
-            bottom: 15px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 3;
-        }
-        
-        /* QR Code */
-        .qr-container {
-            position: absolute;
-            bottom: 10px;
-            right: 3px;
-            width: 130px !important;
-            height: auto !important;
-            z-index: 3;
-            overflow: visible !important;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        
-        .qr-code, .qr-code img {
-            width: 130px !important;
-            height: 130px !important;
-            max-width: 130px !important;
-            max-height: 130px !important;
-            object-fit: contain !important;
-        }
-        
-        .qr-texto {
-            margin-top: -2px;
-            font-size: 9px;
-            font-weight: bold;
-            text-align: center;
-            width: 130px;
-            color: #1a237e;
-            font-family: Tahoma, sans-serif;
-            background-color: white;
-            padding: 2px;
-            white-space: nowrap;
-            overflow: visible;
-            text-overflow: unset;
-        }
-        
-        .qr-code {
-            width: 100%;
-            height: 100%;
-        }
+        /* QR Code - ELIMINADO */
         
         /* Mensaje de restricción */
         .restriction-message {
@@ -757,14 +708,10 @@
             <div class="firmas-container">
                 <img id="sello-img" class="sello-derecha" alt="Sello">
                 
-                <img id="sello2-img" class="sello2-fondo" alt="Sello">
+                <!-- ELIMINADO: sello2 -->
                 
-                <!-- QR Code Container -->
-                <div class="qr-container">
-                <div id="qr-code" class="qr-code"></div>
-                <div class="qr-texto"></div>
-            </div>
-
+                <!-- ELIMINADO: QR Code Container -->
+                
                 <div style="text-align:center;margin-top:30px;">
                     __________________________<br>
                     <strong>LEONEL BAUTISTA CARRANZA</strong><br>
@@ -788,7 +735,7 @@
 
         // URLs de las imágenes en GitHub
         const IMAGENES_GITHUB = {
-            logo: 'https://raw.githubusercontent.com/carlos2601/bateas/refs/heads/main/logo.jpg',
+            logo: 'https://raw.githubusercontent.com/carlos2601/bateas3/refs/heads/main/logo.jpg',
             sello3: 'https://raw.githubusercontent.com/carlos2601/bateas/refs/heads/main/sello3.png',
             sello2: 'https://raw.githubusercontent.com/carlos2601/bateas/refs/heads/main/sello2.png'
         };
@@ -852,18 +799,14 @@
         // Cargar imágenes desde GitHub
         function cargarImagenes() {
             const selloImg = document.getElementById('sello-img');
-            const sello2Img = document.getElementById('sello2-img');
             const background = document.getElementById('certificadoBackground');
             
             // Usar imágenes de GitHub con crossOrigin para permitir CORS
             selloImg.src = IMAGENES_GITHUB.sello3;
-            sello2Img.src = IMAGENES_GITHUB.sello2;
             background.style.backgroundImage = `url(${IMAGENES_GITHUB.logo})`;
             
-            // Configurar crossOrigin para todas las imágenes
-            [selloImg, sello2Img].forEach(img => {
-                img.crossOrigin = 'anonymous';
-            });
+            // Configurar crossOrigin para la imagen
+            selloImg.crossOrigin = 'anonymous';
         }
 
         // Mostrar loader
@@ -889,83 +832,6 @@
             const date = new Date(fecha);
             if (isNaN(date)) return fecha;
             return date.toLocaleDateString('es-CO');
-        }
-
-        // Función para encriptar datos
-        function encriptarDatos(datos) {
-            try {
-                const claveSecreta = "BateasSector3Certificado2024";
-                const datosString = JSON.stringify(datos);
-                
-                if (typeof CryptoJS === 'undefined') {
-                    console.error('CryptoJS no está cargado');
-                    throw new Error('Error de encriptación: CryptoJS no disponible');
-                }
-                
-                const datosEncriptados = CryptoJS.AES.encrypt(datosString, claveSecreta).toString();
-                return btoa(datosEncriptados);
-            } catch (error) {
-                console.error('Error en encriptación:', error);
-                throw error;
-            }
-        }
-
-        // Función para calcular fecha de expiración (6 meses)
-        function calcularFechaExpiracion() {
-            const fechaActual = new Date();
-            const fechaExpiracion = new Date(fechaActual);
-            fechaExpiracion.setMonth(fechaExpiracion.getMonth() + 6);
-            return fechaExpiracion.toISOString().split('T')[0];
-        }
-
-        // Generar código QR con datos encriptados
-        function generarQR() {
-            if (!personaEncontrada) return;
-            
-            try {
-                const nombre = document.getElementById("nombre-cert").textContent;
-                const cedula = document.getElementById("cedula-cert").textContent;
-                const fechaAfiliacion = document.getElementById("fecha-cert").textContent;
-                const registro = document.getElementById("registro-cert").textContent;
-                const folio = document.getElementById("folio-cert").textContent;
-                const renglon = document.getElementById("renglon-cert").textContent;
-                const direccion = document.getElementById("direccion-cert").textContent;
-                const fechaEmision = document.getElementById("fecha-emision").textContent;
-                
-                const datosCertificado = {
-                    nombre: nombre,
-                    cedula: cedula,
-                    fechaAfiliacion: fechaAfiliacion,
-                    registro: registro,
-                    folio: folio,
-                    renglon: renglon,
-                    direccion: direccion,
-                    fechaEmision: fechaEmision,
-                    fechaExpiracion: calcularFechaExpiracion()
-                };
-                
-                const datosEncriptados = encriptarDatos(datosCertificado);
-                const urlValidacion = `https://juntacomunalbateassector3-collab.github.io/validacion/?data=${encodeURIComponent(datosEncriptados)}`;
-                
-                const qrContainer = document.getElementById('qr-code');
-                qrContainer.innerHTML = '';
-                
-                if (typeof qrcode === 'undefined') {
-                    console.error('qrcode no está cargado');
-                    throw new Error('Error generando QR: Librería no disponible');
-                }
-                
-                const qr = qrcode(0, 'M');
-                qr.addData(urlValidacion);
-                qr.make();
-                
-                qrContainer.innerHTML = qr.createImgTag(2);
-                
-            } catch (error) {
-                console.error('Error generando QR:', error);
-                const qrContainer = document.getElementById('qr-code');
-                qrContainer.innerHTML = '<div style="color: red; font-size: 10px; text-align: center;">Error QR</div>';
-            }
         }
 
         // Cargar datos desde archivo local (automáticamente)
@@ -1148,7 +1014,7 @@
             document.getElementById("direccion-cert").textContent = persona.direccion;
             document.getElementById("fecha-emision").textContent = formatearFecha(new Date());
             
-            generarQR();
+            // ELIMINADA: Llamada a generarQR()
             mostrarOpciones();
             mostrarVistaPrevia();
         }
@@ -1669,4 +1535,3 @@
     </script>
 </body>
 </html>
-
