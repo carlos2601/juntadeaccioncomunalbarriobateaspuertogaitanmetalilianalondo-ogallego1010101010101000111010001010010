@@ -578,20 +578,14 @@
                 <button id="btnPDF" class="btn btn-dark">
                     <i class="fas fa-file-pdf"></i> Descargar PDF
                 </button>
-                <!-- NUEVO BOTÓN PARA WORD -->
-                <button id="btnWord" class="btn btn-word">
-                    <i class="fas fa-file-word"></i> Descargar Word
-                </button>
-                <!-- NUEVO BOTÓN PARA IMPRIMIR -->
+                
                 <button id="btnImprimir" class="btn btn-print">
                     <i class="fas fa-print"></i> Imprimir
                 </button>
                 <button id="btnWhatsApp" class="btn btn-whatsapp">
                     <i class="fab fa-whatsapp"></i> Enviar por WhatsApp
                 </button>
-                <button id="btnVolver" class="btn btn-secondary">
-                    <i class="fas fa-home"></i> Volver al Panel
-                </button>
+                
             </div>
         </div>
         
@@ -775,10 +769,9 @@
             document.getElementById('btnOcultarVista').addEventListener('click', ocultarVistaPrevia);
             document.getElementById('btnPNG').addEventListener('click', descargarPNG);
             document.getElementById('btnPDF').addEventListener('click', descargarPDF);
-            document.getElementById('btnWord').addEventListener('click', descargarWord);
+            
             document.getElementById('btnImprimir').addEventListener('click', imprimirCertificado);
             document.getElementById('btnWhatsApp').addEventListener('click', abrirWhatsAppModal);
-            document.getElementById('btnVolver').addEventListener('click', volverAlPanel);
             
             // Edición
             document.getElementById('btnGuardar').addEventListener('click', guardarCambios);
@@ -1385,116 +1378,6 @@
             }
         }
 
-        // FUNCIÓN CORREGIDA: Descargar en formato Word - VERSIÓN SIMPLIFICADA
-        async function descargarWord() {
-            if (tieneRestriccion) {
-                mostrarRestriccion();
-                return;
-            }
-            
-            try {
-                mostrarLoader('Generando documento Word...');
-                
-                // Primero capturamos el certificado como imagen
-                const canvas = await capturarCertificado();
-                const imageDataUrl = canvas.toDataURL('image/png');
-                
-                // Convertir la imagen a Blob
-                const response = await fetch(imageDataUrl);
-                const blob = await response.blob();
-                
-                // Convertir Blob a ArrayBuffer
-                const arrayBuffer = await blob.arrayBuffer();
-                
-                // Crear documento Word con la imagen - VERSIÓN SIMPLIFICADA
-                const { Document, Packer, Paragraph, ImageRun } = docx;
-                
-                // Tamaño carta en puntos (1 punto = 1/72 pulgada)
-                // 210mm = 595.28 puntos, 275mm = 779.53 puntos
-                // Redondeamos a números enteros
-                const pageWidth = 595;  // 210mm
-                const pageHeight = 780; // 275mm
-                
-                // Calcular proporción para mantener relación de aspecto
-                const aspectRatio = canvas.width / canvas.height;
-                let imageWidth = pageWidth;
-                let imageHeight = pageWidth / aspectRatio;
-                
-                // Si es más alto que la página, ajustar
-                if (imageHeight > pageHeight) {
-                    imageHeight = pageHeight;
-                    imageWidth = pageHeight * aspectRatio;
-                }
-                
-                // Crear documento Word - SOLO CON LA IMAGEN
-                const doc = new Document({
-                    sections: [{
-                        properties: {
-                            page: {
-                                size: {
-                                    width: pageWidth,
-                                    height: pageHeight,
-                                },
-                                margin: {
-                                    top: 0,
-                                    bottom: 0,
-                                    left: 0,
-                                    right: 0,
-                                }
-                            }
-                        },
-                        children: [
-                            new Paragraph({
-                                children: [
-                                    new ImageRun({
-                                        data: arrayBuffer,
-                                        transformation: {
-                                            width: imageWidth,
-                                            height: imageHeight,
-                                        }
-                                    })
-                                ],
-                                alignment: 'center'
-                            })
-                        ]
-                    }]
-                });
-                
-                // Generar el documento Word
-                const docxBlob = await Packer.toBlob(doc);
-                
-                // Usar FileSaver para descargar
-                saveAs(docxBlob, `certificado_${personaEncontrada.cedula}.docx`);
-                
-            } catch (error) {
-                console.error("Error al generar Word:", error);
-                
-                // Método alternativo más simple
-                try {
-                    mostrarLoader('Usando método alternativo...');
-                    
-                    // Primero capturamos el certificado como imagen
-                    const canvas = await capturarCertificado();
-                    const imageDataUrl = canvas.toDataURL('image/png');
-                    
-                    // Descargar como PNG si falla Word
-                    const link = document.createElement('a');
-                    link.href = imageDataUrl;
-                    link.download = `certificado_${personaEncontrada.cedula}.png`;
-                    document.body.appendChild(link);
-                    link.click();
-                    document.body.removeChild(link);
-                    
-                    alert("No se pudo generar Word. Se descargó como PNG en su lugar.");
-                    
-                } catch (secondError) {
-                    alert("No se pudo generar el documento. Por favor, use la opción PNG o PDF.");
-                }
-            } finally {
-                ocultarLoader();
-            }
-        }
-
         // Abrir modal de WhatsApp
         function abrirWhatsAppModal() {
             if (tieneRestriccion) {
@@ -1528,11 +1411,6 @@
             cerrarWhatsAppModal();
         }
 
-        // Volver al panel principal
-        function volverAlPanel() {
-            window.location.href = 'panel.html';
-        }
     </script>
 </body>
 </html>
-
