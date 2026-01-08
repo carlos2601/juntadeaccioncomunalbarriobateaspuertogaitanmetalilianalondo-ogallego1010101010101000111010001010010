@@ -805,6 +805,8 @@
         }
 
         // Función para calcular fecha de expiración (6 meses)
+        // Generar código QR con datos encriptados - FUNCIÓN COMENTADA PORQUE ELIMINAMOS EL QR
+/*
         function calcularFechaExpiracion() {
             const fechaActual = new Date();
             const fechaExpiracion = new Date(fechaActual);
@@ -861,6 +863,7 @@
                 qrContainer.innerHTML = '<div style="color: red; font-size: 10px; text-align: center;">Error QR</div>';
             }
         }
+        */
 
         // Cargar datos desde archivo local (automáticamente)
         async function cargarDatosLocales() {
@@ -1042,7 +1045,7 @@
             document.getElementById("direccion-cert").textContent = persona.direccion;
             document.getElementById("fecha-emision").textContent = formatearFecha(new Date());
             
-            generarQR();
+            // generarQR(); // COMENTADA - ELIMINAMOS EL QR
             mostrarOpciones();
             mostrarVistaPrevia();
         }
@@ -1515,6 +1518,7 @@
     </script>
 </body>
 </html>
+
 
 
 
