@@ -1520,113 +1520,132 @@
         }
 
         // Descargar en formato Word
-        async function descargarWord() {
-            if (tieneRestriccion) {
-                mostrarRestriccion();
-                return;
-            }
-            
-            try {
-                mostrarLoader('Generando documento Word...');
-                
-                // Primero capturamos el certificado como imagen
-                const canvas = await capturarCertificado();
-                const imageDataUrl = canvas.toDataURL('image/png');
-                
-                // Convertir la imagen a Blob
-                const response = await fetch(imageDataUrl);
-                const blob = await response.blob();
-                
-                // Convertir Blob a ArrayBuffer
-                const arrayBuffer = await blob.arrayBuffer();
-                
-                // Crear documento Word con la imagen
-                const { Document, Packer, Paragraph, ImageRun } = docx;
-                
-                // Calcular dimensiones para mantener proporción A4
-                const maxWidth = 600;
-                const maxHeight = 800;
-                const aspectRatio = canvas.width / canvas.height;
-                
-                let imageWidth = maxWidth;
-                let imageHeight = maxWidth / aspectRatio;
-                
-                if (imageHeight > maxHeight) {
-                    imageHeight = maxHeight;
-                    imageWidth = maxHeight * aspectRatio;
-                }
-                
-                // Crear documento Word
-                const doc = new Document({
-                    sections: [{
-                        properties: {
-                            page: {
-                                size: {
-                                    width: 11906,
-                                    height: 16838,
-                                },
-                                margin: {
-                                    top: 1000,
-                                    bottom: 1000,
-                                    left: 1000,
-                                    right: 1000,
-                                }
-                            }
+       // Descargar en formato Word - VERSIÓN CORREGIDA
+async function descargarWord() {
+    if (tieneRestriccion) {
+        mostrarRestriccion();
+        return;
+    }
+    
+    try {
+        mostrarLoader('Generando documento Word...');
+        
+        // Primero capturamos el certificado como imagen
+        const canvas = await capturarCertificado();
+        const imageDataUrl = canvas.toDataURL('image/png');
+        
+        // Convertir la imagen a Blob
+        const response = await fetch(imageDataUrl);
+        const blob = await response.blob();
+        
+        // Convertir Blob a ArrayBuffer
+        const arrayBuffer = await blob.arrayBuffer();
+        
+        // Crear documento Word con la imagen - TAMAÑO CARTA CORRECTO
+        const { Document, Packer, Paragraph, ImageRun } = docx;
+        
+        // Tamaño carta en puntos (1 punto = 1/72 pulgada)
+        // Carta: 8.5" x 11" = 612 x 792 puntos
+        // Tu certificado: 210mm x 275mm ≈ 8.27" x 10.83" = 595 x 780 puntos
+        const pageWidth = 595;  // 210mm en puntos
+        const pageHeight = 780; // 275mm en puntos
+        
+        // Calcular dimensiones para que la imagen ocupe toda la página
+        // Sin márgenes
+        const imageWidth = pageWidth;
+        const imageHeight = pageHeight;
+        
+        // Crear documento Word - SOLO CON LA IMAGEN
+        const doc = new Document({
+            sections: [{
+                properties: {
+                    page: {
+                        size: {
+                            width: pageWidth,
+                            height: pageHeight,
                         },
+                        margin: {
+                            top: 0,    // Sin márgenes
+                            bottom: 0,
+                            left: 0,
+                            right: 0,
+                        }
+                    }
+                },
+                children: [
+                    new Paragraph({
                         children: [
-                            new Paragraph({
-                                children: [
-                                    new ImageRun({
-                                        data: arrayBuffer,
-                                        transformation: {
-                                            width: imageWidth,
-                                            height: imageHeight,
-                                        }
-                                    })
-                                ],
-                                alignment: 'center'
-                            }),
-                            new Paragraph({
-                                text: " ",
-                                spacing: { before: 400 }
-                            }),
-                            new Paragraph({
-                                text: `Certificado de Afiliación - ${personaEncontrada.nombre}`,
-                                alignment: 'center',
-                                spacing: { before: 400 }
-                            }),
-                            new Paragraph({
-                                text: `Cédula: ${personaEncontrada.cedula}`,
-                                alignment: 'center'
-                            }),
-                            new Paragraph({
-                                text: `Fecha de emisión: ${new Date().toLocaleDateString('es-CO')}`,
-                                alignment: 'center',
-                                spacing: { after: 400 }
-                            }),
-                            new Paragraph({
-                                text: "Este documento fue generado por el Sistema de Certificados de la Junta de Acción Comunal Barrio Bateas Sector 3.",
-                                alignment: 'center',
-                                size: 20,
-                                color: "666666"
+                            new ImageRun({
+                                data: arrayBuffer,
+                                transformation: {
+                                    width: imageWidth,
+                                    height: imageHeight,
+                                }
                             })
-                        ]
-                    }]
-                });
-                
-                // Generar el documento Word
-                const docxBlob = await Packer.toBlob(doc);
-                
-                // Usar FileSaver para descargar
-                saveAs(docxBlob, `certificado_${personaEncontrada.cedula}.docx`);
-                
-            } catch (error) {
-                console.error("Error al generar Word:", error);
-                alert("No se pudo generar el documento Word. Por favor, use la opción PNG o PDF.");
-            } finally {
-                ocultarLoader();
-            }
+                        ],
+                        alignment: 'center'
+                    })
+                ]
+            }]
+        });
+        
+        // Generar el documento Word
+        const docxBlob = await Packer.toBlob(doc);
+        
+        // Usar FileSaver para descargar
+        saveAs(docxBlob, `certificado_${personaEncontrada.cedula}.docx`);
+        
+    } catch (error) {
+        console.error("Error al generar Word:", error);
+        
+        // Método alternativo si falla
+        try {
+            alert("Generando documento Word simple...");
+            
+            const { Document, Packer, Paragraph, HeadingLevel, AlignmentType } = docx;
+            
+            const doc = new Document({
+                sections: [{
+                    properties: {
+                        page: {
+                            size: {
+                                width: 595,   // 210mm
+                                height: 780,  // 275mm
+                            },
+                            margin: {
+                                top: 0,
+                                bottom: 0,
+                                left: 0,
+                                right: 0,
+                            }
+                        }
+                    },
+                    children: [
+                        new Paragraph({
+                            children: [
+                                new ImageRun({
+                                    data: await (await fetch(imageDataUrl)).arrayBuffer(),
+                                    transformation: {
+                                        width: 595,
+                                        height: 780,
+                                    }
+                                })
+                            ]
+                        })
+                    ]
+                }]
+            });
+            
+            const docxBlob = await Packer.toBlob(doc);
+            saveAs(docxBlob, `certificado_${personaEncontrada.cedula}.docx`);
+            
+        } catch (secondError) {
+            alert("No se pudo generar el documento Word. Por favor, use la opción PNG o PDF.");
         }
+    } finally {
+        ocultarLoader();
+    }
+}
 
         // Abrir modal de WhatsApp
         function abrirWhatsAppModal() {
@@ -1668,5 +1687,6 @@
     </script>
 </body>
 </html>
+
 
 
