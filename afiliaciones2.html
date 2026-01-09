@@ -932,106 +932,166 @@
         return `https://api.github.com/repos/${githubConfig.user}/${githubConfig.repo}/contents/${githubConfig.filePath}`;
     }
 
-    // Cargar archivo desde GitHub
     async function cargarDesdeGitHub() {
-        if (!githubConfig.isConfigured || !githubConfig.user || !githubConfig.repo) {
-            mostrarMensaje('⚠️ Primero configura GitHub', 'warning');
-            abrirConfigGitHub();
-            return;
+    if (!githubConfig.isConfigured || !githubConfig.user || !githubConfig.repo) {
+        mostrarMensaje('⚠️ Primero configura GitHub', 'warning');
+        abrirConfigGitHub();
+        return;
+    }
+    
+    try {
+        mostrarMensaje('🌐 Cargando 300 registros desde GitHub...', 'info');
+        
+        const url = getGitHubRawUrl();
+        console.log('Cargando desde:', url);
+        
+        // Mostrar loader
+        const originalButtonText = document.getElementById('loadFromGithubBtn').innerHTML;
+        document.getElementById('loadFromGithubBtn').innerHTML = '⏳ Cargando...';
+        document.getElementById('loadFromGithubBtn').disabled = true;
+        
+        const startTime = Date.now();
+        const response = await fetch(url, {
+            headers: {
+                'Cache-Control': 'no-cache',
+                'Pragma': 'no-cache'
+            }
+        });
+        
+        if (!response.ok) {
+            throw new Error(`Error HTTP: ${response.status} - ${response.statusText}`);
         }
         
+        const text = await response.text();
+        const loadTime = Date.now() - startTime;
+        console.log(`Tiempo de carga: ${loadTime}ms, Tamaño: ${text.length} caracteres`);
+        
+        // Validar que no esté vacío
+        if (!text.trim()) {
+            throw new Error('El archivo está vacío');
+        }
+        
+        // Verificar formato básico
+        if (!text.startsWith('[') || !text.endsWith(']')) {
+            console.error('Formato inválido - primeras 500 chars:', text.substring(0, 500));
+            throw new Error('El archivo JSON debe comenzar con [ y terminar con ]');
+        }
+        
+        // Parsear JSON con manejo de errores detallado
+        let data;
         try {
-            mostrarMensaje('🌐 Cargando desde GitHub...', 'info');
-            
-            const response = await fetch(getGitHubRawUrl(), {
-                headers: {
-                    'Cache-Control': 'no-cache'
-                }
-            });
-            
-            if (!response.ok) {
-                throw new Error(`Error HTTP: ${response.status}`);
+            data = JSON.parse(text);
+        } catch (parseError) {
+            console.error('Error parseando JSON:', parseError);
+            // Intentar encontrar dónde está el error
+            const errorPosition = parseError.message.match(/position (\d+)/);
+            if (errorPosition) {
+                const pos = parseInt(errorPosition[1]);
+                const contextStart = Math.max(0, pos - 100);
+                const contextEnd = Math.min(text.length, pos + 100);
+                console.error('Contexto del error:', text.substring(contextStart, contextEnd));
             }
-            
-            const data = await response.json();
-            
-            // Procesar los datos
-            jsonData = data;
-            originalFileName = githubConfig.filePath;
-            document.getElementById('fileName').textContent = `Archivo: ${originalFileName} (desde GitHub)`;
-            
-            // Limpiar propiedades CSS del JSON
-            if (Array.isArray(jsonData)) {
-                jsonData = jsonData.map(registro => {
-                    const nuevoRegistro = {};
-                    
-                    const propiedadesBase = ['id', 'nombre', 'cedula', 'fecha_afiliacion', 'registro', 
-                                            'folio', 'renglon', 'direccion', 'telefono', 'pagos', 'firma'];
-                    
-                    propiedadesBase.forEach(prop => {
-                        if (registro.hasOwnProperty(prop)) {
-                            nuevoRegistro[prop] = registro[prop];
-                        } else {
-                            nuevoRegistro[prop] = prop === 'firma' ? '' : '';
-                        }
-                    });
-                    
-                    columnasPersonalizadas.forEach(col => {
-                        if (registro.hasOwnProperty(col.clave)) {
-                            nuevoRegistro[col.clave] = registro[col.clave];
-                        }
-                    });
-                    
-                    return nuevoRegistro;
-                });
-            }
-            
-            // Activar botones
-            document.getElementById('saveBtn').disabled = false;
-            document.getElementById('addRowBtn').disabled = false;
-            document.getElementById('saveToGithubBtn').disabled = false;
-            
-            if (jsonData.length > 0) {
-                jsonData.forEach(registro => {
-                    if (!registro.hasOwnProperty('firma')) {
-                        registro.firma = '';
+            throw new Error(`Error en formato JSON: ${parseError.message}`);
+        }
+        
+        // Verificar que sea array
+        if (!Array.isArray(data)) {
+            console.error('Datos recibidos (no array):', typeof data, data);
+            throw new Error('El archivo debe contener un array JSON');
+        }
+        
+        console.log(`JSON parseado: ${data.length} registros`);
+        
+        // Procesar datos
+        jsonData = data;
+        originalFileName = githubConfig.filePath;
+        document.getElementById('fileName').textContent = `Archivo: ${originalFileName} (${data.length} registros)`;
+        
+        // Limpiar y normalizar datos
+        if (data.length > 0) {
+            jsonData = data.map((registro, index) => {
+                const nuevoRegistro = {};
+                
+                // Propiedades base obligatorias
+                const propiedadesBase = ['id', 'nombre', 'cedula', 'fecha_afiliacion', 'registro', 
+                                        'folio', 'renglon', 'direccion', 'telefono', 'pagos', 'firma'];
+                
+                propiedadesBase.forEach(prop => {
+                    if (registro.hasOwnProperty(prop)) {
+                        nuevoRegistro[prop] = registro[prop];
+                    } else {
+                        // Valores por defecto
+                        nuevoRegistro[prop] = prop === 'firma' ? '' : 
+                                            prop === 'direccion' ? 'MANZANA CASA' : 
+                                            prop === 'id' ? (index + 1).toString() : '';
                     }
-                    columnasPersonalizadas.forEach(col => {
-                        if (!registro.hasOwnProperty(col.clave)) {
-                            registro[col.clave] = '';
-                        }
-                    });
                 });
                 
-                crearTabla();
-                mostrarMensaje('✅ Archivo cargado desde GitHub correctamente', 'success');
-                actualizarContador();
-                actualizarInfoFolio();
-            } else {
-                crearTabla();
-                mostrarMensaje('📄 Archivo JSON cargado desde GitHub (vacío). Puedes agregar nuevos registros.', 'info');
-                actualizarContador();
-                actualizarInfoFolio();
-            }
-            
-            hasChanges = false;
-            actualizarEstado();
-            actualizarConfigColumnasPDF();
-            
-        } catch (error) {
-            console.error('Error al cargar desde GitHub:', error);
-            mostrarMensaje(`❌ Error al cargar desde GitHub: ${error.message}`, 'danger');
-            
-            // Si el archivo no existe, crear uno vacío
-            if (error.message.includes('404')) {
-                if (confirm('El archivo no existe en GitHub. ¿Quieres crear uno nuevo?')) {
-                    jsonData = [];
-                    crearTabla();
-                    mostrarMensaje('📄 Listo para crear nuevo archivo en GitHub', 'info');
-                }
-            }
+                // Columnas personalizadas
+                columnasPersonalizadas.forEach(col => {
+                    if (registro.hasOwnProperty(col.clave)) {
+                        nuevoRegistro[col.clave] = registro[col.clave];
+                    } else {
+                        nuevoRegistro[col.clave] = '';
+                    }
+                });
+                
+                return nuevoRegistro;
+            });
         }
+        
+        // Restaurar botón
+        document.getElementById('loadFromGithubBtn').innerHTML = originalButtonText;
+        document.getElementById('loadFromGithubBtn').disabled = false;
+        
+        // Activar botones
+        document.getElementById('saveToGithubBtn').disabled = false;
+        document.getElementById('addRowBtn').disabled = false;
+        
+        // Crear tabla
+        crearTabla();
+        
+        // Mostrar mensaje de éxito
+        const totalTime = Date.now() - startTime;
+        mostrarMensaje(`✅ Cargados ${jsonData.length} registros en ${totalTime}ms`, 'success');
+        actualizarContador();
+        actualizarInfoFolio();
+        
+        hasChanges = false;
+        actualizarEstado();
+        actualizarConfigColumnasPDF();
+        
+    } catch (error) {
+        console.error('Error completo en cargarDesdeGitHub:', error);
+        
+        // Restaurar botón
+        document.getElementById('loadFromGithubBtn').innerHTML = '🌐 Cargar desde GitHub';
+        document.getElementById('loadFromGithubBtn').disabled = false;
+        
+        // Mensaje de error detallado
+        let errorMsg = `❌ Error: ${error.message}`;
+        
+        if (error.message.includes('JSON')) {
+            errorMsg += '<br>💡 <strong>Posible solución:</strong> Verifica que tu archivo JSON sea válido.';
+            errorMsg += '<br>Usa <a href="https://jsonlint.com/" target="_blank">JSONLint</a> para validarlo.';
+        } else if (error.message.includes('404')) {
+            errorMsg += '<br>💡 <strong>Posible solución:</strong> El archivo no existe en GitHub.';
+            errorMsg += '<br>Crea primero un registro y haz click en "💾 Guardar en GitHub".';
+        } else if (error.message.includes('403')) {
+            errorMsg += '<br>💡 <strong>Posible solución:</strong> Token inválido o repositorio privado.';
+            errorMsg += '<br>Verifica tu token de GitHub tiene permiso "repo".';
+        }
+        
+        // Mostrar mensaje con HTML
+        const messageEl = document.getElementById('message');
+        messageEl.innerHTML = errorMsg;
+        messageEl.className = 'alert-mensaje alert alert-danger';
+        messageEl.style.display = 'block';
+        
+        // También mostrar alerta simple
+        mostrarMensaje(`Error: ${error.message}`, 'danger');
     }
+}
 
     // Guardar archivo en GitHub
     async function guardarEnGitHub() {
