@@ -708,8 +708,13 @@
         <div class="controls-content">
             <input type="file" id="jsonFile" class="file-input" accept=".json">
             <label for="jsonFile" class="btn btn-primary btn-action file-label">
-                📂 Cargar JSON
+                📂 Cargar JSON Local
             </label>
+            
+            <!-- NUEVO: Botón para cargar desde GitHub -->
+            <button id="loadFromGithubBtn" class="btn btn-info btn-action">
+                🌐 Cargar desde GitHub
+            </button>
             
             <button id="saveBtn" class="btn btn-success btn-action" disabled>
                 💾 Guardar JSON
@@ -770,6 +775,9 @@
     let celdaActiva = null;
     let celdaEnEdicion = null;
 
+    // URL del archivo JSON en GitHub (REMPLAZAR CON TU URL REAL)
+    const GITHUB_JSON_URL = 'https://raw.githubusercontent.com/carlos2601/bateas3/main/afiliados.json';
+    
     // Títulos predeterminados
     const titulosPredeterminados = [
         "JUNTA DE ACCIÓN COMUNAL DEL BARRIO BATEAS SECTOR 3",
@@ -781,6 +789,112 @@
         "ASISTENCIA DE AFILIADOS",
         "FECHA: {{fecha}}"
     ];
+
+    // ============================================
+    // FUNCIÓN PARA CARGAR DESDE GITHUB
+    // ============================================
+    async function cargarDesdeGitHub(url) {
+        try {
+            mostrarMensaje('🌐 Cargando desde GitHub...', 'info');
+            
+            const response = await fetch(url);
+            
+            if (!response.ok) {
+                throw new Error(`Error HTTP: ${response.status}`);
+            }
+            
+            const data = await response.json();
+            
+            // Procesar los datos
+            jsonData = data;
+            originalFileName = 'afiliados.json';
+            document.getElementById('fileName').textContent = `Archivo: ${originalFileName} (desde GitHub)`;
+            
+            // CORRECCIÓN IMPORTANTE: Limpiar propiedades CSS del JSON
+            if (Array.isArray(jsonData)) {
+                jsonData = jsonData.map(registro => {
+                    const nuevoRegistro = {};
+                    
+                    const propiedadesBase = ['id', 'nombre', 'cedula', 'fecha_afiliacion', 'registro', 
+                                            'folio', 'renglon', 'direccion', 'telefono', 'pagos', 'firma'];
+                    
+                    propiedadesBase.forEach(prop => {
+                        if (registro.hasOwnProperty(prop)) {
+                            nuevoRegistro[prop] = registro[prop];
+                        } else {
+                            nuevoRegistro[prop] = prop === 'firma' ? '' : '';
+                        }
+                    });
+                    
+                    columnasPersonalizadas.forEach(col => {
+                        if (registro.hasOwnProperty(col.clave)) {
+                            nuevoRegistro[col.clave] = registro[col.clave];
+                        }
+                    });
+                    
+                    return nuevoRegistro;
+                });
+            }
+            
+            // Activar botones
+            document.getElementById('saveBtn').disabled = false;
+            document.getElementById('addRowBtn').disabled = false;
+            
+            if (jsonData.length > 0) {
+                jsonData.forEach(registro => {
+                    if (!registro.hasOwnProperty('firma')) {
+                        registro.firma = '';
+                    }
+                    columnasPersonalizadas.forEach(col => {
+                        if (!registro.hasOwnProperty(col.clave)) {
+                            registro[col.clave] = '';
+                        }
+                    });
+                });
+                
+                crearTabla();
+                mostrarMensaje('✅ Archivo cargado desde GitHub correctamente', 'success');
+                actualizarContador();
+                actualizarInfoFolio();
+            } else {
+                crearTabla();
+                mostrarMensaje('📄 Archivo JSON cargado desde GitHub (vacío). Puedes agregar nuevos registros.', 'info');
+                actualizarContador();
+                actualizarInfoFolio();
+            }
+            
+            hasChanges = false;
+            actualizarEstado();
+            actualizarConfigColumnasPDF();
+            
+        } catch (error) {
+            console.error('Error al cargar desde GitHub:', error);
+            mostrarMensaje(`❌ Error al cargar desde GitHub: ${error.message}`, 'danger');
+            
+            // Mostrar sugerencia
+            mostrarMensaje('💡 Asegúrate de que la URL de GitHub sea correcta y el archivo exista', 'info');
+        }
+    }
+
+    // ============================================
+    // CARGAR AUTOMÁTICAMENTE AL INICIAR
+    // ============================================
+    document.addEventListener('DOMContentLoaded', function() {
+        // Intentar cargar automáticamente desde GitHub al inicio
+        mostrarMensaje('⏳ Cargando datos desde GitHub...', 'info');
+        
+        // Usar un timeout para asegurar que la página esté cargada
+        setTimeout(() => {
+            cargarDesdeGitHub(GITHUB_JSON_URL);
+        }, 1000);
+    });
+
+    // ============================================
+    // CONFIGURAR BOTÓN MANUAL DE GITHUB
+    // ============================================
+    document.getElementById('loadFromGithubBtn').addEventListener('click', function() {
+        cargarDesdeGitHub(GITHUB_JSON_URL);
+    });
 
     function formatearCedula(valor) {
         if (!valor) return '';
