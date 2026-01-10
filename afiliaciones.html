@@ -854,16 +854,20 @@
         <div class="controls-content">
             <!-- Botón de configuración de GitHub -->
             <button id="configGithubBtn" class="btn-config-github btn-action">
-                ⚙️ Configurar GitHub
+                ⚙️ 
             </button>
             
             <input type="file" id="jsonFile" class="file-input" accept=".json">
             <label for="jsonFile" class="btn btn-primary btn-action file-label">
                 📂 Cargar JSON Local
             </label>
+
+            <button id="addRowBtn" class="btn btn-warning btn-action" disabled>
+                ➕ Nuevo Registro
+            </button>
             
             <button id="loadFromGithubBtn" class="btn btn-info btn-action">
-                🌐 Cargar desde GitHub
+                🌐 Cargar GitHub
             </button>
             
             <button id="saveToGithubBtn" class="btn btn-success btn-action" disabled>
@@ -874,9 +878,6 @@
                 📥 Descargar JSON
             </button>
             
-            <button id="addRowBtn" class="btn btn-warning btn-action" disabled>
-                ➕ Nuevo Registro
-            </button>
             
             <button id="configPdfBtn" class="btn btn-danger btn-action">
                 📄 Exportar PDF
@@ -2404,4 +2405,5 @@
         }
     </script>
 </body>
+
 </html>
