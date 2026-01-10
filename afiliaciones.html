@@ -94,7 +94,7 @@
             margin: 0 auto;
             display: flex;
             justify-content: center;
-            gap: 8px;
+            gap: 4px;           /* Reducido de 8px */
             flex-wrap: wrap;
         }
         
@@ -128,7 +128,7 @@
             font-size: 15px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            text-align: center; /* TODOS LOS TÍTULOS CENTRADOS */
+            text-align: center;
         }
         
         .table td {
@@ -141,15 +141,15 @@
         }
         
         /* Alineación específica para celdas */
-            .table td:nth-child(1) { text-align: center; } /* ID - CENTRADO */
-            .table td:nth-child(2) { text-align: left; } /* NOMBRE COMPLETO - IZQUIERDA */
-            .table td:nth-child(3) { text-align: right; } /* CÉDULA - DERECHA */
-            .table td:nth-child(4) { text-align: center; } /* FECHA AFILIACIÓN - CENTRADO */
-            .table td:nth-child(5) { text-align: center; } /* REGISTRO - CENTRADO */
-            .table td:nth-child(6) { text-align: center; } /* FOLIO - CENTRADO */
-            .table td:nth-child(7) { text-align: center; } /* RENGLÓN - CENTRADO */
-            .table td:nth-child(8) { text-align: center; } /* DIRECCIÓN - CENTRADO */
-            .table td:nth-child(9) { text-align: center; } /* TELÉFONO - CENTRADO */
+        .table td:nth-child(1) { text-align: center; } /* ID - CENTRADO */
+        .table td:nth-child(2) { text-align: left; } /* NOMBRE COMPLETO - IZQUIERDA */
+        .table td:nth-child(3) { text-align: right; } /* CÉDULA - DERECHA */
+        .table td:nth-child(4) { text-align: center; } /* FECHA AFILIACIÓN - CENTRADO */
+        .table td:nth-child(5) { text-align: center; } /* REGISTRO - CENTRADO */
+        .table td:nth-child(6) { text-align: center; } /* FOLIO - CENTRADO */
+        .table td:nth-child(7) { text-align: center; } /* RENGLÓN - CENTRADO */
+        .table td:nth-child(8) { text-align: center; } /* DIRECCIÓN - CENTRADO */
+        .table td:nth-child(9) { text-align: center; } /* TELÉFONO - CENTRADO */
         
         .editable-cell { 
             cursor: pointer; 
@@ -169,11 +169,18 @@
         }
         
         .btn-action { 
-            padding: 8px 16px;
-            font-weight: 500;
-            min-width: 140px;
-            margin: 2px;
+             padding: 6px 10px;  /* Reducido de 8px 16px */
+                font-weight: 500;
+                min-width: 100px;   /* Reducido de 140px */
+                margin: 2px;
+                font-size: 13px;
         }
+
+        .btn-action:not(.btn-config-github) {
+                padding: 6px 10px;
+                min-width: 90px;
+                font-size: 13px;
+}
         
         .file-input { display: none; }
         
@@ -372,82 +379,222 @@
         .fila-sin-nombre {
             background-color: #ffe6e6 !important;
         }
+        
         .celda-sin-nombre {
             background-color: #ffe6e6 !important;
             color: #cc0000 !important;
             font-weight: bold;
         }
 
-.filtros-panel {
-    background: rgba(255, 255, 255, 0.1);
-    padding: 10px;
-    border-radius: 5px;
-    margin-top: 10px;
-    backdrop-filter: blur(5px);
-    display: flex;
-    justify-content: center; /* Centrar horizontalmente */
-}
+        .filtros-panel {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+            backdrop-filter: blur(5px);
+            display: flex;
+            justify-content: center;
+        }
 
-.filtro-input {
-    padding: 6px 10px;
-    border-radius: 4px;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    background: rgba(255, 255, 255, 0.9);
-    width: 200px;
-    margin-right: 10px;
-    color: #333; /* Para mejor legibilidad */
-}
+        .filtro-input {
+            padding: 6px 10px;
+            border-radius: 4px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.9);
+            width: 200px;
+            margin-right: 10px;
+            color: #333;
+        }
 
-.btn-filtro {
-    background: #3498db;
-    color: white;
-    border: none;
-    padding: 6px 12px;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background 0.3s;
-}
+        .btn-filtro {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
 
-.btn-filtro:hover {
-    background: #2980b9;
-}
+        .btn-filtro:hover {
+            background: #2980b9;
+        }
+        
+        /* Estilos para el modal de configuración de GitHub */
+        .github-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1200;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .github-modal-content {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            max-height: 85vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .github-config-section {
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .github-config-section h5 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        .token-info {
+            font-size: 0.8em;
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        .github-status {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 0.9em;
+        }
+        
+        .github-status.connected {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .github-status.disconnected {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .btn-config-github {
+            background: #24292e;
+            color: white;
+            border: none;
+            padding: 5px 8px;      /* Reducido */
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 3px;              /* Reducido */
+            font-size: 12px;       /* Más pequeño */
+            min-width: auto;       /* Ancho automático en lugar de fijo */
+        }
+        
+        .btn-config-github:hover {
+            background: #444d56;
+        }
     </style>
 </head>
 <body>
     <div class="fixed-header">
         <div class="header-content">
             <div class="row align-items-center">
-    <!-- Título ocupa TODA la fila y está centrado -->
-    <div class="col-12 text-center position-relative">
-        <h5 class="mb-1">
-            JUNTA DE ACCION COMUNAL BARRIO BATEAS SECTOR 3
-            <span id="fecha-y-hora-actual" class="ms-2"></span>
-        </h5>
-        
-        <!-- Badges posicionados absolutamente a la derecha -->
-        <div class="position-absolute top-0 end-0 mt-1">
-            <span id="rowCount" class="badge bg-secondary">0 registros</span>
-            <span id="folioInfo" class="badge bg-info ms-2">Folio: -</span>
-        </div>
-    </div>
-</div>
+                <div class="col-12 text-center position-relative">
+                    <h5 class="mb-1">
+                        JUNTA DE ACCION COMUNAL BARRIO BATEAS SECTOR 3
+                        <span id="fecha-y-hora-actual" class="ms-2"></span>
+                    </h5>
+                    
+                    <div class="position-absolute top-0 end-0 mt-1">
+                        <span id="rowCount" class="badge bg-secondary">0 registros</span>
+                        <span id="folioInfo" class="badge bg-info ms-2">Folio: -</span>
+                    </div>
+                </div>
+            </div>
             
             <div class="filtros-panel">
-    <div class="d-flex align-items-center justify-content-center"> <!-- Agregar justify-content-center -->
-        <input type="text" id="filtroTexto" class="filtro-input" 
-               placeholder="Buscar en todos los campos...">
-        <select id="filtroColumna" class="filtro-input">
-            <option value="todos">Todos los campos</option>
-            <option value="nombre">Nombre</option>
-            <option value="cedula">Cédula</option>
-            <option value="folio">Folio</option>
-            <option value="registro">Registro</option>
-        </select>
-        <button id="btnAplicarFiltro" class="btn-filtro">🔍 Filtrar</button>
-        <button id="btnLimpiarFiltro" class="btn-filtro" style="background: #95a5a6;">✕ Limpiar</button>
-        <span id="filtroInfo" class="ms-2" style="font-size: 12px; opacity: 0.9;"></span>
+                <div class="d-flex align-items-center justify-content-center">
+                    <input type="text" id="filtroTexto" class="filtro-input" 
+                           placeholder="Buscar en todos los campos...">
+                    <select id="filtroColumna" class="filtro-input">
+                        <option value="todos">Todos los campos</option>
+                        <option value="nombre">Nombre</option>
+                        <option value="cedula">Cédula</option>
+                        <option value="folio">Folio</option>
+                        <option value="registro">Registro</option>
+                    </select>
+                    <button id="btnAplicarFiltro" class="btn-filtro">🔍 Filtrar</button>
+                    <button id="btnLimpiarFiltro" class="btn-filtro" style="background: #95a5a6;">✕ Limpiar</button>
+                    <span id="filtroInfo" class="ms-2" style="font-size: 12px; opacity: 0.9;"></span>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
+
+    <!-- Modal para configuración de GitHub -->
+    <div class="github-modal" id="githubConfigModal">
+        <div class="github-modal-content">
+            <h4 class="mb-4">🔧 Configuración de GitHub</h4>
+            
+            <div class="github-config-section">
+                <h5>📁 Repositorio</h5>
+                <div class="mb-3">
+                    <label for="githubOwner" class="form-label">Propietario (Owner)</label>
+                    <input type="text" class="form-control" id="githubOwner" 
+                           placeholder="Nombre de usuario o organización">
+                </div>
+                <div class="mb-3">
+                    <label for="githubRepo" class="form-label">Repositorio (Repo)</label>
+                    <input type="text" class="form-control" id="githubRepo" 
+                           placeholder="Nombre del repositorio">
+                </div>
+                <div class="mb-3">
+                    <label for="githubPath" class="form-label">Ruta del archivo JSON</label>
+                    <input type="text" class="form-control" id="githubPath" 
+                           value="afiliados.json" placeholder="ej: afiliados.json">
+                </div>
+                <div class="mb-3">
+                    <label for="githubBranch" class="form-label">Rama (Branch)</label>
+                    <input type="text" class="form-control" id="githubBranch" 
+                           value="main" placeholder="ej: main">
+                </div>
+            </div>
+            
+            <div class="github-config-section">
+                <h5>🔑 Token de Acceso Personal</h5>
+                <div class="mb-3">
+                    <label for="githubToken" class="form-label">Token de GitHub</label>
+                    <input type="password" class="form-control" id="githubToken" 
+                           placeholder="ghp_xxxxxxxxxxxxxxxxxxxx">
+                    <div class="token-info">
+                        Necesitas crear un <a href="https://github.com/settings/tokens" target="_blank">Personal Access Token</a> 
+                        con permisos "repo" para acceder al repositorio.
+                    </div>
+                </div>
+            </div>
+            
+            <div id="githubStatus" class="github-status disconnected">
+                ⚠️ No conectado a GitHub
+            </div>
+            
+            <div class="d-flex justify-content-between mt-4 pt-3 border-top">
+                <button type="button" class="btn btn-secondary" onclick="cerrarConfigGitHub()">
+                    Cancelar
+                </button>
+                <button type="button" class="btn btn-primary" onclick="guardarConfigGitHub()">
+                    💾 Guardar Configuración
+                </button>
+                <button type="button" class="btn btn-success" onclick="probarConexionGitHub()">
+                    🔄 Probar Conexión
+                </button>
+            </div>
         </div>
     </div>
 
@@ -627,7 +774,6 @@
                 </div>
             </div>
 
-
             <div class="form-check mt-2">
                 <input class="form-check-input" type="checkbox" id="numeracionConsecutiva" checked>
                 <label class="form-check-label" for="numeracionConsecutiva">
@@ -706,18 +852,26 @@
 
     <div class="fixed-controls">
         <div class="controls-content">
+            <!-- Botón de configuración de GitHub -->
+            <button id="configGithubBtn" class="btn-config-github btn-action">
+                ⚙️ Configurar GitHub
+            </button>
+            
             <input type="file" id="jsonFile" class="file-input" accept=".json">
             <label for="jsonFile" class="btn btn-primary btn-action file-label">
                 📂 Cargar JSON Local
             </label>
             
-            <!-- NUEVO: Botón para cargar desde GitHub -->
             <button id="loadFromGithubBtn" class="btn btn-info btn-action">
                 🌐 Cargar desde GitHub
             </button>
             
-            <button id="saveBtn" class="btn btn-success btn-action" disabled>
-                💾 Guardar JSON
+            <button id="saveToGithubBtn" class="btn btn-success btn-action" disabled>
+                💾 Guardar en GitHub
+            </button>
+            
+            <button id="saveBtn" class="btn btn-outline-success btn-action" disabled>
+                📥 Descargar JSON
             </button>
             
             <button id="addRowBtn" class="btn btn-warning btn-action" disabled>
@@ -732,206 +886,346 @@
 
     <div id="message" class="alert-message alert" style="display: none;"></div>
 
- <script>
-    // ============================================
-    // SCRIPT PARA FECHA Y HORA EN EL TÍTULO
-    // ============================================
-    function mostrarFechaYHora() {
-        const elementoFechaHora = document.getElementById("fecha-y-hora-actual");
-        const ahora = new Date();
-        
-        // Formato compacto para fecha
-        const fechaFormateada = ahora.toLocaleDateString('es-ES', {
-            year: 'numeric',
-            month: 'short',
-            day: 'numeric'
-        });
-        
-        // Formato compacto para hora
-        const horaFormateada = ahora.toLocaleTimeString('es-ES', {
-            hour: '2-digit',
-            minute: '2-digit',
-            hour12: true
-        });
-        
-        // Mostrar sin separador, solo espacio
-        elementoFechaHora.textContent = ` ${fechaFormateada} ${horaFormateada}`;
-    }
+    <script>
+        // ============================================
+        // CONFIGURACIÓN DE GITHUB (AHORA EN LOCALSTORAGE)
+        // ============================================
+        let GITHUB_CONFIG = {
+            token: '',
+            owner: '',
+            repo: '',
+            path: 'afiliados.json',
+            branch: 'main',
+            apiUrl: ''
+        };
 
-    // Ejecutar al cargar y cada minuto
-    mostrarFechaYHora();
-    setInterval(mostrarFechaYHora, 60000);
-    
-    // ============================================
-    // SCRIPT PRINCIPAL DEL EDITOR JSON
-    // ============================================
-    let jsonData = [];
-    let originalFileName = '';
-    let hasChanges = false;
-    let filtroTexto = '';
-    let filtroColumna = 'todos';
-    let columnasPersonalizadas = [];
-    let configAnchoColumnasPDF = {};
-    let celdaActiva = null;
-    let celdaEnEdicion = null;
-
-    // URL del archivo JSON en GitHub (REMPLAZAR CON TU URL REAL)
-    const GITHUB_JSON_URL = 'https://raw.githubusercontent.com/carlos2601/bateas3/main/afiliados.json';
-    
-    // Títulos predeterminados
-    const titulosPredeterminados = [
-        "JUNTA DE ACCIÓN COMUNAL DEL BARRIO BATEAS SECTOR 3",
-        "PUERTO GAITÁN META"
-    ];
-
-    const subtitulosPredeterminados = [
-        "ASAMBLEA PREVIA",
-        "ASISTENCIA DE AFILIADOS",
-        "FECHA: {{fecha}}"
-    ];
-
-    // ============================================
-    // FUNCIÓN PARA CARGAR DESDE GITHUB
-    // ============================================
-    async function cargarDesdeGitHub(url) {
-        try {
-            mostrarMensaje('🌐 Cargando desde GitHub...', 'info');
+        // ============================================
+        // SCRIPT PARA FECHA Y HORA EN EL TÍTULO
+        // ============================================
+        function mostrarFechaYHora() {
+            const elementoFechaHora = document.getElementById("fecha-y-hora-actual");
+            const ahora = new Date();
             
-            const response = await fetch(url);
+            const fechaFormateada = ahora.toLocaleDateString('es-ES', {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric'
+            });
             
-            if (!response.ok) {
-                throw new Error(`Error HTTP: ${response.status}`);
+            const horaFormateada = ahora.toLocaleTimeString('es-ES', {
+                hour: '2-digit',
+                minute: '2-digit',
+                hour12: true
+            });
+            
+            elementoFechaHora.textContent = ` ${fechaFormateada} ${horaFormateada}`;
+        }
+
+        mostrarFechaYHora();
+        setInterval(mostrarFechaYHora, 60000);
+        
+        // ============================================
+        // SCRIPT PRINCIPAL DEL EDITOR JSON
+        // ============================================
+        let jsonData = [];
+        let originalFileName = '';
+        let hasChanges = false;
+        let filtroTexto = '';
+        let filtroColumna = 'todos';
+        let columnasPersonalizadas = [];
+        let configAnchoColumnasPDF = {};
+        let celdaActiva = null;
+        let celdaEnEdicion = null;
+
+        // URL del archivo JSON en GitHub (se construirá dinámicamente)
+        let GITHUB_JSON_URL = '';
+        
+        // Títulos predeterminados
+        const titulosPredeterminados = [
+            "JUNTA DE ACCIÓN COMUNAL DEL BARRIO BATEAS SECTOR 3",
+            "PUERTO GAITÁN META"
+        ];
+
+        const subtitulosPredeterminados = [
+            "ASAMBLEA PREVIA",
+            "ASISTENCIA DE AFILIADOS",
+            "FECHA: {{fecha}}"
+        ];
+
+        // ============================================
+        // FUNCIONES PARA MANEJAR CONFIGURACIÓN DE GITHUB
+        // ============================================
+        function cargarConfigGitHubDesdeStorage() {
+            const configGuardada = localStorage.getItem('githubConfig');
+            if (configGuardada) {
+                try {
+                    const config = JSON.parse(configGuardada);
+                    GITHUB_CONFIG = {
+                        ...GITHUB_CONFIG,
+                        ...config
+                    };
+                    
+                    // Actualizar campos del modal
+                    document.getElementById('githubOwner').value = GITHUB_CONFIG.owner || '';
+                    document.getElementById('githubRepo').value = GITHUB_CONFIG.repo || '';
+                    document.getElementById('githubPath').value = GITHUB_CONFIG.path || 'afiliados.json';
+                    document.getElementById('githubBranch').value = GITHUB_CONFIG.branch || 'main';
+                    document.getElementById('githubToken').value = GITHUB_CONFIG.token || '';
+                    
+                    // Construir URLs
+                    if (GITHUB_CONFIG.owner && GITHUB_CONFIG.repo && GITHUB_CONFIG.path) {
+                        GITHUB_JSON_URL = `https://raw.githubusercontent.com/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/${GITHUB_CONFIG.branch}/${GITHUB_CONFIG.path}`;
+                        GITHUB_CONFIG.apiUrl = `https://api.github.com/repos/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/contents/${GITHUB_CONFIG.path}`;
+                        
+                        // Actualizar estado de conexión
+                        actualizarEstadoConexionGitHub();
+                    }
+                    
+                    return true;
+                } catch (error) {
+                    console.error('Error al cargar configuración de GitHub:', error);
+                    return false;
+                }
+            }
+            return false;
+        }
+
+        function guardarConfigGitHub() {
+            const owner = document.getElementById('githubOwner').value.trim();
+            const repo = document.getElementById('githubRepo').value.trim();
+            const path = document.getElementById('githubPath').value.trim();
+            const branch = document.getElementById('githubBranch').value.trim();
+            const token = document.getElementById('githubToken').value.trim();
+            
+            if (!owner || !repo || !token) {
+                mostrarMensaje('⚠️ Completa todos los campos obligatorios', 'warning');
+                return;
             }
             
-            const data = await response.json();
+            const nuevaConfig = {
+                owner,
+                repo,
+                path: path || 'afiliados.json',
+                branch: branch || 'main',
+                token
+            };
             
-            // Procesar los datos
-            jsonData = data;
-            originalFileName = 'afiliados.json';
-            document.getElementById('fileName').textContent = `Archivo: ${originalFileName} (desde GitHub)`;
+            // Guardar en localStorage
+            localStorage.setItem('githubConfig', JSON.stringify(nuevaConfig));
             
-            // CORRECCIÓN IMPORTANTE: Limpiar propiedades CSS del JSON
-            if (Array.isArray(jsonData)) {
-                jsonData = jsonData.map(registro => {
-                    const nuevoRegistro = {};
+            // Actualizar configuración global
+            GITHUB_CONFIG = { ...GITHUB_CONFIG, ...nuevaConfig };
+            
+            // Construir URLs
+            GITHUB_JSON_URL = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${path}`;
+            GITHUB_CONFIG.apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
+            
+            mostrarMensaje('✅ Configuración de GitHub guardada', 'success');
+            actualizarEstadoConexionGitHub();
+            cerrarConfigGitHub();
+        }
+
+        function probarConexionGitHub() {
+            const owner = document.getElementById('githubOwner').value.trim();
+            const repo = document.getElementById('githubRepo').value.trim();
+            const path = document.getElementById('githubPath').value.trim();
+            const branch = document.getElementById('githubBranch').value.trim();
+            const token = document.getElementById('githubToken').value.trim();
+            
+            if (!owner || !repo || !token) {
+                mostrarMensaje('⚠️ Completa todos los campos obligatorios', 'warning');
+                return;
+            }
+            
+            const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
+            
+            mostrarMensaje('🔍 Probando conexión con GitHub...', 'info');
+            
+            fetch(apiUrl, {
+                headers: {
+                    'Authorization': `token ${token}`,
+                    'Accept': 'application/vnd.github.v3+json'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    mostrarMensaje('✅ Conexión exitosa con GitHub', 'success');
+                    document.getElementById('githubStatus').className = 'github-status connected';
+                    document.getElementById('githubStatus').innerHTML = '✅ Conectado a GitHub';
+                } else {
+                    throw new Error(`Error ${response.status}: ${response.statusText}`);
+                }
+            })
+            .catch(error => {
+                mostrarMensaje(`❌ Error de conexión: ${error.message}`, 'danger');
+                document.getElementById('githubStatus').className = 'github-status disconnected';
+                document.getElementById('githubStatus').innerHTML = `❌ Error: ${error.message}`;
+            });
+        }
+
+        function actualizarEstadoConexionGitHub() {
+            const statusEl = document.getElementById('githubStatus');
+            if (GITHUB_CONFIG.owner && GITHUB_CONFIG.repo && GITHUB_CONFIG.token) {
+                statusEl.className = 'github-status connected';
+                statusEl.innerHTML = `✅ Conectado a ${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}`;
+            } else {
+                statusEl.className = 'github-status disconnected';
+                statusEl.innerHTML = '⚠️ No conectado a GitHub';
+            }
+        }
+
+        function abrirConfigGitHub() {
+            document.getElementById('githubConfigModal').style.display = 'flex';
+            // Cargar configuración actual en los campos
+            document.getElementById('githubOwner').value = GITHUB_CONFIG.owner || '';
+            document.getElementById('githubRepo').value = GITHUB_CONFIG.repo || '';
+            document.getElementById('githubPath').value = GITHUB_CONFIG.path || 'afiliados.json';
+            document.getElementById('githubBranch').value = GITHUB_CONFIG.branch || 'main';
+            document.getElementById('githubToken').value = GITHUB_CONFIG.token || '';
+            actualizarEstadoConexionGitHub();
+        }
+
+        function cerrarConfigGitHub() {
+            document.getElementById('githubConfigModal').style.display = 'none';
+        }
+
+        // ============================================
+        // FUNCIÓN PARA GUARDAR EN GITHUB
+        // ============================================
+        async function guardarEnGitHub() {
+            if (jsonData.length === 0) {
+                mostrarMensaje('⚠️ No hay datos para guardar', 'warning');
+                return;
+            }
+
+            // Verificar configuración
+            if (!GITHUB_CONFIG.owner || !GITHUB_CONFIG.repo || !GITHUB_CONFIG.token) {
+                mostrarMensaje('⚠️ Configura primero GitHub', 'warning');
+                abrirConfigGitHub();
+                return;
+            }
+
+            try {
+                mostrarMensaje('⏳ Guardando en GitHub...', 'info');
+                
+                // Preparar datos limpios para guardar
+                const datosParaGuardar = jsonData.map(registro => {
+                    const registroLimpio = {};
                     
                     const propiedadesBase = ['id', 'nombre', 'cedula', 'fecha_afiliacion', 'registro', 
                                             'folio', 'renglon', 'direccion', 'telefono', 'pagos', 'firma'];
                     
                     propiedadesBase.forEach(prop => {
                         if (registro.hasOwnProperty(prop)) {
-                            nuevoRegistro[prop] = registro[prop];
-                        } else {
-                            nuevoRegistro[prop] = prop === 'firma' ? '' : '';
+                            registroLimpio[prop] = registro[prop];
                         }
                     });
                     
                     columnasPersonalizadas.forEach(col => {
                         if (registro.hasOwnProperty(col.clave)) {
-                            nuevoRegistro[col.clave] = registro[col.clave];
+                            registroLimpio[col.clave] = registro[col.clave];
                         }
                     });
                     
-                    return nuevoRegistro;
+                    return registroLimpio;
                 });
-            }
-            
-            // Activar botones
-            document.getElementById('saveBtn').disabled = false;
-            document.getElementById('addRowBtn').disabled = false;
-            
-            if (jsonData.length > 0) {
-                jsonData.forEach(registro => {
-                    if (!registro.hasOwnProperty('firma')) {
-                        registro.firma = '';
-                    }
-                    columnasPersonalizadas.forEach(col => {
-                        if (!registro.hasOwnProperty(col.clave)) {
-                            registro[col.clave] = '';
+                
+                const content = JSON.stringify(datosParaGuardar, null, 2);
+                const contentEncoded = btoa(unescape(encodeURIComponent(content)));
+                
+                // Primero obtener el SHA del archivo actual
+                let sha = null;
+                try {
+                    const response = await fetch(GITHUB_CONFIG.apiUrl, {
+                        headers: {
+                            'Authorization': `token ${GITHUB_CONFIG.token}`,
+                            'Accept': 'application/vnd.github.v3+json'
                         }
                     });
+                    
+                    if (response.ok) {
+                        const data = await response.json();
+                        sha = data.sha;
+                    }
+                } catch (error) {
+                    console.log('No se pudo obtener SHA, probablemente el archivo no existe aún');
+                }
+                
+                // Crear el payload para la API de GitHub
+                const payload = {
+                    message: `Actualización automática: ${new Date().toLocaleString()}`,
+                    content: contentEncoded,
+                    branch: GITHUB_CONFIG.branch
+                };
+                
+                if (sha) {
+                    payload.sha = sha;
+                }
+                
+                // Hacer la solicitud PUT para actualizar el archivo
+                const updateResponse = await fetch(GITHUB_CONFIG.apiUrl, {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `token ${GITHUB_CONFIG.token}`,
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/vnd.github.v3+json'
+                    },
+                    body: JSON.stringify(payload)
                 });
                 
-                crearTabla();
-                mostrarMensaje('✅ Archivo cargado desde GitHub correctamente', 'success');
-                actualizarContador();
-                actualizarInfoFolio();
-            } else {
-                crearTabla();
-                mostrarMensaje('📄 Archivo JSON cargado desde GitHub (vacío). Puedes agregar nuevos registros.', 'info');
-                actualizarContador();
-                actualizarInfoFolio();
-            }
-            
-            hasChanges = false;
-            actualizarEstado();
-            actualizarConfigColumnasPDF();
-            
-        } catch (error) {
-            console.error('Error al cargar desde GitHub:', error);
-            mostrarMensaje(`❌ Error al cargar desde GitHub: ${error.message}`, 'danger');
-            
-            // Mostrar sugerencia
-            mostrarMensaje('💡 Asegúrate de que la URL de GitHub sea correcta y el archivo exista', 'info');
-        }
-    }
-
-    // ============================================
-    // CARGAR AUTOMÁTICAMENTE AL INICIAR
-    // ============================================
-    document.addEventListener('DOMContentLoaded', function() {
-        // Intentar cargar automáticamente desde GitHub al inicio
-        mostrarMensaje('⏳ Cargando datos desde GitHub...', 'info');
-        
-        // Usar un timeout para asegurar que la página esté cargada
-        setTimeout(() => {
-            cargarDesdeGitHub(GITHUB_JSON_URL);
-        }, 1000);
-    });
-
-    // ============================================
-    // CONFIGURAR BOTÓN MANUAL DE GITHUB
-    // ============================================
-    document.getElementById('loadFromGithubBtn').addEventListener('click', function() {
-        cargarDesdeGitHub(GITHUB_JSON_URL);
-    });
-
-    function formatearCedula(valor) {
-        if (!valor) return '';
-        const numero = valor.toString().replace(/\D/g, '');
-        return numero.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
-    }
-
-    // Función para obtener solo números de una cédula
-    function obtenerNumerosCedula(cedula) {
-        if (!cedula) return 0;
-        return parseInt(cedula.toString().replace(/\D/g, '')) || 0;
-    }
-
-    document.getElementById('jsonFile').addEventListener('change', function(e) {
-        const file = e.target.files[0];
-        if (!file) return;
-        
-        originalFileName = file.name;
-        document.getElementById('fileName').textContent = `Archivo: ${file.name}`;
-        
-        const reader = new FileReader();
-        reader.onload = function(event) {
-            try {
-                jsonData = JSON.parse(event.target.result);
+                if (updateResponse.ok) {
+                    const result = await updateResponse.json();
+                    hasChanges = false;
+                    actualizarEstado();
+                    mostrarMensaje('✅ Datos guardados exitosamente en GitHub', 'success');
+                    console.log('Archivo guardado en GitHub:', result);
+                    return true;
+                } else {
+                    const errorData = await updateResponse.json();
+                    throw new Error(errorData.message || 'Error desconocido');
+                }
                 
-                // CORRECCIÓN IMPORTANTE: Limpiar propiedades CSS del JSON
-                // Asegurar que solo tengamos los datos de los registros, no propiedades del DOM
+            } catch (error) {
+                console.error('Error al guardar en GitHub:', error);
+                mostrarMensaje(`❌ Error al guardar en GitHub: ${error.message}`, 'danger');
+                return false;
+            }
+        }
+
+        // ============================================
+        // FUNCIÓN PARA CARGAR DESDE GITHUB
+        // ============================================
+        async function cargarDesdeGitHub(url) {
+            // Verificar configuración
+            if (!GITHUB_CONFIG.owner || !GITHUB_CONFIG.repo) {
+                mostrarMensaje('⚠️ Configura primero GitHub', 'warning');
+                abrirConfigGitHub();
+                return;
+            }
+
+            try {
+                mostrarMensaje('🌐 Cargando desde GitHub...', 'info');
+                
+                const response = await fetch(url);
+                
+                if (!response.ok) {
+                    throw new Error(`Error HTTP: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                
+                // Procesar los datos
+                jsonData = data;
+                originalFileName = GITHUB_CONFIG.path;
+                document.getElementById('fileName').textContent = `Archivo: ${originalFileName} (desde GitHub)`;
+                
                 if (Array.isArray(jsonData)) {
                     jsonData = jsonData.map(registro => {
-                        // Crear un nuevo objeto con solo las propiedades que necesitamos
                         const nuevoRegistro = {};
                         
-                        // Propiedades base que deben existir
                         const propiedadesBase = ['id', 'nombre', 'cedula', 'fecha_afiliacion', 'registro', 
                                                 'folio', 'renglon', 'direccion', 'telefono', 'pagos', 'firma'];
                         
-                        // Copiar solo las propiedades válidas
                         propiedadesBase.forEach(prop => {
                             if (registro.hasOwnProperty(prop)) {
                                 nuevoRegistro[prop] = registro[prop];
@@ -940,7 +1234,6 @@
                             }
                         });
                         
-                        // Copiar columnas personalizadas si existen
                         columnasPersonalizadas.forEach(col => {
                             if (registro.hasOwnProperty(col.clave)) {
                                 nuevoRegistro[col.clave] = registro[col.clave];
@@ -951,680 +1244,823 @@
                     });
                 }
                 
-                // CORRECCIÓN IMPORTANTE: Activar botones incluso si el array está vacío
-                if (Array.isArray(jsonData)) {
-                    // Siempre activar los botones, incluso con array vacío
-                    document.getElementById('saveBtn').disabled = false;
-                    document.getElementById('addRowBtn').disabled = false;
-                    
-                    if (jsonData.length > 0) {
-                        // Si hay datos, procesar normalmente
-                        jsonData.forEach(registro => {
-                            if (!registro.hasOwnProperty('firma')) {
-                                registro.firma = '';
+                // Activar botones
+                document.getElementById('saveBtn').disabled = false;
+                document.getElementById('addRowBtn').disabled = false;
+                document.getElementById('saveToGithubBtn').disabled = false;
+                
+                if (jsonData.length > 0) {
+                    jsonData.forEach(registro => {
+                        if (!registro.hasOwnProperty('firma')) {
+                            registro.firma = '';
+                        }
+                        columnasPersonalizadas.forEach(col => {
+                            if (!registro.hasOwnProperty(col.clave)) {
+                                registro[col.clave] = '';
                             }
-                            columnasPersonalizadas.forEach(col => {
-                                if (!registro.hasOwnProperty(col.clave)) {
-                                    registro[col.clave] = '';
-                                }
-                            });
                         });
-                        
-                        crearTabla();
-                        mostrarMensaje('✅ Archivo cargado correctamente', 'success');
-                        actualizarContador();
-                        actualizarInfoFolio();
-                    } else {
-                        // Si el array está vacío, mostrar mensaje pero mantener botones activos
-                        crearTabla(); // Esto creará una tabla vacía
-                        mostrarMensaje('📄 Archivo JSON cargado (vacío). Puedes agregar nuevos registros.', 'info');
-                        actualizarContador();
-                        actualizarInfoFolio();
-                    }
+                    });
                     
-                    hasChanges = false;
-                    actualizarEstado();
-                    actualizarConfigColumnasPDF();
-                }
-            } catch (error) {
-                mostrarMensaje('❌ Error al leer el JSON', 'danger');
-            }
-        };
-        reader.readAsText(file);
-    });
-
-    function crearTabla() {
-        const headers = document.getElementById('tableHeaders');
-        const body = document.getElementById('tableBody');
-        headers.innerHTML = '';
-        body.innerHTML = '';
-        
-        if (jsonData.length > 0) {
-            const columnasBase = [
-                { key: 'id', label: 'ID', width: '70px' },
-                { key: 'nombre', label: 'NOMBRE COMPLETO', width: '200px', class: 'nombre-columna' },
-                { key: 'cedula', label: 'CÉDULA', width: '100px' },
-                { key: 'fecha_afiliacion', label: 'FECHA AFILIACIÓN', width: '100px' },
-                { key: 'registro', label: 'REGISTRO', width: '50px' },
-                { key: 'folio', label: 'FOLIO', width: '50px' },
-                { key: 'renglon', label: 'RENGLÓN', width: '50px' },
-                { key: 'direccion', label: 'DIRECCIÓN', width: '150px' },
-                { key: 'telefono', label: 'TELÉFONO', width: '90px' },
-                { key: 'pagos', label: 'PAGOS', width: '100px', class: 'columna-oculta' },
-                { key: 'firma', label: 'FIRMA', width: '100px', class: 'columna-firma-oculta' }
-            ];
-            const columnasPersonalizadasTabla = columnasPersonalizadas.map(col => ({
-                key: col.clave,
-                label: col.label,
-                width: '120px'
-            }));
-            const todasColumnas = [...columnasBase, ...columnasPersonalizadasTabla];
-            
-            // Solo mostrar columnas NO OCULTAS en los headers
-            todasColumnas.forEach(col => {
-                if (!col.class || (!col.class.includes('columna-oculta') && !col.class.includes('columna-firma-oculta'))) {
-                    const th = document.createElement('th');
-                    th.textContent = col.label;
-                    th.style.width = col.width;
-                    if (col.class) th.className = col.class;
-                    headers.appendChild(th);
-                }
-            });
-            
-            jsonData.forEach((item, rowIndex) => {
-                const tr = document.createElement('tr');
-                tr.dataset.rowIndex = rowIndex;
-                
-                const nombreVacio = !item.nombre || item.nombre.trim() === '';
-                if (nombreVacio) {
-                    tr.classList.add('fila-sin-nombre');
-                }
-                
-                // Contador para columnas visibles
-                let colVisibleIndex = 0;
-                
-                // Solo mostrar columnas NO OCULTAS en el body
-                todasColumnas.forEach((col, colIndex) => {
-                    if (!col.class || (!col.class.includes('columna-oculta') && !col.class.includes('columna-firma-oculta'))) {
-                        const td = document.createElement('td');
-                        td.className = 'editable-cell ' + (col.class || '');
-                        
-                        if (nombreVacio) {
-                            td.classList.add('celda-sin-nombre');
-                        }
-                        
-                        td.textContent = col.key === 'cedula' ? formatearCedula(item[col.key]) : (item[col.key] || '');
-                        td.dataset.key = col.key;
-                        td.dataset.row = rowIndex;
-                        td.dataset.col = colVisibleIndex;
-                        td.tabIndex = 0;
-                        
-                        if (col.key !== 'pagos' && col.key !== 'firma') {
-                            td.addEventListener('click', function(e) {
-                                if (celdaEnEdicion === this) return;
-                                iniciarEdicion(this);
-                            });
-                        } else {
-                            td.style.cursor = 'default';
-                        }
-                        
-                        td.addEventListener('focus', function(e) {
-                            celdaActiva = this;
-                            this.classList.add('celda-activa');
-                        });
-                        
-                        td.addEventListener('blur', function(e) {
-                            this.classList.remove('celda-activa');
-                        });
-                        
-                        tr.appendChild(td);
-                        colVisibleIndex++;
-                    }
-                });
-                body.appendChild(tr);
-            });
-        }
-    }
-
-    function iniciarEdicion(celda) {
-        if (!celda || celda.dataset.key === 'pagos' || celda.dataset.key === 'firma') return;
-        if (celdaEnEdicion) finalizarEdicion(celdaEnEdicion);
-        
-        const oldValue = celda.textContent;
-        const key = celda.dataset.key;
-        const row = celda.dataset.row;
-        
-        const input = document.createElement('input');
-        input.type = 'text';
-        input.className = 'form-control form-control-sm';
-        input.value = key === 'cedula' ? oldValue.replace(/\./g, '') : oldValue;
-        input.style.width = '100%';
-        input.style.height = '100%';
-        input.style.border = 'none';
-        input.style.background = 'transparent';
-        input.style.outline = 'none';
-        
-        celda.textContent = '';
-        celda.appendChild(input);
-        celdaEnEdicion = celda;
-        
-        input.focus();
-        input.select();
-        
-        function guardarCambio() {
-            const newValue = input.value.trim();
-            if (newValue !== (key === 'cedula' ? oldValue.replace(/\./g, '') : oldValue)) {
-                jsonData[row][key] = key === 'cedula' ? newValue.replace(/\D/g, '') : newValue;
-                celda.textContent = key === 'cedula' ? formatearCedula(newValue) : newValue;
-                hasChanges = true;
-                actualizarEstado();
-                
-                if (key === 'nombre') {
-                    actualizarEstiloFila(row);
-                }
-                
-                if (['registro', 'folio', 'renglon'].includes(key)) {
+                    crearTabla();
+                    mostrarMensaje('✅ Archivo cargado desde GitHub correctamente', 'success');
+                    actualizarContador();
+                    actualizarInfoFolio();
+                } else {
+                    crearTabla();
+                    mostrarMensaje('📄 Archivo JSON cargado desde GitHub (vacío). Puedes agregar nuevos registros.', 'info');
+                    actualizarContador();
                     actualizarInfoFolio();
                 }
-            } else {
-                celda.textContent = key === 'cedula' ? formatearCedula(oldValue) : oldValue;
+                
+                hasChanges = false;
+                actualizarEstado();
+                actualizarConfigColumnasPDF();
+                
+            } catch (error) {
+                console.error('Error al cargar desde GitHub:', error);
+                mostrarMensaje(`❌ Error al cargar desde GitHub: ${error.message}`, 'danger');
+                
+                mostrarMensaje('💡 Asegúrate de que la configuración de GitHub sea correcta y el archivo exista', 'info');
             }
-            celdaEnEdicion = null;
         }
-        
-        input.addEventListener('blur', guardarCambio);
-        input.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter') {
-                guardarCambio();
-                moverSiguienteCelda();
-            } else if (e.key === 'Escape') {
-                celda.textContent = key === 'cedula' ? formatearCedula(oldValue) : oldValue;
-                celdaEnEdicion = null;
-            } else if (e.key === 'Tab') {
-                e.preventDefault();
-                guardarCambio();
-                if (e.shiftKey) {
-                    moverCeldaAnterior();
-                } else {
-                    moverSiguienteCelda();
-                }
+
+        // ============================================
+        // INICIALIZACIÓN
+        // ============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            // Cargar configuración de GitHub desde localStorage
+            const configCargada = cargarConfigGitHubDesdeStorage();
+            
+            if (configCargada && GITHUB_CONFIG.owner && GITHUB_CONFIG.repo && GITHUB_CONFIG.token) {
+                // Intentar cargar automáticamente desde GitHub al inicio
+                mostrarMensaje('⏳ Cargando datos desde GitHub...', 'info');
+                
+                setTimeout(() => {
+                    cargarDesdeGitHub(GITHUB_JSON_URL);
+                }, 1000);
+            } else {
+                mostrarMensaje('⚠️ Configura GitHub para cargar datos automáticamente', 'info');
             }
         });
-    }
 
-    function actualizarEstiloFila(rowIndex) {
-        const tr = document.querySelector(`tr[data-row-index="${rowIndex}"]`);
-        if (!tr) return;
+        // ============================================
+        // EVENT LISTENERS
+        // ============================================
+        document.getElementById('configGithubBtn').addEventListener('click', abrirConfigGitHub);
         
-        const nombreVacio = !jsonData[rowIndex].nombre || jsonData[rowIndex].nombre.trim() === '';
-        
-        if (nombreVacio) {
-            tr.classList.add('fila-sin-nombre');
-            const celdas = tr.querySelectorAll('td');
-            celdas.forEach(td => {
-                td.classList.add('celda-sin-nombre');
-            });
-        } else {
-            tr.classList.remove('fila-sin-nombre');
-            const celdas = tr.querySelectorAll('td');
-            celdas.forEach(td => {
-                td.classList.remove('celda-sin-nombre');
-            });
-        }
-    }
-
-    function finalizarEdicion(celda) {
-        if (celda && celda.querySelector('input')) {
-            const input = celda.querySelector('input');
-            const event = new Event('blur');
-            input.dispatchEvent(event);
-        }
-    }
-
-    function moverSiguienteCelda() {
-        if (!celdaActiva) return;
-        const row = parseInt(celdaActiva.dataset.row);
-        const col = parseInt(celdaActiva.dataset.col);
-        const totalRows = jsonData.length;
-        
-        // Obtener todas las celdas visibles de esta fila
-        const celdasVisibles = Array.from(document.querySelectorAll(`td[data-row="${row}"]`))
-            .filter(td => {
-                const key = td.dataset.key;
-                return key !== 'pagos' && key !== 'firma';
-            });
-        
-        const totalCols = celdasVisibles.length;
-        const currentIndex = celdasVisibles.findIndex(td => td === celdaActiva);
-        
-        if (currentIndex < totalCols - 1) {
-            const nextCell = celdasVisibles[currentIndex + 1];
-            if (nextCell) {
-                nextCell.focus();
-                iniciarEdicion(nextCell);
+        document.getElementById('loadFromGithubBtn').addEventListener('click', function() {
+            if (!GITHUB_JSON_URL) {
+                mostrarMensaje('⚠️ Configura primero GitHub', 'warning');
+                abrirConfigGitHub();
+                return;
             }
-        } else if (row < totalRows - 1) {
-            // Ir a la primera celda de la siguiente fila
-            const nextRowCells = Array.from(document.querySelectorAll(`td[data-row="${row + 1}"]`))
+            cargarDesdeGitHub(GITHUB_JSON_URL);
+        });
+
+        document.getElementById('saveToGithubBtn').addEventListener('click', function() {
+            guardarEnGitHub();
+        });
+
+        // ============================================
+        // FUNCIONES RESTANTES (sin cambios)
+        // ============================================
+        function formatearCedula(valor) {
+            if (!valor) return '';
+            const numero = valor.toString().replace(/\D/g, '');
+            return numero.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+        }
+
+        function obtenerNumerosCedula(cedula) {
+            if (!cedula) return 0;
+            return parseInt(cedula.toString().replace(/\D/g, '')) || 0;
+        }
+
+        document.getElementById('jsonFile').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            
+            originalFileName = file.name;
+            document.getElementById('fileName').textContent = `Archivo: ${file.name}`;
+            
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                try {
+                    jsonData = JSON.parse(event.target.result);
+                    
+                    if (Array.isArray(jsonData)) {
+                        jsonData = jsonData.map(registro => {
+                            const nuevoRegistro = {};
+                            
+                            const propiedadesBase = ['id', 'nombre', 'cedula', 'fecha_afiliacion', 'registro', 
+                                                    'folio', 'renglon', 'direccion', 'telefono', 'pagos', 'firma'];
+                            
+                            propiedadesBase.forEach(prop => {
+                                if (registro.hasOwnProperty(prop)) {
+                                    nuevoRegistro[prop] = registro[prop];
+                                } else {
+                                    nuevoRegistro[prop] = prop === 'firma' ? '' : '';
+                                }
+                            });
+                            
+                            columnasPersonalizadas.forEach(col => {
+                                if (registro.hasOwnProperty(col.clave)) {
+                                    nuevoRegistro[col.clave] = registro[col.clave];
+                                }
+                            });
+                            
+                            return nuevoRegistro;
+                        });
+                    }
+                    
+                    if (Array.isArray(jsonData)) {
+                        document.getElementById('saveBtn').disabled = false;
+                        document.getElementById('addRowBtn').disabled = false;
+                        document.getElementById('saveToGithubBtn').disabled = false;
+                        
+                        if (jsonData.length > 0) {
+                            jsonData.forEach(registro => {
+                                if (!registro.hasOwnProperty('firma')) {
+                                    registro.firma = '';
+                                }
+                                columnasPersonalizadas.forEach(col => {
+                                    if (!registro.hasOwnProperty(col.clave)) {
+                                        registro[col.clave] = '';
+                                    }
+                                });
+                            });
+                            
+                            crearTabla();
+                            mostrarMensaje('✅ Archivo cargado correctamente', 'success');
+                            actualizarContador();
+                            actualizarInfoFolio();
+                        } else {
+                            crearTabla();
+                            mostrarMensaje('📄 Archivo JSON cargado (vacío). Puedes agregar nuevos registros.', 'info');
+                            actualizarContador();
+                            actualizarInfoFolio();
+                        }
+                        
+                        hasChanges = false;
+                        actualizarEstado();
+                        actualizarConfigColumnasPDF();
+                    }
+                } catch (error) {
+                    mostrarMensaje('❌ Error al leer el JSON', 'danger');
+                }
+            };
+            reader.readAsText(file);
+        });
+
+        function crearTabla() {
+            const headers = document.getElementById('tableHeaders');
+            const body = document.getElementById('tableBody');
+            headers.innerHTML = '';
+            body.innerHTML = '';
+            
+            if (jsonData.length > 0) {
+                const columnasBase = [
+                    { key: 'id', label: 'ID', width: '70px' },
+                    { key: 'nombre', label: 'NOMBRE COMPLETO', width: '200px', class: 'nombre-columna' },
+                    { key: 'cedula', label: 'CÉDULA', width: '100px' },
+                    { key: 'fecha_afiliacion', label: 'FECHA AFILIACIÓN', width: '100px' },
+                    { key: 'registro', label: 'REGISTRO', width: '50px' },
+                    { key: 'folio', label: 'FOLIO', width: '50px' },
+                    { key: 'renglon', label: 'RENGLÓN', width: '50px' },
+                    { key: 'direccion', label: 'DIRECCIÓN', width: '150px' },
+                    { key: 'telefono', label: 'TELÉFONO', width: '90px' },
+                    { key: 'pagos', label: 'PAGOS', width: '100px', class: 'columna-oculta' },
+                    { key: 'firma', label: 'FIRMA', width: '100px', class: 'columna-firma-oculta' }
+                ];
+                const columnasPersonalizadasTabla = columnasPersonalizadas.map(col => ({
+                    key: col.clave,
+                    label: col.label,
+                    width: '120px'
+                }));
+                const todasColumnas = [...columnasBase, ...columnasPersonalizadasTabla];
+                
+                // Solo mostrar columnas NO OCULTAS en los headers
+                todasColumnas.forEach(col => {
+                    if (!col.class || (!col.class.includes('columna-oculta') && !col.class.includes('columna-firma-oculta'))) {
+                        const th = document.createElement('th');
+                        th.textContent = col.label;
+                        th.style.width = col.width;
+                        if (col.class) th.className = col.class;
+                        headers.appendChild(th);
+                    }
+                });
+                
+                jsonData.forEach((item, rowIndex) => {
+                    const tr = document.createElement('tr');
+                    tr.dataset.rowIndex = rowIndex;
+                    
+                    const nombreVacio = !item.nombre || item.nombre.trim() === '';
+                    if (nombreVacio) {
+                        tr.classList.add('fila-sin-nombre');
+                    }
+                    
+                    let colVisibleIndex = 0;
+                    
+                    todasColumnas.forEach((col, colIndex) => {
+                        if (!col.class || (!col.class.includes('columna-oculta') && !col.class.includes('columna-firma-oculta'))) {
+                            const td = document.createElement('td');
+                            td.className = 'editable-cell ' + (col.class || '');
+                            
+                            if (nombreVacio) {
+                                td.classList.add('celda-sin-nombre');
+                            }
+                            
+                            td.textContent = col.key === 'cedula' ? formatearCedula(item[col.key]) : (item[col.key] || '');
+                            td.dataset.key = col.key;
+                            td.dataset.row = rowIndex;
+                            td.dataset.col = colVisibleIndex;
+                            td.tabIndex = 0;
+                            
+                            if (col.key !== 'pagos' && col.key !== 'firma') {
+                                td.addEventListener('click', function(e) {
+                                    if (celdaEnEdicion === this) return;
+                                    iniciarEdicion(this);
+                                });
+                            } else {
+                                td.style.cursor = 'default';
+                            }
+                            
+                            td.addEventListener('focus', function(e) {
+                                celdaActiva = this;
+                                this.classList.add('celda-activa');
+                            });
+                            
+                            td.addEventListener('blur', function(e) {
+                                this.classList.remove('celda-activa');
+                            });
+                            
+                            tr.appendChild(td);
+                            colVisibleIndex++;
+                        }
+                    });
+                    body.appendChild(tr);
+                });
+            }
+        }
+
+        function iniciarEdicion(celda) {
+            if (!celda || celda.dataset.key === 'pagos' || celda.dataset.key === 'firma') return;
+            if (celdaEnEdicion) finalizarEdicion(celdaEnEdicion);
+            
+            const oldValue = celda.textContent;
+            const key = celda.dataset.key;
+            const row = celda.dataset.row;
+            
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.className = 'form-control form-control-sm';
+            input.value = key === 'cedula' ? oldValue.replace(/\./g, '') : oldValue;
+            input.style.width = '100%';
+            input.style.height = '100%';
+            input.style.border = 'none';
+            input.style.background = 'transparent';
+            input.style.outline = 'none';
+            
+            celda.textContent = '';
+            celda.appendChild(input);
+            celdaEnEdicion = celda;
+            
+            input.focus();
+            input.select();
+            
+            function guardarCambio() {
+                const newValue = input.value.trim();
+                if (newValue !== (key === 'cedula' ? oldValue.replace(/\./g, '') : oldValue)) {
+                    jsonData[row][key] = key === 'cedula' ? newValue.replace(/\D/g, '') : newValue;
+                    celda.textContent = key === 'cedula' ? formatearCedula(newValue) : newValue;
+                    hasChanges = true;
+                    actualizarEstado();
+                    
+                    if (key === 'nombre') {
+                        actualizarEstiloFila(row);
+                    }
+                    
+                    if (['registro', 'folio', 'renglon'].includes(key)) {
+                        actualizarInfoFolio();
+                    }
+                } else {
+                    celda.textContent = key === 'cedula' ? formatearCedula(oldValue) : oldValue;
+                }
+                celdaEnEdicion = null;
+            }
+            
+            input.addEventListener('blur', guardarCambio);
+            input.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') {
+                    guardarCambio();
+                    moverSiguienteCelda();
+                } else if (e.key === 'Escape') {
+                    celda.textContent = key === 'cedula' ? formatearCedula(oldValue) : oldValue;
+                    celdaEnEdicion = null;
+                } else if (e.key === 'Tab') {
+                    e.preventDefault();
+                    guardarCambio();
+                    if (e.shiftKey) {
+                        moverCeldaAnterior();
+                    } else {
+                        moverSiguienteCelda();
+                    }
+                }
+            });
+        }
+
+        function actualizarEstiloFila(rowIndex) {
+            const tr = document.querySelector(`tr[data-row-index="${rowIndex}"]`);
+            if (!tr) return;
+            
+            const nombreVacio = !jsonData[rowIndex].nombre || jsonData[rowIndex].nombre.trim() === '';
+            
+            if (nombreVacio) {
+                tr.classList.add('fila-sin-nombre');
+                const celdas = tr.querySelectorAll('td');
+                celdas.forEach(td => {
+                    td.classList.add('celda-sin-nombre');
+                });
+            } else {
+                tr.classList.remove('fila-sin-nombre');
+                const celdas = tr.querySelectorAll('td');
+                celdas.forEach(td => {
+                    td.classList.remove('celda-sin-nombre');
+                });
+            }
+        }
+
+        function finalizarEdicion(celda) {
+            if (celda && celda.querySelector('input')) {
+                const input = celda.querySelector('input');
+                const event = new Event('blur');
+                input.dispatchEvent(event);
+            }
+        }
+
+        function moverSiguienteCelda() {
+            if (!celdaActiva) return;
+            const row = parseInt(celdaActiva.dataset.row);
+            const col = parseInt(celdaActiva.dataset.col);
+            const totalRows = jsonData.length;
+            
+            const celdasVisibles = Array.from(document.querySelectorAll(`td[data-row="${row}"]`))
                 .filter(td => {
                     const key = td.dataset.key;
                     return key !== 'pagos' && key !== 'firma';
                 });
-            if (nextRowCells.length > 0) {
-                const nextCell = nextRowCells[0];
+            
+            const totalCols = celdasVisibles.length;
+            const currentIndex = celdasVisibles.findIndex(td => td === celdaActiva);
+            
+            if (currentIndex < totalCols - 1) {
+                const nextCell = celdasVisibles[currentIndex + 1];
                 if (nextCell) {
                     nextCell.focus();
                     iniciarEdicion(nextCell);
                 }
+            } else if (row < totalRows - 1) {
+                const nextRowCells = Array.from(document.querySelectorAll(`td[data-row="${row + 1}"]`))
+                    .filter(td => {
+                        const key = td.dataset.key;
+                        return key !== 'pagos' && key !== 'firma';
+                    });
+                if (nextRowCells.length > 0) {
+                    const nextCell = nextRowCells[0];
+                    if (nextCell) {
+                        nextCell.focus();
+                        iniciarEdicion(nextCell);
+                    }
+                }
             }
         }
-    }
 
-    function moverCeldaAnterior() {
-        if (!celdaActiva) return;
-        const row = parseInt(celdaActiva.dataset.row);
-        const col = parseInt(celdaActiva.dataset.col);
-        const totalRows = jsonData.length;
-        
-        // Obtener todas las celdas visibles de esta fila
-        const celdasVisibles = Array.from(document.querySelectorAll(`td[data-row="${row}"]`))
-            .filter(td => {
-                const key = td.dataset.key;
-                return key !== 'pagos' && key !== 'firma';
-            });
-        
-        const totalCols = celdasVisibles.length;
-        const currentIndex = celdasVisibles.findIndex(td => td === celdaActiva);
-        
-        if (currentIndex > 0) {
-            const prevCell = celdasVisibles[currentIndex - 1];
-            if (prevCell) {
-                prevCell.focus();
-                iniciarEdicion(prevCell);
-            }
-        } else if (row > 0) {
-            // Ir a la última celda de la fila anterior
-            const prevRowCells = Array.from(document.querySelectorAll(`td[data-row="${row - 1}"]`))
+        function moverCeldaAnterior() {
+            if (!celdaActiva) return;
+            const row = parseInt(celdaActiva.dataset.row);
+            const col = parseInt(celdaActiva.dataset.col);
+            const totalRows = jsonData.length;
+            
+            const celdasVisibles = Array.from(document.querySelectorAll(`td[data-row="${row}"]`))
                 .filter(td => {
                     const key = td.dataset.key;
                     return key !== 'pagos' && key !== 'firma';
                 });
-            if (prevRowCells.length > 0) {
-                const prevCell = prevRowCells[prevRowCells.length - 1];
+            
+            const totalCols = celdasVisibles.length;
+            const currentIndex = celdasVisibles.findIndex(td => td === celdaActiva);
+            
+            if (currentIndex > 0) {
+                const prevCell = celdasVisibles[currentIndex - 1];
                 if (prevCell) {
                     prevCell.focus();
                     iniciarEdicion(prevCell);
                 }
+            } else if (row > 0) {
+                const prevRowCells = Array.from(document.querySelectorAll(`td[data-row="${row - 1}"]`))
+                    .filter(td => {
+                        const key = td.dataset.key;
+                        return key !== 'pagos' && key !== 'firma';
+                    });
+                if (prevRowCells.length > 0) {
+                    const prevCell = prevRowCells[prevRowCells.length - 1];
+                    if (prevCell) {
+                        prevCell.focus();
+                        iniciarEdicion(prevCell);
+                    }
+                }
             }
         }
-    }
 
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Tab' && celdaActiva && !celdaEnEdicion) {
-            e.preventDefault();
-            if (celdaActiva.dataset.key !== 'pagos' && celdaActiva.dataset.key !== 'firma') {
-                iniciarEdicion(celdaActiva);
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Tab' && celdaActiva && !celdaEnEdicion) {
+                e.preventDefault();
+                if (celdaActiva.dataset.key !== 'pagos' && celdaActiva.dataset.key !== 'firma') {
+                    iniciarEdicion(celdaActiva);
+                }
             }
-        }
-        
-        if (e.key === 'Enter' && celdaActiva && !celdaEnEdicion) {
-            e.preventDefault();
-            if (celdaActiva.dataset.key !== 'pagos' && celdaActiva.dataset.key !== 'firma') {
-                iniciarEdicion(celdaActiva);
-            }
-        }
-        
-        if (e.key === 'Delete' && celdaActiva && e.target.tagName !== 'INPUT') {
-            const rowIndex = parseInt(celdaActiva.dataset.row);
-            if (confirm('¿Eliminar esta fila? (Delete)')) {
-                jsonData.splice(rowIndex, 1);
-                crearTabla();
-                hasChanges = true;
-                actualizarEstado();
-                actualizarContador();
-                actualizarInfoFolio();
-                mostrarMensaje('🗑️ Fila eliminada (Delete)', 'warning');
-            }
-        }
-    });
-
-    document.getElementById('btnAplicarFiltro').addEventListener('click', aplicarFiltro);
-    document.getElementById('btnLimpiarFiltro').addEventListener('click', limpiarFiltro);
-    document.getElementById('filtroTexto').addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') aplicarFiltro();
-    });
-
-    function aplicarFiltro() {
-        filtroTexto = document.getElementById('filtroTexto').value.toLowerCase();
-        filtroColumna = document.getElementById('filtroColumna').value;
-        
-        if (!filtroTexto) {
-            limpiarFiltro();
-            return;
-        }
-        
-        const filas = document.querySelectorAll('#tableBody tr');
-        let coincidencias = 0;
-        
-        filas.forEach((fila, index) => {
-            const celdas = fila.querySelectorAll('td');
-            let coincide = false;
             
-            if (filtroColumna === 'todos') {
-                for (let celda of celdas) {
-                    // CORRECCIÓN: Para cédula, comparar sin puntos
-                    if (celda.dataset.key === 'cedula') {
-                        const cedulaSinPuntos = celda.textContent.replace(/\./g, '');
-                        const filtroSinPuntos = filtroTexto.replace(/\./g, '');
-                        if (cedulaSinPuntos.toLowerCase().includes(filtroSinPuntos)) {
+            if (e.key === 'Enter' && celdaActiva && !celdaEnEdicion) {
+                e.preventDefault();
+                if (celdaActiva.dataset.key !== 'pagos' && celdaActiva.dataset.key !== 'firma') {
+                    iniciarEdicion(celdaActiva);
+                }
+            }
+            
+            if (e.key === 'Delete' && celdaActiva && e.target.tagName !== 'INPUT') {
+                const rowIndex = parseInt(celdaActiva.dataset.row);
+                if (confirm('¿Eliminar esta fila? (Delete)')) {
+                    jsonData.splice(rowIndex, 1);
+                    crearTabla();
+                    hasChanges = true;
+                    actualizarEstado();
+                    actualizarContador();
+                    actualizarInfoFolio();
+                    mostrarMensaje('🗑️ Fila eliminada (Delete)', 'warning');
+                }
+            }
+        });
+
+        document.getElementById('btnAplicarFiltro').addEventListener('click', aplicarFiltro);
+        document.getElementById('btnLimpiarFiltro').addEventListener('click', limpiarFiltro);
+        document.getElementById('filtroTexto').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') aplicarFiltro();
+        });
+
+        function aplicarFiltro() {
+            filtroTexto = document.getElementById('filtroTexto').value.toLowerCase();
+            filtroColumna = document.getElementById('filtroColumna').value;
+            
+            if (!filtroTexto) {
+                limpiarFiltro();
+                return;
+            }
+            
+            const filas = document.querySelectorAll('#tableBody tr');
+            let coincidencias = 0;
+            
+            filas.forEach((fila, index) => {
+                const celdas = fila.querySelectorAll('td');
+                let coincide = false;
+                
+                if (filtroColumna === 'todos') {
+                    for (let celda of celdas) {
+                        if (celda.dataset.key === 'cedula') {
+                            const cedulaSinPuntos = celda.textContent.replace(/\./g, '');
+                            const filtroSinPuntos = filtroTexto.replace(/\./g, '');
+                            if (cedulaSinPuntos.toLowerCase().includes(filtroSinPuntos)) {
+                                coincide = true;
+                                break;
+                            }
+                        } else if (celda.textContent.toLowerCase().includes(filtroTexto)) {
                             coincide = true;
                             break;
                         }
-                    } else if (celda.textContent.toLowerCase().includes(filtroTexto)) {
-                        coincide = true;
-                        break;
+                    }
+                } else if (filtroColumna === 'cedula') {
+                    const indice = 2;
+                    if (celdas[indice]) {
+                        const cedulaSinPuntos = celdas[indice].textContent.replace(/\./g, '');
+                        const filtroSinPuntos = filtroTexto.replace(/\./g, '');
+                        coincide = cedulaSinPuntos.toLowerCase().includes(filtroSinPuntos);
+                    }
+                } else {
+                    const indices = { 'nombre': 1, 'cedula': 2, 'folio': 5, 'registro': 4 };
+                    const indice = indices[filtroColumna];
+                    if (indice !== undefined && celdas[indice]) {
+                        coincide = celdas[indice].textContent.toLowerCase().includes(filtroTexto);
                     }
                 }
-            } else if (filtroColumna === 'cedula') {
-                // CORRECCIÓN ESPECIAL: para filtro por cédula, comparar sin puntos
-                const indice = 2; // índice de la columna cédula
-                if (celdas[indice]) {
-                    const cedulaSinPuntos = celdas[indice].textContent.replace(/\./g, '');
-                    const filtroSinPuntos = filtroTexto.replace(/\./g, '');
-                    coincide = cedulaSinPuntos.toLowerCase().includes(filtroSinPuntos);
+                
+                if (coincide) {
+                    fila.classList.remove('fila-filtrada');
+                    coincidencias++;
+                } else {
+                    fila.classList.add('fila-filtrada');
                 }
-            } else {
-                const indices = { 'nombre': 1, 'cedula': 2, 'folio': 5, 'registro': 4 };
-                const indice = indices[filtroColumna];
-                if (indice !== undefined && celdas[indice]) {
-                    coincide = celdas[indice].textContent.toLowerCase().includes(filtroTexto);
-                }
-            }
-            
-            if (coincide) {
-                fila.classList.remove('fila-filtrada');
-                coincidencias++;
-            } else {
-                fila.classList.add('fila-filtrada');
-            }
-        });
-        
-        document.getElementById('filtroInfo').textContent = `${coincidencias} de ${filas.length} registros`;
-        document.getElementById('filtroEstado').textContent = `Filtrado: "${filtroTexto}" (${coincidencias} resultados)`;
-        
-        mostrarMensaje(`🔍 Filtro aplicado: ${coincidencias} resultados`, 'info');
-    }
-
-    function limpiarFiltro() {
-        document.getElementById('filtroTexto').value = '';
-        document.getElementById('filtroInfo').textContent = '';
-        document.getElementById('filtroEstado').textContent = '';
-        
-        const filas = document.querySelectorAll('#tableBody tr');
-        filas.forEach(fila => {
-            fila.classList.remove('fila-filtrada');
-        });
-        
-        mostrarMensaje('Filtro limpiado', 'info');
-    }
-
-    document.getElementById('tamTitulo').addEventListener('input', function() {
-        document.getElementById('tamTituloVal').textContent = this.value;
-    });
-    document.getElementById('tamTabla').addEventListener('input', function() {
-        document.getElementById('tamTablaVal').textContent = this.value;
-    });
-    document.getElementById('altoCelda').addEventListener('input', function() {
-        document.getElementById('altoCeldaVal').textContent = this.value;
-    });
-    document.getElementById('margenSup').addEventListener('input', function() {
-        document.getElementById('margenSupVal').textContent = this.value;
-    });
-
-    function restaurarTitulosPredeterminados() {
-        const container = document.getElementById('titulosContainer');
-        container.innerHTML = '';
-        
-        titulosPredeterminados.forEach(titulo => {
-            const div = document.createElement('div');
-            div.className = 'titulo-input-group d-flex align-items-center mb-2';
-            div.innerHTML = `
-                <input type="text" class="form-control pdf-titulo" 
-                       value="${titulo}" placeholder="Título">
-                <button type="button" class="btn-remove ms-2" onclick="this.parentElement.remove()">✕</button>
-            `;
-            container.appendChild(div);
-        });
-        
-        mostrarMensaje('Títulos predeterminados restaurados', 'info');
-    }
-
-    function restaurarSubtitulosPredeterminados() {
-        const container = document.getElementById('subtitulosContainer');
-        container.innerHTML = '';
-        
-        subtitulosPredeterminados.forEach(subtitulo => {
-            const div = document.createElement('div');
-            div.className = 'titulo-input-group d-flex align-items-center mb-2';
-            div.innerHTML = `
-                <input type="text" class="form-control pdf-subtitulo" 
-                       value="${subtitulo}" placeholder="Subtítulo">
-                <button type="button" class="btn-remove ms-2" onclick="this.parentElement.remove()">✕</button>
-            `;
-            container.appendChild(div);
-        });
-        
-        mostrarMensaje('Subtítulos predeterminados restaurados', 'info');
-    }
-
-    function agregarTitulo() {
-        const container = document.getElementById('titulosContainer');
-        const div = document.createElement('div');
-        div.className = 'titulo-input-group d-flex align-items-center';
-        div.innerHTML = `<input type="text" class="form-control pdf-titulo" placeholder="Nuevo título"><button type="button" class="btn-remove ms-2" onclick="this.parentElement.remove()">✕</button>`;
-        container.appendChild(div);
-    }
-    
-    function agregarSubtitulo() {
-        const container = document.getElementById('subtitulosContainer');
-        const div = document.createElement('div');
-        div.className = 'titulo-input-group d-flex align-items-center';
-        div.innerHTML = `<input type="text" class="form-control pdf-subtitulo" placeholder="Nuevo subtítulo"><button type="button" class="btn-remove ms-2" onclick="this.parentElement.remove()">✕</button>`;
-        container.appendChild(div);
-    }
-
-    function actualizarConfigColumnasPDF() {
-        if (jsonData.length === 0) return;
-        
-        const container = document.getElementById('columnasConfig');
-        container.innerHTML = '';
-        
-        const columnasBase = [
-            { key: 'id', label: 'ID', ancho: 15, alineacion: 'center' },
-            { key: 'nombre', label: 'NOMBRE COMPLETO', ancho: 95, alineacion: 'left' },
-            { key: 'cedula', label: 'CÉDULA', ancho: 50, alineacion: 'right' },
-            { key: 'fecha_afiliacion', label: 'FECHA AFILIACIÓN', ancho: 50, alineacion: 'center' },
-            { key: 'registro', label: 'REGISTRO', ancho: 20, alineacion: 'center' },
-            { key: 'folio', label: 'FOLIO', ancho: 20, alineacion: 'center' },
-            { key: 'renglon', label: 'RENGLÓN', ancho: 20, alineacion: 'center' },
-            { key: 'direccion', label: 'DIRECCIÓN', ancho: 50, alineacion: 'center' },
-            { key: 'telefono', label: 'TELÉFONO', ancho: 50, alineacion: 'center' },
-            { key: 'pagos', label: 'PAGOS', ancho: 30, alineacion: 'center' },
-            { key: 'firma', label: 'FIRMA', ancho: 55, alineacion: 'center' }
-        ];
-        
-        const todasColumnas = [...columnasBase, ...columnasPersonalizadas];
-        
-        if (Object.keys(configAnchoColumnasPDF).length === 0) {
-            todasColumnas.forEach(col => {
-                configAnchoColumnasPDF[col.key] = {
-                    activa: true,
-                    ancho: col.ancho || 30,
-                    alineacion: col.alineacion || 'center'
-                };
             });
-        } else {
-            todasColumnas.forEach(col => {
-                if (!configAnchoColumnasPDF[col.key]) {
+            
+            document.getElementById('filtroInfo').textContent = `${coincidencias} de ${filas.length} registros`;
+            document.getElementById('filtroEstado').textContent = `Filtrado: "${filtroTexto}" (${coincidencias} resultados)`;
+            
+            mostrarMensaje(`🔍 Filtro aplicado: ${coincidencias} resultados`, 'info');
+        }
+
+        function limpiarFiltro() {
+            document.getElementById('filtroTexto').value = '';
+            document.getElementById('filtroInfo').textContent = '';
+            document.getElementById('filtroEstado').textContent = '';
+            
+            const filas = document.querySelectorAll('#tableBody tr');
+            filas.forEach(fila => {
+                fila.classList.remove('fila-filtrada');
+            });
+            
+            mostrarMensaje('Filtro limpiado', 'info');
+        }
+
+        document.getElementById('tamTitulo').addEventListener('input', function() {
+            document.getElementById('tamTituloVal').textContent = this.value;
+        });
+        document.getElementById('tamTabla').addEventListener('input', function() {
+            document.getElementById('tamTablaVal').textContent = this.value;
+        });
+        document.getElementById('altoCelda').addEventListener('input', function() {
+            document.getElementById('altoCeldaVal').textContent = this.value;
+        });
+        document.getElementById('margenSup').addEventListener('input', function() {
+            document.getElementById('margenSupVal').textContent = this.value;
+        });
+
+        function restaurarTitulosPredeterminados() {
+            const container = document.getElementById('titulosContainer');
+            container.innerHTML = '';
+            
+            titulosPredeterminados.forEach(titulo => {
+                const div = document.createElement('div');
+                div.className = 'titulo-input-group d-flex align-items-center mb-2';
+                div.innerHTML = `
+                    <input type="text" class="form-control pdf-titulo" 
+                           value="${titulo}" placeholder="Título">
+                    <button type="button" class="btn-remove ms-2" onclick="this.parentElement.remove()">✕</button>
+                `;
+                container.appendChild(div);
+            });
+            
+            mostrarMensaje('Títulos predeterminados restaurados', 'info');
+        }
+
+        function restaurarSubtitulosPredeterminados() {
+            const container = document.getElementById('subtitulosContainer');
+            container.innerHTML = '';
+            
+            subtitulosPredeterminados.forEach(subtitulo => {
+                const div = document.createElement('div');
+                div.className = 'titulo-input-group d-flex align-items-center mb-2';
+                div.innerHTML = `
+                    <input type="text" class="form-control pdf-subtitulo" 
+                           value="${subtitulo}" placeholder="Subtítulo">
+                    <button type="button" class="btn-remove ms-2" onclick="this.parentElement.remove()">✕</button>
+                `;
+                container.appendChild(div);
+            });
+            
+            mostrarMensaje('Subtítulos predeterminados restaurados', 'info');
+        }
+
+        function agregarTitulo() {
+            const container = document.getElementById('titulosContainer');
+            const div = document.createElement('div');
+            div.className = 'titulo-input-group d-flex align-items-center';
+            div.innerHTML = `<input type="text" class="form-control pdf-titulo" placeholder="Nuevo título"><button type="button" class="btn-remove ms-2" onclick="this.parentElement.remove()">✕</button>`;
+            container.appendChild(div);
+        }
+        
+        function agregarSubtitulo() {
+            const container = document.getElementById('subtitulosContainer');
+            const div = document.createElement('div');
+            div.className = 'titulo-input-group d-flex align-items-center';
+            div.innerHTML = `<input type="text" class="form-control pdf-subtitulo" placeholder="Nuevo subtítulo"><button type="button" class="btn-remove ms-2" onclick="this.parentElement.remove()">✕</button>`;
+            container.appendChild(div);
+        }
+
+        function actualizarConfigColumnasPDF() {
+            if (jsonData.length === 0) return;
+            
+            const container = document.getElementById('columnasConfig');
+            container.innerHTML = '';
+            
+            const columnasBase = [
+                { key: 'id', label: 'ID', ancho: 15, alineacion: 'center' },
+                { key: 'nombre', label: 'NOMBRE COMPLETO', ancho: 95, alineacion: 'left' },
+                { key: 'cedula', label: 'CÉDULA', ancho: 50, alineacion: 'right' },
+                { key: 'fecha_afiliacion', label: 'FECHA AFILIACIÓN', ancho: 50, alineacion: 'center' },
+                { key: 'registro', label: 'REGISTRO', ancho: 20, alineacion: 'center' },
+                { key: 'folio', label: 'FOLIO', ancho: 20, alineacion: 'center' },
+                { key: 'renglon', label: 'RENGLÓN', ancho: 20, alineacion: 'center' },
+                { key: 'direccion', label: 'DIRECCIÓN', ancho: 50, alineacion: 'center' },
+                { key: 'telefono', label: 'TELÉFONO', ancho: 50, alineacion: 'center' },
+                { key: 'pagos', label: 'PAGOS', ancho: 30, alineacion: 'center' },
+                { key: 'firma', label: 'FIRMA', ancho: 55, alineacion: 'center' }
+            ];
+            
+            const todasColumnas = [...columnasBase, ...columnasPersonalizadas];
+            
+            if (Object.keys(configAnchoColumnasPDF).length === 0) {
+                todasColumnas.forEach(col => {
                     configAnchoColumnasPDF[col.key] = {
                         activa: true,
                         ancho: col.ancho || 30,
                         alineacion: col.alineacion || 'center'
                     };
+                });
+            } else {
+                todasColumnas.forEach(col => {
+                    if (!configAnchoColumnasPDF[col.key]) {
+                        configAnchoColumnasPDF[col.key] = {
+                            activa: true,
+                            ancho: col.ancho || 30,
+                            alineacion: col.alineacion || 'center'
+                        };
+                    }
+                });
+            }
+            
+            todasColumnas.forEach((col, index) => {
+                const config = configAnchoColumnasPDF[col.key] || { activa: true, ancho: 30, alineacion: 'center' };
+                
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td class="text-center">
+                        <input type="checkbox" class="form-check-input" 
+                               id="colActivar${index}" ${config.activa ? 'checked' : ''}
+                               onchange="actualizarConfigColumnaPDF('${col.key}', 'activa', this.checked)">
+                    </td>
+                    <td>${col.label}</td>
+                    <td class="text-center">
+                        <input type="number" class="form-control form-control-sm ancho-columna-input" 
+                               value="${config.ancho}" min="5" max="100" step="1"
+                               onchange="actualizarConfigColumnaPDF('${col.key}', 'ancho', this.value)">
+                        <small class="text-muted">mm</small>
+                    </td>
+                    <td class="text-center">
+                        <select class="form-select form-select-sm alineacion-select"
+                                onchange="actualizarConfigColumnaPDF('${col.key}', 'alineacion', this.value)">
+                            <option value="left" ${config.alineacion === 'left' ? 'selected' : ''}>Izquierda</option>
+                            <option value="center" ${config.alineacion === 'center' ? 'selected' : ''}>Centro</option>
+                            <option value="right" ${config.alineacion === 'right' ? 'selected' : ''}>Derecha</option>
+                        </select>
+                    </td>
+                `;
+                container.appendChild(tr);
+            });
+            
+            actualizarListaColumnasPersonalizadas();
+        }
+
+        function actualizarConfigColumnaPDF(key, propiedad, valor) {
+            if (!configAnchoColumnasPDF[key]) {
+                configAnchoColumnasPDF[key] = { activa: true, ancho: 30, alineacion: 'center' };
+            }
+            
+            if (propiedad === 'ancho') {
+                configAnchoColumnasPDF[key].ancho = parseInt(valor) || 30;
+            } else if (propiedad === 'alineacion') {
+                configAnchoColumnasPDF[key].alineacion = valor;
+            } else if (propiedad === 'activa') {
+                configAnchoColumnasPDF[key].activa = valor;
+            }
+        }
+
+        function agregarColumnaPersonalizada() {
+            const nombre = document.getElementById('nuevaColNombre').value.trim();
+            const clave = document.getElementById('nuevaColClave').value.trim().toLowerCase();
+            
+            if (!nombre || !clave) {
+                mostrarMensaje('⚠️ Completa ambos campos', 'warning');
+                return;
+            }
+            
+            if (columnasPersonalizadas.some(col => col.clave === clave) || clave === 'firma') {
+                mostrarMensaje('⚠️ Ya existe una columna con esa clave', 'warning');
+                return;
+            }
+            
+            const nuevaColumna = { clave: clave, label: nombre.toUpperCase(), ancho: 30, alineacion: 'center' };
+            columnasPersonalizadas.push(nuevaColumna);
+            jsonData.forEach(registro => {
+                if (!registro.hasOwnProperty(clave)) {
+                    registro[clave] = '';
                 }
             });
-        }
-        
-        todasColumnas.forEach((col, index) => {
-            const config = configAnchoColumnasPDF[col.key] || { activa: true, ancho: 30, alineacion: 'center' };
             
-            const tr = document.createElement('tr');
-            tr.innerHTML = `
-                <td class="text-center">
-                    <input type="checkbox" class="form-check-input" 
-                           id="colActivar${index}" ${config.activa ? 'checked' : ''}
-                           onchange="actualizarConfigColumnaPDF('${col.key}', 'activa', this.checked)">
-                </td>
-                <td>${col.label}</td>
-                <td class="text-center">
-                    <input type="number" class="form-control form-control-sm ancho-columna-input" 
-                           value="${config.ancho}" min="5" max="100" step="1"
-                           onchange="actualizarConfigColumnaPDF('${col.key}', 'ancho', this.value)">
-                    <small class="text-muted">mm</small>
-                </td>
-                <td class="text-center">
-                    <select class="form-select form-select-sm alineacion-select"
-                            onchange="actualizarConfigColumnaPDF('${col.key}', 'alineacion', this.value)">
-                        <option value="left" ${config.alineacion === 'left' ? 'selected' : ''}>Izquierda</option>
-                        <option value="center" ${config.alineacion === 'center' ? 'selected' : ''}>Centro</option>
-                        <option value="right" ${config.alineacion === 'right' ? 'selected' : ''}>Derecha</option>
-                    </select>
-                </td>
-            `;
-            container.appendChild(tr);
-        });
-        
-        actualizarListaColumnasPersonalizadas();
-    }
-
-    function actualizarConfigColumnaPDF(key, propiedad, valor) {
-        if (!configAnchoColumnasPDF[key]) {
-            configAnchoColumnasPDF[key] = { activa: true, ancho: 30, alineacion: 'center' };
-        }
-        
-        if (propiedad === 'ancho') {
-            configAnchoColumnasPDF[key].ancho = parseInt(valor) || 30;
-        } else if (propiedad === 'alineacion') {
-            configAnchoColumnasPDF[key].alineacion = valor;
-        } else if (propiedad === 'activa') {
-            configAnchoColumnasPDF[key].activa = valor;
-        }
-    }
-
-    function agregarColumnaPersonalizada() {
-        const nombre = document.getElementById('nuevaColNombre').value.trim();
-        const clave = document.getElementById('nuevaColClave').value.trim().toLowerCase();
-        
-        if (!nombre || !clave) {
-            mostrarMensaje('⚠️ Completa ambos campos', 'warning');
-            return;
-        }
-        
-        if (columnasPersonalizadas.some(col => col.clave === clave) || clave === 'firma') {
-            mostrarMensaje('⚠️ Ya existe una columna con esa clave', 'warning');
-            return;
-        }
-        
-        const nuevaColumna = { clave: clave, label: nombre.toUpperCase(), ancho: 30, alineacion: 'center' };
-        columnasPersonalizadas.push(nuevaColumna);
-        jsonData.forEach(registro => {
-            if (!registro.hasOwnProperty(clave)) {
-                registro[clave] = '';
-            }
-        });
-        
-        configAnchoColumnasPDF[clave] = { activa: true, ancho: 30, alineacion: 'center' };
-        
-        document.getElementById('nuevaColNombre').value = '';
-        document.getElementById('nuevaColClave').value = '';
-        crearTabla();
-        actualizarConfigColumnasPDF();
-        hasChanges = true;
-        actualizarEstado();
-        mostrarMensaje(`✅ Columna "${nombre}" agregada`, 'success');
-    }
-
-    function actualizarListaColumnasPersonalizadas() {
-        const container = document.getElementById('columnasPersonalizadas');
-        container.innerHTML = '';
-        columnasPersonalizadas.forEach((col, index) => {
-            const div = document.createElement('div');
-            div.className = 'custom-column';
-            div.innerHTML = `<span>${col.label} (${col.clave})</span><button class="btn-remove" onclick="eliminarColumnaPersonalizada(${index})">✕</button>`;
-            container.appendChild(div);
-        });
-    }
-
-    function eliminarColumnaPersonalizada(index) {
-        const columna = columnasPersonalizadas[index];
-        if (confirm(`¿Eliminar la columna "${columna.label}"?`)) {
-            columnasPersonalizadas.splice(index, 1);
-            delete configAnchoColumnasPDF[columna.clave];
-            jsonData.forEach(registro => {
-                delete registro[columna.clave];
-            });
+            configAnchoColumnasPDF[clave] = { activa: true, ancho: 30, alineacion: 'center' };
+            
+            document.getElementById('nuevaColNombre').value = '';
+            document.getElementById('nuevaColClave').value = '';
             crearTabla();
             actualizarConfigColumnasPDF();
             hasChanges = true;
             actualizarEstado();
-            mostrarMensaje(`🗑️ Columna "${columna.label}" eliminada', 'warning`);
+            mostrarMensaje(`✅ Columna "${nombre}" agregada`, 'success');
         }
-    }
 
-    function calcularNuevosValores() {
-        if (jsonData.length === 0) {
-            return { registro: 1, folio: 2, renglon: 1 };
+        function actualizarListaColumnasPersonalizadas() {
+            const container = document.getElementById('columnasPersonalizadas');
+            container.innerHTML = '';
+            columnasPersonalizadas.forEach((col, index) => {
+                const div = document.createElement('div');
+                div.className = 'custom-column';
+                div.innerHTML = `<span>${col.label} (${col.clave})</span><button class="btn-remove" onclick="eliminarColumnaPersonalizada(${index})">✕</button>`;
+                container.appendChild(div);
+            });
         }
-        const ultimo = jsonData[jsonData.length - 1];
-        let ultimoRegistro = parseInt(ultimo.registro) || 0;
-        let ultimoFolio = parseInt(ultimo.folio) || 0;
-        let ultimoRenglon = parseInt(ultimo.renglon) || 0;
-        const nuevoRegistro = ultimoRegistro + 1;
-        let nuevoRenglon, nuevoFolio;
-        
-        if (ultimoRenglon >= 36) {
-            nuevoRenglon = 1;
-            nuevoFolio = ultimoFolio + 2;
-        } else {
-            nuevoRenglon = ultimoRenglon + 1;
-            nuevoFolio = ultimoFolio;
-        }
-        
-        if (nuevoFolio % 2 !== 0) {
-            nuevoFolio += 1;
-        }
-        
-        return { registro: nuevoRegistro, folio: nuevoFolio, renglon: nuevoRenglon };
-    }
 
-    document.getElementById('addRowBtn').addEventListener('click', function() {
-        // CORRECCIÓN: Si no hay datos, crear estructura base
-        if (jsonData.length === 0) {
-            const newRow = {
-                id: "1",
-                nombre: "",
-                cedula: "",
-                fecha_afiliacion: "",
-                registro: "1",
-                folio: "2",
-                renglon: "1",
-                direccion: "MANZANA  CASA ",
-                telefono: "",
-                pagos: "",
-                firma: ""
-            };
+        function eliminarColumnaPersonalizada(index) {
+            const columna = columnasPersonalizadas[index];
+            if (confirm(`¿Eliminar la columna "${columna.label}"?`)) {
+                columnasPersonalizadas.splice(index, 1);
+                delete configAnchoColumnasPDF[columna.clave];
+                jsonData.forEach(registro => {
+                    delete registro[columna.clave];
+                });
+                crearTabla();
+                actualizarConfigColumnasPDF();
+                hasChanges = true;
+                actualizarEstado();
+                mostrarMensaje(`🗑️ Columna "${columna.label}" eliminada', 'warning`);
+            }
+        }
+
+        function calcularNuevosValores() {
+            if (jsonData.length === 0) {
+                return { registro: 1, folio: 2, renglon: 1 };
+            }
+            const ultimo = jsonData[jsonData.length - 1];
+            let ultimoRegistro = parseInt(ultimo.registro) || 0;
+            let ultimoFolio = parseInt(ultimo.folio) || 0;
+            let ultimoRenglon = parseInt(ultimo.renglon) || 0;
+            const nuevoRegistro = ultimoRegistro + 1;
+            let nuevoRenglon, nuevoFolio;
             
-            // Agregar columnas personalizadas si existen
+            if (ultimoRenglon >= 36) {
+                nuevoRenglon = 1;
+                nuevoFolio = ultimoFolio + 2;
+            } else {
+                nuevoRenglon = ultimoRenglon + 1;
+                nuevoFolio = ultimoFolio;
+            }
+            
+            if (nuevoFolio % 2 !== 0) {
+                nuevoFolio += 1;
+            }
+            
+            return { registro: nuevoRegistro, folio: nuevoFolio, renglon: nuevoRenglon };
+        }
+
+        document.getElementById('addRowBtn').addEventListener('click', function() {
+            if (jsonData.length === 0) {
+                const newRow = {
+                    id: "1",
+                    nombre: "",
+                    cedula: "",
+                    fecha_afiliacion: "",
+                    registro: "1",
+                    folio: "2",
+                    renglon: "1",
+                    direccion: "MANZANA  CASA ",
+                    telefono: "",
+                    pagos: "",
+                    firma: ""
+                };
+                
+                columnasPersonalizadas.forEach(col => {
+                    newRow[col.clave] = '';
+                });
+                
+                jsonData.push(newRow);
+                crearTabla();
+                hasChanges = true;
+                actualizarEstado();
+                actualizarContador();
+                actualizarInfoFolio();
+                mostrarMensaje('➕ Primer registro creado', 'info');
+                return;
+            }
+            
+            const nuevosValores = calcularNuevosValores();
+            const newRow = {...jsonData[0]};
+            newRow.id = (jsonData.length + 1).toString();
+            newRow.registro = nuevosValores.registro;
+            newRow.folio = nuevosValores.folio;
+            newRow.renglon = nuevosValores.renglon;
+            newRow.nombre = '';
+            newRow.cedula = '';
+            newRow.fecha_afiliacion = '';
+            newRow.direccion = 'MANZANA  CASA ';
+            newRow.telefono = '';
+            newRow.pagos = '';
+            newRow.firma = '';
+            
             columnasPersonalizadas.forEach(col => {
                 newRow[col.clave] = '';
             });
@@ -1635,387 +2071,337 @@
             actualizarEstado();
             actualizarContador();
             actualizarInfoFolio();
-            mostrarMensaje('➕ Primer registro creado', 'info');
-            return;
-        }
-        
-        // Si ya hay datos, calcular nuevos valores normalmente
-        const nuevosValores = calcularNuevosValores();
-        const newRow = {...jsonData[0]};
-        newRow.id = (jsonData.length + 1).toString();
-        newRow.registro = nuevosValores.registro;
-        newRow.folio = nuevosValores.folio;
-        newRow.renglon = nuevosValores.renglon;
-        newRow.nombre = '';
-        newRow.cedula = '';
-        newRow.fecha_afiliacion = '';
-        newRow.direccion = 'MANZANA  CASA ';
-        newRow.telefono = '';
-        newRow.pagos = '';
-        newRow.firma = '';
-        
-        columnasPersonalizadas.forEach(col => {
-            newRow[col.clave] = '';
+            mostrarMensaje(`➕ Nuevo: Folio ${nuevosValores.folio}, Renglón ${nuevosValores.renglon}`, 'info');
         });
-        
-        jsonData.push(newRow);
-        crearTabla();
-        hasChanges = true;
-        actualizarEstado();
-        actualizarContador();
-        actualizarInfoFolio();
-        mostrarMensaje(`➕ Nuevo: Folio ${nuevosValores.folio}, Renglón ${nuevosValores.renglon}`, 'info');
-    });
 
-    document.getElementById('configPdfBtn').addEventListener('click', function() {
-        if (jsonData.length === 0) {
-            mostrarMensaje('⚠️ Primero carga un archivo JSON', 'warning');
-            return;
+        document.getElementById('configPdfBtn').addEventListener('click', function() {
+            if (jsonData.length === 0) {
+                mostrarMensaje('⚠️ Primero carga un archivo JSON', 'warning');
+                return;
+            }
+            document.getElementById('pdfConfigModal').style.display = 'flex';
+            actualizarConfigColumnasPDF();
+        });
+
+        function cerrarConfigPDF() {
+            document.getElementById('pdfConfigModal').style.display = 'none';
         }
-        document.getElementById('pdfConfigModal').style.display = 'flex';
-        actualizarConfigColumnasPDF();
-    });
 
-    function cerrarConfigPDF() {
-        document.getElementById('pdfConfigModal').style.display = 'none';
-    }
+        function exportarPDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF('landscape', 'mm', 'a4');
+            
+            const titulos = Array.from(document.querySelectorAll('.pdf-titulo')).map(input => input.value.trim()).filter(t => t !== '');
+            const subtitulos = Array.from(document.querySelectorAll('.pdf-subtitulo')).map(input => {
+                let texto = input.value.trim();
+                if (texto.includes('{{fecha}}')) {
+                    const fechaActual = new Date().toLocaleDateString('es-ES', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
+                    });
+                    texto = texto.replace('{{fecha}}', fechaActual);
+                }
+                return texto;
+            }).filter(t => t !== '');
+            
+            const incluirNumPaginas = document.getElementById('incluirNumPaginas').checked;
+            const incluirFecha = document.getElementById('incluirFecha').checked;
+            const soloFilasVisibles = document.getElementById('soloFilasVisibles').checked;
+            const alternarColores = document.getElementById('alternarColores').checked;
+            const bordeCeldas = document.getElementById('bordeCeldas').checked;
+            const cabeceraNegrita = document.getElementById('cabeceraNegrita').checked;
+            const tamTitulo = parseInt(document.getElementById('tamTitulo').value);
+            const tamTabla = parseInt(document.getElementById('tamTabla').value);
+            const altoCelda = parseInt(document.getElementById('altoCelda').value);
+            const margenSuperior = parseInt(document.getElementById('margenSup').value);
+            const ordenarPor = document.querySelector('input[name="ordenarPor"]:checked').value;
+            const ordenDescendente = document.getElementById('ordenDescendente').checked;
+            const numeracionConsecutiva = document.getElementById('numeracionConsecutiva').checked;
 
-    function exportarPDF() {
-        const { jsPDF } = window.jspdf;
-        const doc = new jsPDF('landscape', 'mm', 'a4');
-        
-        // 1. LEER CONFIGURACIÓN DEL MODAL
-        const titulos = Array.from(document.querySelectorAll('.pdf-titulo')).map(input => input.value.trim()).filter(t => t !== '');
-        const subtitulos = Array.from(document.querySelectorAll('.pdf-subtitulo')).map(input => {
-            let texto = input.value.trim();
-            if (texto.includes('{{fecha}}')) {
-                const fechaActual = new Date().toLocaleDateString('es-ES', {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric'
+            let dataParaExportar = [];
+            if (soloFilasVisibles) {
+                const filasVisibles = document.querySelectorAll('#tableBody tr:not(.fila-filtrada)');
+                filasVisibles.forEach(tr => {
+                    const index = parseInt(tr.dataset.rowIndex);
+                    if (!isNaN(index)) { dataParaExportar.push(jsonData[index]); }
                 });
-                texto = texto.replace('{{fecha}}', fechaActual);
+            } else { 
+                dataParaExportar = [...jsonData]; 
             }
-            return texto;
-        }).filter(t => t !== '');
-        
-        const incluirNumPaginas = document.getElementById('incluirNumPaginas').checked;
-        const incluirFecha = document.getElementById('incluirFecha').checked;
-        const soloFilasVisibles = document.getElementById('soloFilasVisibles').checked;
-        const alternarColores = document.getElementById('alternarColores').checked;
-        const bordeCeldas = document.getElementById('bordeCeldas').checked;
-        const cabeceraNegrita = document.getElementById('cabeceraNegrita').checked;
-        const tamTitulo = parseInt(document.getElementById('tamTitulo').value);
-        const tamTabla = parseInt(document.getElementById('tamTabla').value);
-        const altoCelda = parseInt(document.getElementById('altoCelda').value);
-        const margenSuperior = parseInt(document.getElementById('margenSup').value);
-        const ordenarPor = document.querySelector('input[name="ordenarPor"]:checked').value;
-        const ordenDescendente = document.getElementById('ordenDescendente').checked;
-        const numeracionConsecutiva = document.getElementById('numeracionConsecutiva').checked;
-
-        // 2. FILTRAR DATOS A EXPORTAR (solo filas visibles si está activado)
-        let dataParaExportar = [];
-        if (soloFilasVisibles) {
-            const filasVisibles = document.querySelectorAll('#tableBody tr:not(.fila-filtrada)');
-            filasVisibles.forEach(tr => {
-                const index = parseInt(tr.dataset.rowIndex);
-                if (!isNaN(index)) { dataParaExportar.push(jsonData[index]); }
-            });
-        } else { 
-            dataParaExportar = [...jsonData]; 
-        }
-        
-        if (dataParaExportar.length === 0) { 
-            mostrarMensaje('⚠️ No hay datos para exportar', 'warning'); 
-            cerrarConfigPDF(); 
-            return; 
-        }
-        
-        // 3. FILTRAR REGISTROS VÁLIDOS (NOMBRE y CÉDULA no vacíos)
-        let datosFiltrados = dataParaExportar.filter(row => {
-            const nombreValido = row.nombre && row.nombre.trim() !== '';
-            const cedulaValida = row.cedula && row.cedula.toString().trim() !== '';
-            return nombreValido && cedulaValida;
-        });
-        
-        if (datosFiltrados.length === 0) { 
-            mostrarMensaje('⚠️ No hay registros con nombre y cédula válidos', 'warning'); 
-            cerrarConfigPDF(); 
-            return; 
-        }
-        
-        // 4. CONSTRUIR LISTA DE COLUMNAS ACTIVAS
-        const columnasPDF = [];
-        
-        const columnasBase = [
-            { key: 'id', label: 'ID' },
-            { key: 'nombre', label: 'NOMBRE COMPLETO' },
-            { key: 'cedula', label: 'CÉDULA' },
-            { key: 'fecha_afiliacion', label: 'FECHA AFILIACIÓN' },
-            { key: 'registro', label: 'REGISTRO' },
-            { key: 'folio', label: 'FOLIO' },
-            { key: 'renglon', label: 'RENGLÓN' },
-            { key: 'direccion', label: 'DIRECCIÓN' },
-            { key: 'telefono', label: 'TELÉFONO' },
-            { key: 'pagos', label: 'PAGOS' },
-            { key: 'firma', label: 'FIRMA' }
-        ];
-        const todasLasColumnas = [...columnasBase, ...columnasPersonalizadas];
-        
-        todasLasColumnas.forEach(col => {
-            const config = configAnchoColumnasPDF[col.key];
-            if (config && config.activa && col.key !== 'pagos') {
-                columnasPDF.push({ 
-                    header: col.label, 
-                    dataKey: col.key, 
-                    width: config.ancho || 30
-                });
+            
+            if (dataParaExportar.length === 0) { 
+                mostrarMensaje('⚠️ No hay datos para exportar', 'warning'); 
+                cerrarConfigPDF(); 
+                return; 
             }
-        });
-        
-        if (columnasPDF.length === 0) {
-            mostrarMensaje('⚠️ No hay columnas activadas para exportar', 'warning');
-            return;
-        }
-
-        // 5. PREPARAR DATOS PARA PDF (con filtro de NOMBRE y CÉDULA)
-        let datosParaPdf = datosFiltrados.map(row => {
-            let newRow = { ...row };
-            if (newRow.cedula) {
-                newRow.cedula = formatearCedula(newRow.cedula);
-            }
-            return newRow;
-        });
-
-        // 6. APLICAR ORDENAMIENTO SI NO ES "NINGUNO"
-        if (ordenarPor !== 'ninguno') {
-            datosParaPdf.sort((a, b) => {
-                let valorA = a[ordenarPor] || '';
-                let valorB = b[ordenarPor] || '';
-                
-                // CORRECCIÓN IMPORTANTE: Para cédula, convertir a número sin puntos
-                if (ordenarPor === 'cedula') {
-                    valorA = obtenerNumerosCedula(valorA);
-                    valorB = obtenerNumerosCedula(valorB);
-                }
-                // Convertir a número si es folio, registro o renglón
-                else if (ordenarPor === 'folio' || ordenarPor === 'registro' || ordenarPor === 'renglon') {
-                    valorA = parseInt(valorA) || 0;
-                    valorB = parseInt(valorB) || 0;
-                }
-                // Para nombres, convertir a mayúsculas para ordenar sin considerar mayúsculas/minúsculas
-                else if (ordenarPor === 'nombre') {
-                    valorA = (valorA || '').toString().toUpperCase();
-                    valorB = (valorB || '').toString().toUpperCase();
-                }
-                
-                // Comparación
-                if (valorA < valorB) return ordenDescendente ? 1 : -1;
-                if (valorA > valorB) return ordenDescendente ? -1 : 1;
-                return 0;
-            });
-        }
-
-        // 7. AGREGAR NUMERACIÓN CONSECUTIVA AL INICIO
-        if (numeracionConsecutiva) {
-            // Agregar columna "N°" al inicio
-            columnasPDF.unshift({ 
-                header: 'N°', 
-                dataKey: 'numero_consecutivo', 
-                width: 15
+            
+            let datosFiltrados = dataParaExportar.filter(row => {
+                const nombreValido = row.nombre && row.nombre.trim() !== '';
+                const cedulaValida = row.cedula && row.cedula.toString().trim() !== '';
+                return nombreValido && cedulaValida;
             });
             
-            // Agregar numeración consecutiva a cada fila
-            datosParaPdf = datosParaPdf.map((row, index) => {
-                return {
-                    numero_consecutivo: (index + 1).toString(),
-                    ...row
-                };
-            });
-        }
-
-        // 8. DIBUJAR TÍTULOS EN LA PRIMERA PÁGINA
-        let startY = margenSuperior;
-        
-        doc.setFontSize(tamTitulo);
-        doc.setFont(undefined, 'bold');
-        titulos.forEach(titulo => {
-            doc.text(titulo, doc.internal.pageSize.width / 2, startY, { align: 'center' });
-            startY += 8;
-        });
-        doc.setFontSize(tamTitulo - 2);
-        doc.setFont(undefined, 'normal');
-        subtitulos.forEach(subtitulo => {
-            doc.text(subtitulo, doc.internal.pageSize.width / 2, startY, { align: 'center' });
-            startY += 6;
-        });
-        
-        if (incluirFecha) {
-            startY += 5;
-            doc.setFontSize(10);
-            doc.setFont(undefined, 'italic');
-            const fechaActual = new Date().toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' });
-            doc.text(`Fecha: ${fechaActual}`, doc.internal.pageSize.width / 2, startY, { align: 'center' });
-            startY += 10;
-        }
-
-        // 9. CREAR ESTILOS DE COLUMNAS
-        const columnStyles = {};
-        // Estilo para la numeración consecutiva (si existe)
-        if (numeracionConsecutiva) {
-            columnStyles['numero_consecutivo'] = { 
-                halign: 'center',
-                cellWidth: 15
-            };
-        }
-        
-        // Estilos para las demás columnas
-        todasLasColumnas.forEach(col => {
-            const config = configAnchoColumnasPDF[col.key];
-            if (config && config.activa && col.key !== 'pagos') {
-                columnStyles[col.key] = { 
-                    halign: config.alineacion || 'center',
-                    cellWidth: config.ancho || 30
-                };
+            if (datosFiltrados.length === 0) { 
+                mostrarMensaje('⚠️ No hay registros con nombre y cédula válidos', 'warning'); 
+                cerrarConfigPDF(); 
+                return; 
             }
-        });
-
-        // 10. GENERAR TABLA
-        doc.autoTable({
-            columns: columnasPDF,
-            body: datosParaPdf,
-            startY: startY,
-            styles: { 
-                fontSize: tamTabla, 
-                cellPadding: altoCelda / 2, 
-                textColor: [0, 0, 0], 
-                lineColor: bordeCeldas ? [200, 200, 200] : [255, 255, 255], 
-                lineWidth: bordeCeldas ? 0.1 : 0, 
-                fontStyle: 'normal',
-                fillColor: [255, 255, 255],
-                halign: 'center'
-            },
-            headStyles: { 
-                fillColor: [255, 255, 255], 
-                textColor: [0, 0, 0], 
-                fontStyle: cabeceraNegrita ? 'bold' : 'normal', 
-                fontSize: tamTabla + 1, 
-                lineColor: bordeCeldas ? [200, 200, 200] : [255, 255, 255], 
-                lineWidth: bordeCeldas ? 0.1 : 0,
-                halign: 'center'
-            },
-            bodyStyles: { 
-                lineColor: bordeCeldas ? [200, 200, 200] : [255, 255, 255], 
-                lineWidth: bordeCeldas ? 0.1 : 0,
-                fillColor: [255, 255, 255]
-            },
-            alternateRowStyles: alternarColores ? { 
-                fillColor: [245, 247, 250] 
-            } : { fillColor: [255, 255, 255] },
-            columnStyles: columnStyles,
-            tableWidth: 'auto',
-            showHead: 'everyPage',
-            margin: { top: 10, left: 15, right: 15, bottom: 15 },
-            didDrawPage: function(data) {
-                if (data.pageNumber > 1) {
-                    data.settings.margin.top = 10;
+            
+            const columnasPDF = [];
+            
+            const columnasBase = [
+                { key: 'id', label: 'ID' },
+                { key: 'nombre', label: 'NOMBRE COMPLETO' },
+                { key: 'cedula', label: 'CÉDULA' },
+                { key: 'fecha_afiliacion', label: 'FECHA AFILIACIÓN' },
+                { key: 'registro', label: 'REGISTRO' },
+                { key: 'folio', label: 'FOLIO' },
+                { key: 'renglon', label: 'RENGLÓN' },
+                { key: 'direccion', label: 'DIRECCIÓN' },
+                { key: 'telefono', label: 'TELÉFONO' },
+                { key: 'pagos', label: 'PAGOS' },
+                { key: 'firma', label: 'FIRMA' }
+            ];
+            const todasLasColumnas = [...columnasBase, ...columnasPersonalizadas];
+            
+            todasLasColumnas.forEach(col => {
+                const config = configAnchoColumnasPDF[col.key];
+                if (config && config.activa && col.key !== 'pagos') {
+                    columnasPDF.push({ 
+                        header: col.label, 
+                        dataKey: col.key, 
+                        width: config.ancho || 30
+                    });
                 }
+            });
+            
+            if (columnasPDF.length === 0) {
+                mostrarMensaje('⚠️ No hay columnas activadas para exportar', 'warning');
+                return;
             }
-        });
 
-        // 11. AÑADIR NUMERACIÓN DE PÁGINAS (SOLO SI ESTÁ ACTIVADO)
-        if (incluirNumPaginas) {
-            const totalPages = doc.internal.getNumberOfPages();
-            for (let i = 1; i <= totalPages; i++) {
-                doc.setPage(i);
+            let datosParaPdf = datosFiltrados.map(row => {
+                let newRow = { ...row };
+                if (newRow.cedula) {
+                    newRow.cedula = formatearCedula(newRow.cedula);
+                }
+                return newRow;
+            });
+
+            if (ordenarPor !== 'ninguno') {
+                datosParaPdf.sort((a, b) => {
+                    let valorA = a[ordenarPor] || '';
+                    let valorB = b[ordenarPor] || '';
+                    
+                    if (ordenarPor === 'cedula') {
+                        valorA = obtenerNumerosCedula(valorA);
+                        valorB = obtenerNumerosCedula(valorB);
+                    }
+                    else if (ordenarPor === 'folio' || ordenarPor === 'registro' || ordenarPor === 'renglon') {
+                        valorA = parseInt(valorA) || 0;
+                        valorB = parseInt(valorB) || 0;
+                    }
+                    else if (ordenarPor === 'nombre') {
+                        valorA = (valorA || '').toString().toUpperCase();
+                        valorB = (valorB || '').toString().toUpperCase();
+                    }
+                    
+                    if (valorA < valorB) return ordenDescendente ? 1 : -1;
+                    if (valorA > valorB) return ordenDescendente ? -1 : 1;
+                    return 0;
+                });
+            }
+
+            if (numeracionConsecutiva) {
+                columnasPDF.unshift({ 
+                    header: 'N°', 
+                    dataKey: 'numero_consecutivo', 
+                    width: 15
+                });
+                
+                datosParaPdf = datosParaPdf.map((row, index) => {
+                    return {
+                        numero_consecutivo: (index + 1).toString(),
+                        ...row
+                    };
+                });
+            }
+
+            let startY = margenSuperior;
+            
+            doc.setFontSize(tamTitulo);
+            doc.setFont(undefined, 'bold');
+            titulos.forEach(titulo => {
+                doc.text(titulo, doc.internal.pageSize.width / 2, startY, { align: 'center' });
+                startY += 8;
+            });
+            doc.setFontSize(tamTitulo - 2);
+            doc.setFont(undefined, 'normal');
+            subtitulos.forEach(subtitulo => {
+                doc.text(subtitulo, doc.internal.pageSize.width / 2, startY, { align: 'center' });
+                startY += 6;
+            });
+            
+            if (incluirFecha) {
+                startY += 5;
                 doc.setFontSize(10);
-                doc.text(
-                    `Página ${i} de ${totalPages}`,
-                    doc.internal.pageSize.width - 15,
-                    doc.internal.pageSize.height - 10,
-                    { align: 'right' }
-                );
+                doc.setFont(undefined, 'italic');
+                const fechaActual = new Date().toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' });
+                doc.text(`Fecha: ${fechaActual}`, doc.internal.pageSize.width / 2, startY, { align: 'center' });
+                startY += 10;
+            }
+
+            const columnStyles = {};
+            if (numeracionConsecutiva) {
+                columnStyles['numero_consecutivo'] = { 
+                    halign: 'center',
+                    cellWidth: 15
+                };
+            }
+            
+            todasLasColumnas.forEach(col => {
+                const config = configAnchoColumnasPDF[col.key];
+                if (config && config.activa && col.key !== 'pagos') {
+                    columnStyles[col.key] = { 
+                        halign: config.alineacion || 'center',
+                        cellWidth: config.ancho || 30
+                    };
+                }
+            });
+
+            doc.autoTable({
+                columns: columnasPDF,
+                body: datosParaPdf,
+                startY: startY,
+                styles: { 
+                    fontSize: tamTabla, 
+                    cellPadding: altoCelda / 2, 
+                    textColor: [0, 0, 0], 
+                    lineColor: bordeCeldas ? [200, 200, 200] : [255, 255, 255], 
+                    lineWidth: bordeCeldas ? 0.1 : 0, 
+                    fontStyle: 'normal',
+                    fillColor: [255, 255, 255],
+                    halign: 'center'
+                },
+                headStyles: { 
+                    fillColor: [255, 255, 255], 
+                    textColor: [0, 0, 0], 
+                    fontStyle: cabeceraNegrita ? 'bold' : 'normal', 
+                    fontSize: tamTabla + 1, 
+                    lineColor: bordeCeldas ? [200, 200, 200] : [255, 255, 255], 
+                    lineWidth: bordeCeldas ? 0.1 : 0,
+                    halign: 'center'
+                },
+                bodyStyles: { 
+                    lineColor: bordeCeldas ? [200, 200, 200] : [255, 255, 255], 
+                    lineWidth: bordeCeldas ? 0.1 : 0,
+                    fillColor: [255, 255, 255]
+                },
+                alternateRowStyles: alternarColores ? { 
+                    fillColor: [245, 247, 250] 
+                } : { fillColor: [255, 255, 255] },
+                columnStyles: columnStyles,
+                tableWidth: 'auto',
+                showHead: 'everyPage',
+                margin: { top: 10, left: 15, right: 15, bottom: 15 },
+                didDrawPage: function(data) {
+                    if (data.pageNumber > 1) {
+                        data.settings.margin.top = 10;
+                    }
+                }
+            });
+
+            if (incluirNumPaginas) {
+                const totalPages = doc.internal.getNumberOfPages();
+                for (let i = 1; i <= totalPages; i++) {
+                    doc.setPage(i);
+                    doc.setFontSize(10);
+                    doc.text(
+                        `Página ${i} de ${totalPages}`,
+                        doc.internal.pageSize.width - 15,
+                        doc.internal.pageSize.height - 10,
+                        { align: 'right' }
+                    );
+                }
+            }
+            
+            const nombreArchivo = originalFileName ? originalFileName.replace('.json', '') + '.pdf' : 'registro_afiliados.pdf';
+            doc.save(nombreArchivo); 
+            cerrarConfigPDF(); 
+            mostrarMensaje('📄 PDF generado correctamente', 'success');
+        }
+
+        document.getElementById('saveBtn').addEventListener('click', function() {
+            if (jsonData.length === 0) return;
+            
+            const datosParaGuardar = jsonData.map(registro => {
+                const registroLimpio = {};
+                
+                const propiedadesBase = ['id', 'nombre', 'cedula', 'fecha_afiliacion', 'registro', 
+                                        'folio', 'renglon', 'direccion', 'telefono', 'pagos', 'firma'];
+                
+                propiedadesBase.forEach(prop => {
+                    if (registro.hasOwnProperty(prop)) {
+                        registroLimpio[prop] = registro[prop];
+                    }
+                });
+                
+                columnasPersonalizadas.forEach(col => {
+                    if (registro.hasOwnProperty(col.clave)) {
+                        registroLimpio[col.clave] = registro[col.clave];
+                    }
+                });
+                
+                return registroLimpio;
+            });
+            
+            const dataStr = JSON.stringify(datosParaGuardar, null, 2);
+            const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+            const exportFileDefaultName = originalFileName || 'datos_modificados.json';
+            const linkElement = document.createElement('a'); 
+            linkElement.setAttribute('href', dataUri); 
+            linkElement.setAttribute('download', exportFileDefaultName); 
+            linkElement.click();
+            hasChanges = false; 
+            actualizarEstado(); 
+            mostrarMensaje('💾 Archivo JSON descargado', 'success');
+        });
+
+        function mostrarMensaje(texto, tipo) {
+            const messageEl = document.getElementById('message'); 
+            messageEl.textContent = texto; 
+            messageEl.className = `alert-message alert alert-${tipo}`;
+            messageEl.style.display = 'block';
+            setTimeout(() => { 
+                messageEl.style.display = 'none'; 
+            }, 3000);
+        }
+        
+        function actualizarContador() { 
+            const total = jsonData.length; 
+            document.getElementById('rowCount').textContent = `${total} registros`; 
+        }
+        
+        function actualizarInfoFolio() { 
+            if (jsonData.length > 0) { 
+                const ultimo = jsonData[jsonData.length - 1]; 
+                document.getElementById('folioInfo').textContent = `Último Folio: ${ultimo.folio}`; 
+            } else { 
+                document.getElementById('folioInfo').textContent = 'Folio: -'; 
+            } 
+        }
+        
+        function actualizarEstado() {
+            const statusEl = document.getElementById('editStatus');
+            if (hasChanges) { 
+                statusEl.textContent = 'Hay cambios sin guardar'; 
+                statusEl.className = 'text-warning fw-bold'; 
+            } else { 
+                statusEl.textContent = 'Sin cambios'; 
+                statusEl.className = 'text-muted'; 
             }
         }
-        
-        const nombreArchivo = originalFileName ? originalFileName.replace('.json', '') + '.pdf' : 'registro_afiliados.pdf';
-        doc.save(nombreArchivo); 
-        cerrarConfigPDF(); 
-        mostrarMensaje('📄 PDF generado correctamente', 'success');
-    }
-
-    document.getElementById('saveBtn').addEventListener('click', function() {
-        if (jsonData.length === 0) return;
-        
-        // CORRECCIÓN: Preparar datos limpios para guardar
-        const datosParaGuardar = jsonData.map(registro => {
-            const registroLimpio = {};
-            
-            // Propiedades base
-            const propiedadesBase = ['id', 'nombre', 'cedula', 'fecha_afiliacion', 'registro', 
-                                    'folio', 'renglon', 'direccion', 'telefono', 'pagos', 'firma'];
-            
-            // Copiar solo las propiedades válidas (evitar propiedades CSS)
-            propiedadesBase.forEach(prop => {
-                if (registro.hasOwnProperty(prop)) {
-                    registroLimpio[prop] = registro[prop];
-                }
-            });
-            
-            // Copiar columnas personalizadas
-            columnasPersonalizadas.forEach(col => {
-                if (registro.hasOwnProperty(col.clave)) {
-                    registroLimpio[col.clave] = registro[col.clave];
-                }
-            });
-            
-            return registroLimpio;
-        });
-        
-        const dataStr = JSON.stringify(datosParaGuardar, null, 2);
-        const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
-        const exportFileDefaultName = originalFileName || 'datos_modificados.json';
-        const linkElement = document.createElement('a'); 
-        linkElement.setAttribute('href', dataUri); 
-        linkElement.setAttribute('download', exportFileDefaultName); 
-        linkElement.click();
-        hasChanges = false; 
-        actualizarEstado(); 
-        mostrarMensaje('💾 Archivo JSON guardado', 'success');
-    });
-
-    function mostrarMensaje(texto, tipo) {
-        const messageEl = document.getElementById('message'); 
-        messageEl.textContent = texto; 
-        messageEl.className = `alert-mensaje alert alert-${tipo}`; 
-        messageEl.style.display = 'block';
-        setTimeout(() => { messageEl.style.display = 'none'; }, 3000);
-    }
-    
-    function actualizarContador() { 
-        const total = jsonData.length; 
-        document.getElementById('rowCount').textContent = `${total} registros`; 
-    }
-    
-    function actualizarInfoFolio() { 
-        if (jsonData.length > 0) { 
-            const ultimo = jsonData[jsonData.length - 1]; 
-            document.getElementById('folioInfo').textContent = `Último Folio: ${ultimo.folio}`; 
-        } else { 
-            document.getElementById('folioInfo').textContent = 'Folio: -'; 
-        } 
-    }
-    
-    function actualizarEstado() {
-        const statusEl = document.getElementById('editStatus');
-        if (hasChanges) { 
-            statusEl.textContent = 'Hay cambios sin guardar'; 
-            statusEl.className = 'text-warning fw-bold'; 
-        } else { 
-            statusEl.textContent = 'Sin cambios'; 
-            statusEl.className = 'text-muted'; 
-        }
-    }
-</script>
+    </script>
 </body>
 </html>
