@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Principal - Junta de Acción Comunal</title>
+    <style>
+        :root {
+            --verde-primario: #4CAF50;
+            --verde-secundario: #388E3C;
+            --amarillo-primario: #FFC107;
+            --amarillo-secundario: #FFA000;
+            --gris-claro: #f5f5f5;
+            --gris-oscuro: #424242;
+            --blanco: #ffffff;
+            --azul-primario: #2196F3;
+            --rojo-promario: #9c1f1b;
+            --rojo-secundario: #ac2614;
+            --naranja-primario: #FF9800;
+            --naranja-secundario: #F57C00;
+            --cafe-primario: #964B00;
+            --cafe-secundario: #905010;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--gris-claro);
+            min-height: 100vh;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, var(--verde-primario), var(--amarillo-primario));
+            color: var(--blanco);
+            padding: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        
+        .header h1 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+        
+        .header h2 {
+            font-size: 1.2rem;
+            font-weight: 400;
+            text-align: center;
+        }
+        
+        .user-info {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .user-info i {
+            font-size: 1.2rem;
+        }
+        
+        .logout-btn {
+            background: none;
+            border: none;
+            color: var(--blanco);
+            cursor: pointer;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+        
+        .welcome-message {
+            background-color: var(--blanco);
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            margin-bottom: 2rem;
+            border-left: 4px solid var(--verde-primario);
+        }
+        
+        .sections-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .section-card {
+            background-color: var(--blanco);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .section-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+        }
+        
+        .card-header {
+            padding: 1.2rem;
+            color: var(--blanco);
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        
+        .afiliaciones {
+            background: linear-gradient(135deg, var(--verde-primario), var(--verde-secundario));
+        }
+        
+        .afiliados {
+            background: linear-gradient(135deg, var(--azul-primario), #1976D2);
+        }
+        
+        .certificados {
+            background: linear-gradient(135deg, var(--amarillo-primario), var(--amarillo-secundario));
+        }
+
+        .traslados {
+            background: linear-gradient(135deg, var(--cafe-primario), var(--cafe-secundario));
+        }
+        
+        .documentos {
+            background: linear-gradient(135deg, #9C27B0, #7B1FA2);
+        }
+
+        .descargarcertificadodelusuario {
+            background: linear-gradient(135deg, var(--rojo-promario), var(--rojo-secundario));
+        }
+
+        .novedades {
+            background: linear-gradient(135deg, var(--naranja-primario), var(--naranja-secundario));
+        }
+        
+        .card-header i {
+            font-size: 1.5rem;
+        }
+        
+        .card-body {
+            padding: 1.5rem;
+        }
+        
+        .card-body h3 {
+            margin-bottom: 1rem;
+            color: var(--gris-oscuro);
+        }
+        
+        .card-body p {
+            color: #616161;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .card-btn {
+            display: inline-block;
+            padding: 0.6rem 1.2rem;
+            background-color: var(--gris-claro);
+            color: var(--gris-oscuro);
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+        
+        .afiliaciones .card-btn:hover {
+            background-color: var(--verde-primario);
+            color: var(--blanco);
+        }
+        
+        .afiliados .card-btn:hover {
+            background-color: var(--azul-primario);
+            color: var(--blanco);
+        }
+        
+        .certificados .card-btn:hover {
+            background-color: var(--amarillo-primario);
+            color: var(--blanco);
+        }
+        
+        .traslados .card-btn:hover {
+            background-color: var(--cafe-primario);
+            color: var(--blanco);
+        }
+        
+        .documentos .card-btn:hover {
+            background-color: #9C27B0;
+            color: var(--blanco);
+        }
+
+        .descargarcertificadodelusuario .card-btn:hover {
+            background-color: var(--rojo-promario);
+            color: var(--blanco);
+        }
+
+        .novedades .card-btn:hover {
+            background-color: var(--naranja-primario);
+            color: var(--blanco);
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1rem;
+            font-size: 0.8rem;
+            color: #757575;
+        }
+        
+        @media (max-width: 768px) {
+            .sections-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .user-info span {
+                display: none;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="header">
+        <div class="user-info">
+            <i class="fas fa-user-circle"></i>
+            <span>Administrador</span>
+            <button class="logout-btn" id="logoutBtn">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Salir</span>
+            </button>
+        </div>
+        <h1>JUNTA DE ACCIÓN COMUNAL</h1>
+        <h2>BARRIO BATEAS SECTOR 3</h2>
+    </div>
+    
+    <div class="container">
+        <div class="welcome-message">
+            <h2>Bienvenido al Panel de Control</h2>
+            <p>Gestiona todas las actividades de tu junta de acción comunal desde este panel centralizado.</p>
+        </div>
+        
+        <div class="sections-grid">
+            <!-- Sección Afiliaciones -->
+            <div class="section-card" onclick="location.href='afiliaciones.html'">
+                <div class="card-header afiliaciones">
+                    <i class="fas fa-users"></i>
+                    <h3>Afiliaciones</h3>
+                </div>
+                <div class="card-body">
+                    <p>Gestiona las solicitudes de afiliación de nuevos miembros a la junta comunal.</p>
+                    <div class="stats">
+                        <span><i class="fas fa-clock"></i> 5 pendientes</span>
+                        <span><i class="fas fa-check-circle"></i> 120 aprobadas</span>
+                    </div>
+                    <a href="afiliaciones.html" class="card-btn">Gestionar Afiliaciones</a>
+                </div>
+            </div>
+            
+            <!-- Sección Afiliados -->
+            <div class="section-card" onclick="location.href='afiliados.html'">
+                <div class="card-header afiliados">
+                    <i class="fas fa-address-book"></i>
+                    <h3>Afiliados</h3>
+                </div>
+                <div class="card-body">
+                    <p>Administra el registro de miembros afiliados y sus datos personales.</p>
+                    <div class="stats">
+                        <span><i class="fas fa-users"></i> 150 activos</span>
+                        <span><i class="fas fa-user-clock"></i> 10 inactivos</span>
+                    </div>
+                    <a href="afiliados.html" class="card-btn">Ver Afiliados</a>
+                </div>
+            </div>
+            
+            <!-- Sección Certificados -->
+            <div class="section-card" onclick="location.href='certificados.html'">
+                <div class="card-header certificados">
+                    <i class="fas fa-certificate"></i>
+                    <h3>Certificados</h3>
+                </div>
+                <div class="card-body">
+                    <p>Genera y administra certificados para miembros y documentos oficiales.</p>
+                    <div class="stats">
+                        <span><i class="fas fa-file-alt"></i> 30 emitidos</span>
+                        <span><i class="fas fa-sync-alt"></i> 5 por renovar</span>
+                    </div>
+                    <a href="certificados.html" class="card-btn">Gestionar Certificados</a>
+                </div>
+            </div>
+
+             <!-- Sección Traslados (CORREGIDA) -->
+             <div class="section-card" onclick="location.href='traslado.html'">
+                <div class="card-header traslados">
+                    <i class="fas fa-exchange-alt"></i>
+                    <h3>Certificados de Traslados</h3>
+                </div>
+                <div class="card-body">
+                    <p>Genera y administra certificados de traslados para miembros y documentos oficiales.</p>
+                    <div class="stats">
+                        <span><i class="fas fa-file-alt"></i> 15 emitidos</span>
+                        <span><i class="fas fa-sync-alt"></i> 2 por renovar</span>
+                    </div>
+                    <a href="traslados.html" class="card-btn">Gestionar Traslados</a>
+                </div>
+            </div>
+            
+            <!-- Sección Documentos -->
+            <div class="section-card" onclick="location.href='documentos.html'">
+                <div class="card-header documentos">
+                    <i class="fas fa-folder-open"></i>
+                    <h3>Documentos</h3>
+                </div>
+                <div class="card-body">
+                    <p>Archivo digital de actas, reglamentos y documentos legales de la junta.</p>
+                    <div class="stats">
+                        <span><i class="fas fa-folder"></i> 45 archivos</span>
+                        <span><i class="fas fa-calendar-alt"></i> 3 nuevos</span>
+                    </div>
+                    <a href="documentos.html" class="card-btn">Ver Documentos</a>
+                </div>
+            </div>
+
+            <!-- Sección Descargar Certificado del Usuario -->
+            <div class="section-card" onclick="location.href='descargarcertificadodelusuario.html'">
+                <div class="card-header descargarcertificadodelusuario">
+                    <i class="fas fa-file-download"></i>
+                    <h3>Descargar Certificados</h3>
+                </div>
+                <div class="card-body">
+                    <p>Página principal para descarga de certificados de usuarios.</p>
+                    <div class="stats">
+                        <span><i class="fas fa-folder"></i> 45 descargas</span>
+                        <span><i class="fas fa-calendar-alt"></i> 3 nuevos</span>
+                    </div>
+                    <a href="descargarcertificadodelusuario.html" class="card-btn">Descargar Certificados</a>
+                </div>
+            </div>
+
+            <!-- Sección Novedades -->
+            <div class="section-card" onclick="location.href='novedades.html'">
+                <div class="card-header novedades">
+                    <i class="fas fa-newspaper"></i>
+                    <h3>Novedades</h3>
+                </div>
+                <div class="card-body">
+                    <p>Mantente informado sobre las últimas noticias y eventos de la comunidad.</p>
+                    <div class="stats">
+                        <span><i class="fas fa-bell"></i> 8 noticias</span>
+                        <span><i class="fas fa-calendar"></i> 2 eventos</span>
+                    </div>
+                    <a href="novedades.html" class="card-btn">Ver Novedades</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    
+    <script>
+        // Cerrar sesión
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+            if(confirm('¿Está seguro que desea cerrar sesión?')) {
+                window.location.href = 'index.html';
+            }
+        });
+        
+        // Mostrar año actual en el footer
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
+

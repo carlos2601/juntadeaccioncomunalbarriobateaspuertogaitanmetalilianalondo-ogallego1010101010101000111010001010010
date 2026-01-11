@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LIBRO DE AFILIADOS - BARRIO BATEAS SECTOR 3</title>
+    <style>
+        :root {
+            --verde-primario: #4CAF50;
+            --verde-secundario: #388E3C;
+            --amarillo-primario: #FFC107;
+            --amarillo-secundario: #FFA000;
+            --gris-claro: #f5f5f5;
+            --gris-oscuro: #424242;
+            --blanco: #ffffff;
+            --rojo-primario: #f44336;
+            --azul-primario: #2196F3;
+            --morado-primario: #9C27B0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, var(--verde-primario), var(--amarillo-primario));
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .header {
+            background-color: var(--blanco);
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .organization-name {
+            color: var(--gris-oscuro);
+            font-weight: 700;
+            font-size: 1.2rem;
+            line-height: 1.4;
+            margin-bottom: 10px;
+        }
+        
+        .current-date {
+            color: #616161;
+            font-size: 0.9rem;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo i {
+            font-size: 2rem;
+            color: var(--verde-primario);
+            background: linear-gradient(to right, var(--verde-primario), var(--amarillo-primario));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .logo h1 {
+            color: var(--gris-oscuro);
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        .actions-container {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+            width: 100%;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(to right, var(--verde-primario), var(--amarillo-primario));
+            color: var(--blanco);
+        }
+        
+        .btn-primary:hover {
+            background: linear-gradient(to right, var(--verde-secundario), var(--amarillo-secundario));
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-danger {
+            background-color: var(--rojo-primario);
+            color: var(--blanco);
+        }
+        
+        .btn-danger:hover {
+            background-color: #d32f2f;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-info {
+            background-color: var(--azul-primario);
+            color: var(--blanco);
+        }
+        
+        .btn-info:hover {
+            background-color: #1976D2;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-secondary {
+            background-color: #757575;
+            color: var(--blanco);
+        }
+        
+        .btn-secondary:hover {
+            background-color: #616161;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-purple {
+            background-color: var(--morado-primario);
+            color: var(--blanco);
+        }
+        
+        .btn-purple:hover {
+            background-color: #7B1FA2;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .search-container {
+            margin-bottom: 20px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .search-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s;
+            background-color: var(--gris-claro);
+            color: var(--gris-oscuro);
+        }
+        
+        .search-input:focus {
+            border-color: var(--verde-primario);
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+            background-color: var(--blanco);
+        }
+        
+        .table-container {
+            background-color: var(--blanco);
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            overflow-x: auto;
+            padding: 15px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            table-layout: fixed;
+        }
+        
+        th, td {
+            padding: 8px 10px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+            font-size: 0.85rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        th {
+            background-color: var(--gris-claro);
+            color: var(--gris-oscuro);
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+        }
+        
+        /* Columnas más estrechas */
+        th:nth-child(1), td:nth-child(1) { width: 60px; text-align: center; } /* Renglón */
+        th:nth-child(2), td:nth-child(2) { width: 70px; text-align: center; } /* Folio */
+        th:nth-child(3), td:nth-child(3) { width: 80px; text-align: center; } /* Registro */
+        th:nth-child(4), td:nth-child(4) { width: 100px; text-align: center; } /* Fecha Afiliación */
+        th:nth-child(5), td:nth-child(5) { width: 90px; } /* Cédula */
+        th:nth-child(6), td:nth-child(6) { width: auto; white-space: normal; } /* Nombres */
+        th:nth-child(7), td:nth-child(7) { width: auto; white-space: normal; } /* Dirección */
+        th:nth-child(8), td:nth-child(8) { width: 100px; } /* Celular */
+        
+        tr:hover {
+            background-color: rgba(76, 175, 80, 0.05);
+        }
+        
+        .action-btn {
+            padding: 5px 8px;
+            border: none;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 3px;
+            margin-right: 5px;
+        }
+        
+        .delete-btn {
+            background-color: var(--rojo-primario);
+            color: var(--blanco);
+        }
+        
+        .delete-btn:hover {
+            background-color: #d32f2f;
+        }
+        
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            gap: 5px;
+        }
+        
+        .page-btn {
+            padding: 8px 12px;
+            border: 1px solid #e0e0e0;
+            background-color: var(--blanco);
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .page-btn.active {
+            background-color: var(--verde-primario);
+            color: var(--blanco);
+            border-color: var(--verde-primario);
+        }
+        
+        .footer {
+            margin-top: 2rem;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #757575;
+            padding: 15px;
+            background-color: var(--blanco);
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        @media print {
+            @page {
+                size: auto;
+                margin: 0;
+            }
+            
+            body {
+                margin: 0;
+                padding: 10mm;
+                background: white !important;
+            }
+            
+            body * {
+                visibility: hidden;
+            }
+            
+            .print-header, .print-header *,
+            .table-container, .table-container * {
+                visibility: visible;
+            }
+            
+            .table-container {
+                position: absolute;
+                left: 0;
+                top: 40px;
+                width: 100%;
+                box-shadow: none;
+                border-radius: 0;
+                padding: 0;
+            }
+            
+            table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+            
+            th, td {
+                border: 1px solid #ddd;
+                padding: 8px;
+                font-size: 12px;
+                white-space: normal !important;
+            }
+            
+            th {
+                font-weight: bold !important;
+                background-color: #f5f5f5 !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            
+            .action-btns, .pagination, .footer, .header {
+                display: none !important;
+            }
+            
+            th:nth-child(9), td:nth-child(9) {
+                display: none;
+            }
+        }
+        
+        .print-header {
+            display: none;
+            text-align: left;
+            margin: 0 0 15px 0;
+            font-size: 18px;
+            font-weight: bold;
+            padding: 10px;
+        }
+        
+        .libro-title {
+            display: block;
+            text-align: center;
+            margin-top: 5px;
+            font-size: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .logo {
+                margin-top: 10px;
+            }
+            
+            th, td {
+                padding: 6px 8px;
+                font-size: 0.8rem;
+            }
+            
+            .action-btn {
+                padding: 3px 5px;
+                font-size: 0.7rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+</head>
+<body>
+    <div class="header">
+        <div>
+            <div class="organization-name">
+                JUNTA DE ACCIÓN COMUNAL<br>
+                BARRIO BATEAS SECTOR 3
+            </div>
+            <div class="current-date" id="currentDate"></div>
+        </div>
+        
+        <div class="logo">
+            <i class="fas fa-users"></i>
+            <h1>Registro de Afiliados</h1>
+        </div>
+        
+        <div class="actions-container">
+            <button class="btn btn-secondary" id="backBtn">
+                <i class="fas fa-arrow-left"></i> Volver
+            </button>
+            <button class="btn btn-primary" id="printBtn">
+                <i class="fas fa-print"></i> Imprimir
+            </button>
+            <button class="btn btn-info" id="refreshBtn">
+                <i class="fas fa-sync-alt"></i> Actualizar
+            </button>
+            <button class="btn btn-purple" id="saveLocalBtn">
+                <i class="fas fa-download"></i> Guardar Local
+            </button>
+            <input type="text" class="search-input" id="searchInput" placeholder="Buscar afiliado...">
+        </div>
+    </div>
+    
+    <div class="print-header">
+        JUNTA DE ACCIÓN COMUNAL - BARRIO BATEAS SECTOR 3<br>
+        <span class="libro-title">LIBRO DE AFILIADOS - <span id="fechaActual"></span></span>
+    </div>
+
+    
+    
+    <div class="table-container">
+        <table id="afiliadosTable">
+            <thead>
+                <tr>
+                    <th>Renglón</th>
+                    <th>Folio</th>
+                    <th>Registro</th>
+                    <th>Fecha Afiliación</th>
+                    <th>Cédula</th>
+                    <th>Nombres</th>
+                    <th>Dirección</th>
+                    <th>Celular</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="afiliadosBody">
+                <!-- Datos se cargarán dinámicamente desde Firebase -->
+            </tbody>
+        </table>
+        
+        <div class="pagination" id="pagination">
+            <!-- Paginación se generará dinámicamente -->
+        </div>
+    </div>
+    
+    <div class="footer">
+        <p>Sistema de afiliados © <span id="currentYear"></span></p>
+    </div>
+    
+    <script>
+        // Mostrar fecha actual y año
+        function updateDateTime() {
+            const today = new Date();
+            const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
+            const formattedDate = today.toLocaleDateString('es-ES', options).replace(/\//g, '-');
+            
+            document.getElementById('currentDate').textContent = today.toLocaleDateString('es-ES', { 
+                weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' 
+            });
+            document.getElementById('currentYear').textContent = today.getFullYear();
+            document.getElementById('fechaActual').textContent = formattedDate;
+        }
+        
+        // Configuración de Firebase con tus datos
+        const firebaseConfig = {
+            apiKey: "AIzaSyCERQc8srBtLuMe6Jw944WsO1mySohMpkU",
+            authDomain: "junta-bateas-sector-3.firebaseapp.com",
+            databaseURL: "https://junta-bateas-sector-3-default-rtdb.firebaseio.com",
+            projectId: "junta-bateas-sector-3",
+            storageBucket: "junta-bateas-sector-3.appspot.com",
+            messagingSenderId: "913958453084",
+            appId: "1:913958453084:web:5324de6958dfff01980b99"
+        };
+        
+        // Inicializar Firebase
+        firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
+        
+        // Variables para paginación
+        let currentPage = 1;
+        const rowsPerPage = 10;
+        let allAfiliados = [];
+        let filteredAfiliados = [];
+        
+        // Cargar datos de Firebase desde 'afiliaciones'
+        function loadAfiliados() {
+            database.ref('afiliaciones').once('value').then((snapshot) => {
+                const data = snapshot.val();
+                console.log("Datos crudos de Firebase:", data);
+                
+                // Convertir el objeto de objetos a un array de objetos con IDs
+                allAfiliados = data ? Object.keys(data).map(key => {
+                    const afiliado = data[key];
+                    return {
+                        id: key,
+                        folio: afiliado.folio || '',
+                        registro: afiliado.registro || '',
+                        fecha_afiliacion: afiliado.fecha_afiliacion || afiliado.fecha || '',
+                        cedula: afiliado.cedula || '',
+                        nombres: afiliado.nombres || afiliado.nombre || '',
+                        direccion: afiliado.direccion || '',
+                        celular: afiliado.celular || afiliado.telefono || ''
+                    };
+                }) : [];
+                
+                console.log("Datos procesados:", allAfiliados);
+                
+                filteredAfiliados = [...allAfiliados];
+                renderTable();
+                renderPagination();
+            }).catch((error) => {
+                console.error("Error al cargar datos:", error);
+                alert("Error al cargar los datos de afiliados. Por favor recarga la página.");
+            });
+        }
+        
+        // Renderizar tabla con datos
+        function renderTable() {
+            const tbody = document.getElementById('afiliadosBody');
+            tbody.innerHTML = '';
+            
+            const start = (currentPage - 1) * rowsPerPage;
+            const end = start + rowsPerPage;
+            const paginatedAfiliados = filteredAfiliados.slice(start, end);
+            
+            if (paginatedAfiliados.length === 0) {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `<td colspan="9" style="text-align: center;">No se encontraron afiliados</td>`;
+                tbody.appendChild(tr);
+                return;
+            }
+            
+            paginatedAfiliados.forEach((afiliado, index) => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${start + index + 1}</td>
+                    <td>${afiliado.folio || 'N/A'}</td>
+                    <td>${afiliado.registro || 'N/A'}</td>
+                    <td>${afiliado.fecha_afiliacion || 'N/A'}</td>
+                    <td>${afiliado.cedula || 'N/A'}</td>
+                    <td>${afiliado.nombres || 'N/A'}</td>
+                    <td>${afiliado.direccion || 'N/A'}</td>
+                    <td>${afiliado.celular || 'N/A'}</td>
+                    <td class="action-btns">
+                        <button class="action-btn delete-btn" data-id="${afiliado.id}">
+                            <i class="fas fa-trash"></i> Eliminar
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+            
+            // Agregar eventos a los botones
+            document.querySelectorAll('.delete-btn').forEach(btn => {
+                btn.addEventListener('click', deleteAfiliado);
+            });
+        }
+        
+        // Eliminar afiliado
+        function deleteAfiliado(e) {
+            if (!confirm('¿Está seguro que desea eliminar este afiliado?')) return;
+            
+            const id = e.target.getAttribute('data-id');
+            
+            database.ref('afiliaciones/' + id).remove()
+                .then(() => {
+                    // Actualizar datos locales
+                    allAfiliados = allAfiliados.filter(a => a.id !== id);
+                    filteredAfiliados = filteredAfiliados.filter(a => a.id !== id);
+                    
+                    // Volver a renderizar la tabla
+                    if (filteredAfiliados.length <= (currentPage - 1) * rowsPerPage && currentPage > 1) {
+                        currentPage--;
+                    }
+                    
+                    renderTable();
+                    renderPagination();
+                })
+                .catch(error => {
+                    console.error("Error al eliminar:", error);
+                    alert("Error al eliminar afiliado. Por favor intente nuevamente.");
+                });
+        }
+        
+        // Guardar datos localmente como JSON
+        function saveDataLocally() {
+            const today = new Date();
+            const formattedDate = today.toLocaleDateString('es-ES', { 
+                day: '2-digit', month: '2-digit', year: 'numeric' 
+            }).replace(/\//g, '-');
+            
+            const dataStr = JSON.stringify(allAfiliados, null, 2);
+            const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+            
+            const exportName = `Libro de Afiliados Bateas Sector 3 - ${formattedDate}.json`;
+            
+            const linkElement = document.createElement('a');
+            linkElement.setAttribute('href', dataUri);
+            linkElement.setAttribute('download', exportName);
+            linkElement.click();
+            
+            alert(`Datos de ${allAfiliados.length} afiliados guardados en ${exportName}`);
+        }
+        
+        // Renderizar paginación
+        function renderPagination() {
+            const pagination = document.getElementById('pagination');
+            pagination.innerHTML = '';
+            
+            const totalPages = Math.ceil(filteredAfiliados.length / rowsPerPage);
+            
+            if (totalPages <= 1) return;
+            
+            // Botón Anterior
+            const prevBtn = document.createElement('button');
+            prevBtn.className = 'page-btn';
+            prevBtn.innerHTML = '<i class="fas fa-chevron-left"></i>';
+            prevBtn.disabled = currentPage === 1;
+            prevBtn.addEventListener('click', () => {
+                if (currentPage > 1) {
+                    currentPage--;
+                    renderTable();
+                    renderPagination();
+                }
+            });
+            pagination.appendChild(prevBtn);
+            
+            // Números de página
+            const startPage = Math.max(1, currentPage - 2);
+            const endPage = Math.min(totalPages, currentPage + 2);
+            
+            for (let i = startPage; i <= endPage; i++) {
+                const pageBtn = document.createElement('button');
+                pageBtn.className = `page-btn ${i === currentPage ? 'active' : ''}`;
+                pageBtn.textContent = i;
+                pageBtn.addEventListener('click', () => {
+                    currentPage = i;
+                    renderTable();
+                    renderPagination();
+                });
+                pagination.appendChild(pageBtn);
+            }
+            
+            // Botón Siguiente
+            const nextBtn = document.createElement('button');
+            nextBtn.className = 'page-btn';
+            nextBtn.innerHTML = '<i class="fas fa-chevron-right"></i>';
+            nextBtn.disabled = currentPage === totalPages;
+            nextBtn.addEventListener('click', () => {
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    renderTable();
+                    renderPagination();
+                }
+            });
+            pagination.appendChild(nextBtn);
+        }
+        
+        // Buscar afiliados
+        document.getElementById('searchInput').addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            
+            if (searchTerm === '') {
+                filteredAfiliados = [...allAfiliados];
+            } else {
+                filteredAfiliados = allAfiliados.filter(afiliado => 
+                    (afiliado.nombres && afiliado.nombres.toLowerCase().includes(searchTerm)) ||
+                    (afiliado.cedula && afiliado.cedula.toLowerCase().includes(searchTerm)) ||
+                    (afiliado.direccion && afiliado.direccion.toLowerCase().includes(searchTerm)) ||
+                    (afiliado.celular && afiliado.celular.toLowerCase().includes(searchTerm))
+                );
+            }
+            
+            currentPage = 1;
+            renderTable();
+            renderPagination();
+        });
+        
+        // Imprimir tabla
+        document.getElementById('printBtn').addEventListener('click', () => {
+            // Crear un iframe temporal para la impresión
+            const iframe = document.createElement('iframe');
+            iframe.style.display = 'none';
+            document.body.appendChild(iframe);
+            
+            // Clonar el contenido que quieres imprimir
+            const content = document.querySelector('.table-container').cloneNode(true);
+            const printHeader = document.querySelector('.print-header').cloneNode(true);
+            
+            // Crear el documento dentro del iframe
+            const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+            iframeDoc.open();
+            iframeDoc.write(`
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <title>LIBRO DE AFILIADOS - BARRIO BATEAS SECTOR 3</title>
+                    <style>
+                        @page {
+                            size: auto;
+                            margin: 10mm;
+                        }
+                        body {
+                            margin: 0;
+                            padding: 0;
+                            font-family: Arial, sans-serif;
+                        }
+                        .print-header {
+                            text-align: left;
+                            margin-bottom: 20px;
+                            font-size: 18px;
+                            font-weight: bold;
+                        }
+                        .libro-title {
+                            display: block;
+                            text-align: center;
+                            margin-top: 5px;
+                            font-size: 20px;
+                        }
+                        table {
+                            width: 100%;
+                            border-collapse: collapse;
+                        }
+                        th, td {
+                            border: 1px solid #ddd;
+                            padding: 8px;
+                            text-align: left;
+                        }
+                        th {
+                            background-color: #f2f2f2;
+                        }
+                        td:nth-child(1), td:nth-child(2), 
+                        td:nth-child(3), td:nth-child(4) {
+                            text-align: center;
+                        }
+                        .action-btns {
+                            display: none;
+                        }
+                    </style>
+                </head>
+                <body>
+            `);
+            iframeDoc.body.appendChild(printHeader);
+            iframeDoc.body.appendChild(content);
+            iframeDoc.write('</body></html>');
+            iframeDoc.close();
+
+            // Esperar a que cargue el contenido antes de imprimir
+            iframe.onload = function() {
+                setTimeout(() => {
+                    iframe.contentWindow.focus();
+                    iframe.contentWindow.print();
+                    document.body.removeChild(iframe);
+                }, 300);
+            };
+        });
+        
+        // Actualizar datos
+        document.getElementById('refreshBtn').addEventListener('click', () => {
+            loadAfiliados();
+        });
+        
+        // Volver al panel principal
+        document.getElementById('backBtn').addEventListener('click', () => {
+            window.location.href = "panelprincipal.html";
+        });
+        
+        // Guardar datos localmente
+        document.getElementById('saveLocalBtn').addEventListener('click', saveDataLocally);
+        
+        // Inicializar
+        updateDateTime();
+        loadAfiliados();
+    </script>
+</body>
+</html>
