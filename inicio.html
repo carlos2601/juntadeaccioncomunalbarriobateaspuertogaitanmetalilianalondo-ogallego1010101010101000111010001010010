@@ -232,8 +232,8 @@
         /* COLORES AÑADIDOS AL HEADER */
         .panel-header {
             padding: 20px 40px;
-            background: linear-gradient(135deg, var(--verde), var(--verde-oscuro)); /* COLOR AÑADIDO */
-            color: var(--blanco); /* COLOR AÑADIDO */
+            background: linear-gradient(135deg, var(--verde), var(--verde-oscuro));
+            color: var(--blanco);
             border-bottom: 1px solid #e0e6ed;
             display: flex;
             justify-content: space-between;
@@ -252,7 +252,7 @@
             height: 50px;
             border-radius: 12px;
             overflow: hidden;
-            border: 3px solid var(--blanco); /* COLOR AÑADIDO */
+            border: 3px solid var(--blanco);
             padding: 5px;
             background: var(--blanco);
         }
@@ -264,12 +264,12 @@
         }
         
         .panel-title h2 {
-            color: var(--blanco); /* COLOR AÑADIDO */
+            color: var(--blanco);
             font-size: 1.5rem;
         }
         
         .panel-title p {
-            color: rgba(255, 255, 255, 0.9); /* COLOR AÑADIDO */
+            color: rgba(255, 255, 255, 0.9);
             font-size: 0.9rem;
             margin-top: 2px;
         }
@@ -296,19 +296,19 @@
         .user-details h3 {
             font-size: 1rem;
             margin-bottom: 3px;
-            color: var(--blanco); /* COLOR AÑADIDO */
+            color: var(--blanco);
         }
         
         .user-details p {
             font-size: 0.8rem;
-            color: rgba(255, 255, 255, 0.9); /* COLOR AÑADIDO */
+            color: rgba(255, 255, 255, 0.9);
         }
         
         .btn-logout {
             padding: 10px 25px;
-            background: rgba(255, 255, 255, 0.2); /* COLOR AÑADIDO */
-            color: var(--blanco); /* COLOR AÑADIDO */
-            border: 2px solid rgba(255, 255, 255, 0.3); /* COLOR AÑADIDO */
+            background: rgba(255, 255, 255, 0.2);
+            color: var(--blanco);
+            border: 2px solid rgba(255, 255, 255, 0.3);
             border-radius: 8px;
             font-size: 0.95rem;
             cursor: pointer;
@@ -319,12 +319,11 @@
         }
         
         .btn-logout:hover {
-            background: rgba(255, 255, 255, 0.3); /* COLOR AÑADIDO */
+            background: rgba(255, 255, 255, 0.3);
         }
         
         /* CONTENIDO PRINCIPAL - TARJETAS HORIZONTALES (ORIGINAL) */
         .panel-content {
-            
             padding: 40px;
             overflow-y: auto;
             display: flex;
@@ -358,7 +357,7 @@
         }
         
         .services-title {
-            color: var(--verde-oscuro); /* COLOR AÑADIDO */
+            color: var(--verde-oscuro);
             font-size: 2rem;
             margin-bottom: 40px;
             text-align: center;
@@ -490,11 +489,15 @@
                 flex-direction: column;
                 gap: 15px;
                 text-align: center;
+                justify-content: center;
             }
             
             .panel-header-left {
                 flex-direction: column;
                 gap: 10px;
+                width: 100%;
+                justify-content: center;
+                align-items: center;
             }
             
             .panel-content {
@@ -521,8 +524,16 @@
             }
             
             .user-section {
-                flex-direction: column;
-                gap: 10px;
+                display: none !important;
+            }
+            
+            .user-details,
+            .user-avatar,
+            .btn-logout,
+            .btn-logout i,
+            .btn-logout span,
+            .btn-logout::after {
+                display: none !important;
             }
         }
         
@@ -631,7 +642,7 @@
                 </div>
                 <button class="btn-logout" id="logoutButton">
                     <i class="fas fa-sign-out-alt"></i>
-                    Cerrar Sesión
+                    <span>Cerrar Sesión</span>
                 </button>
             </div>
         </div>
