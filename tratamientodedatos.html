@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consentimiento Tratamiento de Datos</title>
+    <style>
+        /* Reset completo para consistencia */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        /* Configuración base para pantalla */
+        body {
+            font-family: Tahoma, sans-serif;
+            background: linear-gradient(135deg, #FFD700, #32CD32);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        /* Contenedor principal */
+        .pages-container {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            width: 100%;
+            max-width: 21.59cm;
+            align-items: center;
+        }
+
+        /* Hoja del documento - TAMAÑO CARTA */
+        .document-page {
+            width: 21.59cm;
+            height: 27.94cm; /* Tamaño carta */
+            background-color: white;
+            padding: 1.8cm 2.5cm;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Numeración de páginas */
+        .page-number {
+            position: absolute;
+            bottom: 1.5cm;
+            right: 2.5cm;
+            font-size: 11pt;
+            font-weight: bold;
+            color: #000;
+            z-index: 2;
+        }
+        
+        /* Fondo con logo - MÁS CLARO */
+        .page-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('logo4.jpg');
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            z-index: 0;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+            opacity: 0.2; /* Logo clarito por defecto */
+            filter: brightness(1.2);
+        }
+        
+        @media print {
+            .page-background {
+                opacity: 0.15; /* Logo más claro para impresión */
+            }
+        }
+        
+        /* Contenido principal */
+        .content-wrapper {
+            position: relative;
+            z-index: 1;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Estilos tipográficos */
+        .header {
+            text-align: center;
+            margin-bottom: 0.8cm;
+        }
+        
+        h1 {
+            font-size: 14pt;
+            color: #2c3e50;
+            margin: 5px 0;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+        
+        .document-title {
+            font-size: 14pt;
+            font-weight: bold;
+            text-align: center;
+            margin: 0.3cm 0 0.5cm 0;
+            text-decoration: underline;
+        }
+        
+        .content {
+            font-size: 12.5pt;
+            text-align: justify;
+            line-height: 1.6;
+            flex-grow: 1;
+        }
+        
+        h2 {
+            font-size: 13pt;
+            margin: 0.7cm 0 0.4cm 0;
+            color: #2c3e50;
+            font-weight: bold;
+        }
+        
+        ul {
+            margin: 0.4cm 0 0.4cm 1.5cm;
+            padding: 0;
+        }
+        
+        li {
+            margin-bottom: 0.25cm;
+            line-height: 1.5;
+        }
+        
+        .signature-section {
+            margin-top: 1.2cm;
+        }
+        
+        .signature-center {
+            text-align: center;
+            margin-top: 1.8cm;
+        }
+        
+        .signature-line {
+            margin: 0 auto;
+            border-top: 1px solid #333;
+            width: 60%;
+            text-align: center;
+            padding-top: 8px;
+            font-size: 12.5pt;
+        }
+        
+        .cc-centered {
+            margin-top: 15px;
+            font-size: 12.5pt;
+            text-align: center;
+        }
+        
+        .footer {
+            text-align: center;
+            font-size: 10pt;
+            margin-top: auto;
+            padding-top: 0.5cm;
+            color: #777;
+        }
+
+        /* Botones flotantes */
+        .button-container {
+            position: fixed;
+            bottom: 20px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            z-index: 100;
+        }
+
+        .logout-btn {
+            background: #e74c3c;
+            color: white;
+            padding: 10px 22px;
+            border-radius: 4px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            border: none;
+            cursor: pointer;
+            min-width: 130px;
+            font-size: 13pt;
+        }
+
+        .logout-btn:hover {
+            background: #c0392b;
+            transform: translateY(-1px);
+        }
+
+        .panel-btn {
+            background: #3498db;
+            color: white;
+            padding: 10px 22px;
+            border-radius: 4px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            border: none;
+            cursor: pointer;
+            min-width: 130px;
+            font-size: 13pt;
+        }
+
+        .print-btn {
+            background: #2ecc71;
+            color: white;
+            padding: 10px 22px;
+            border-radius: 4px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            border: none;
+            cursor: pointer;
+            min-width: 130px;
+            font-size: 13pt;
+        }
+
+        /* Configuración de impresión - TAMAÑO CARTA */
+        @media print {
+            body {
+                background: none !important;
+                padding: 0 !important;
+                margin: 0 !important;
+            }
+            
+            .pages-container {
+                gap: 0 !important;
+                margin: 0 !important;
+            }
+            
+            .button-container {
+                display: none !important;
+            }
+            
+            .document-page {
+                box-shadow: none !important;
+                margin: 0 !important;
+                padding: 1.8cm 2.5cm !important;
+                page-break-after: always !important;
+                height: 27.94cm !important;
+                width: 21.59cm !important;
+                break-inside: avoid !important;
+            }
+            
+            .document-page:last-child {
+                page-break-after: auto !important;
+            }
+            
+            .page-background {
+                opacity: 0.15 !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            
+            .page-number {
+                position: absolute;
+                bottom: 1.5cm;
+                right: 2.5cm;
+                font-size: 11pt;
+                font-weight: bold;
+                color: #000;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            
+            @page {
+                size: letter;
+                margin: 0 !important;
+                marks: none !important;
+            }
+        }
+
+        /* Estilos responsivos para dispositivos móviles */
+        @media screen and (max-width: 768px) {
+            .pages-container {
+                max-width: 100%;
+                padding: 0 10px;
+            }
+            
+            .document-page {
+                width: 100%;
+                height: auto;
+                min-height: auto;
+                padding: 1.5cm;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            }
+            
+            .page-number {
+                position: relative;
+                bottom: auto;
+                right: auto;
+                text-align: center;
+                margin-top: 20px;
+            }
+            
+            h1 {
+                font-size: 13pt;
+            }
+            
+            .document-title {
+                font-size: 13pt;
+            }
+            
+            .content {
+                font-size: 12pt;
+                line-height: 1.5;
+            }
+            
+            h2 {
+                font-size: 12pt;
+            }
+            
+            .button-container {
+                position: relative;
+                bottom: auto;
+                margin-top: 20px;
+                flex-wrap: wrap;
+            }
+            
+            .panel-btn, .print-btn, .logout-btn {
+                min-width: 110px;
+                padding: 8px 16px;
+                font-size: 11pt;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .document-page {
+                padding: 1.2cm;
+            }
+            
+            h1 {
+                font-size: 12pt;
+            }
+            
+            .document-title {
+                font-size: 12pt;
+            }
+            
+            .content {
+                font-size: 11pt;
+            }
+            
+            h2 {
+                font-size: 11pt;
+            }
+            
+            ul {
+                margin-left: 1.2cm;
+            }
+            
+            .button-container {
+                gap: 10px;
+            }
+            
+            .panel-btn, .print-btn, .logout-btn {
+                min-width: 90px;
+                padding: 7px 14px;
+                font-size: 10pt;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="pages-container">
+        <!-- Página 1 -->
+        <div class="document-page">
+            <div class="page-number">Página 1 de 2</div>
+            <div class="page-background"></div>
+            <div class="content-wrapper">
+                <div class="header">
+                    <h1>JUNTA DE ACCIÓN COMUNAL</h1>
+                    <h1>BARRIO BATEAS - SECTOR 3</h1>
+                    <p><strong>PUERTO GAITÁN, META</strong></p>
+                </div>
+                
+                <div class="document-title">AUTORIZACIÓN PARA EL TRATAMIENTO DE DATOS PERSONALES</div>
+                
+                <div class="content">
+                    <p>Yo, <strong><span id="nombreAfiliado">_________________________________________</span></strong>, 
+                    identificado(a) con <strong><span id="tipoDocumento">Cédula de Ciudadanía</span></strong> 
+                    No. <strong><span id="documentoAfiliado">____________________</span></strong> expedida en 
+                    <strong><span id="lugarExpedicion">____________________</span></strong>, en mi calidad de afiliado(a) 
+                    a la Junta de Acción Comunal del Barrio Bateas - Sector 3 de Puerto Gaitán, Meta, en ejercicio de mis derechos 
+                    constitucionales y legales, <strong>MANIFIESTO</strong> que de manera libre, previa, expresa, 
+                    voluntaria, informada e inequívoca <strong>AUTORIZO</strong> a la Junta de Acción Comunal del Barrio 
+                    Bateas - Sector 3 para que realice el tratamiento de mis datos personales suministrados, de acuerdo con lo 
+                    establecido en la Ley 1581 de 2012 y el Decreto 1377 de 2013.</p>
+                    
+                    <h2>1. FINALIDAD DEL TRATAMIENTO</h2>
+                    <p>La Junta de Acción Comunal utilizará mis datos personales para los siguientes fines:</p>
+                    <ul>
+                        <li>Gestión de afiliación y membresía a la Junta de Acción Comunal</li>
+                        <li>Comunicación de actividades, eventos y convocatorias</li>
+                        <li>Control y seguimiento de pagos de cuotas ordinarias y extraordinarias</li>
+                        <li>Elaboración de certificados y constancias de afiliación</li>
+                        <li>Gestión administrativa interna de la organización</li>
+                        <li>Cumplimiento de obligaciones legales y estatutarias</li>
+                    </ul>
+                    
+                    <h2>2. DATOS QUE SERÁN TRATADOS</h2>
+                    <p>Autorizo el tratamiento de los siguientes datos personales:</p>
+                    <ul>
+                        <li>Nombres y apellidos completos</li>
+                        <li>Número de documento de identidad</li>
+                        <li>Dirección de residencia</li>
+                        <li>Números telefónicos y dirección de correo electrónico</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Página 2 -->
+        <div class="document-page">
+            <div class="page-number">Página 2 de 2</div>
+            <div class="page-background"></div>
+            <div class="content-wrapper">
+                <div class="content">
+                    <ul>
+                        <li>Fecha de nacimiento</li>
+                        <li>Información de afiliación (fecha, número de registro, etc.)</li>
+                        <li>Historial de pagos y contribuciones</li>
+                    </ul>
+                    
+                    <h2>3. DERECHOS DEL TITULAR</h2>
+                    <p>Como titular de los datos, conozco que tengo derecho a:</p>
+                    <ul>
+                        <li>Conocer, actualizar y rectificar mis datos personales</li>
+                        <li>Solicitar prueba de la autorización otorgada</li>
+                        <li>Ser informado sobre el uso que se ha dado a mis datos</li>
+                        <li>Presentar quejas ante la Superintendencia de Industria y Comercio</li>
+                        <li>Revocar la autorización y/o solicitar la supresión del dato</li>
+                        <li>Acceder en forma gratuita a mis datos personales</li>
+                    </ul>
+                    
+                    <h2>4. VIGENCIA</h2>
+                    <p>La presente autorización tendrá una vigencia igual al tiempo que mantenga mi condición de afiliado(a) 
+                    a la Junta de Acción Comunal del Barrio Bateas - Sector 3 y hasta que se cumplan las finalidades necesarias para 
+                    el tratamiento de los datos.</p>
+                    
+                    <div class="signature-section">
+                        <p>En constancia de lo anterior, firmo en Puerto Gaitán, Meta, a los <strong><span id="diaFirma">____</span></strong> 
+                        días del mes de <strong><span id="mesFirma">____________________</span></strong> del <strong><span id="anioFirma">________</span></strong>.</p>
+                        
+                        <div class="signature-center">
+                            <div class="signature-line">Firma del Afiliado</div>
+                            <div class="cc-centered">CC: _________________________</div>
+                        </div>
+                    </div>
+                    
+                    <div class="footer">
+                        <p><strong>Junta de Acción Comunal Barrio Bateas - Sector 3</strong> - Puerto Gaitán, Meta</p>
+                        <p>Teléfono: 313 581 5787 - Correo: juntacomunalbateassector3@gmail.com</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Contenedor de botones centrados -->
+    <div class="button-container">
+        <a href="documentos.html" class="panel-btn">Volver</a>
+        <button onclick="window.print()" class="print-btn">Imprimir Formato</button>
+        <button onclick="cerrarSesion()" class="logout-btn">Cerrar Sesión</button>
+    </div>
+    
+    <script>
+        function cerrarSesion() {
+            if (confirm("¿Está seguro que desea cerrar sesión?")) {
+                window.location.href = "login.html";
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Verificar carga de imagen de fondo
+            const img = new Image();
+            img.src = 'logo4.jpg';
+            
+            img.onerror = function() {
+                const backgrounds = document.querySelectorAll('.page-background');
+                backgrounds.forEach(bg => {
+                    bg.style.backgroundImage = 'none';
+                    bg.innerHTML = '<p style="color:red;text-align:center;margin-top:70%;font-family:Tahoma,sans-serif;">[Logo no encontrado]</p>';
+                });
+            };
+            
+            // Cargar datos desde URL si existen
+            const urlParams = new URLSearchParams(window.location.search);
+            const fields = {
+                'nombre': 'nombreAfiliado',
+                'documento': 'documentoAfiliado',
+                'lugarExpedicion': 'lugarExpedicion'
+            };
+            
+            for (const [param, elementId] of Object.entries(fields)) {
+                if (urlParams.has(param)) {
+                    document.getElementById(elementId).textContent = urlParams.get(param);
+                }
+            }
+            
+            // Establecer fecha actual
+            const today = new Date();
+            document.getElementById('diaFirma').textContent = today.getDate();
+            document.getElementById('anioFirma').textContent = today.getFullYear();
+            
+            const meses = ["enero", "febrero", "marzo", "abril", "mayo", "junio", 
+                          "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
+            document.getElementById('mesFirma').textContent = meses[today.getMonth()];
+        });
+    </script>
+</body>
+</html>

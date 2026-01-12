@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formato de Verificación de Residencia - JAC Barrio Bateas</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #FFD700, #32CD32);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding: 15px;
+        }
+        
+        .page {
+            width: 21.6cm;
+            height: 27.9cm;
+            background: white;
+            padding: 1.2cm 1.5cm;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            position: relative;
+            margin-bottom: 15px;
+            page-break-after: always;
+        }
+        
+        .page:last-child {
+            page-break-after: auto;
+        }
+        
+       .page-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('logo4.jpg');
+            background-size: contain;
+            background-position: center -0.7cm;
+            background-repeat: no-repeat;
+            opacity: 0.15;
+            z-index: 0;
+        }
+        
+        .page-number {
+            position: absolute;
+            bottom: 0.6cm;
+            right: 1.5cm;
+            font-size: 10pt;
+            font-weight: bold;
+            color: #000;
+            z-index: 2;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 0.2cm;
+            padding-bottom: 0.2cm;
+            border-bottom: 2px solid #2c3e50;
+            position: relative;
+            z-index: 1;
+        }
+        
+        h1 {
+            font-size: 14pt;
+            color: #2c3e50;
+            margin-bottom: 0.1cm;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        
+        h2 {
+            font-size: 12pt;
+            color: #5a6a7a;
+            font-weight: 600;
+            margin-bottom: 0.1cm;
+        }
+        
+        .document-title {
+            font-size: 12pt;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-top: 0.2cm;
+            text-decoration: underline;
+        }
+        
+        .content {
+            font-size: 10pt;
+            position: relative;
+            z-index: 1;
+            line-height: 1.1;
+        }
+        
+        .section {
+            margin-bottom: 0.3cm;
+            padding: 0.2cm;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            background: white;
+        }
+        
+        .section-title {
+            font-weight: bold;
+            margin-bottom: 0.15cm;
+            font-size: 11pt;
+            color: #2c3e50;
+            border-bottom: 1px solid #FFD700;
+            padding-bottom: 0.1cm;
+        }
+        
+        .form-row {
+            display: flex;
+            margin-bottom: 0.12cm;
+            align-items: flex-start;
+        }
+        
+        .form-label {
+            width: 4cm;
+            font-weight: 500;
+            font-size: 9.5pt;
+            padding-top: 0.1cm;
+        }
+        
+        .form-input {
+            flex: 1;
+            border: none;
+            border-bottom: 1px solid #ccc;
+            padding: 0.1cm 0;
+            background: transparent;
+            font-size: 9pt;
+        }
+        
+        .form-textarea {
+            flex: 1;
+            border: 1px solid #ddd;
+            padding: 0.2cm;
+            height: 90px;
+            resize: vertical;
+            background: white;
+            font-size: 9pt;
+            line-height: 1.1;
+        }
+        
+        .signature-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 0.4cm;
+            margin-top: 0.4cm;
+        }
+        
+        .signature-box {
+    text-align: center;
+    padding: 0.3cm;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    background: white;
+    min-height: 5cm; /* Aumenté de 3.2cm a 5cm */
+}
+        
+        .signature-title {
+            font-weight: bold;
+            font-size: 10pt;
+            margin-bottom: 0.2cm;
+            color: #2c3e50;
+        }
+        
+       .signature-text {
+    font-size: 8.5pt;
+    margin: 0.15cm 0;
+    line-height: 1.2;
+    min-height: 1.5cm; /* Aumenté de 0.8cm a 1.5cm */
+}
+        
+        .signature-line {
+    border-top: 1px solid #2c3e50;
+    margin-top: 1cm; /* Aumenté de 0.4cm a 1cm */
+    padding-top: 0.1cm;
+    font-size: 8.5pt;
+    font-weight: 500;
+}
+        
+        .signature-cc {
+            font-size: 7.5pt;
+            margin-top: 0.1cm;
+            color: #555;
+        }
+        
+        .legal-notice {
+            margin: 0.2cm 0;
+            padding: 0.2cm;
+            border: 1px solid #e74c3c;
+            border-radius: 3px;
+            background: white;
+            font-size: 8pt;
+            line-height: 1.1;
+        }
+        
+        .legal-notice h3 {
+            color: #e74c3c;
+            margin-bottom: 0.1cm;
+            font-size: 9pt;
+            text-align: center;
+        }
+        
+        .verification-options {
+            display: flex;
+            justify-content: center;
+            gap: 1cm;
+            margin: 0.2cm 0;
+        }
+        
+        .verification-option {
+            text-align: center;
+            font-size: 9pt;
+        }
+        
+        .verification-option input[type="radio"] {
+            transform: scale(1);
+            margin-right: 0.1cm;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 0.2cm;
+            font-size: 7pt;
+            color: #5a6a7a;
+            padding-top: 0.5cm;
+            border-top: 1px solid #ddd;
+            line-height: 1;
+            
+        }
+        
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 15px 0;
+            width: 21.6cm;
+            flex-wrap: wrap;
+        }
+        
+        .panel-btn, .print-btn, .logout-btn {
+            padding: 6px 15px;
+            border-radius: 3px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            border: none;
+            cursor: pointer;
+            min-width: 100px;
+            font-size: 10pt;
+        }
+        
+        .panel-btn {
+            background: #3498db;
+            color: white;
+        }
+        
+        .print-btn {
+            background: #2ecc71;
+            color: white;
+        }
+        
+        .logout-btn {
+            background: #e74c3c;
+            color: white;
+        }
+        
+        .panel-btn:hover {
+            background: #2980b9;
+            transform: translateY(-1px);
+        }
+        
+        .print-btn:hover {
+            background: #27ae60;
+            transform: translateY(-1px);
+        }
+        
+        .logout-btn:hover {
+            background: #c0392b;
+            transform: translateY(-1px);
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 0.4cm;
+            flex: 1;
+        }
+        
+        .radio-option {
+            display: flex;
+            align-items: center;
+            font-size: 9pt;
+        }
+        
+        .radio-option input {
+            margin-right: 0.1cm;
+        }
+
+        /* Estilos específicos para la segunda página */
+        .page-two .section {
+            margin-bottom: 0.25cm;
+            padding: 0.2cm;
+        }
+        
+        .page-two .form-row {
+            margin-bottom: 0.12cm;
+        }
+
+        .page-two .content {
+    min-height: 22cm; /* Ajusta este valor según necesites */
+}
+
+        /* Controles de ajuste */
+        .adjustment-panel {
+            width: 21.6cm;
+            background: white;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .adjustment-title {
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        
+        .adjustment-controls {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        
+        .control-label {
+            font-size: 11px;
+            font-weight: 500;
+        }
+        
+        .control-input {
+            padding: 5px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            font-size: 11px;
+            width: 120px;
+        }
+        
+        .adjustment-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .adjust-btn {
+            padding: 6px 12px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 11px;
+        }
+        
+        .apply-btn {
+            background: #3498db;
+            color: white;
+        }
+        
+        .reset-btn {
+            background: #95a5a6;
+            color: white;
+        }
+
+        @media print {
+            body {
+                background: none;
+                padding: 0;
+                margin: 0;
+            }
+            
+            .page {
+                box-shadow: none;
+                margin: 0;
+                width: 21.6cm;
+                height: 27.9cm;
+                padding: 1.2cm 1.5cm;
+                page-break-after: always;
+            }
+            
+            .page:last-child {
+                page-break-after: auto;
+            }
+            
+            .page-background {
+                opacity: 0.1;
+            }
+            
+            .action-buttons, .adjustment-panel {
+                display: none;
+            }
+            
+            .page-number {
+                position: absolute;
+                bottom: 0.6cm;
+                right: 1.5cm;
+                font-size: 10pt;
+                font-weight: bold;
+                color: #000;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            
+            @page {
+                size: letter;
+                margin: 0;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .page {
+                width: 100%;
+                padding: 0.8cm;
+                height: auto;
+            }
+            
+            .signature-grid {
+                grid-template-columns: 1fr;
+                gap: 0.3cm;
+            }
+            
+            .action-buttons, .adjustment-panel {
+                width: 100%;
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .panel-btn, .print-btn, .logout-btn {
+                width: 150px;
+            }
+            
+            .adjustment-controls {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Panel de Ajustes -->
+    <div class="adjustment-panel">
+        <div class="adjustment-title">AJUSTES DE FORMATO</div>
+        <div class="adjustment-controls">
+            <div class="control-group">
+                <label class="control-label">Margen Superior (cm):</label>
+                <input type="number" id="marginTop" class="control-input" min="0.5" max="3" step="0.1" value="1.2">
+            </div>
+            <div class="control-group">
+                <label class="control-label">Margen Inferior (cm):</label>
+                <input type="number" id="marginBottom" class="control-input" min="0.5" max="3" step="0.1" value="1.2">
+            </div>
+            <div class="control-group">
+                <label class="control-label">Margen Izquierdo (cm):</label>
+                <input type="number" id="marginLeft" class="control-input" min="0.5" max="3" step="0.1" value="1.5">
+            </div>
+            <div class="control-group">
+                <label class="control-label">Margen Derecho (cm):</label>
+                <input type="number" id="marginRight" class="control-input" min="0.5" max="3" step="0.1" value="1.5">
+            </div>
+        </div>
+        <div class="adjustment-buttons">
+            <button id="applyAdjustments" class="adjust-btn apply-btn">Aplicar Ajustes</button>
+            <button id="resetAdjustments" class="adjust-btn reset-btn">Restablecer</button>
+        </div>
+    </div>
+
+    <!-- Página 1 -->
+    <div class="page">
+        <div class="page-number"><strong>Página 1 de 2</strong></div>
+        <div class="page-background"></div>
+        
+        <div class="header">
+            <h1>JUNTA DE ACCIÓN COMUNAL</h1>
+            <h2>BARRIO BATEAS - SECTOR 3</h2>
+            <div class="document-title">FORMATO DE VERIFICACIÓN DE RESIDENCIA</div>
+        </div>
+        
+        <div class="content">
+            <!-- Advertencia Legal Unificada -->
+            <div class="legal-notice">
+                <h3>⚠️ ADVERTENCIA LEGAL - CONSECUENCIAS POR FALSEDAD</h3>
+                <p><strong>Este documento tiene carácter de DECLARACIÓN JURADA.</strong> Cualquier falsedad en la información acarreará:</p>
+                
+                <p><strong>⚖️ CONSECUENCIAS PENALES:</strong><br>
+                • Falsedad en documento privado (Art. 269 C.P.) - Prisión de 16 a 72 meses<br>
+                • Obtención de beneficios mediante engaño - Sanciones según Ley 1900/2018</p>
+                
+                <p><strong>🏠 CONSECUENCIAS PARA PROPIETARIOS:</strong><br>
+                • Pérdida permanente de afiliación para TODOS los residentes de la propiedad<br>
+                • Inhabilitación definitiva para certificar futuros inquilinos<br>
+                • Responsabilidad solidaria en perjuicios causados</p>
+                
+                <p><strong>👥 CONSECUENCIAS PARA SOLICITANTES:</strong><br>
+                • Nulidad inmediata del proceso de afiliación<br>
+                • Inhabilitación permanente para futuras solicitudes<br>
+                • Denuncia penal ante autoridades</p>
+                
+                <p><strong>Todas las partes declaran conocer y aceptar estas consecuencias al firmar.</strong></p>
+            </div>
+
+            <!-- Información del Solicitante -->
+            <div class="section">
+                <div class="section-title">1. INFORMACIÓN DEL SOLICITANTE</div>
+                
+                <div class="form-row">
+                    <div class="form-label">Nombre completo:</div>
+                    <input type="text" class="form-input">
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-label">Número de cédula:</div>
+                    <input type="text" class="form-input">
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-label">Dirección de residencia:</div>
+                    <input type="text" class="form-input">
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-label">Teléfono de contacto:</div>
+                    <input type="text" class="form-input">
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-label">Condición de residencia:</div>
+                    <div class="radio-group">
+                        <label class="radio-option">
+                            <input type="radio" name="residencia"> Propietario
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="residencia"> Inquilino
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="residencia"> Familiar
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Información del Dueño (si es inquilino) -->
+            <div class="section">
+                <div class="section-title">2. INFORMACIÓN DEL PROPIETARIO (SOLO PARA INQUILINOS)</div>
+                
+                <div class="form-row">
+                    <div class="form-label">Nombre del propietario:</div>
+                    <input type="text" class="form-input">
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-label">Cédula del propietario:</div>
+                    <input type="text" class="form-input">
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-label">Teléfono del propietario:</div>
+                    <input type="text" class="form-input">
+                </div>
+            </div>
+
+            <!-- Verificación con Vecinos -->
+            <div class="section">
+                <div class="section-title">3. VERIFICACIÓN CON VECINOS (OBLIGATORIA)</div>
+                
+                <div class="form-row">
+                    <div class="form-label">Vecino 1 - Nombre:</div>
+                    <input type="text" class="form-input" placeholder="Nombre completo del vecino">
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-label">Confirmación:</div>
+                    <div class="radio-group">
+                        <label class="radio-option">
+                            <input type="radio" name="vecino1"> Confirma
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="vecino1"> No confirma
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="vecino1"> No disponible
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-label">Vecino 2 - Nombre:</div>
+                    <input type="text" class="form-input" placeholder="Nombre completo del vecino">
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-label">Confirmación:</div>
+                    <div class="radio-group">
+                        <label class="radio-option">
+                            <input type="radio" name="vecino2"> Confirma
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="vecino2"> No confirma
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="vecino2"> No disponible
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Detalles de la Visita (MOVIDA A LA PRIMERA PÁGINA) -->
+            <div class="section">
+                <div class="section-title">4. DETALLES DE LA VISITA</div>
+                
+                <div class="form-row">
+                    <div class="form-label">Fecha de visita:</div>
+                    <input type="text" class="form-input">
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-label">Hora de visita:</div>
+                    <input type="text" class="form-input">
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-label">Persona contactada:</div>
+                    <input type="text" class="form-input">
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>Junta de Acción Comunal Barrio Bateas - Sector 3 | Teléfono: 313 581 5787 | Correo: juntacomunalbateassector3@gmail.com
+</p>
+            <p>Puerto Gaitán, Meta | Documento oficial - Prohibida su reproducción no autorizada</p>
+        </div>
+    </div>
+
+    <!-- Página 2 -->
+    <div class="page page-two">
+        <div class="page-number"><strong>Página 2 de 2</strong></div>
+        <div class="page-background"></div>
+        
+        <div class="content">
+            <!-- Observaciones y Documentos -->
+            <div class="section">
+                <div class="section-title">5. OBSERVACIONES Y DOCUMENTOS</div>
+                
+                <div class="form-row">
+                    <div class="form-label">Documentos verificados:</div>
+                    <textarea class="form-textarea" placeholder="Lista de documentos revisados (cédula, recibos, contrato, etc.)"></textarea>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-label">Observaciones generales:</div>
+                    <textarea class="form-textarea" placeholder="Describa los hallazgos de la visita, estado de la vivienda, y cualquier observación relevante"></textarea>
+                </div>
+            </div>
+
+            <!-- Conclusión de la Verificación -->
+            <div class="section">
+                <div class="section-title">6. CONCLUSIÓN DE LA VERIFICACIÓN</div>
+                
+                <div class="verification-options">
+                    <div class="verification-option">
+                        <input type="radio" id="aprobado" name="conclusion">
+                        <label for="aprobado">APROBADO</label>
+                    </div>
+                    <div class="verification-option">
+                        <input type="radio" id="rechazado" name="conclusion">
+                        <label for="rechazado">RECHAZADO</label>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-label">Motivo de rechazo:</div>
+                    <textarea class="form-textarea"></textarea>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-label">Recomendaciones:</div>
+                    <textarea class="form-textarea" placeholder="Observaciones o recomendaciones adicionales"></textarea>
+                </div>
+            </div>
+
+            <!-- Información de la Conciliadora -->
+            <div class="section">
+                <div class="section-title">7. INFORMACIÓN DE LA CONCILIADORA</div>
+                
+                <div class="form-row">
+                    <div class="form-label">Nombre de la conciliadora:</div>
+                    <input type="text" class="form-input">
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-label">Cédula de ciudadanía:</div>
+                    <input type="text" class="form-input">
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-label">Número de registro JAC:</div>
+                    <input type="text" class="form-input">
+                </div>
+            </div>
+
+            <!-- Firmas -->
+            <div class="signature-grid">
+                <!-- Solicitante -->
+                <div class="signature-box">
+                    <div class="signature-title">SOLICITANTE</div>
+                    <div class="signature-text">Declaro bajo juramento que la información es veraz y conozco las sanciones por falsedad.</div>
+                    <div class="signature-line">Firma del solicitante</div>
+                    <div class="signature-cc">C.C. _________________________</div>
+                </div>
+                
+                <!-- Propietario -->
+                <div class="signature-box">
+                    <div class="signature-title">PROPIETARIO</div>
+                    <div class="signature-text">Certifico bajo juramento que reside efectivamente en mi propiedad y conozco las consecuencias penales.</div>
+                    <div class="signature-line">Firma del propietario</div>
+                    <div class="signature-cc">C.C. _________________________</div>
+                </div>
+                
+                <!-- Conciliadora -->
+                <div class="signature-box">
+                    <div class="signature-title">CONCILIADORA JAC</div>
+                    <div class="signature-text">Certifico la verificación realizada y he informado sobre las consecuencias legales.</div>
+                    <div class="signature-line">Firma y sello</div>
+                    <div class="signature-cc">C.C. _________________________</div>
+                </div>
+            </div>
+        </div>
+        
+   
+        
+        
+
+        <div class="legal-notice">
+                <h3>✅ DECLARACIÓN FINAL DE CONFORMIDAD</h3>
+                <p style="font-size: 9pt;"><strong>Todas las partes declaran bajo juramento conocer y aceptar las sanciones por falsedad en la información proporcionada.</strong></p>
+            </div>
+        <br>
+        <div class="footer">
+            <p>Junta de Acción Comunal Barrio Bateas - Sector 3 | Teléfono: 313 581 5787 | Correo: juntacomunalbateassector3@gmail.com
+</p>
+            <p>Puerto Gaitán, Meta | Documento oficial - Prohibida su reproducción no autorizada</p>
+        </div> </div>
+
+        
+
+    <div class="action-buttons">
+        <a href="documentos.html" class="panel-btn">Volver al Panel</a>
+        <button onclick="window.print()" class="print-btn">Imprimir Formato</button>
+        <button onclick="cerrarSesion()" class="logout-btn">Cerrar Sesión</button>
+    </div>
+
+    <script>
+        function cerrarSesion() {
+            if (confirm("¿Está seguro que desea cerrar sesión?")) {
+                window.location.href = "login.html";
+            }
+        }
+
+        // Verificar si el logo existe
+        document.addEventListener('DOMContentLoaded', function() {
+            const img = new Image();
+            img.src = 'logo4.jpg';
+            img.onerror = function() {
+                document.querySelectorAll('.page-background').forEach(bg => {
+                    bg.style.backgroundImage = 'none';
+                    bg.innerHTML = '<p style="color:red;text-align:center;margin-top:50%;font-size:8pt;">[Logo no encontrado]</p>';
+                });
+            };
+            
+            // Control de márgenes
+            const applyBtn = document.getElementById('applyAdjustments');
+            const resetBtn = document.getElementById('resetAdjustments');
+            
+            applyBtn.addEventListener('click', function() {
+                const marginTop = document.getElementById('marginTop').value + 'cm';
+                const marginBottom = document.getElementById('marginBottom').value + 'cm';
+                const marginLeft = document.getElementById('marginLeft').value + 'cm';
+                const marginRight = document.getElementById('marginRight').value + 'cm';
+                
+                document.querySelectorAll('.page').forEach(page => {
+                    page.style.padding = `${marginTop} ${marginRight} ${marginBottom} ${marginLeft}`;
+                });
+                
+                // Ajustar posición del número de página
+                document.querySelectorAll('.page-number').forEach(number => {
+                    number.style.right = marginRight;
+                    number.style.bottom = marginBottom;
+                });
+                
+                // Ajustar posición del footer
+                document.querySelectorAll('.footer').forEach(footer => {
+                    footer.style.left = marginLeft;
+                    footer.style.right = marginRight;
+                    footer.style.bottom = marginBottom;
+                });
+                
+                alert('Ajustes aplicados correctamente');
+            });
+            
+            resetBtn.addEventListener('click', function() {
+                document.getElementById('marginTop').value = '1.2';
+                document.getElementById('marginBottom').value = '1.2';
+                document.getElementById('marginLeft').value = '1.5';
+                document.getElementById('marginRight').value = '1.5';
+                applyBtn.click();
+            });
+        });
+    </script>
+</body>
+</html>

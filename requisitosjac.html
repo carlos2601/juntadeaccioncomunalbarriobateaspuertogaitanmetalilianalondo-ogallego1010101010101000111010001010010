@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Requisitos de Afiliación</title>
+    <style>
+        /* Reset y estilos base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Tahoma, sans-serif;
+            background: linear-gradient(135deg, #FFD700, #32CD32);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .pages-container {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            width: 100%;
+            max-width: 21.59cm;
+            align-items: center;
+        }
+
+        .document-page {
+            width: 21.59cm;
+            min-height: 27.94cm;
+            background-color: white;
+            padding: 1.5cm 2.5cm;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .page-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('logo4.jpg');
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.3; /* Logo más claro */
+            filter: brightness(1.0);
+            z-index: 0;
+        }
+        
+        .content-wrapper {
+            position: relative;
+            z-index: 1;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Estilos de títulos */
+        .header {
+            text-align: center;
+            margin-bottom: 0.5cm;
+        }
+        
+        .header h4 {
+            font-size: 13pt;
+            font-weight: bold;
+            color: #000000;
+            margin-bottom: 0.1cm;
+            text-transform: uppercase;
+            line-height: 1.1;
+        }
+        
+        .main-title {
+            font-size: 14pt;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: underline;
+            margin: 0.3cm 0 0.5cm 0;
+            color: #000000;
+            text-transform: uppercase;
+        }
+        
+        .content {
+            font-size: 12pt;
+            text-align: justify;
+            line-height: 1.4;
+        }
+        
+        h2 {
+            font-size: 13pt;
+            margin: 0.5cm 0 0.2cm 0;
+            color: #000000;
+            font-weight: bold;
+            text-decoration: underline;
+        }
+        
+        ol {
+            margin: 0.3cm 0 0.3cm 1.2cm;
+        }
+        
+        li {
+            margin-bottom: 0.4cm;
+            line-height: 1.5;
+        }
+        
+        .footer {
+            text-align: center;
+            font-size: 9pt;
+            margin-top: 0.5cm;
+            padding-top: 0.3cm;
+            border-top: 1px solid #ddd;
+            color: #555;
+        }
+
+        /* Botones */
+        .button-container {
+            position: fixed;
+            bottom: 20px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            z-index: 100;
+        }
+        
+        .action-button {
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12pt;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            font-weight: bold;
+        }
+        
+        .back-button {
+            background: #e74c3c;
+        }
+        
+        .download-button {
+            background: #3498db;
+        }
+
+        .logout-btn {
+            background: #e74c3c;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 4px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            border: none;
+            cursor: pointer;
+            min-width: 120px;
+        }
+
+        .logout-btn:hover {
+            background: #c0392b;
+            transform: translateY(-1px);
+        }
+
+        .panel-btn {
+            background: #3498db;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 4px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            border: none;
+            cursor: pointer;
+            min-width: 120px;
+        }
+
+        .print-btn {
+            background: #2ecc71;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 4px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            border: none;
+            cursor: pointer;
+            min-width: 120px;
+        }
+
+        /* Configuración de impresión mejorada */
+        @media print {
+            body {
+                background: none !important;
+                padding: 0 !important;
+                margin: 0 !important;
+            }
+            
+            .pages-container {
+                gap: 0 !important;
+                margin: 0 !important;
+            }
+            
+            .button-container {
+                display: none !important;
+            }
+            
+            .document-page {
+                box-shadow: none !important;
+                margin: 0 !important;
+                padding: 1cm 2cm !important;
+                page-break-after: avoid !important;
+                height: 27.94cm !important;
+                width: 21.59cm !important;
+            }
+            
+            .content-wrapper {
+                padding: 0 !important;
+            }
+            
+            .page-background {
+                opacity: 0.15 !important; /* Logo aún más claro para impresión */
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            
+            @page {
+                size: letter; /* Cambiado a tamaño carta */
+                margin: 0 !important;
+                marks: none !important;
+                margin-top: 0.5cm !important;
+                margin-bottom: 0.5cm !important;
+                margin-left: 1.5cm !important;
+                margin-right: 1.5cm !important;
+            }
+        }
+
+        /* Estilos responsivos para dispositivos móviles */
+        @media screen and (max-width: 768px) {
+            .pages-container {
+                max-width: 100%;
+                padding: 0 10px;
+            }
+            
+            .document-page {
+                width: 100%;
+                min-height: auto;
+                padding: 1cm;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            }
+            
+            .header h4 {
+                font-size: 11pt;
+            }
+            
+            .main-title {
+                font-size: 12pt;
+            }
+            
+            .content {
+                font-size: 10pt;
+            }
+            
+            h2 {
+                font-size: 11pt;
+            }
+            
+            .button-container {
+                position: relative;
+                bottom: auto;
+                margin-top: 20px;
+                flex-wrap: wrap;
+            }
+            
+            .panel-btn, .print-btn, .logout-btn {
+                min-width: 100px;
+                padding: 6px 12px;
+                font-size: 10pt;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .document-page {
+                padding: 0.8cm;
+            }
+            
+            .header h4 {
+                font-size: 10pt;
+            }
+            
+            .main-title {
+                font-size: 11pt;
+            }
+            
+            .content {
+                font-size: 9pt;
+            }
+            
+            h2 {
+                font-size: 10pt;
+            }
+            
+            ol {
+                margin-left: 0.8cm;
+            }
+            
+            .button-container {
+                gap: 10px;
+            }
+            
+            .panel-btn, .print-btn, .logout-btn {
+                min-width: 80px;
+                padding: 5px 10px;
+                font-size: 9pt;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="pages-container">
+        <div class="document-page">
+            <div class="page-background"></div>
+            <div class="content-wrapper">
+                <!-- Encabezado -->
+                <div class="header">
+                    <h4>PUERTO GAITÁN, META</h4>
+                    <h4>JUNTA DE ACCIÓN COMUNAL</h4>
+                    <h4>BARRIO BATEAS</h4>
+                    <h4>SECTOR 3</h4>
+                    <h1 class="main-title">REQUISITOS PARA LA AFILIACIÓN A LA JUNTA</h1>
+                </div>
+                
+                <!-- Contenido compacto -->
+                <div class="content">
+                    <h2>1. REQUISITOS OBLIGATORIOS</h2>
+                    <ol>
+                        <li>Fotocopia de cédula de ciudadanía (legible).</li>
+                        <li>Copia de recibo de energía o servicio público (no mayor a 2 meses).</li>
+                        <li>Certificado del dueño de la casa autenticado (si es arrendatario). 
+                            <br><em style="font-size: 10pt;">Nota: Si es el dueño, el recibo de servicios debe estar a su nombre.</em>
+                        </li>
+                    </ol>
+                    
+                    <h2>2. PASOS A SEGUIR</h2>
+                    <ol>
+                        <li>La conciliadora de la junta hará una visita personal para verificar que la información suministrada sea correcta.</li>
+                        <li>La visita se realizará entre <strong>1 a 15 días</strong> después de entregar los documentos.</li>
+                        <li>Si todo es correcto, el solicitante debe:
+                            <ul style="list-style-type: none; margin-left: 0.8cm; font-size: 10pt;">
+                                <li>- Volver a la sede de la junta.</li>
+                                <li>- Firmar el libro de afiliados.</li>
+                            </ul>
+                        </li>
+                        <li>Expedición del certificado de afiliación.</li>
+                        <li style="margin-bottom: 0.1cm;"><strong>Importante:</strong> Pasado <u>1 año</u> de estar inscrito en el libro, tendrá derecho a solicitar certificados oficiales de la junta.</li>
+                    </ol>
+                    <div class="footer">
+                        <p>Junta de Acción Comunal Barrio Bateas - Sector 3</p>
+                        <p>Teléfono: 321 332 9108 | Correo: bateassector3@gmail.com</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Botones flotantes -->
+    <div class="button-container">
+        <a href="documentos.html" class="panel-btn">Volver</a>
+        <button onclick="window.print()" class="print-btn">Imprimir Formato</button>
+        <button onclick="cerrarSesion()" class="logout-btn">Cerrar Sesión</button>
+    </div>
+    
+    <script>
+        function cerrarSesion() {
+            if (confirm("¿Está seguro que desea cerrar sesión?")) {
+                window.location.href = "login.html";
+            }
+        }
+
+        // Verificación del logo
+        document.addEventListener('DOMContentLoaded', function() {
+            const img = new Image();
+            img.src = 'logo4.jpg';
+            img.onerror = function() {
+                document.querySelectorAll('.page-background').forEach(bg => {
+                    bg.style.backgroundImage = 'none';
+                    bg.innerHTML = '<p style="color:red;text-align:center;margin-top:50%;">[Logo no encontrado]</p>';
+                });
+            };
+        });
+
+        // Función mejorada para impresión
+        function prepareForPrinting() {
+            // Añadir estilo temporal para eliminar URL
+            const printStyle = document.createElement('style');
+            printStyle.innerHTML = `
+                @page {
+                    size: auto;
+                    margin: 0;
+                    margin-top: 0.5cm;
+                    margin-bottom: 0.5cm;
+                }
+            `;
+            document.head.appendChild(printStyle);
+            
+            window.print();
+            
+            // Eliminar el estilo después de imprimir
+            setTimeout(() => {
+                document.head.removeChild(printStyle);
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
