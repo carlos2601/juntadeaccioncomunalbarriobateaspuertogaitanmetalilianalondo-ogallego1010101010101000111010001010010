@@ -671,142 +671,141 @@
             }
         }
         
-        // Cargar desde GitHub - Solución CORS
         async function cargarDesdeGitHub() {
-            try {
-                console.log('🔄 Intentando conectar a GitHub...');
-                actualizarEstado('Conectando...', 'info');
-                
-                // Crear un identificador único para evitar caché
-                const timestamp = Date.now();
-                
-                // Intentar diferentes métodos para evitar CORS
-                let datos = null;
-                let metodoUsado = '';
-                
-                // Método 1: Usar raw.githubusercontent directamente con no-cache
-                try {
-                    console.log('📡 Método 1: Raw GitHub...');
-                    const response = await fetch(`${JSON_URL}?t=${timestamp}`, {
-                        method: 'GET',
-                        mode: 'cors',
-                        cache: 'no-cache',
-                        headers: {
-                            'Accept': 'application/json',
-                            'Cache-Control': 'no-cache'
-                        }
-                    });
-                    
-                    if (response.ok) {
-                        datos = await response.json();
-                        metodoUsado = 'raw.githubusercontent';
-                        console.log('✅ Método 1 exitoso');
-                    } else {
-                        throw new Error('Método 1 falló');
-                    }
-                } catch (error1) {
-                    console.log('⚠️ Método 1 falló, intentando Método 2...');
-                    
-                    // Método 2: Usar GitHub Pages si existe
-                    try {
-                        const githubPagesUrl = 'https://carlos2601.github.io/bateas3/afiliados.json';
-                        const response = await fetch(`${githubPagesUrl}?t=${timestamp}`, {
-                            method: 'GET',
-                            mode: 'cors',
-                            cache: 'no-cache'
-                        });
-                        
-                        if (response.ok) {
-                            datos = await response.json();
-                            metodoUsado = 'GitHub Pages';
-                            console.log('✅ Método 2 exitoso');
-                        } else {
-                            throw new Error('Método 2 falló');
-                        }
-                    } catch (error2) {
-                        console.log('⚠️ Método 2 falló, intentando Método 3...');
-                        
-                        // Método 3: Usar un proxy simple
-                        try {
-                            // Lista de proxies CORS alternativos
-                            const proxies = [
-                                `https://corsproxy.io/?${encodeURIComponent(JSON_URL + '?t=' + timestamp)}`,
-                                `https://api.allorigins.win/raw?url=${encodeURIComponent(JSON_URL + '?t=' + timestamp)}`,
-                                `https://thingproxy.freeboard.io/fetch/${encodeURIComponent(JSON_URL + '?t=' + timestamp)}`
-                            ];
-                            
-                            for (let i = 0; i < proxies.length; i++) {
-                                try {
-                                    console.log(`📡 Intentando proxy ${i + 1}...`);
-                                    const response = await fetch(proxies[i], {
-                                        method: 'GET',
-                                        headers: {
-                                            'Accept': 'application/json'
-                                        }
-                                    });
-                                    
-                                    if (response.ok) {
-                                        const text = await response.text();
-                                        datos = JSON.parse(text);
-                                        metodoUsado = `Proxy ${i + 1}`;
-                                        console.log(`✅ Proxy ${i + 1} exitoso`);
-                                        break;
-                                    }
-                                } catch (proxyError) {
-                                    console.log(`⚠️ Proxy ${i + 1} falló`);
-                                }
-                            }
-                            
-                            if (!datos) {
-                                throw new Error('Todos los proxies fallaron');
-                            }
-                        } catch (error3) {
-                            console.log('❌ Todos los métodos fallaron');
-                            throw new Error('No se pudo conectar a GitHub');
-                        }
-                    }
-                }
-                
-                // Procesar datos si se obtuvieron
-                if (datos) {
-                    console.log(`✅ Datos obtenidos (${metodoUsado}):`, datos.length, 'registros');
-                    
-                    // Procesar y comparar con caché
-                    procesarDatos(datos, false);
-                    actualizarEstado('Actualizado', 'success');
-                    actualizarUltimaActualizacion();
-                    
-                    // Guardar en caché
-                    localStorage.setItem('afiliados_cache_real', JSON.stringify(datos));
-                    localStorage.setItem('ultima_actualizacion', Date.now());
-                    localStorage.setItem('metodo_conexion', metodoUsado);
-                    
-                    // Mostrar notificación de éxito
-                    mostrarNotificacion('Actualización exitosa', 
-                        `Datos obtenidos via ${metodoUsado}`, 'success');
-                }
-                
-            } catch (error) {
-                console.log('⚠️ Error conectando a GitHub:', error.message);
-                
-                // Verificar si hay caché local
-                const datosCache = localStorage.getItem('afiliados_cache_real');
-                if (datosCache) {
-                    console.log('📂 Usando datos de caché...');
-                    const datosParseados = JSON.parse(datosCache);
-                    procesarDatos(datosParseados, true);
-                    actualizarEstado('Caché (sin conexión)', 'warning');
-                    
-                    // Mostrar advertencia
-                    mostrarNotificacion('Modo sin conexión', 
-                        'Usando datos almacenados localmente', 'warning');
-                } else {
-                    actualizarEstado('Sin conexión', 'danger');
-                    mostrarNotificacion('Error de conexión', 
-                        'No se pudo conectar y no hay datos locales', 'danger');
-                }
-            }
+    try {
+        console.log('🚀 Forzando actualización sin caché...');
+        actualizarEstado('Actualizando...', 'info');
+        
+        // Crear un parámetro único para evitar caché
+        const timestamp = Date.now();
+        const randomId = Math.random().toString(36).substring(2, 15);
+        
+        // URL con parámetros únicos que evitan caché
+        const url = `https://raw.githubusercontent.com/carlos2601/bateas3/main/afiliados.json?_=${timestamp}&nocache=${randomId}`;
+        
+        console.log('📡 URL solicitada:', url);
+        
+        // Configuración de fetch para evitar caché completamente
+        const response = await fetch(url, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Cache-Control': 'no-cache, no-store, must-revalidate',
+                'Pragma': 'no-cache',
+                'Expires': '0'
+            },
+            cache: 'no-store', // Esto es importante
+            mode: 'cors',
+            credentials: 'omit'
+        });
+        
+        if (!response.ok) {
+            throw new Error(`Error HTTP ${response.status}: ${response.statusText}`);
         }
+        
+        const text = await response.text();
+        console.log('📥 Respuesta recibida:', text.substring(0, 200) + '...');
+        
+        const datos = JSON.parse(text);
+        console.log('✅ Datos parseados:', datos.length, 'registros');
+        
+        // Encontrar el ID más alto
+        const ultimoId = Math.max(...datos.map(a => parseInt(a.id) || 0));
+        const nuevoUltimo = datos.find(a => parseInt(a.id) === ultimoId);
+        
+        console.log('🎯 Último registro encontrado:', nuevoUltimo);
+        console.log('📊 Comparando con actual:', ultimoAfiliado ? ultimoAfiliado.id : 'ninguno');
+        
+        // Procesar datos
+        procesarDatos(datos, false);
+        actualizarEstado('Actualizado ✓', 'success');
+        actualizarUltimaActualizacion();
+        
+        // Guardar en caché local
+        localStorage.setItem('afiliados_cache_real', JSON.stringify(datos));
+        localStorage.setItem('ultima_actualizacion', Date.now());
+        localStorage.setItem('ultima_solicitud', timestamp.toString());
+        
+        // Mostrar confirmación
+        mostrarNotificacion('Actualizado', 
+            `Se cargaron ${datos.length} registros`, 'success');
+        
+        return true;
+        
+    } catch (error) {
+        console.error('❌ Error en actualización:', error);
+        
+        // Mostrar error específico
+        actualizarEstado('Error de red', 'danger');
+        
+        // Intentar con proxy alternativo
+        setTimeout(async () => {
+            try {
+                console.log('🔄 Intentando con proxy alternativo...');
+                await cargarConProxyAlternativo();
+            } catch (proxyError) {
+                console.log('⚠️ Todos los métodos fallaron');
+                usarCacheLocal();
+            }
+        }, 1000);
+        
+        return false;
+    }
+}
+
+// Función alternativa con proxy
+async function cargarConProxyAlternativo() {
+    const timestamp = Date.now();
+    const urlOriginal = `https://raw.githubusercontent.com/carlos2601/bateas3/main/afiliados.json?t=${timestamp}`;
+    
+    // Lista de proxies
+    const proxies = [
+        `https://api.allorigins.win/raw?url=${encodeURIComponent(urlOriginal)}`,
+        `https://corsproxy.io/?${encodeURIComponent(urlOriginal)}`,
+        `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(urlOriginal)}`
+    ];
+    
+    for (let proxy of proxies) {
+        try {
+            console.log('🔗 Probando proxy:', proxy.substring(0, 50) + '...');
+            const response = await fetch(proxy, { timeout: 5000 });
+            
+            if (response.ok) {
+                const datos = await response.json();
+                procesarDatos(datos, false);
+                actualizarEstado('Proxy ✓', 'warning');
+                return true;
+            }
+        } catch (e) {
+            continue;
+        }
+    }
+    
+    throw new Error('Todos los proxies fallaron');
+}
+
+// Usar caché local como último recurso
+function usarCacheLocal() {
+    const datosCache = localStorage.getItem('afiliados_cache_real');
+    if (datosCache) {
+        try {
+            const datos = JSON.parse(datosCache);
+            procesarDatos(datos, true);
+            actualizarEstado('Caché local', 'warning');
+            
+            // Mostrar advertencia solo una vez
+            if (!localStorage.getItem('cache_warning_shown')) {
+                mostrarNotificacion('Modo sin conexión', 
+                    'Usando datos almacenados localmente', 'warning');
+                localStorage.setItem('cache_warning_shown', 'true');
+            }
+        } catch (e) {
+            actualizarEstado('Sin datos', 'danger');
+        }
+    } else {
+        actualizarEstado('Sin conexión', 'danger');
+    }
+}
         
         // Procesar datos CORREGIDO: Ordenar por ID numérico descendente
         function procesarDatos(datos, esCache = false) {
@@ -1248,13 +1247,31 @@ function actualizarListaAfiliados() {
             console.log('🔄 Actualización automática configurada cada 60 segundos');
         }
         
-        // Forzar actualización inmediata
         function forzarActualizacion() {
-            console.log('⚡ Forzando actualización...');
-            reiniciarContador(10);
-            cargarDesdeGitHub();
-            mostrarNotificacion('Actualizando', 'Buscando nuevos afiliados...', 'info');
-        }
+    console.log('⚡ Forzando actualización completa...');
+    reiniciarContador(10);
+    
+    // Limpiar cache warnings
+    localStorage.removeItem('cache_warning_shown');
+    
+    // Forzar recarga del navegador también
+    if ('caches' in window) {
+        caches.keys().then(function(names) {
+            for (let name of names) caches.delete(name);
+        });
+    }
+    
+    // Limpiar caché de localStorage específico
+    localStorage.removeItem('ultima_solicitud');
+    
+    // Mostrar notificación
+    mostrarNotificacion('Actualizando', 'Forzando recarga completa...', 'info');
+    
+    // Hacer la solicitud
+    setTimeout(() => {
+        cargarDesdeGitHub();
+    }, 500);
+}
         
         // Test de conexión
         async function testConexion() {
