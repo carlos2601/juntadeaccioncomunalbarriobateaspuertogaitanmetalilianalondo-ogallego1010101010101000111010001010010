@@ -357,123 +357,6 @@
             background-color: var(--azul-primario);
         }
         
-        .github-config-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 2000;
-        }
-        
-        .github-config-modal.show {
-            display: flex;
-        }
-        
-        .github-config-content {
-            background-color: white;
-            padding: 30px;
-            border-radius: 12px;
-            width: 90%;
-            max-width: 600px;
-            max-height: 90vh;
-            overflow-y: auto;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-        }
-        
-        .github-config-content h2 {
-            margin-bottom: 20px;
-            color: var(--gris-oscuro);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .form-group {
-            margin-bottom: 20px;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: var(--gris-oscuro);
-        }
-        
-        .form-group input {
-            width: 100%;
-            padding: 12px 15px;
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            font-size: 1rem;
-            transition: all 0.3s;
-        }
-        
-        .form-group input:focus {
-            border-color: var(--verde-primario);
-            outline: none;
-            box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
-        }
-        
-        .form-group input[readonly] {
-            background-color: var(--gris-claro);
-            cursor: not-allowed;
-        }
-        
-        .token-help {
-            background-color: #f8f9fa;
-            border-left: 4px solid var(--azul-primario);
-            padding: 15px;
-            margin: 15px 0;
-            border-radius: 4px;
-        }
-        
-        .token-help h4 {
-            margin-top: 0;
-            color: var(--gris-oscuro);
-        }
-        
-        .token-help ol {
-            margin: 10px 0;
-            padding-left: 20px;
-        }
-        
-        .token-help li {
-            margin-bottom: 8px;
-            line-height: 1.4;
-        }
-        
-        .token-help code {
-            background-color: #e9ecef;
-            padding: 2px 6px;
-            border-radius: 3px;
-            font-family: monospace;
-        }
-        
-        .show-token {
-            background: none;
-            border: none;
-            color: var(--azul-primario);
-            cursor: pointer;
-            font-size: 0.9rem;
-            margin-left: 10px;
-        }
-        
-        .show-token:hover {
-            text-decoration: underline;
-        }
-        
-        .config-buttons {
-            display: flex;
-            gap: 10px;
-            justify-content: flex-end;
-            margin-top: 20px;
-        }
-        
         @media print {
             @page {
                 size: auto;
@@ -569,11 +452,6 @@
                 font-size: 0.7rem;
             }
             
-            .github-config-content {
-                width: 95%;
-                padding: 20px;
-            }
-            
             .pagination {
                 flex-direction: column;
                 gap: 10px;
@@ -615,9 +493,6 @@
             <button class="btn btn-purple" id="saveLocalBtn">
                 <i class="fas fa-download"></i> Guardar Local
             </button>
-            <button class="btn btn-info" id="githubConfigBtn">
-                <i class="fab fa-github"></i> Configurar GitHub
-            </button>
             <input type="text" class="search-input" id="searchInput" placeholder="Buscar afiliado...">
         </div>
     </div>
@@ -656,64 +531,6 @@
         <p>Sistema de afiliados © <span id="currentYear"></span></p>
     </div>
     
-    <!-- Modal para configuración de GitHub -->
-    <div class="github-config-modal" id="githubConfigModal">
-        <div class="github-config-content">
-            <h2><i class="fab fa-github"></i> Configuración de GitHub</h2>
-            
-            <div class="form-group">
-                <label for="ownerInput">Propietario (Owner):</label>
-                <input type="text" id="ownerInput" value="carlos2601" readonly>
-            </div>
-            
-            <div class="form-group">
-                <label for="repoInput">Repositorio (Repo):</label>
-                <input type="text" id="repoInput" value="bateas3" readonly>
-            </div>
-            
-            <div class="form-group">
-                <label for="pathInput">Ruta del archivo JSON:</label>
-                <input type="text" id="pathInput" value="afiliados.json" readonly>
-            </div>
-            
-            <div class="form-group">
-                <label for="branchInput">Rama (Branch):</label>
-                <input type="text" id="branchInput" value="main" readonly>
-            </div>
-            
-            <div class="form-group">
-                <label for="tokenInput">
-                    Token de Acceso Personal:
-                    <button type="button" class="show-token" id="showTokenBtn">
-                        <i class="fas fa-eye"></i> Mostrar/Ocultar
-                    </button>
-                </label>
-                <input type="password" id="tokenInput" placeholder="Pega aquí tu token de GitHub" style="font-family: monospace;">
-                <small style="display: block; margin-top: 5px; color: #666;">
-                    Haz clic en el campo de arriba y pega tu token (Ctrl+V)
-                </small>
-            </div>
-            
-            <div class="token-help">
-                <h4><i class="fas fa-info-circle"></i> ¿Cómo crear un Token de Acceso Personal?</h4>
-                <ol>
-                    <li>Ve a <a href="https://github.com/settings/tokens" target="_blank">GitHub Settings → Developer Settings → Personal Access Tokens</a></li>
-                    <li>Haz clic en "Generate new token"</li>
-                    <li>Selecciona el scope <code>repo</code> (acceso completo a repositorios)</li>
-                    <li>Dale un nombre descriptivo (ej: "Sistema Afiliados Bateas")</li>
-                    <li>Haz clic en "Generate token"</li>
-                    <li><strong>IMPORTANTE:</strong> Copia el token inmediatamente (solo se muestra una vez)</li>
-                    <li>Pega el token en el campo de arriba</li>
-                </ol>
-            </div>
-            
-            <div class="config-buttons">
-                <button class="btn btn-secondary" id="cancelConfigBtn">Cancelar</button>
-                <button class="btn btn-primary" id="saveConfigBtn">Guardar Configuración</button>
-            </div>
-        </div>
-    </div>
-    
     <div class="message" id="message"></div>
     
     <script>
@@ -736,57 +553,8 @@
         let allAfiliados = [];
         let filteredAfiliados = [];
         
-        // Configuración de GitHub
-        let githubConfig = {
-            owner: 'carlos2601',
-            repo: 'bateas3',
-            path: 'afiliados.json',
-            branch: 'main',
-            token: ''
-        };
-        
-        // Cargar configuración desde localStorage
-        function loadConfig() {
-            const savedConfig = localStorage.getItem('githubConfig');
-            if (savedConfig) {
-                const parsedConfig = JSON.parse(savedConfig);
-                githubConfig = {
-                    ...githubConfig,
-                    ...parsedConfig
-                };
-                document.getElementById('tokenInput').value = githubConfig.token;
-                showMessage('Configuración cargada correctamente', 'success');
-            }
-        }
-        
-        // Guardar configuración
-        function saveConfig() {
-            githubConfig.token = document.getElementById('tokenInput').value.trim();
-            
-            if (!githubConfig.token) {
-                showMessage('Por favor, ingresa un token de GitHub', 'error');
-                return;
-            }
-            
-            localStorage.setItem('githubConfig', JSON.stringify(githubConfig));
-            hideGitHubConfigModal();
-            showMessage('Configuración guardada correctamente', 'success');
-            loadAfiliados(); // Recargar datos con nueva configuración
-        }
-        
-        // Mostrar/ocultar token
-        function toggleTokenVisibility() {
-            const tokenInput = document.getElementById('tokenInput');
-            const showTokenBtn = document.getElementById('showTokenBtn');
-            
-            if (tokenInput.type === 'password') {
-                tokenInput.type = 'text';
-                showTokenBtn.innerHTML = '<i class="fas fa-eye-slash"></i> Ocultar';
-            } else {
-                tokenInput.type = 'password';
-                showTokenBtn.innerHTML = '<i class="fas fa-eye"></i> Mostrar/Ocultar';
-            }
-        }
+        // URL directa al archivo JSON en GitHub
+        const GITHUB_JSON_URL = 'https://raw.githubusercontent.com/carlos2601/bateas3/main/afiliados.json';
         
         // Mostrar mensajes
         function showMessage(text, type = 'info') {
@@ -800,55 +568,36 @@
             }, 3000);
         }
         
-        // Modal de configuración de GitHub
-        function showGitHubConfigModal() {
-            document.getElementById('githubConfigModal').classList.add('show');
-            document.getElementById('tokenInput').focus();
-        }
-        
-        function hideGitHubConfigModal() {
-            document.getElementById('githubConfigModal').classList.remove('show');
-        }
-        
-        // Cargar datos de GitHub
+        // Cargar datos directamente desde GitHub (solo lectura)
         async function loadAfiliados() {
-            if (!githubConfig.token) {
-                showMessage('Por favor, configura tu token de GitHub primero', 'info');
-                showGitHubConfigModal();
-                return;
-            }
-            
             showMessage('Cargando datos desde GitHub...', 'info');
             
             try {
-                const url = `https://api.github.com/repos/${githubConfig.owner}/${githubConfig.repo}/contents/${githubConfig.path}?ref=${githubConfig.branch}`;
-                
-                const response = await fetch(url, {
-                    headers: {
-                        'Authorization': `token ${githubConfig.token}`,
-                        'Accept': 'application/vnd.github.v3+json'
-                    }
+                const response = await fetch(GITHUB_JSON_URL, {
+                    cache: 'no-cache' // Evitar caché
                 });
                 
                 if (!response.ok) {
                     throw new Error(`Error ${response.status}: ${response.statusText}`);
                 }
                 
-                const data = await response.json();
-                const content = atob(data.content); // Decodificar base64
-                allAfiliados = JSON.parse(content);
+                const jsonData = await response.json();
                 
-                // Asegurar que cada afiliado tenga un ID
-                allAfiliados = allAfiliados.map((afiliado, index) => ({
-                    id: afiliado.id || `afiliado-${index + 1}`,
-                    folio: afiliado.folio || '',
-                    registro: afiliado.registro || '',
-                    fecha_afiliacion: afiliado.fecha_afiliacion || afiliado.fecha || '',
-                    cedula: afiliado.cedula || '',
-                    nombres: afiliado.nombres || afiliado.nombre || '',
-                    direccion: afiliado.direccion || '',
-                    celular: afiliado.celular || afiliado.telefono || ''
-                }));
+                // Mantener la estructura ORIGINAL del JSON
+                allAfiliados = Array.isArray(jsonData) ? jsonData : [];
+                
+                // Solo agregamos ID si no existe, manteniendo TODOS los campos originales
+                allAfiliados = allAfiliados.map((afiliado, index) => {
+                    // Crear un nuevo objeto con TODOS los campos originales
+                    const nuevoAfiliado = { ...afiliado };
+                    
+                    // Solo agregar ID si no existe
+                    if (!nuevoAfiliado.id) {
+                        nuevoAfiliado.id = `afiliado-${index + 1}`;
+                    }
+                    
+                    return nuevoAfiliado;
+                });
                 
                 filteredAfiliados = [...allAfiliados];
                 renderTable();
@@ -860,76 +609,31 @@
                 console.error("Error al cargar datos:", error);
                 showMessage(`Error al cargar datos: ${error.message}`, 'error');
                 
-                // Mostrar datos vacíos
-                allAfiliados = [];
-                filteredAfiliados = [];
-                renderTable();
-                renderPagination();
-            }
-        }
-        
-        // Guardar datos en GitHub
-        async function saveToGitHub() {
-            if (!githubConfig.token) {
-                showMessage('Por favor, configura tu token de GitHub primero', 'error');
-                showGitHubConfigModal();
-                return;
-            }
-            
-            showMessage('Guardando datos en GitHub...', 'info');
-            
-            try {
-                // Primero obtener el SHA del archivo actual
-                const getUrl = `https://api.github.com/repos/${githubConfig.owner}/${githubConfig.repo}/contents/${githubConfig.path}?ref=${githubConfig.branch}`;
-                
-                const getResponse = await fetch(getUrl, {
-                    headers: {
-                        'Authorization': `token ${githubConfig.token}`,
-                        'Accept': 'application/vnd.github.v3+json'
+                // Intentar cargar datos de respaldo si hay
+                try {
+                    const backupData = localStorage.getItem('afiliadosBackup');
+                    if (backupData) {
+                        allAfiliados = JSON.parse(backupData);
+                        filteredAfiliados = [...allAfiliados];
+                        renderTable();
+                        renderPagination();
+                        showMessage('Usando datos de respaldo local', 'info');
+                    } else {
+                        allAfiliados = [];
+                        filteredAfiliados = [];
+                        renderTable();
+                        renderPagination();
                     }
-                });
-                
-                let sha = '';
-                if (getResponse.ok) {
-                    const fileData = await getResponse.json();
-                    sha = fileData.sha;
+                } catch (backupError) {
+                    allAfiliados = [];
+                    filteredAfiliados = [];
+                    renderTable();
+                    renderPagination();
                 }
-                
-                // Crear contenido para GitHub (base64 encode)
-                const content = btoa(JSON.stringify(allAfiliados, null, 2));
-                
-                // Actualizar archivo en GitHub
-                const updateUrl = `https://api.github.com/repos/${githubConfig.owner}/${githubConfig.repo}/contents/${githubConfig.path}`;
-                
-                const updateResponse = await fetch(updateUrl, {
-                    method: 'PUT',
-                    headers: {
-                        'Authorization': `token ${githubConfig.token}`,
-                        'Accept': 'application/vnd.github.v3+json',
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        message: `Actualización de afiliados - ${new Date().toLocaleDateString()}`,
-                        content: content,
-                        sha: sha,
-                        branch: githubConfig.branch
-                    })
-                });
-                
-                if (!updateResponse.ok) {
-                    const errorData = await updateResponse.json();
-                    throw new Error(`Error ${updateResponse.status}: ${errorData.message || updateResponse.statusText}`);
-                }
-                
-                showMessage('Datos guardados exitosamente en GitHub', 'success');
-                
-            } catch (error) {
-                console.error("Error al guardar datos:", error);
-                showMessage(`Error al guardar: ${error.message}`, 'error');
             }
         }
         
-        // Renderizar tabla con datos
+        // Renderizar tabla con datos - VERSIÓN COMPATIBLE
         function renderTable() {
             const tbody = document.getElementById('afiliadosBody');
             tbody.innerHTML = '';
@@ -946,55 +650,30 @@
             }
             
             paginatedAfiliados.forEach((afiliado, index) => {
+                // Usar campos ORIGINALES del JSON
+                // Aceptar múltiples nombres de campos para compatibilidad
+                const nombres = afiliado.nombres || afiliado.nombre || 'N/A';
+                const celular = afiliado.celular || afiliado.telefono || 'N/A';
+                const fecha = afiliado.fecha_afiliacion || afiliado.fecha || 'N/A';
+                
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
                     <td>${start + index + 1}</td>
                     <td>${afiliado.folio || 'N/A'}</td>
                     <td>${afiliado.registro || 'N/A'}</td>
-                    <td>${afiliado.fecha_afiliacion || 'N/A'}</td>
+                    <td>${fecha}</td>
                     <td>${afiliado.cedula || 'N/A'}</td>
-                    <td>${afiliado.nombres || 'N/A'}</td>
+                    <td>${nombres}</td>
                     <td>${afiliado.direccion || 'N/A'}</td>
-                    <td>${afiliado.celular || 'N/A'}</td>
+                    <td>${celular}</td>
                     <td class="action-btns">
-                        <button class="action-btn delete-btn" data-id="${afiliado.id}">
+                        <button class="action-btn delete-btn" data-id="${afiliado.id}" disabled title="Función deshabilitada (modo solo lectura)">
                             <i class="fas fa-trash"></i> Eliminar
                         </button>
                     </td>
                 `;
                 tbody.appendChild(tr);
             });
-            
-            // Agregar eventos a los botones
-            document.querySelectorAll('.delete-btn').forEach(btn => {
-                btn.addEventListener('click', deleteAfiliado);
-            });
-        }
-        
-        // Eliminar afiliado
-        async function deleteAfiliado(e) {
-            if (!confirm('¿Está seguro que desea eliminar este afiliado?')) return;
-            
-            const id = e.target.closest('.delete-btn').getAttribute('data-id');
-            
-            // Eliminar localmente
-            allAfiliados = allAfiliados.filter(a => a.id !== id);
-            filteredAfiliados = filteredAfiliados.filter(a => a.id !== id);
-            
-            // Volver a renderizar la tabla
-            if (filteredAfiliados.length <= (currentPage - 1) * rowsPerPage && currentPage > 1) {
-                currentPage--;
-            }
-            
-            renderTable();
-            renderPagination();
-            
-            // Guardar cambios en GitHub
-            try {
-                await saveToGitHub();
-            } catch (error) {
-                showMessage('Error al guardar cambios en GitHub', 'error');
-            }
         }
         
         // Guardar datos localmente como JSON
@@ -1014,7 +693,10 @@
             linkElement.setAttribute('download', exportName);
             linkElement.click();
             
-            alert(`Datos de ${allAfiliados.length} afiliados guardados en ${exportName}`);
+            // También guardar como respaldo en localStorage
+            localStorage.setItem('afiliadosBackup', dataStr);
+            
+            showMessage(`Datos de ${allAfiliados.length} afiliados guardados localmente`, 'success');
         }
         
         // Renderizar paginación mejorada
@@ -1171,19 +853,34 @@
             pagination.appendChild(pageJumpContainer);
         }
         
-        // Buscar afiliados
+        // Buscar afiliados - VERSIÓN COMPATIBLE Y SEGURA
         document.getElementById('searchInput').addEventListener('input', (e) => {
-            const searchTerm = e.target.value.toLowerCase();
+            const searchTerm = e.target.value.toLowerCase().trim();
             
             if (searchTerm === '') {
                 filteredAfiliados = [...allAfiliados];
             } else {
-                filteredAfiliados = allAfiliados.filter(afiliado => 
-                    (afiliado.nombres && afiliado.nombres.toLowerCase().includes(searchTerm)) ||
-                    (afiliado.cedula && afiliado.cedula.toLowerCase().includes(searchTerm)) ||
-                    (afiliado.direccion && afiliado.direccion.toLowerCase().includes(searchTerm)) ||
-                    (afiliado.celular && afiliado.celular.toLowerCase().includes(searchTerm))
-                );
+                filteredAfiliados = allAfiliados.filter(afiliado => {
+                    // Verificar que el afiliado existe
+                    if (!afiliado) return false;
+                    
+                    // Función segura para obtener valores
+                    const getSafeValue = (value) => {
+                        if (value === null || value === undefined) return '';
+                        return String(value).toLowerCase();
+                    };
+                    
+                    // Buscar en todos los campos posibles (para compatibilidad)
+                    const nombres = getSafeValue(afiliado.nombres || afiliado.nombre);
+                    const cedula = getSafeValue(afiliado.cedula);
+                    const direccion = getSafeValue(afiliado.direccion);
+                    const celular = getSafeValue(afiliado.celular || afiliado.telefono);
+                    
+                    return nombres.includes(searchTerm) ||
+                           cedula.includes(searchTerm) ||
+                           direccion.includes(searchTerm) ||
+                           celular.includes(searchTerm);
+                });
             }
             
             currentPage = 1;
@@ -1276,37 +973,13 @@
         });
         
         document.getElementById('backBtn').addEventListener('click', () => {
-            window.location.href = "panel.html";
+            window.location.href = "panelprincipal.html";
         });
         
         document.getElementById('saveLocalBtn').addEventListener('click', saveDataLocally);
         
-        document.getElementById('githubConfigBtn').addEventListener('click', showGitHubConfigModal);
-        
-        document.getElementById('cancelConfigBtn').addEventListener('click', hideGitHubConfigModal);
-        
-        document.getElementById('saveConfigBtn').addEventListener('click', saveConfig);
-        
-        document.getElementById('showTokenBtn').addEventListener('click', toggleTokenVisibility);
-        
-        // Permitir pegar en el campo del token
-        document.getElementById('tokenInput').addEventListener('paste', (e) => {
-            // Permitir pegar normalmente
-            setTimeout(() => {
-                showMessage('Token pegado correctamente', 'success');
-            }, 100);
-        });
-        
-        // Cerrar modal al hacer clic fuera
-        document.getElementById('githubConfigModal').addEventListener('click', (e) => {
-            if (e.target === document.getElementById('githubConfigModal')) {
-                hideGitHubConfigModal();
-            }
-        });
-        
         // Inicializar
         updateDateTime();
-        loadConfig();
         loadAfiliados();
         
         // Recargar automáticamente cada 30 segundos
