@@ -20,6 +20,10 @@
             --naranja-secundario: #F57C00;
             --cafe-primario: #964B00;
             --cafe-secundario: #905010;
+            --morado-primario: #9C27B0;
+            --morado-secundario: #7B1FA2;
+            --monitor-primary: #8BC34A;
+            --monitor-secondary: #689F38;
         }
         
         * {
@@ -91,12 +95,63 @@
             box-shadow: 0 2px 5px rgba(0,0,0,0.05);
             margin-bottom: 2rem;
             border-left: 4px solid var(--verde-primario);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .welcome-text h2 {
+            margin-bottom: 0.5rem;
+            color: var(--gris-oscuro);
+        }
+        
+        .welcome-text p {
+            color: #616161;
+            font-size: 0.9rem;
+        }
+        
+        .stats-quick {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 0.5rem 1rem;
+            background: var(--gris-claro);
+            border-radius: 6px;
+            min-width: 100px;
+        }
+        
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--verde-primario);
+        }
+        
+        .stat-label {
+            font-size: 0.8rem;
+            color: #757575;
+        }
+        
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
         }
         
         .sections-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 1.5rem;
+        }
+        
+        .monitor-sidebar {
+            background-color: var(--blanco);
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
         }
         
         .section-card {
@@ -121,6 +176,10 @@
             gap: 0.8rem;
         }
         
+        .monitor {
+            background: linear-gradient(135deg, var(--monitor-primary), var(--monitor-secondary));
+        }
+        
         .afiliaciones {
             background: linear-gradient(135deg, var(--verde-primario), var(--verde-secundario));
         }
@@ -138,7 +197,7 @@
         }
         
         .documentos {
-            background: linear-gradient(135deg, #9C27B0, #7B1FA2);
+            background: linear-gradient(135deg, var(--morado-primario), var(--morado-secundario));
         }
 
         .descargarcertificadodelusuario {
@@ -177,6 +236,7 @@
             text-decoration: none;
             font-size: 0.9rem;
             transition: all 0.3s;
+            cursor: pointer;
         }
         
         .afiliaciones .card-btn:hover {
@@ -200,7 +260,7 @@
         }
         
         .documentos .card-btn:hover {
-            background-color: #9C27B0;
+            background-color: var(--morado-primario);
             color: var(--blanco);
         }
 
@@ -214,6 +274,11 @@
             color: var(--blanco);
         }
         
+        .monitor .card-btn:hover {
+            background-color: var(--monitor-primary);
+            color: var(--blanco);
+        }
+        
         .stats {
             display: flex;
             justify-content: space-between;
@@ -222,13 +287,144 @@
             color: #757575;
         }
         
+        /* Estilos del Monitor */
+        .monitor-content {
+            padding: 1rem;
+        }
+        
+        .monitor-stats {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .monitor-stat-item {
+            background: var(--gris-claro);
+            padding: 1rem;
+            border-radius: 6px;
+            text-align: center;
+            border-left: 4px solid var(--monitor-primary);
+        }
+        
+        .monitor-stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--monitor-primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .monitor-stat-label {
+            font-size: 0.9rem;
+            color: #757575;
+        }
+        
+        .last-affiliate {
+            background: var(--gris-claro);
+            padding: 1rem;
+            border-radius: 6px;
+            margin-top: 1rem;
+        }
+        
+        .last-affiliate h4 {
+            margin-bottom: 0.5rem;
+            color: var(--gris-oscuro);
+            font-size: 0.9rem;
+        }
+        
+        .last-affiliate-info {
+            font-size: 0.8rem;
+            color: #616161;
+        }
+        
+        .last-affiliate-info div {
+            margin-bottom: 0.3rem;
+        }
+        
+        .monitor-status {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.5rem;
+            background: var(--gris-claro);
+            border-radius: 6px;
+            margin-top: 1rem;
+        }
+        
+        .status-indicator {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #4CAF50;
+        }
+        
+        .status-text {
+            font-size: 0.8rem;
+            color: #757575;
+        }
+        
+        .update-time {
+            font-size: 0.7rem;
+            color: #9E9E9E;
+        }
+        
+        /* Botón de ir al monitor completo */
+        .full-monitor-btn {
+            display: block;
+            width: 100%;
+            padding: 0.8rem;
+            background: linear-gradient(135deg, var(--monitor-primary), var(--monitor-secondary));
+            color: var(--blanco);
+            border: none;
+            border-radius: 0 0 6px 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            text-align: center;
+            margin-top: 1rem;
+        }
+        
+        .full-monitor-btn:hover {
+            opacity: 0.9;
+        }
+        
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+        }
+        
         @media (max-width: 768px) {
             .sections-grid {
                 grid-template-columns: 1fr;
             }
             
+            .welcome-message {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .stats-quick {
+                width: 100%;
+                justify-content: space-around;
+            }
+            
             .user-info span {
                 display: none;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 1rem;
+            }
+            
+            .stat-item {
+                min-width: 80px;
+                padding: 0.5rem;
+            }
+            
+            .stat-number {
+                font-size: 1.2rem;
             }
         }
     </style>
@@ -250,111 +446,363 @@
     
     <div class="container">
         <div class="welcome-message">
-            <h2>Bienvenido al Panel de Control</h2>
-            <p>Gestiona todas las actividades de tu junta de acción comunal desde este panel centralizado.</p>
+            <div class="welcome-text">
+                <h2>Bienvenido al Panel de Control</h2>
+                <p>Gestiona todas las actividades de tu junta de acción comunal desde este panel centralizado.</p>
+            </div>
+            <div class="stats-quick">
+                <div class="stat-item">
+                    <div class="stat-number" id="totalAfiliadosPanel">0</div>
+                    <div class="stat-label">Afiliados</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="nuevosHoy">0</div>
+                    <div class="stat-label">Hoy</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="pendientes">5</div>
+                    <div class="stat-label">Pendientes</div>
+                </div>
+            </div>
         </div>
         
-        <div class="sections-grid">
-            <!-- Sección Afiliaciones -->
-            <div class="section-card" onclick="location.href='afiliaciones.html'">
-                <div class="card-header afiliaciones">
-                    <i class="fas fa-users"></i>
-                    <h3>Afiliaciones</h3>
-                </div>
-                <div class="card-body">
-                    <p>Gestiona las solicitudes de afiliación de nuevos miembros a la junta comunal.</p>
-                    <div class="stats">
-                        <span><i class="fas fa-clock"></i> 5 pendientes</span>
-                        <span><i class="fas fa-check-circle"></i> 120 aprobadas</span>
+        <div class="main-content">
+            <div class="sections-grid">
+                <!-- Sección Monitor -->
+                <div class="section-card" onclick="location.href='monitor.html'">
+                    <div class="card-header monitor">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>Monitor en Tiempo Real</h3>
                     </div>
-                    <a href="afiliaciones.html" class="card-btn">Gestionar Afiliaciones</a>
-                </div>
-            </div>
-            
-            <!-- Sección Afiliados -->
-            <div class="section-card" onclick="location.href='afiliados.html'">
-                <div class="card-header afiliados">
-                    <i class="fas fa-address-book"></i>
-                    <h3>Afiliados</h3>
-                </div>
-                <div class="card-body">
-                    <p>Administra el registro de miembros afiliados y sus datos personales.</p>
-                    <div class="stats">
-                        <span><i class="fas fa-users"></i> 150 activos</span>
-                        <span><i class="fas fa-user-clock"></i> 10 inactivos</span>
+                    <div class="card-body">
+                        <p>Sistema de monitoreo en tiempo real de afiliaciones y actividad comunal.</p>
+                        <div class="stats">
+                            <span><i class="fas fa-bell"></i> Alertas activas</span>
+                            <span><i class="fas fa-sync-alt"></i> Actualizado</span>
+                        </div>
+                        <a href="monitor.html" class="card-btn">Ir al Monitor</a>
                     </div>
-                    <a href="afiliados.html" class="card-btn">Ver Afiliados</a>
                 </div>
-            </div>
-            
-            <!-- Sección Certificados -->
-            <div class="section-card" onclick="location.href='certificado.html'">
-                <div class="card-header certificados">
-                    <i class="fas fa-certificate"></i>
-                    <h3>Certificados</h3>
-                </div>
-                <div class="card-body">
-                    <p>Genera y administra certificados para miembros y documentos oficiales.</p>
-                    <div class="stats">
-                        <span><i class="fas fa-file-alt"></i> 30 emitidos</span>
-                        <span><i class="fas fa-sync-alt"></i> 5 por renovar</span>
+                
+                <!-- Sección Afiliaciones -->
+                <div class="section-card" onclick="location.href='afiliaciones.html'">
+                    <div class="card-header afiliaciones">
+                        <i class="fas fa-users"></i>
+                        <h3>Afiliaciones</h3>
                     </div>
-                    <a href="certificado.html" class="card-btn">Gestionar Certificados</a>
+                    <div class="card-body">
+                        <p>Gestiona las solicitudes de afiliación de nuevos miembros a la junta comunal.</p>
+                        <div class="stats">
+                            <span><i class="fas fa-clock"></i> 5 pendientes</span>
+                            <span><i class="fas fa-check-circle"></i> <span id="totalAprobadas">120</span> aprobadas</span>
+                        </div>
+                        <a href="afiliaciones.html" class="card-btn">Gestionar Afiliaciones</a>
+                    </div>
                 </div>
-            </div>
+                
+                <!-- Sección Afiliados -->
+                <div class="section-card" onclick="location.href='afiliados.html'">
+                    <div class="card-header afiliados">
+                        <i class="fas fa-address-book"></i>
+                        <h3>Afiliados</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Administra el registro de miembros afiliados y sus datos personales.</p>
+                        <div class="stats">
+                            <span><i class="fas fa-users"></i> <span id="afiliadosActivos">150</span> activos</span>
+                            <span><i class="fas fa-user-clock"></i> 10 inactivos</span>
+                        </div>
+                        <a href="afiliados.html" class="card-btn">Ver Afiliados</a>
+                    </div>
+                </div>
+                
+                <!-- Sección Certificados -->
+                <div class="section-card" onclick="location.href='certificado.html'">
+                    <div class="card-header certificados">
+                        <i class="fas fa-certificate"></i>
+                        <h3>Certificados</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Genera y administra certificados para miembros y documentos oficiales.</p>
+                        <div class="stats">
+                            <span><i class="fas fa-file-alt"></i> 30 emitidos</span>
+                            <span><i class="fas fa-sync-alt"></i> 5 por renovar</span>
+                        </div>
+                        <a href="certificado.html" class="card-btn">Gestionar Certificados</a>
+                    </div>
+                </div>
 
-             <!-- Sección Traslados (CORREGIDA) -->
-             <div class="section-card" onclick="location.href='traslado.html'">
-                <div class="card-header traslados">
-                    <i class="fas fa-exchange-alt"></i>
-                    <h3>Certificados de Traslados</h3>
-                </div>
-                <div class="card-body">
-                    <p>Genera y administra certificados de traslados para miembros y documentos oficiales.</p>
-                    <div class="stats">
-                        <span><i class="fas fa-file-alt"></i> 15 emitidos</span>
-                        <span><i class="fas fa-sync-alt"></i> 2 por renovar</span>
+                <!-- Sección Traslados -->
+                <div class="section-card" onclick="location.href='traslado.html'">
+                    <div class="card-header traslados">
+                        <i class="fas fa-exchange-alt"></i>
+                        <h3>Certificados de Traslados</h3>
                     </div>
-                    <a href="traslados.html" class="card-btn">Gestionar Traslados</a>
+                    <div class="card-body">
+                        <p>Genera y administra certificados de traslados para miembros y documentos oficiales.</p>
+                        <div class="stats">
+                            <span><i class="fas fa-file-alt"></i> 15 emitidos</span>
+                            <span><i class="fas fa-sync-alt"></i> 2 por renovar</span>
+                        </div>
+                        <a href="traslado.html" class="card-btn">Gestionar Traslados</a>
+                    </div>
+                </div>
+                
+                <!-- Sección Documentos -->
+                <div class="section-card" onclick="location.href='documentos.html'">
+                    <div class="card-header documentos">
+                        <i class="fas fa-folder-open"></i>
+                        <h3>Documentos</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Archivo digital de actas, reglamentos y documentos legales de la junta.</p>
+                        <div class="stats">
+                            <span><i class="fas fa-folder"></i> 45 archivos</span>
+                            <span><i class="fas fa-calendar-alt"></i> 3 nuevos</span>
+                        </div>
+                        <a href="documentos.html" class="card-btn">Ver Documentos</a>
+                    </div>
                 </div>
             </div>
             
-            <!-- Sección Documentos -->
-            <div class="section-card" onclick="location.href='documentos.html'">
-                <div class="card-header documentos">
-                    <i class="fas fa-folder-open"></i>
-                    <h3>Documentos</h3>
+            <!-- Sidebar del Monitor -->
+            <div class="monitor-sidebar">
+                <div class="card-header monitor">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Monitor en Tiempo Real</h3>
                 </div>
-                <div class="card-body">
-                    <p>Archivo digital de actas, reglamentos y documentos legales de la junta.</p>
-                    <div class="stats">
-                        <span><i class="fas fa-folder"></i> 45 archivos</span>
-                        <span><i class="fas fa-calendar-alt"></i> 3 nuevos</span>
+                <div class="monitor-content">
+                    <div class="monitor-stats">
+                        <div class="monitor-stat-item">
+                            <div class="monitor-stat-number" id="monitorTotal">0</div>
+                            <div class="monitor-stat-label">Total Afiliados</div>
+                        </div>
+                        <div class="monitor-stat-item">
+                            <div class="monitor-stat-number" id="monitorNuevosHoy">0</div>
+                            <div class="monitor-stat-label">Nuevos Hoy</div>
+                        </div>
+                        <div class="monitor-stat-item">
+                            <div class="monitor-stat-number" id="monitorUltimoId">0</div>
+                            <div class="monitor-stat-label">Último ID</div>
+                        </div>
                     </div>
-                    <a href="documentos.html" class="card-btn">Ver Documentos</a>
+                    
+                    <div class="last-affiliate">
+                        <h4>Último Afiliado:</h4>
+                        <div class="last-affiliate-info">
+                            <div><strong>Nombre:</strong> <span id="monitorUltimoNombre">Cargando...</span></div>
+                            <div><strong>Cédula:</strong> <span id="monitorUltimoCedula">--</span></div>
+                            <div><strong>Fecha:</strong> <span id="monitorUltimoFecha">--</span></div>
+                        </div>
+                    </div>
+                    
+                    <div class="monitor-status">
+                        <div class="status-indicator" id="statusIndicatorPanel"></div>
+                        <div class="status-text" id="statusTextPanel">Conectando...</div>
+                        <div class="update-time" id="lastUpdatePanel">--:--:--</div>
+                    </div>
+                    
+                    <button class="full-monitor-btn" onclick="location.href='monitor.html'">
+                        <i class="fas fa-external-link-alt"></i> Ir al Monitor Completo
+                    </button>
                 </div>
             </div>
-
-            
-
         </div>
     </div>
     
     <script>
-        // Cerrar sesión
-        document.getElementById('logoutBtn').addEventListener('click', function() {
-            if(confirm('¿Está seguro que desea cerrar sesión?')) {
-                window.location.href = 'index.html';
-            }
+        // Variables del monitor
+        let afiliadosData = [];
+        let totalAfiliados = 0;
+        let nuevosHoy = 0;
+        let ultimoAfiliado = null;
+        let monitorInterval = null;
+        
+        // URL del JSON
+        const JSON_URL = './afiliados.json';
+        
+        // Cargar datos iniciales
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Panel principal cargado');
+            
+            // Configurar event listeners
+            document.getElementById('logoutBtn').addEventListener('click', function() {
+                if(confirm('¿Está seguro que desea cerrar sesión?')) {
+                    window.location.href = 'index.html';
+                }
+            });
+            
+            // Cargar datos del monitor
+            cargarDatosMonitor();
+            
+            // Iniciar actualización automática cada 60 segundos
+            monitorInterval = setInterval(cargarDatosMonitor, 60000);
         });
         
-        // Mostrar año actual en el footer
-        document.getElementById('currentYear').textContent = new Date().getFullYear();
+        // Función para cargar datos del monitor
+        async function cargarDatosMonitor() {
+            try {
+                actualizarEstadoPanel('Cargando...', 'info');
+                
+                const timestamp = Date.now();
+                const response = await fetch(`${JSON_URL}?t=${timestamp}`, {
+                    method: 'GET',
+                    cache: 'no-cache',
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`Error HTTP: ${response.status}`);
+                }
+                
+                const datos = await response.json();
+                
+                if (!Array.isArray(datos)) {
+                    throw new Error('Los datos no son un array');
+                }
+                
+                // Procesar datos
+                procesarDatosMonitor(datos);
+                actualizarEstadoPanel('Conectado', 'success');
+                actualizarUltimaActualizacionPanel();
+                
+            } catch (error) {
+                console.log('⚠️ Error cargando datos del monitor:', error.message);
+                actualizarEstadoPanel('Sin conexión', 'danger');
+                
+                // Intentar usar caché local
+                try {
+                    const datosCache = localStorage.getItem('afiliados_cache_real');
+                    if (datosCache) {
+                        const datosParseados = JSON.parse(datosCache);
+                        procesarDatosMonitor(datosParseados);
+                    }
+                } catch (cacheError) {
+                    console.log('⚠️ No hay datos en caché');
+                }
+            }
+        }
+        
+        // Procesar datos del monitor
+        function procesarDatosMonitor(datos) {
+            // Ordenar por ID descendente
+            afiliadosData = datos.sort((a, b) => {
+                const idA = parseInt(a.id) || 0;
+                const idB = parseInt(b.id) || 0;
+                return idB - idA;
+            });
+            
+            totalAfiliados = afiliadosData.length;
+            
+            // Calcular nuevos hoy
+            const hoy = new Date();
+            nuevosHoy = afiliadosData.filter(a => {
+                try {
+                    const fechaAfiliacion = new Date(a.fecha_afiliacion);
+                    return fechaAfiliacion.toDateString() === hoy.toDateString();
+                } catch (e) {
+                    return false;
+                }
+            }).length;
+            
+            // Obtener último afiliado
+            ultimoAfiliado = afiliadosData[0] || null;
+            
+            // Actualizar UI del panel principal
+            document.getElementById('totalAfiliadosPanel').textContent = totalAfiliados;
+            document.getElementById('nuevosHoy').textContent = nuevosHoy;
+            document.getElementById('afiliadosActivos').textContent = totalAfiliados;
+            document.getElementById('totalAprobadas').textContent = totalAfiliados;
+            
+            // Actualizar sidebar del monitor
+            actualizarMonitorSidebar();
+            
+            // Guardar en caché
+            localStorage.setItem('afiliados_cache_real', JSON.stringify(afiliadosData));
+        }
+        
+        // Actualizar sidebar del monitor
+        function actualizarMonitorSidebar() {
+            // Actualizar estadísticas
+            document.getElementById('monitorTotal').textContent = totalAfiliados;
+            document.getElementById('monitorNuevosHoy').textContent = nuevosHoy;
+            document.getElementById('monitorUltimoId').textContent = ultimoAfiliado ? ultimoAfiliado.id : '0';
+            
+            // Actualizar último afiliado
+            if (ultimoAfiliado) {
+                document.getElementById('monitorUltimoNombre').textContent = 
+                    ultimoAfiliado.nombre ? 
+                    (ultimoAfiliado.nombre.length > 20 ? 
+                     ultimoAfiliado.nombre.substring(0, 20) + '...' : 
+                     ultimoAfiliado.nombre) : 
+                    'Sin nombre';
+                
+                document.getElementById('monitorUltimoCedula').textContent = 
+                    ultimoAfiliado.cedula || '--';
+                
+                if (ultimoAfiliado.fecha_afiliacion) {
+                    try {
+                        const fecha = new Date(ultimoAfiliado.fecha_afiliacion);
+                        const fechaFormateada = !isNaN(fecha.getTime()) ? 
+                            fecha.toLocaleDateString('es-CO') : 
+                            ultimoAfiliado.fecha_afiliacion;
+                        document.getElementById('monitorUltimoFecha').textContent = fechaFormateada;
+                    } catch (e) {
+                        document.getElementById('monitorUltimoFecha').textContent = ultimoAfiliado.fecha_afiliacion;
+                    }
+                } else {
+                    document.getElementById('monitorUltimoFecha').textContent = '--';
+                }
+            } else {
+                document.getElementById('monitorUltimoNombre').textContent = 'Cargando...';
+                document.getElementById('monitorUltimoCedula').textContent = '--';
+                document.getElementById('monitorUltimoFecha').textContent = '--';
+            }
+        }
+        
+        // Actualizar estado del panel
+        function actualizarEstadoPanel(mensaje, tipo = 'info') {
+            const indicator = document.getElementById('statusIndicatorPanel');
+            const text = document.getElementById('statusTextPanel');
+            
+            text.textContent = mensaje;
+            
+            const colores = {
+                success: '#4CAF50',
+                warning: '#FF9800',
+                danger: '#F44336',
+                info: '#2196F3'
+            };
+            
+            indicator.style.background = colores[tipo] || colores.info;
+        }
+        
+        // Actualizar última actualización
+        function actualizarUltimaActualizacionPanel() {
+            const ahora = new Date();
+            const hora = ahora.toLocaleTimeString('es-CO', { 
+                hour: '2-digit', 
+                minute: '2-digit',
+                second: '2-digit' 
+            });
+            document.getElementById('lastUpdatePanel').textContent = hora;
+        }
+        
+        // Actualizar datos manualmente
+        function actualizarManual() {
+            clearInterval(monitorInterval);
+            cargarDatosMonitor();
+            monitorInterval = setInterval(cargarDatosMonitor, 60000);
+        }
+        
+        // Limpiar intervalo al salir de la página
+        window.addEventListener('beforeunload', function() {
+            if (monitorInterval) {
+                clearInterval(monitorInterval);
+            }
+        });
     </script>
 </body>
 </html>
-
-
-
-
-
