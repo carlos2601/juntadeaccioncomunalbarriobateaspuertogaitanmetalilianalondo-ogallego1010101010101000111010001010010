@@ -1,0 +1,1519 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Certificados</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <!-- Documento Word -->
+    <script src="https://cdn.jsdelivr.net/npm/docx@7.7.0/build/index.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
+    <style>
+        :root {
+            --primary: #8BC34A;
+            --primary-dark: #689F38;
+            --secondary: #FFC107;
+            --secondary-dark: #FFA000;
+            --accent: #4CAF50;
+            --light: #F1F8E9;
+            --dark: #33691E;
+            --text: #212121;
+            --text-light: #757575;
+            --background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: var(--background);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .header {
+            border-radius: 16px;
+            padding: 0px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .logo {
+            flex-direction: column;
+            align-items: center;
+            gap: 50px;
+            margin-bottom: 15px;
+        }
+        
+        .logo i {
+            font-size: 2.5rem;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .logo h1 {
+            color: var(--dark);
+            font-weight: 700;
+            font-size: 1.5rem;
+            line-height: 1.3;
+        }
+        
+        .current-date {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+        
+        .search-container {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            margin-bottom: 20px;
+            width: 100%;
+            max-width: 600px;
+            position: relative;
+        }
+        
+        .search-container h2 {
+            color: var(--dark);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .search-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        
+        .input-group label {
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .input-group input {
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s;
+            background-color: var(--light);
+        }
+        
+        .input-group input:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(139, 195, 74, 0.2);
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .btn {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(to right, var(--primary), var(--primary-dark));
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .btn-success {
+            background: linear-gradient(to right, var(--accent), var(--primary));
+            color: white;
+        }
+        
+        .btn-info {
+            background: linear-gradient(to right, #03A9F4, #0288D1);
+            color: white;
+        }
+        
+        .btn-warning {
+            background: linear-gradient(to right, var(--secondary), var(--secondary-dark));
+            color: white;
+        }
+        
+        .btn-dark {
+            background: linear-gradient(to right, #607D8B, #455A64);
+            color: white;
+        }
+        
+        .btn-word {
+            background: linear-gradient(to right, #2B579A, #1E4A8F);
+            color: white;
+        }
+        
+        .btn-whatsapp {
+            background: linear-gradient(to right, #25D366, #128C7E);
+            color: white;
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(to right, #9E9E9E, #757575);
+            color: white;
+        }
+        
+        .success-check {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: #4CAF50;
+            font-size: 2rem;
+            display: none;
+        }
+        
+        .options-container {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            margin-bottom: 20px;
+            width: 100%;
+            max-width: 800px;
+            display: none;
+        }
+        
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        
+        .hidden {
+            display: none !important;
+        }
+        
+        .edit-form {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            margin-bottom: 20px;
+            width: 100%;
+            max-width: 800px;
+            display: none;
+        }
+        
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .form-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+        
+        .whatsapp-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            display: none;
+        }
+        
+        .modal-content {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            width: 90%;
+            max-width: 400px;
+            position: relative;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-light);
+        }
+        
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1001;
+            flex-direction: column;
+            color: white;
+            display: none;
+        }
+        
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+            margin-bottom: 15px;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Certificado styles */
+        #contenido-certificado {
+            font-family: Tahoma, sans-serif;
+            width: 210mm;
+            min-height: 275mm;
+            margin: 20px auto;
+            padding: 05mm 15mm;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+            box-sizing: border-box;
+            position: relative;
+            aspect-ratio: 210 / 275;
+            display: none;
+            overflow: hidden;
+            transform-origin: top center;
+        }
+        
+        .certificado-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            opacity: 5.7;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: contain;
+        }
+        
+        .certificado-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .encabezado-certificado {
+            text-align: center;
+            font-size: 17px;
+            line-height: 1.4;
+            margin-bottom: 20px;
+            margin-top: 0;
+        }
+        
+        .texto-justificado {
+            text-align: justify;
+            font-size: 9px;
+            line-height: 1.5;
+            margin: -19px 0;
+        }
+        
+        .titulo-certificado {
+            text-align: center;
+            font-size: 18px;
+            line-height: 1.5;
+            margin: 30px 0;
+        }
+        
+        .datos-certificado {
+            text-align: left;
+            font-size: 18px;
+            line-height: 1.6;
+            margin: 20px 0;
+        }
+        
+        .firmas-container {
+            position: relative;
+            margin-top: 40px;
+        }
+        
+        .sello-derecha {
+            width: 160px;
+            position: absolute;
+            bottom: 60px;
+            left: 20px;
+            z-index: 3;
+        }
+        
+        .sello2-fondo {
+            width: 160px;
+            position: absolute;
+            bottom: 1px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
+        }
+        
+        
+        
+        /* Mensaje de restricción */
+        .restriction-message {
+            background-color: #ffebee;
+            color: #c62828;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            margin: 20px auto;
+            max-width: 500px;
+            border-left: 4px solid #c62828;
+        }
+        
+        /* Estilos para dispositivos móviles */
+        @media (max-width: 768px) {
+            .button-group {
+                flex-direction: row;
+                justify-content: center;
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                padding-bottom: 10px;
+            }
+            
+            .btn {
+                min-width: auto;
+                flex: 0 0 auto;
+                font-size: 0.9rem;
+                padding: 10px 15px;
+            }
+            
+            .options-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 10px;
+            }
+            
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .button-group {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .btn {
+                min-width: 120px;
+                margin-bottom: 5px;
+            }
+            
+            .options-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                <i class="fas fa-certificate"></i>
+                <h1>JUNTA DE ACCIÓN COMUNAL<br>BARRIO BATEAS SECTOR 3</h1>
+                <div class="current-date" id="currentDate"></div>
+            </div>
+        </div>
+        
+        <div class="search-container" id="searchContainer">
+            <div class="success-check" id="successCheck">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h2>Buscar Afiliado</h2>
+            <div class="search-form">
+                <div class="input-group">
+                    <label for="searchInput">Número de cédula o Nombre</label>
+                    <input type="text" id="searchInput" placeholder="Ej: 1234567890 o Juan Pérez">
+                </div>
+                <div class="button-group">
+                    <button id="btnBuscar" class="btn btn-primary">
+                        <i class="fas fa-search"></i> Buscar
+                    </button>
+                    <button id="btnOpciones" class="btn btn-info hidden">
+                        <i class="fas fa-cog"></i> Opciones
+                    </button>
+                    <button id="btnOcultarOpciones" class="btn btn-info hidden">
+                        <i class="fas fa-times"></i> Ocultar Opciones
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mensaje de restricción -->
+        <div id="restriction-message" class="restriction-message hidden">
+            <h3><i class="fas fa-exclamation-triangle"></i> Restricción de Certificado</h3>
+            <p>Este afiliado no cumple con el mínimo requerido de asistencias a asambleas.</p>
+            <p>Contacte con la Junta de Bateas Sector 3 para más información.</p>
+        </div>
+        
+        <div class="options-container" id="optionsContainer">
+            <h3>Opciones del Certificado</h3>
+            <div class="options-grid">
+                <button id="btnEditar" class="btn btn-primary">
+                    <i class="fas fa-edit"></i> Editar
+                </button>
+                <button id="btnVistaPrevia" class="btn btn-info">
+                    <i class="fas fa-eye"></i> Vista Previa
+                </button>
+                <button id="btnOcultarVista" class="btn btn-info hidden">
+                    <i class="fas fa-eye-slash"></i> Ocultar Vista
+                </button>
+                <button id="btnPNG" class="btn btn-warning">
+                    <i class="fas fa-download"></i> Descargar PNG
+                </button>
+                <button id="btnPDF" class="btn btn-dark">
+                    <i class="fas fa-file-pdf"></i> Descargar PDF
+                </button>
+                <!-- NUEVO BOTÓN PARA WORD -->
+                <button id="btnWord" class="btn btn-word">
+                    <i class="fas fa-file-word"></i> Descargar Word
+                </button>
+                <button id="btnWhatsApp" class="btn btn-whatsapp">
+                    <i class="fab fa-whatsapp"></i> Enviar por WhatsApp
+                </button>
+                <button id="btnVolver" class="btn btn-secondary">
+                    <i class="fas fa-home"></i> Volver al Panel
+                </button>
+            </div>
+        </div>
+        
+        <div class="edit-form" id="editForm">
+            <h3>Editar Datos del Afiliado</h3>
+            <div class="form-grid">
+                
+                <div class="input-group">
+                    <label for="editNombre">Nombre completo</label>
+                    <input type="text" id="editNombre">
+                </div>
+                <div class="input-group">
+                    <label for="editFolio">Folio Nº</label>
+                    <input type="text" id="editFolio">
+                </div>
+                <div class="input-group">
+                    <label for="editCedula">Cédula</label>
+                    <input type="text" id="editCedula">
+                </div>
+                <div class="input-group">
+                    <label for="editRenglon">Renglón Nº</label>
+                    <input type="text" id="editRenglon">
+                </div>
+                
+                <div class="input-group">
+                    <label for="editFechaAfiliacion">Fecha de afiliación</label>
+                    <input type="date" id="editFechaAfiliacion">
+                </div>
+                
+                <div class="input-group">
+                    <label for="editDireccion">Dirección</label>
+                    <input type="text" id="editDireccion">
+                </div>
+                <div class="input-group">
+                    <label for="editRegistro">Registro Nº</label>
+                    <input type="text" id="editRegistro">
+                </div>
+                
+                <div class="input-group">
+                    <label for="editTelefono">Teléfono/Celular</label>
+                    <input type="text" id="editTelefono">
+                </div>
+            </div>
+            <div class="form-actions">
+                <button id="btnGuardar" class="btn btn-primary">
+                    <i class="fas fa-save"></i> Guardar Cambios
+                </button>
+                <button id="btnCancelarEdicion" class="btn btn-secondary">
+                    <i class="fas fa-times"></i> Cancelar
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="whatsapp-modal" id="whatsappModal">
+        <div class="modal-content">
+            <button class="close-modal" id="closeWhatsAppModal">
+                <i class="fas fa-times"></i>
+            </button>
+            <h3>Enviar por WhatsApp</h3>
+            <div class="input-group" style="margin: 20px 0;">
+                <label for="whatsappNumber">Número de teléfono</label>
+                <input type="text" id="whatsappNumber" placeholder="Número registrado del usuario">
+            </div>
+            <button id="btnEnviarWhatsApp" class="btn btn-whatsapp" style="width: 100%;">
+                <i class="fab fa-whatsapp"></i> Enviar Certificado
+            </button>
+        </div>
+    </div>
+    
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="spinner"></div>
+        <p id="loadingText">Procesando...</p>
+    </div>
+    
+    <!-- Certificado (oculto inicialmente) -->
+    <div id="contenido-certificado">
+        <div class="certificado-background" id="certificadoBackground"></div>
+        <div class="certificado-content">
+            
+            <div class="encabezado-certificado">
+                <br>
+                <strong>REPUBLICA DE COLOMBIA</strong><br>
+                <strong>DEPARTAMENTO DEL META</strong><br>
+                <strong>PUERTO GAITÁN – META</strong><br>
+                <strong>JUNTA DE ACCIÓN COMUNAL</strong><br>
+                <strong>BARRIO BATEAS SECTOR 3</strong><br>
+                Personería Jurídica No. 451 del 31 de Octubre de 2.025
+            </div>
+            <div class="texto-justificado">
+                El suscrito Presidente de la Junta de Acción Comunal Bateas Sector 3, del Municipio de Puerto Gaitán, Meta, identificada con Personería Jurídica No. 451 del 31 de octubre de 2025, fundamentado en la Ley 1551 de 2012 que modifica el artículo 91 de la Ley 136 de 1994, el cual establece en su literal F numeral 6: 'Con relación a la prosperidad integral de su región; Expedirá la certificación para acreditar la residencia a aquellas personas que residen en el territorio del área de influencia de los proyectos de exploración y explotación petrolera y minería en general, y que aspiren acceder a labores como mano de obra no calificada y calificada. Los alcaldes expedirán dichos certificados con base en LOS REGISTROS ELECTORALES O DE SISBEN, ASÍ COMO LOS REGISTROS OF LOS AFILIADOS DE LAS JUNTAS DE ACCIÓN COMUNAL.
+            </div>
+
+            <div class="titulo-certificado">
+                <span style="font-size:18px;">CONSTANCIA DE AFILIACIÓN</span><br>
+                <strong>La Junta de Acción Comunal del Barrio Bateas Sector 3</strong><br>
+                
+                HACE CONSTAR:<br>
+                Que la información suministrada reposa en el libro de afiliados:
+            </div>
+
+            <div class="datos-certificado">
+                NOMBRE: <strong id="nombre-cert"></strong><br>
+                CÉDULA: <strong id="cedula-cert"></strong><br>
+                FECHA DE AFILIACIÓN: <strong id="fecha-cert"></strong><br>
+                REGISTRO Nº: <strong id="registro-cert"></strong><br>
+                FOLIO Nº: <strong id="folio-cert"></strong><br>
+                RENGLÓN Nº: <strong id="renglon-cert"></strong><br>
+                DIRECCIÓN: <strong id="direccion-cert"></strong><br><br>
+                La presente constancia se expide a solicitud del interesado, <strong id="fecha-emision"></strong> y tiene vigencia de 6 meses a partir de la fecha de su expedición.
+            </div>
+            <br>Atentamente,<br><br>
+
+            <div class="firmas-container">
+                <img id="sello-img" class="sello-derecha" alt="Sello">
+                
+                <img id="sello2-img" class="sello2-fondo" alt="Sello">
+                
+                <!-- QR Code Container -->
+                <!-- QR Code Container - ELIMINADO -->
+<!--
+                    <div class="qr-container">
+                        <div id="qr-code" class="qr-code"></div>
+                        <div class="qr-texto"></div>
+                    </div>
+                    -->
+
+                <div style="text-align:center;margin-top:30px;">
+                    __________________________<br>
+                    <strong>LEONEL BAUTISTA CARRANZA</strong><br>
+                    Presidente<br>
+                    juntacomunalsector3bateas@gmail.com
+                </div>
+            </div>
+            <br>
+            <div style="text-align:justify;font-size:12px;line-height:1.3;margin-top:25px;"><br>
+            <strong>Código penal colombiano. "ley 599 de 2000 Artículo 287.</strong> Falsedad material en documento público. El que falsifique documentos públicos que pueda servir de prueba, incurrirá en prisión de tres (3) a seis (6) años.
+            </div>
+        </div>
+    </div>
+    <script>
+        const { jsPDF } = window.jspdf;
+
+        // Variables globales
+        let personaEncontrada = null;
+        let datosCargados = [];
+        let tieneRestriccion = false;
+
+        // URLs de las imágenes en GitHub
+        const IMAGENES_GITHUB = {
+            logo: 'https://raw.githubusercontent.com/carlos2601/bateas/refs/heads/main/logo.jpg',
+            sello3: 'https://raw.githubusercontent.com/carlos2601/bateas3/refs/heads/main/sello.png',
+            sello2: 'https://raw.githubusercontent.com/carlos2601/bateas3/refs/heads/main/firma-leo.png'
+        };
+        
+        // Inicializar la aplicación
+        document.addEventListener('DOMContentLoaded', function() {
+            inicializarApp();
+            configurarEventListeners();
+        });
+
+        // Inicializar la aplicación
+        async function inicializarApp() {
+            // Mostrar fecha actual
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            const today = new Date();
+            document.getElementById('currentDate').textContent = today.toLocaleDateString('es-ES', options);
+            
+            // Cargar imágenes
+            cargarImagenes();
+            
+            // Cargar datos automáticamente al iniciar
+            await cargarDatosLocales();
+            
+            console.log(`Datos cargados automáticamente: ${datosCargados.length} registros`);
+        }
+
+        // Configurar event listeners
+        function configurarEventListeners() {
+            // Buscar
+            document.getElementById('btnBuscar').addEventListener('click', buscarUsuario);
+            
+            // Opciones
+            document.getElementById('btnOpciones').addEventListener('click', mostrarOpciones);
+            document.getElementById('btnOcultarOpciones').addEventListener('click', ocultarOpciones);
+            document.getElementById('btnEditar').addEventListener('click', mostrarEdicion);
+            document.getElementById('btnVistaPrevia').addEventListener('click', mostrarVistaPrevia);
+            document.getElementById('btnOcultarVista').addEventListener('click', ocultarVistaPrevia);
+            document.getElementById('btnPNG').addEventListener('click', descargarPNG);
+            document.getElementById('btnPDF').addEventListener('click', descargarPDF);
+            document.getElementById('btnWord').addEventListener('click', descargarWord); // Nuevo botón Word
+            document.getElementById('btnWhatsApp').addEventListener('click', abrirWhatsAppModal);
+            document.getElementById('btnVolver').addEventListener('click', volverAlPanel);
+            
+            // Edición
+            document.getElementById('btnGuardar').addEventListener('click', guardarCambios);
+            document.getElementById('btnCancelarEdicion').addEventListener('click', cancelarEdicion);
+            
+            // WhatsApp
+            document.getElementById('closeWhatsAppModal').addEventListener('click', cerrarWhatsAppModal);
+            document.getElementById('btnEnviarWhatsApp').addEventListener('click', enviarWhatsApp);
+            
+            // Enter para buscar
+            document.getElementById('searchInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    buscarUsuario();
+                }
+            });
+        }
+
+        // Cargar imágenes desde GitHub
+        function cargarImagenes() {
+            const selloImg = document.getElementById('sello-img');
+            const sello2Img = document.getElementById('sello2-img');
+            const background = document.getElementById('certificadoBackground');
+            
+            // Usar imágenes de GitHub con crossOrigin para permitir CORS
+            selloImg.src = IMAGENES_GITHUB.sello3;
+            sello2Img.src = IMAGENES_GITHUB.sello2;
+            background.style.backgroundImage = `url(${IMAGENES_GITHUB.logo})`;
+            
+            // Configurar crossOrigin para todas las imágenes
+            [selloImg, sello2Img].forEach(img => {
+                img.crossOrigin = 'anonymous';
+            });
+        }
+
+        // Mostrar loader
+        function mostrarLoader(texto = "Procesando...") {
+            document.getElementById('loadingText').textContent = texto;
+            document.getElementById('loadingOverlay').style.display = 'flex';
+        }
+
+        // Ocultar loader
+        function ocultarLoader() {
+            document.getElementById('loadingOverlay').style.display = 'none';
+        }
+
+        // Función para formatear cédula
+        function formatearCedula(cedula) {
+            if (!cedula) return '';
+            return cedula.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        }
+
+        // Función para formatear fecha
+        function formatearFecha(fecha) {
+            if (!fecha) return '';
+            const date = new Date(fecha);
+            if (isNaN(date)) return fecha;
+            return date.toLocaleDateString('es-CO');
+        }
+
+        // Función para encriptar datos
+        function encriptarDatos(datos) {
+            try {
+                const claveSecreta = "BateasSector3Certificado2024";
+                const datosString = JSON.stringify(datos);
+                
+                if (typeof CryptoJS === 'undefined') {
+                    console.error('CryptoJS no está cargado');
+                    throw new Error('Error de encriptación: CryptoJS no disponible');
+                }
+                
+                const datosEncriptados = CryptoJS.AES.encrypt(datosString, claveSecreta).toString();
+                return btoa(datosEncriptados);
+            } catch (error) {
+                console.error('Error en encriptación:', error);
+                throw error;
+            }
+        }
+
+        // Función para calcular fecha de expiración (6 meses)
+        function calcularFechaExpiracion() {
+            const fechaActual = new Date();
+            const fechaExpiracion = new Date(fechaActual);
+            fechaExpiracion.setMonth(fechaExpiracion.getMonth() + 6);
+            return fechaExpiracion.toISOString().split('T')[0];
+        }
+
+        // Generar código QR con datos encriptados
+        function generarQR() {
+            if (!personaEncontrada) return;
+            
+            try {
+                const nombre = document.getElementById("nombre-cert").textContent;
+                const cedula = document.getElementById("cedula-cert").textContent;
+                const fechaAfiliacion = document.getElementById("fecha-cert").textContent;
+                const registro = document.getElementById("registro-cert").textContent;
+                const folio = document.getElementById("folio-cert").textContent;
+                const renglon = document.getElementById("renglon-cert").textContent;
+                const direccion = document.getElementById("direccion-cert").textContent;
+                const fechaEmision = document.getElementById("fecha-emision").textContent;
+                
+                const datosCertificado = {
+                    nombre: nombre,
+                    cedula: cedula,
+                    fechaAfiliacion: fechaAfiliacion,
+                    registro: registro,
+                    folio: folio,
+                    renglon: renglon,
+                    direccion: direccion,
+                    fechaEmision: fechaEmision,
+                    fechaExpiracion: calcularFechaExpiracion()
+                };
+                
+                const datosEncriptados = encriptarDatos(datosCertificado);
+                const urlValidacion = `https://juntacomunalbateassector3-collab.github.io/validacion/?data=${encodeURIComponent(datosEncriptados)}`;
+                
+                const qrContainer = document.getElementById('qr-code');
+                qrContainer.innerHTML = '';
+                
+                if (typeof qrcode === 'undefined') {
+                    console.error('qrcode no está cargado');
+                    throw new Error('Error generando QR: Librería no disponible');
+                }
+                
+                const qr = qrcode(0, 'M');
+                qr.addData(urlValidacion);
+                qr.make();
+                
+                qrContainer.innerHTML = qr.createImgTag(2);
+                
+            } catch (error) {
+                console.error('Error generando QR:', error);
+                const qrContainer = document.getElementById('qr-code');
+                qrContainer.innerHTML = '<div style="color: red; font-size: 10px; text-align: center;">Error QR</div>';
+            }
+        }
+
+        // Cargar datos desde archivo local (automáticamente)
+        async function cargarDatosLocales() {
+            try {
+                const response = await fetch('afiliados.json');
+                if (!response.ok) throw new Error('No se pudo cargar el archivo local afiliados.json');
+                const datos = await response.json();
+                datosCargados = normalizarDatos(datos);
+                
+                console.log('Datos cargados automáticamente desde afiliados.json:', datosCargados.length, 'registros');
+                return datosCargados;
+            } catch (error) {
+                console.error("Error cargando datos locales:", error);
+                alert('Error: No se pudo cargar el archivo afiliados.json. Asegúrate de que el archivo existe en la misma carpeta.');
+                datosCargados = [];
+                return datosCargados;
+            }
+        }
+
+        // Cargar novedades desde archivo local (si existe)
+        async function cargarNovedades(idAfiliado) {
+            try {
+                const response = await fetch('novedades.json');
+                if (!response.ok) {
+                    console.log("No se encontró archivo de novedades");
+                    return null;
+                }
+                
+                const todasNovedades = await response.json();
+                return todasNovedades[idAfiliado] || null;
+            } catch (error) {
+                console.error("Error cargando novedades:", error);
+                return null;
+            }
+        }
+
+        // Verificar si el afiliado tiene restricciones
+        async function verificarRestricciones(idAfiliado) {
+            try {
+                const novedades = await cargarNovedades(idAfiliado);
+                
+                if (!novedades) {
+                    console.log("No hay novedades para este afiliado");
+                    return false;
+                }
+                
+                const asamblea1 = novedades.asamblea1 === true;
+                const asamblea2 = novedades.asamblea2 === true;
+                const asamblea3 = novedades.asamblea3 === true;
+                
+                const asistencias = [asamblea1, asamblea2, asamblea3].filter(asistio => asistio === true).length;
+                
+                console.log("Asistencias totales:", asistencias);
+                
+                if (asistencias < 2) {
+                    console.log("RESTRICCIÓN APLICADA: Menos de 2 asistencias");
+                    return true;
+                } else {
+                    console.log("SIN RESTRICCIÓN: Tiene", asistencias, "asistencias");
+                    return false;
+                }
+                
+            } catch (error) {
+                console.error("Error en verificación de restricciones:", error);
+                return false;
+            }
+        }
+
+        // Mostrar mensaje de restricción
+        function mostrarRestriccion() {
+            document.getElementById("restriction-message").classList.remove("hidden");
+            document.getElementById("optionsContainer").classList.add("hidden");
+            document.getElementById("btnOpciones").classList.add("hidden");
+            document.getElementById("btnOcultarOpciones").classList.add("hidden");
+            document.getElementById("contenido-certificado").style.display = "none";
+            alert("Contacte con la Junta de Bateas Sector 3. Este afiliado no cumple con los requisitos para generar certificados.");
+        }
+
+        // Ocultar mensaje de restricción
+        function ocultarRestriccion() {
+            document.getElementById("restriction-message").classList.add("hidden");
+            document.getElementById("btnOpciones").classList.remove("hidden");
+        }
+
+        // Buscar usuario
+        async function buscarUsuario() {
+            const searchInput = document.getElementById('searchInput').value.trim();
+            if (!searchInput) {
+                alert('Por favor ingrese un número de cédula o nombre para buscar');
+                return;
+            }
+            
+            try {
+                mostrarLoader('Buscando usuario...');
+                
+                // Si no hay datos cargados, intentar cargarlos nuevamente
+                if (datosCargados.length === 0) {
+                    datosCargados = await cargarDatosLocales();
+                    if (datosCargados.length === 0) {
+                        throw new Error("No hay datos de afiliados disponibles");
+                    }
+                }
+                
+                // Buscar por cédula o nombre
+                const persona = datosCargados.find(p => 
+                    String(p.cedula).replace(/\D/g, '') === searchInput.replace(/\D/g, '') || 
+                    p.nombre.toLowerCase().includes(searchInput.toLowerCase())
+                );
+
+                if (!persona) {
+                    throw new Error("No se encontró el afiliado");
+                }
+                
+                personaEncontrada = persona;
+                
+                // Verificar restricciones antes de mostrar el resultado
+                tieneRestriccion = await verificarRestricciones(persona.id);
+                
+                if (tieneRestriccion) {
+                    mostrarRestriccion();
+                    ocultarLoader();
+                    return;
+                }
+                
+                ocultarRestriccion();
+                mostrarResultado(persona);
+                ocultarLoader();
+                
+            } catch (error) {
+                ocultarLoader();
+                alert(error.message);
+            }
+        }
+
+        // Normalizar datos para que funcionen con cualquier formato
+        function normalizarDatos(datos) {
+            return datos.map(persona => {
+                if (persona.nombre && persona.cedula) {
+                    return {
+                        id: persona.id || '',
+                        nombre: persona.nombre,
+                        cedula: persona.cedula,
+                        fecha_afiliacion: persona.fecha_afiliacion || persona.fecha,
+                        registro: persona.registro || '',
+                        folio: persona.folio || '',
+                        renglon: persona.renglon || '',
+                        direccion: persona.direccion || '',
+                        telefono: persona.telefono || ''
+                    };
+                }
+                else if (persona.nombres && persona.cedula) {
+                    return {
+                        id: persona.id || '',
+                        nombre: persona.nombres,
+                        cedula: persona.cedula,
+                        fecha_afiliacion: persona.fecha_afiliacion || persona.fecha,
+                        registro: persona.registro || '',
+                        folio: persona.folio || '',
+                        renglon: persona.renglon || '',
+                        direccion: persona.direccion || '',
+                        telefono: persona.telefono || ''
+                    };
+                }
+                return persona;
+            });
+        }
+
+        // Mostrar resultado de búsqueda
+        function mostrarResultado(persona) {
+            document.getElementById('successCheck').style.display = 'block';
+            document.getElementById('btnOpciones').classList.remove('hidden');
+            
+            document.getElementById("nombre-cert").textContent = persona.nombre;
+            document.getElementById("cedula-cert").textContent = formatearCedula(persona.cedula);
+            document.getElementById("fecha-cert").textContent = formatearFecha(persona.fecha_afiliacion);
+            document.getElementById("registro-cert").textContent = formatearCedula(persona.registro);
+            document.getElementById("folio-cert").textContent = persona.folio;
+            document.getElementById("renglon-cert").textContent = persona.renglon;
+            document.getElementById("direccion-cert").textContent = persona.direccion;
+            document.getElementById("fecha-emision").textContent = formatearFecha(new Date());
+            
+            generarQR();
+            mostrarOpciones();
+            mostrarVistaPrevia();
+        }
+
+        // Mostrar opciones
+        function mostrarOpciones() {
+            if (tieneRestriccion) {
+                mostrarRestriccion();
+                return;
+            }
+            
+            document.getElementById('optionsContainer').style.display = 'block';
+            document.getElementById('btnOpciones').classList.add('hidden');
+            document.getElementById('btnOcultarOpciones').classList.remove('hidden');
+        }
+
+        // Ocultar opciones
+        function ocultarOpciones() {
+            document.getElementById('optionsContainer').style.display = 'none';
+            document.getElementById('btnOpciones').classList.remove('hidden');
+            document.getElementById('btnOcultarOpciones').classList.add('hidden');
+        }
+
+        // Mostrar edición
+        function mostrarEdicion() {
+            if (!personaEncontrada || tieneRestriccion) return;
+            
+            document.getElementById('editNombre').value = personaEncontrada.nombre;
+            document.getElementById('editCedula').value = personaEncontrada.cedula;
+            document.getElementById('editFechaAfiliacion').value = personaEncontrada.fecha_afiliacion;
+            document.getElementById('editDireccion').value = personaEncontrada.direccion;
+            document.getElementById('editTelefono').value = personaEncontrada.telefono || '';
+            document.getElementById('editRegistro').value = personaEncontrada.registro;
+            document.getElementById('editFolio').value = personaEncontrada.folio;
+            document.getElementById('editRenglon').value = personaEncontrada.renglon;
+            
+            document.getElementById('editForm').style.display = 'block';
+            ocultarOpciones();
+        }
+
+        // Guardar cambios de edición
+        function guardarCambios() {
+            personaEncontrada.nombre = document.getElementById('editNombre').value;
+            personaEncontrada.cedula = document.getElementById('editCedula').value;
+            personaEncontrada.fecha_afiliacion = document.getElementById('editFechaAfiliacion').value;
+            personaEncontrada.direccion = document.getElementById('editDireccion').value;
+            personaEncontrada.telefono = document.getElementById('editTelefono').value;
+            personaEncontrada.registro = document.getElementById('editRegistro').value;
+            personaEncontrada.folio = document.getElementById('editFolio').value;
+            personaEncontrada.renglon = document.getElementById('editRenglon').value;
+            
+            const index = datosCargados.findIndex(p => p.id === personaEncontrada.id);
+            if (index !== -1) {
+                datosCargados[index] = {...personaEncontrada};
+            }
+            
+            guardarCambiosEnArchivo();
+            mostrarResultado(personaEncontrada);
+            document.getElementById('editForm').style.display = 'none';
+            
+            alert('Cambios guardados correctamente');
+        }
+
+        // Guardar cambios en el archivo afiliados.json
+        function guardarCambiosEnArchivo() {
+            try {
+                const datosActualizados = JSON.stringify(datosCargados, null, 2);
+                const blob = new Blob([datosActualizados], { type: 'application/json' });
+                const link = document.createElement('a');
+                link.href = URL.createObjectURL(blob);
+                link.download = 'afiliados.json';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                
+                console.log('Archivo afiliados.json actualizado y descargado');
+            } catch (error) {
+                console.error('Error al guardar cambios en el archivo:', error);
+                alert('Error al guardar cambios en el archivo. Los cambios se mantendrán en esta sesión.');
+            }
+        }
+
+        // Cancelar edición
+        function cancelarEdicion() {
+            document.getElementById('editForm').style.display = 'none';
+        }
+
+        // Mostrar vista previa
+        function mostrarVistaPrevia() {
+            if (tieneRestriccion) {
+                mostrarRestriccion();
+                return;
+            }
+            
+            const certificado = document.getElementById("contenido-certificado");
+            certificado.style.display = 'block';
+            
+            document.getElementById('btnVistaPrevia').classList.add('hidden');
+            document.getElementById('btnOcultarVista').classList.remove('hidden');
+            
+            setTimeout(() => {
+                certificado.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 300);
+        }
+
+        // Ocultar vista previa
+        function ocultarVistaPrevia() {
+            const certificado = document.getElementById("contenido-certificado");
+            certificado.style.display = 'none';
+            
+            document.getElementById('btnVistaPrevia').classList.remove('hidden');
+            document.getElementById('btnOcultarVista').classList.add('hidden');
+        }
+
+        // Función para capturar certificado
+        async function capturarCertificado() {
+            if (tieneRestriccion) {
+                mostrarRestriccion();
+                throw new Error("Usuario con restricciones");
+            }
+            
+            const elemento = document.getElementById("contenido-certificado");
+            const estadoOriginal = elemento.style.display;
+            
+            elemento.style.display = 'block';
+            await new Promise(resolve => setTimeout(resolve, 2000));
+            
+            const options = {
+                scale: 2,
+                useCORS: true,
+                allowTaint: false,
+                backgroundColor: '#FFFFFF',
+                logging: false
+            };
+            
+            try {
+                const canvas = await html2canvas(elemento, options);
+                return canvas;
+            } catch (error) {
+                console.error("Error en html2canvas:", error);
+                throw new Error("No se pudo generar la imagen del certificado");
+            } finally {
+                elemento.style.display = estadoOriginal;
+            }
+        }
+
+        // Descargar PNG
+        async function descargarPNG() {
+            if (tieneRestriccion) {
+                mostrarRestriccion();
+                return;
+            }
+            
+            try {
+                mostrarLoader('Generando imagen PNG...');
+                const canvas = await capturarCertificado();
+                
+                const link = document.createElement('a');
+                link.href = canvas.toDataURL('image/png');
+                link.download = `certificado_${personaEncontrada.cedula}.png`;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                
+            } catch (error) {
+                alert("Error al generar PNG: " + error.message);
+            } finally {
+                ocultarLoader();
+            }
+        }
+
+        // Descargar PDF
+        async function descargarPDF() {
+            if (tieneRestriccion) {
+                mostrarRestriccion();
+                return;
+            }
+            
+            try {
+                mostrarLoader('Generando PDF...');
+                
+                const elemento = document.getElementById("contenido-certificado");
+                const estadoOriginal = elemento.style.display;
+                
+                elemento.style.display = 'block';
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                
+                const widthPx = 210 * 3.78;
+                const heightPx = 275 * 3.78;
+                
+                const options = {
+                    scale: 7,
+                    useCORS: true,
+                    allowTaint: false,
+                    backgroundColor: '#FFFFFF',
+                    logging: false,
+                    width: widthPx,
+                    height: heightPx
+                };
+                
+                const canvas = await html2canvas(elemento, options);
+                elemento.style.display = estadoOriginal;
+                
+                const pdf = new jsPDF({
+                    orientation: 'portrait',
+                    unit: 'mm',
+                    format: [210, 275]
+                });
+
+                const imgData = canvas.toDataURL('image/jpeg', 0.95);
+                const pdfWidth = pdf.internal.pageSize.getWidth();
+                const pdfHeight = pdf.internal.pageSize.getHeight();
+                
+                pdf.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight);
+                pdf.save(`certificado_${personaEncontrada.cedula}.pdf`);
+                
+            } catch (error) {
+                alert("Error al generar PDF: " + error.message);
+            } finally {
+                ocultarLoader();
+            }
+        }
+
+        // NUEVA FUNCIÓN MEJORADA: Descargar en formato Word con imagen
+        async function descargarWord() {
+            if (tieneRestriccion) {
+                mostrarRestriccion();
+                return;
+            }
+            
+            try {
+                mostrarLoader('Generando documento Word...');
+                
+                // Primero capturamos el certificado como imagen
+                const canvas = await capturarCertificado();
+                const imageDataUrl = canvas.toDataURL('image/png');
+                
+                // Convertir la imagen a Blob
+                const response = await fetch(imageDataUrl);
+                const blob = await response.blob();
+                
+                // Convertir Blob a ArrayBuffer
+                const arrayBuffer = await blob.arrayBuffer();
+                
+                // Crear documento Word con la imagen
+                const { Document, Packer, Paragraph, ImageRun, Media } = docx;
+                
+                // Calcular dimensiones para mantener proporción A4
+                const maxWidth = 600; // Ancho máximo en puntos
+                const maxHeight = 800; // Alto máximo en puntos
+                const aspectRatio = canvas.width / canvas.height;
+                
+                let imageWidth = maxWidth;
+                let imageHeight = maxWidth / aspectRatio;
+                
+                if (imageHeight > maxHeight) {
+                    imageHeight = maxHeight;
+                    imageWidth = maxHeight * aspectRatio;
+                }
+                
+                // Crear documento Word
+                const doc = new Document({
+                    sections: [{
+                        properties: {
+                            page: {
+                                size: {
+                                    width: 11906, // A4 ancho en puntos (21cm * 567 = 11906)
+                                    height: 16838, // A4 alto en puntos (29.7cm * 567 = 16838)
+                                },
+                                margin: {
+                                    top: 1000,
+                                    bottom: 1000,
+                                    left: 1000,
+                                    right: 1000,
+                                }
+                            }
+                        },
+                        children: [
+                            new Paragraph({
+                                children: [
+                                    new ImageRun({
+                                        data: arrayBuffer,
+                                        transformation: {
+                                            width: imageWidth,
+                                            height: imageHeight,
+                                        },
+                                        floating: {
+                                            horizontalPosition: {
+                                                offset: 0,
+                                            },
+                                            verticalPosition: {
+                                                offset: 0,
+                                            },
+                                        }
+                                    })
+                                ],
+                                alignment: 'center'
+                            }),
+                            new Paragraph({
+                                text: " ",
+                                spacing: { before: 400 }
+                            }),
+                            new Paragraph({
+                                text: `Certificado de Afiliación - ${personaEncontrada.nombre}`,
+                                alignment: 'center',
+                                spacing: { before: 400 }
+                            }),
+                            new Paragraph({
+                                text: `Cédula: ${personaEncontrada.cedula}`,
+                                alignment: 'center'
+                            }),
+                            new Paragraph({
+                                text: `Fecha de emisión: ${new Date().toLocaleDateString('es-CO')}`,
+                                alignment: 'center',
+                                spacing: { after: 400 }
+                            }),
+                            new Paragraph({
+                                text: "Este documento fue generado por el Sistema de Certificados de la Junta de Acción Comunal Barrio Bateas Sector 3.",
+                                alignment: 'center',
+                                size: 20,
+                                color: "666666"
+                            })
+                        ]
+                    }]
+                });
+                
+                // Generar el documento Word
+                const docxBlob = await Packer.toBlob(doc);
+                
+                // Usar FileSaver para descargar
+                saveAs(docxBlob, `certificado_${personaEncontrada.cedula}.docx`);
+                
+            } catch (error) {
+                console.error("Error al generar Word:", error);
+                
+                // Si falla, intentar método alternativo: crear un documento simple
+                try {
+                    alert("Generando documento Word simple...");
+                    
+                    const { Document, Packer, Paragraph, HeadingLevel, AlignmentType } = docx;
+                    
+                    const doc = new Document({
+                        sections: [{
+                            properties: {},
+                            children: [
+                                new Paragraph({
+                                    text: "CERTIFICADO DE AFILIACIÓN",
+                                    heading: HeadingLevel.TITLE,
+                                    alignment: AlignmentType.CENTER,
+                                    spacing: { after: 400 }
+                                }),
+                                new Paragraph({
+                                    text: "JUNTA DE ACCIÓN COMUNAL BARRIO BATEAS SECTOR 3",
+                                    alignment: AlignmentType.CENTER,
+                                    spacing: { after: 200 }
+                                }),
+                                new Paragraph({
+                                    text: "Personería Jurídica No. 451 del 31 de Octubre de 2025",
+                                    alignment: AlignmentType.CENTER,
+                                    spacing: { after: 400 }
+                                }),
+                                new Paragraph({
+                                    text: "Se certifica que:",
+                                    spacing: { after: 200 }
+                                }),
+                                new Paragraph({
+                                    text: `NOMBRE: ${personaEncontrada.nombre}`,
+                                    spacing: { after: 100 }
+                                }),
+                                new Paragraph({
+                                    text: `CÉDULA: ${formatearCedula(personaEncontrada.cedula)}`,
+                                    spacing: { after: 100 }
+                                }),
+                                new Paragraph({
+                                    text: `FECHA DE AFILIACIÓN: ${formatearFecha(personaEncontrada.fecha_afiliacion)}`,
+                                    spacing: { after: 100 }
+                                }),
+                                new Paragraph({
+                                    text: `REGISTRO Nº: ${formatearCedula(personaEncontrada.registro)}`,
+                                    spacing: { after: 100 }
+                                }),
+                                new Paragraph({
+                                    text: `FOLIO Nº: ${personaEncontrada.folio}`,
+                                    spacing: { after: 100 }
+                                }),
+                                new Paragraph({
+                                    text: `RENGLÓN Nº: ${personaEncontrada.renglon}`,
+                                    spacing: { after: 100 }
+                                }),
+                                new Paragraph({
+                                    text: `DIRECCIÓN: ${personaEncontrada.direccion}`,
+                                    spacing: { after: 400 }
+                                }),
+                                new Paragraph({
+                                    text: `La presente constancia se expide a solicitud del interesado, ${formatearFecha(new Date())} y tiene vigencia de 6 meses a partir de la fecha de su expedición.`,
+                                    spacing: { after: 400 }
+                                }),
+                                new Paragraph({
+                                    text: "Atentamente,",
+                                    spacing: { after: 400 }
+                                }),
+                                new Paragraph({
+                                    text: "__________________________",
+                                    spacing: { after: 200 }
+                                }),
+                                new Paragraph({
+                                    text: "LEONEL BAUTISTA CARRANZA",
+                                    spacing: { after: 100 }
+                                }),
+                                new Paragraph({
+                                    text: "Presidente",
+                                    spacing: { after: 100 }
+                                }),
+                                new Paragraph({
+                                    text: "juntacomunalsector3bateas@gmail.com",
+                                    spacing: { after: 400 }
+                                })
+                            ]
+                        }]
+                    });
+                    
+                    const docxBlob = await Packer.toBlob(doc);
+                    saveAs(docxBlob, `certificado_simple_${personaEncontrada.cedula}.docx`);
+                    
+                } catch (secondError) {
+                    alert("No se pudo generar el documento Word. Por favor, use la opción PNG o PDF.");
+                }
+            } finally {
+                ocultarLoader();
+            }
+        }
+
+        // Abrir modal de WhatsApp
+        function abrirWhatsAppModal() {
+            if (tieneRestriccion) {
+                mostrarRestriccion();
+                return;
+            }
+            
+            document.getElementById('whatsappNumber').value = personaEncontrada.telefono || '';
+            document.getElementById('whatsappModal').style.display = 'flex';
+        }
+
+        // Cerrar modal de WhatsApp
+        function cerrarWhatsAppModal() {
+            document.getElementById('whatsappModal').style.display = 'none';
+        }
+
+        // Enviar por WhatsApp
+        function enviarWhatsApp() {
+            if (tieneRestriccion) {
+                mostrarRestriccion();
+                return;
+            }
+            
+            const numero = document.getElementById('whatsappNumber').value.trim();
+            if (!numero) {
+                alert('Por favor ingrese un número de teléfono');
+                return;
+            }
+            
+            window.open(`whatsapp://send?phone=57${numero}`, '_blank');
+            cerrarWhatsAppModal();
+        }
+
+        // Volver al panel principal
+        function volverAlPanel() {
+            window.location.href = 'panel.html';
+        }
+    </script>
+</body>
+</html>
+
+
