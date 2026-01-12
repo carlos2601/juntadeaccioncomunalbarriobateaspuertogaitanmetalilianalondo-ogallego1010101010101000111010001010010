@@ -311,14 +311,12 @@
             to { transform: rotate(360deg); }
         }
         
-        /* Certificado styles - MÁRGENES CORREGIDOS */
+        /* Certificado styles - CORREGIDO */
         #contenido-certificado {
             font-family: Tahoma, sans-serif;
             width: 210mm; /* Ancho A4 */
-            min-height: 257mm; /* Alto A4 */
-            padding: 20mm;  /* 3.5cm en todos los lados */
-            padding-top: 30px;
-            
+            min-height: 297mm; /* Alto A4 corregido (297mm) */
+            padding: 35mm;  /* 3.5cm en todos los lados */
             background-color: white;
             box-shadow: 0 0 10px rgba(0,0,0,0.2);
             box-sizing: border-box;
@@ -329,16 +327,17 @@
         }
         
         .certificado-background {
-                position: absolute;
-                top: 0.8px;
-                left: 0px;
-                width: 100%;
-                height: 100%;
-                z-index: 1;
-                opacity: 1.5;
-                background-position: center;
-                background-repeat: no-repeat;
-                background-size: contain;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 90%;
+            height: 90%;
+            z-index: 1;
+            opacity: 0.1;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: contain;
+            transform: translate(-50%, -50%);
         }
         
         .certificado-content {
@@ -388,8 +387,6 @@
             justify-content: flex-end;
         }
         
-        /* Eliminados estilos de sellos, firmas y QR */
-        
         /* Mensaje de restricción */
         .restriction-message {
             background-color: #ffebee;
@@ -400,6 +397,36 @@
             margin: 20px auto;
             max-width: 500px;
             border-left: 4px solid #c62828;
+        }
+        
+        /* ESTILOS DE IMPRESIÓN - SOLO EL CERTIFICADO */
+        @media print {
+            body * {
+                display: none !important;
+            }
+            
+            #contenido-certificado {
+                display: block !important;
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 210mm;
+                height: 297mm;
+                margin: 0;
+                padding: 35mm;
+                box-shadow: none;
+                background-color: white;
+            }
+            
+            #contenido-certificado * {
+                visibility: visible !important;
+                display: block !important;
+            }
+            
+            .certificado-background {
+                display: block !important;
+                opacity: 0.1 !important;
+            }
         }
         
         @media (max-width: 768px) {
@@ -424,30 +451,12 @@
                 min-height: auto;
                 padding: 20px;
                 margin: 10px;
+                transform: scale(0.9);
+                transform-origin: top center;
             }
             
             .firmas-container {
                 align-items: center;
-            }
-        }
-
-        @media print {
-            body * {
-                visibility: hidden;
-            }
-            #contenido-certificado,
-            #contenido-certificado * {
-                visibility: visible;
-            }
-            #contenido-certificado {
-                position: absolute;
-                left: 0;
-                top: 0;
-                width: 210mm;
-                height: 257mm;
-                margin: 0;
-                padding: 35mm;
-                box-shadow: none;
             }
         }
     </style>
@@ -631,7 +640,7 @@
             <div class="datos-certificado">
                El/La Señor(a) <strong id="nombre-cert"></strong>, identificad(o) con cédula <strong id="cedula-cert"></strong> con fecha de afiliación <strong id="fecha-cert"></strong>, solicita Desafiliación de la junta de barrio Bateas para trasladarse <strong id="traslado-cert"></strong>.<br><br>
 
-                La presente constancia se expide a solicitud del interesado, el dia <strong id="fecha-emision"></strong> y tiene vigencia de 6 meses a partir de la fecha de su expedición.
+                La presente constancia se expide a solicitud del interesado, el dia <strong id="fecha-emision"></strong> y tiene vigencia de 30 dias a partir de la fecha de su expedición.
             
                 
             </div>
@@ -641,12 +650,11 @@
             <br><br>
             
             <div class="firmas-container">
-                <!-- Eliminadas imágenes de sellos y firmas -->
                 <div style="text-align:center; margin-top: 20px; font-size: 19px;">
                     ______________________________<br>
                     <strong>LILIANA LONDOÑO GALLEGO</strong><br>
                     Secretaria<br>
-                    jacbateas3puertogaitan@gmail.com
+                    juntacomunalsector3bateas@gmail.com
                 </div>
             </div>
             <br><br><br>
@@ -663,9 +671,8 @@
     let personaEncontrada = null;
     let usandoJSON = false;
     let datosCargados = [];
-    let tieneRestriccion = false;
 
-    // URL del archivo JSON en GitHub (actualiza esta URL con tu repositorio)
+    // URL del archivo JSON en GitHub (ACTUALIZAR CON TU URL)
     const GITHUB_JSON_URL = 'https://raw.githubusercontent.com/carlos2601/bateas3/refs/heads/main/afiliados.json';
 
     // Datos de ejemplo para cuando no hay conexión o falla la carga
@@ -702,7 +709,7 @@
         // Ocultar botón JSON (usaremos GitHub por defecto)
         document.getElementById('btnJson').classList.add('hidden');
         
-        // Cargar imagen de fondo
+        // Cargar imagen de fondo del logo
         cargarImagenFondo();
     }
 
@@ -740,20 +747,13 @@
         });
     }
 
-    // Cargar imagen de fondo
+    // Cargar imagen de fondo del logo
     function cargarImagenFondo() {
         const background = document.getElementById('certificadoBackground');
         
-        // Intentar cargar imagen local primero
-        const imgLocal = new Image();
-        imgLocal.onload = function() {
-            background.style.backgroundImage = 'url(logo.jpg)';
-        };
-        imgLocal.onerror = function() {
-            // Si no hay imagen local, usar una por defecto o dejar sin fondo
-            background.style.backgroundImage = '';
-        };
-        imgLocal.src = 'logo.jpg';
+        // Logo de fondo para el certificado (ajusta la URL según tu logo)
+        background.style.backgroundImage = "url('https://raw.githubusercontent.com/carlos2601/bateas/main/logo4.jpg')";
+        background.style.opacity = "0.1";
     }
 
     // Mostrar loader
@@ -819,22 +819,6 @@
         input.click();
     }
 
-    // Mostrar mensaje de restricción
-    function mostrarRestriccion() {
-        document.getElementById("restriction-message").classList.remove("hidden");
-        document.getElementById("optionsContainer").classList.add("hidden");
-        document.getElementById("btnOpciones").classList.add("hidden");
-        document.getElementById("btnOcultarOpciones").classList.add("hidden");
-        document.getElementById("contenido-certificado").style.display = "none";
-        alert("Contacte con la Junta de Bateas Sector 3. Este afiliado no cumple con los requisitos para generar certificados.");
-    }
-
-    // Ocultar mensaje de restricción
-    function ocultarRestriccion() {
-        document.getElementById("restriction-message").classList.add("hidden");
-        document.getElementById("btnOpciones").classList.remove("hidden");
-    }
-
     // Buscar usuario
     async function buscarUsuario() {
         const searchInput = document.getElementById('searchInput').value.trim();
@@ -867,12 +851,11 @@
             
             personaEncontrada = persona;
             
-            // Nota: Se eliminó la verificación de restricciones (Firebase)
-            // Si deseas mantener alguna restricción, puedes implementarla aquí
-            
-            ocultarRestriccion();
             mostrarResultado(persona);
             ocultarLoader();
+            
+            // MOSTRAR AUTOMÁTICAMENTE LA VISTA PREVIA AL BUSCAR
+            mostrarVistaPrevia();
             
         } catch (error) {
             ocultarLoader();
@@ -945,11 +928,6 @@
 
     // Mostrar opciones
     function mostrarOpciones() {
-        if (tieneRestriccion) {
-            mostrarRestriccion();
-            return;
-        }
-        
         document.getElementById('optionsContainer').style.display = 'block';
         document.getElementById('btnOpciones').classList.add('hidden');
         document.getElementById('btnOcultarOpciones').classList.remove('hidden');
@@ -964,7 +942,7 @@
 
     // Mostrar edición
     function mostrarEdicion() {
-        if (!personaEncontrada || tieneRestriccion) return;
+        if (!personaEncontrada) return;
         
         // Llenar el formulario con los datos actuales
         document.getElementById('editNombre').value = personaEncontrada.nombre;
@@ -1010,10 +988,7 @@
 
     // Mostrar vista previa
     function mostrarVistaPrevia() {
-        if (tieneRestriccion) {
-            mostrarRestriccion();
-            return;
-        }
+        if (!personaEncontrada) return;
         
         const certificado = document.getElementById("contenido-certificado");
         certificado.style.display = 'block';
@@ -1037,11 +1012,6 @@
 
     // Función para capturar certificado
     async function capturarCertificado() {
-        if (tieneRestriccion) {
-            mostrarRestriccion();
-            throw new Error("Usuario con restricciones");
-        }
-        
         const elemento = document.getElementById("contenido-certificado");
         
         // Mostrar temporalmente el certificado
@@ -1065,11 +1035,6 @@
 
     // Descargar PNG
     async function descargarPNG() {
-        if (tieneRestriccion) {
-            mostrarRestriccion();
-            return;
-        }
-        
         try {
             mostrarLoader('Generando imagen PNG...');
             const canvas = await capturarCertificado();
@@ -1089,11 +1054,6 @@
 
     // Descargar PDF
     async function descargarPDF() {
-        if (tieneRestriccion) {
-            mostrarRestriccion();
-            return;
-        }
-        
         try {
             mostrarLoader('Generando PDF...');
             const canvas = await capturarCertificado();
@@ -1116,32 +1076,169 @@
         }
     }
 
-    // Función para imprimir certificado
+    // Función para imprimir certificado - CORREGIDA
     function imprimirCertificado() {
-        if (tieneRestriccion) {
-            mostrarRestriccion();
+        if (!personaEncontrada) {
+            alert("Primero debe buscar un afiliado");
             return;
         }
         
-        // Asegurarse de que el certificado esté visible
-        const certificado = document.getElementById("contenido-certificado");
-        certificado.style.display = 'block';
+        // Crear un iframe temporal para la impresión
+        const iframe = document.createElement('iframe');
+        iframe.style.position = 'fixed';
+        iframe.style.right = '0';
+        iframe.style.bottom = '0';
+        iframe.style.width = '0';
+        iframe.style.height = '0';
+        iframe.style.border = '0';
+        iframe.style.visibility = 'hidden';
         
-        // Esperar un momento para que se renderice completamente
-        setTimeout(() => {
-            window.print();
-            
-            // Ocultar después de imprimir
-            setTimeout(() => {
-                certificado.style.display = 'none';
-            }, 500);
-        }, 100);
+        document.body.appendChild(iframe);
+        
+        // Obtener el contenido del certificado
+        const certificado = document.getElementById("contenido-certificado");
+        
+        // Copiar el contenido del certificado al iframe
+        const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+        
+        // Estilos específicos para impresión
+        const estilosImpresion = `
+            <style>
+                @page {
+                    size: A4 portrait;
+                    margin: 35mm;
+                }
+                
+                body {
+                    margin: 0;
+                    padding: 0;
+                    font-family: Tahoma, sans-serif;
+                    width: 210mm;
+                    height: 297mm;
+                    background-color: white;
+                }
+                
+                .certificado-impresion {
+                    width: 100%;
+                    height: 100%;
+                    position: relative;
+                    padding: 0;
+                }
+                
+                .certificado-background-impresion {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    width: 90%;
+                    height: 90%;
+                    z-index: 1;
+                    opacity: 0.1;
+                    background-image: url('https://raw.githubusercontent.com/carlos2601/bateas/main/logo4.jpg');
+                    background-position: center;
+                    background-repeat: no-repeat;
+                    background-size: contain;
+                    transform: translate(-50%, -50%);
+                }
+                
+                .certificado-content-impresion {
+                    position: relative;
+                    z-index: 2;
+                    width: 100%;
+                    height: 100%;
+                }
+                
+                .encabezado-certificado {
+                    text-align: center;
+                    font-size: 17px;
+                    line-height: 1.4;
+                    margin-bottom: 15px;
+                }
+                
+                .texto-justificado {
+                    text-align: justify;
+                    font-size: 10px;
+                    line-height: 1.5;
+                    margin: -10px 0;
+                }
+                
+                .titulo-certificado {
+                    text-align: center;
+                    font-size: 20px;
+                    font-weight: bold;
+                    margin: 20px 0;
+                    text-transform: uppercase;
+                }
+                
+                .datos-certificado {
+                    text-align: justify;
+                    font-size: 19px;
+                    line-height: 1.6;
+                    margin: 15px 0;
+                }
+                
+                .firmas-container {
+                    position: relative;
+                    margin-top: 40px;
+                    flex-grow: 1;
+                }
+                
+                @media print {
+                    body {
+                        margin: 0 !important;
+                        padding: 0 !important;
+                    }
+                }
+            </style>
+        `;
+        
+        // Contenido del certificado para impresión
+        const contenidoHTML = `
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <title>Certificado de Traslado</title>
+                ${estilosImpresion}
+            </head>
+            <body>
+                <div class="certificado-impresion">
+                    <div class="certificado-background-impresion"></div>
+                    <div class="certificado-content-impresion">
+                        ${certificado.innerHTML}
+                    </div>
+                </div>
+                <script>
+                    // Imprimir automáticamente cuando se carga el iframe
+                    window.onload = function() {
+                        setTimeout(function() {
+                            window.print();
+                            setTimeout(function() {
+                                window.parent.postMessage('impresion-completada', '*');
+                            }, 500);
+                        }, 500);
+                    };
+                <\/script>
+            </body>
+            </html>
+        `;
+        
+        // Escribir el contenido en el iframe
+        iframeDoc.open();
+        iframeDoc.write(contenidoHTML);
+        iframeDoc.close();
+        
+        // Escuchar mensaje cuando termine la impresión
+        window.addEventListener('message', function(event) {
+            if (event.data === 'impresion-completada') {
+                // Remover el iframe
+                document.body.removeChild(iframe);
+            }
+        }, { once: true });
     }
 
     // Abrir modal de WhatsApp
     function abrirWhatsAppModal() {
-        if (tieneRestriccion) {
-            mostrarRestriccion();
+        if (!personaEncontrada) {
+            alert("Primero debe buscar un afiliado");
             return;
         }
         
@@ -1156,8 +1253,8 @@
 
     // Enviar por WhatsApp
     function enviarWhatsApp() {
-        if (tieneRestriccion) {
-            mostrarRestriccion();
+        if (!personaEncontrada) {
+            alert("Primero debe buscar un afiliado");
             return;
         }
         
