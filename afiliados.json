@@ -7,10 +7,7 @@
     "registro": 1,
     "folio": 2,
     "renglon": 1,
-    "direccion": "BATEAS 3",
-    "telefono": "",
-    "pagos": "",
-    "firma": ""
+    "direccion": "BATEAS 3"
   },
   {
     "id": "2",
@@ -20,10 +17,7 @@
     "registro": 2,
     "folio": 2,
     "renglon": 2,
-    "direccion": "BATEAS 3",
-    "telefono": "",
-    "pagos": "",
-    "firma": ""
+    "direccion": "BATEAS 3"
   },
   {
     "id": "3",
@@ -33,10 +27,7 @@
     "registro": 3,
     "folio": 2,
     "renglon": 3,
-    "direccion": "BATEAS 3",
-    "telefono": "",
-    "pagos": "",
-    "firma": ""
+    "direccion": "BATEAS 3"
   },
   {
     "id": "4",
@@ -46,10 +37,7 @@
     "registro": 4,
     "folio": 2,
     "renglon": 4,
-    "direccion": "BATEAS 3",
-    "telefono": "",
-    "pagos": "",
-    "firma": ""
+    "direccion": "BATEAS 3"
   },
   {
     "id": "5",
@@ -59,10 +47,7 @@
     "registro": 5,
     "folio": 2,
     "renglon": 5,
-    "direccion": "BATEAS 3",
-    "telefono": "",
-    "pagos": "",
-    "firma": ""
+    "direccion": "BATEAS 3"
   },
   {
     "id": "6",
@@ -72,23 +57,13 @@
     "registro": 6,
     "folio": 2,
     "renglon": 6,
-    "direccion": "BATEAS 3",
-    "telefono": "",
-    "pagos": "",
-    "firma": ""
+    "direccion": "BATEAS 3"
   },
   {
     "id": "7",
-    "nombre": "",
-    "cedula": "",
-    "fecha_afiliacion": "",
     "registro": 7,
     "folio": 2,
-    "renglon": 7,
-    "direccion": "",
-    "telefono": "",
-    "pagos": "",
-    "firma": ""
+    "renglon": 7
   },
   {
     "id": "8",
@@ -99,9 +74,7 @@
     "folio": 2,
     "renglon": 8,
     "direccion": "MANZANA 58 CASA 11 B",
-    "telefono": "3214093804",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3214093804"
   },
   {
     "id": "9",
@@ -112,9 +85,7 @@
     "folio": 2,
     "renglon": 9,
     "direccion": "MANZANA 58 CASA 11 B",
-    "telefono": "3214093804",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3214093804"
   },
   {
     "id": "10",
@@ -124,10 +95,7 @@
     "registro": 10,
     "folio": 2,
     "renglon": 10,
-    "direccion": "BATEAS 3",
-    "telefono": "",
-    "pagos": "",
-    "firma": ""
+    "direccion": "BATEAS 3"
   },
   {
     "id": "11",
@@ -137,10 +105,7 @@
     "registro": 11,
     "folio": 2,
     "renglon": 11,
-    "direccion": "BATEAS 3",
-    "telefono": "",
-    "pagos": "",
-    "firma": ""
+    "direccion": "BATEAS 3"
   },
   {
     "id": "12",
@@ -151,9 +116,7 @@
     "folio": 2,
     "renglon": 12,
     "direccion": "MANZANA 64 CAS 14",
-    "telefono": "3107605520",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3107605520"
   },
   {
     "id": "13",
@@ -163,10 +126,7 @@
     "registro": 13,
     "folio": 2,
     "renglon": 13,
-    "direccion": "BATEAS 3",
-    "telefono": "",
-    "pagos": "",
-    "firma": ""
+    "direccion": "BATEAS 3"
   },
   {
     "id": "14",
@@ -176,10 +136,7 @@
     "registro": 14,
     "folio": 2,
     "renglon": 14,
-    "direccion": "BATEAS 3",
-    "telefono": "",
-    "pagos": "",
-    "firma": ""
+    "direccion": "BATEAS 3"
   },
   {
     "id": "15",
@@ -189,23 +146,13 @@
     "registro": 15,
     "folio": 2,
     "renglon": 15,
-    "direccion": "BATEAS 3",
-    "telefono": "",
-    "pagos": "",
-    "firma": ""
+    "direccion": "BATEAS 3"
   },
   {
     "id": "16",
-    "nombre": "",
-    "cedula": "",
-    "fecha_afiliacion": "",
     "registro": 16,
     "folio": 2,
-    "renglon": 16,
-    "direccion": "",
-    "telefono": "",
-    "pagos": "",
-    "firma": ""
+    "renglon": 16
   },
   {
     "id": "17",
@@ -216,9 +163,7 @@
     "folio": 2,
     "renglon": 17,
     "direccion": "MANZANA 80 CASA 25",
-    "telefono": "3283241906",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3283241906"
   },
   {
     "id": "18",
@@ -229,9 +174,7 @@
     "folio": 2,
     "renglon": 18,
     "direccion": "MANZANA 64 CASA 25",
-    "telefono": "3144551305",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3144551305"
   },
   {
     "id": "19",
@@ -242,9 +185,7 @@
     "folio": 2,
     "renglon": 19,
     "direccion": "MANZANA 64 CASA 25",
-    "telefono": "3102619418",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3102619418"
   },
   {
     "id": "20",
@@ -255,9 +196,7 @@
     "folio": 2,
     "renglon": 20,
     "direccion": "MANZANA 64 CASA 25",
-    "telefono": "3224565800",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3224565800"
   },
   {
     "id": "21",
@@ -268,9 +207,7 @@
     "folio": 2,
     "renglon": 21,
     "direccion": "MANZANA 59 CASA 11",
-    "telefono": "3112792095",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3112792095"
   },
   {
     "id": "22",
@@ -281,22 +218,14 @@
     "folio": 2,
     "renglon": 22,
     "direccion": "MANZANA 80 CASA 25",
-    "telefono": "3224390201",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3224390201"
   },
   {
     "id": "23",
     "nombre": "ANULADO",
-    "cedula": "",
-    "fecha_afiliacion": "",
     "registro": 23,
     "folio": 2,
-    "renglon": 23,
-    "direccion": "",
-    "telefono": "",
-    "pagos": "",
-    "firma": ""
+    "renglon": 23
   },
   {
     "id": "24",
@@ -306,10 +235,7 @@
     "registro": 24,
     "folio": 2,
     "renglon": 24,
-    "direccion": "BATEAS 3",
-    "telefono": "",
-    "pagos": "",
-    "firma": ""
+    "direccion": "BATEAS 3"
   },
   {
     "id": "25",
@@ -319,10 +245,7 @@
     "registro": 25,
     "folio": 2,
     "renglon": 25,
-    "direccion": "BATEAS 3",
-    "telefono": "",
-    "pagos": "",
-    "firma": ""
+    "direccion": "BATEAS 3"
   },
   {
     "id": "26",
@@ -332,10 +255,7 @@
     "registro": 26,
     "folio": 2,
     "renglon": 26,
-    "direccion": "BATEAS 3",
-    "telefono": "",
-    "pagos": "",
-    "firma": ""
+    "direccion": "BATEAS 3"
   },
   {
     "id": "27",
@@ -345,10 +265,7 @@
     "registro": 27,
     "folio": 2,
     "renglon": 27,
-    "direccion": "BATEAS 3",
-    "telefono": "",
-    "pagos": "",
-    "firma": ""
+    "direccion": "BATEAS 3"
   },
   {
     "id": "28",
@@ -358,10 +275,7 @@
     "registro": 28,
     "folio": 2,
     "renglon": 28,
-    "direccion": "BATEAS 3",
-    "telefono": "",
-    "pagos": "",
-    "firma": ""
+    "direccion": "BATEAS 3"
   },
   {
     "id": "29",
@@ -371,10 +285,7 @@
     "registro": 29,
     "folio": 2,
     "renglon": 29,
-    "direccion": "BATEAS 3",
-    "telefono": "",
-    "pagos": "",
-    "firma": ""
+    "direccion": "BATEAS 3"
   },
   {
     "id": "30",
@@ -384,10 +295,7 @@
     "registro": 30,
     "folio": 2,
     "renglon": 30,
-    "direccion": "BATEAS 3",
-    "telefono": "",
-    "pagos": "",
-    "firma": ""
+    "direccion": "BATEAS 3"
   },
   {
     "id": "31",
@@ -398,9 +306,7 @@
     "folio": 2,
     "renglon": 31,
     "direccion": "MANZANA 74 CASA 23",
-    "telefono": "3133938745",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3133938745"
   },
   {
     "id": "32",
@@ -411,9 +317,7 @@
     "folio": 2,
     "renglon": 32,
     "direccion": "MANZANA 74 CASA 24",
-    "telefono": "3219418416",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3219418416"
   },
   {
     "id": "33",
@@ -424,9 +328,7 @@
     "folio": 2,
     "renglon": 33,
     "direccion": "MANZANA 65 CASA 11",
-    "telefono": "3223111872",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3223111872"
   },
   {
     "id": "34",
@@ -437,9 +339,7 @@
     "folio": 2,
     "renglon": 34,
     "direccion": "MANZANA 65 CASA 11",
-    "telefono": "3214492055",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3214492055"
   },
   {
     "id": "35",
@@ -449,10 +349,7 @@
     "registro": 35,
     "folio": 2,
     "renglon": 35,
-    "direccion": "BATEAS 3",
-    "telefono": "",
-    "pagos": "",
-    "firma": ""
+    "direccion": "BATEAS 3"
   },
   {
     "id": "36",
@@ -463,9 +360,7 @@
     "folio": 2,
     "renglon": 36,
     "direccion": "MANZANA 82 CASA 14",
-    "telefono": "3166399976",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3166399976"
   },
   {
     "id": "37",
@@ -476,9 +371,7 @@
     "folio": 4,
     "renglon": 1,
     "direccion": "MANZANA 82 CASA 12",
-    "telefono": "3125364759",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3125364759"
   },
   {
     "id": "38",
@@ -489,9 +382,7 @@
     "folio": 4,
     "renglon": 2,
     "direccion": "MANZANA 82 CASA 12",
-    "telefono": "3156422249",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3156422249"
   },
   {
     "id": "39",
@@ -502,9 +393,7 @@
     "folio": 4,
     "renglon": 3,
     "direccion": "MANZANA 82 CASA 25",
-    "telefono": "3185682188",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3185682188"
   },
   {
     "id": "40",
@@ -515,9 +404,7 @@
     "folio": 4,
     "renglon": 4,
     "direccion": "MANZANA 73 CASA 08",
-    "telefono": "3202330421",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3202330421"
   },
   {
     "id": "41",
@@ -528,9 +415,7 @@
     "folio": 4,
     "renglon": 5,
     "direccion": "MANZANA 73 CASA 08",
-    "telefono": "3107787118",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3107787118"
   },
   {
     "id": "42",
@@ -541,9 +426,7 @@
     "folio": 4,
     "renglon": 6,
     "direccion": "MANZANA 69 CASA 19",
-    "telefono": "3144515384",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3144515384"
   },
   {
     "id": "43",
@@ -554,9 +437,7 @@
     "folio": 4,
     "renglon": 7,
     "direccion": "MANZANA 65 CASA 19",
-    "telefono": "3219301903",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3219301903"
   },
   {
     "id": "44",
@@ -567,9 +448,7 @@
     "folio": 4,
     "renglon": 8,
     "direccion": "MANZANA 65 CASA 19",
-    "telefono": "3104865021",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3104865021"
   },
   {
     "id": "45",
@@ -580,22 +459,13 @@
     "folio": 4,
     "renglon": 9,
     "direccion": "MANZANA 80 CASA 08",
-    "telefono": "3208349222",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3208349222"
   },
   {
     "id": "46",
-    "nombre": "",
-    "cedula": "",
-    "fecha_afiliacion": "",
     "registro": 46,
     "folio": 4,
-    "renglon": 10,
-    "direccion": "",
-    "telefono": "",
-    "pagos": "",
-    "firma": ""
+    "renglon": 10
   },
   {
     "id": "47",
@@ -606,9 +476,7 @@
     "folio": 4,
     "renglon": 11,
     "direccion": "MANZANA 77 CASA 02",
-    "telefono": "3122070588",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3122070588"
   },
   {
     "id": "48",
@@ -619,9 +487,7 @@
     "folio": 4,
     "renglon": 12,
     "direccion": "MANZANA 80 CASA 20",
-    "telefono": "3209808721",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3209808721"
   },
   {
     "id": "49",
@@ -630,11 +496,7 @@
     "fecha_afiliacion": "2024-11-21",
     "registro": 49,
     "folio": 4,
-    "renglon": 13,
-    "direccion": "",
-    "telefono": "",
-    "pagos": "",
-    "firma": ""
+    "renglon": 13
   },
   {
     "id": "50",
@@ -643,11 +505,7 @@
     "fecha_afiliacion": "2024-11-21",
     "registro": 50,
     "folio": 4,
-    "renglon": 14,
-    "direccion": "",
-    "telefono": "",
-    "pagos": "",
-    "firma": ""
+    "renglon": 14
   },
   {
     "id": "51",
@@ -658,9 +516,7 @@
     "folio": 4,
     "renglon": 15,
     "direccion": "MANZANA 56 CASA 08",
-    "telefono": "3192965344",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3192965344"
   },
   {
     "id": "52",
@@ -671,9 +527,7 @@
     "folio": 4,
     "renglon": 16,
     "direccion": "MANZANA 56 CASA 08",
-    "telefono": "3212918430",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3212918430"
   },
   {
     "id": "53",
@@ -684,22 +538,13 @@
     "folio": 4,
     "renglon": 17,
     "direccion": "MANZANA 65 CASA 11",
-    "telefono": "3108731778",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3108731778"
   },
   {
     "id": "54",
-    "nombre": "",
-    "cedula": "",
-    "fecha_afiliacion": "",
     "registro": 54,
     "folio": 4,
-    "renglon": 18,
-    "direccion": "",
-    "telefono": "",
-    "pagos": "",
-    "firma": ""
+    "renglon": 18
   },
   {
     "id": "55",
@@ -710,9 +555,7 @@
     "folio": 4,
     "renglon": 19,
     "direccion": "MANZANA 73 CASA 09",
-    "telefono": "3223658659",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3223658659"
   },
   {
     "id": "56",
@@ -723,9 +566,7 @@
     "folio": 4,
     "renglon": 20,
     "direccion": "MANZANA 74 CASA 17",
-    "telefono": "3202610742",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3202610742"
   },
   {
     "id": "57",
@@ -736,9 +577,7 @@
     "folio": 4,
     "renglon": 21,
     "direccion": "MANZANA 73 CASA 09",
-    "telefono": "3124622571",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3124622571"
   },
   {
     "id": "58",
@@ -749,9 +588,7 @@
     "folio": 4,
     "renglon": 22,
     "direccion": "MANZANA 77 CASA 10",
-    "telefono": "3232430946",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3232430946"
   },
   {
     "id": "59",
@@ -762,9 +599,7 @@
     "folio": 4,
     "renglon": 23,
     "direccion": "MANZANA 69 CASA 12",
-    "telefono": "3164094703",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3164094703"
   },
   {
     "id": "60",
@@ -775,9 +610,7 @@
     "folio": 4,
     "renglon": 24,
     "direccion": "MANZANA 66 CASA 08",
-    "telefono": "3124990718",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3124990718"
   },
   {
     "id": "61",
@@ -788,9 +621,7 @@
     "folio": 4,
     "renglon": 25,
     "direccion": "MANZANA 66 CASA 10",
-    "telefono": "3227047583",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3227047583"
   },
   {
     "id": "62",
@@ -801,9 +632,7 @@
     "folio": 4,
     "renglon": 26,
     "direccion": "MANZANA 66 CASA 10",
-    "telefono": "3183786515",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3183786515"
   },
   {
     "id": "63",
@@ -814,22 +643,13 @@
     "folio": 4,
     "renglon": 27,
     "direccion": "MANZANA 77 CASA 10",
-    "telefono": "3146516701",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3146516701"
   },
   {
     "id": "64",
-    "nombre": "",
-    "cedula": "",
-    "fecha_afiliacion": "",
     "registro": 64,
     "folio": 4,
-    "renglon": 28,
-    "direccion": "",
-    "telefono": "",
-    "pagos": "",
-    "firma": ""
+    "renglon": 28
   },
   {
     "id": "65",
@@ -840,9 +660,7 @@
     "folio": 4,
     "renglon": 29,
     "direccion": "MANZANA 65 CASA 12",
-    "telefono": "3123543404",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3123543404"
   },
   {
     "id": "66",
@@ -853,9 +671,7 @@
     "folio": 4,
     "renglon": 30,
     "direccion": "MANZANA 66 CASA 10",
-    "telefono": "3113905896",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3113905896"
   },
   {
     "id": "67",
@@ -866,9 +682,7 @@
     "folio": 4,
     "renglon": 31,
     "direccion": "MANZANA 66 CASA 10",
-    "telefono": "3118052182",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3118052182"
   },
   {
     "id": "68",
@@ -879,9 +693,7 @@
     "folio": 4,
     "renglon": 32,
     "direccion": "MANZANA 66 CASA 11",
-    "telefono": "3134139642",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3134139642"
   },
   {
     "id": "69",
@@ -892,9 +704,7 @@
     "folio": 4,
     "renglon": 33,
     "direccion": "MANZANA 66 CASA 11",
-    "telefono": "3134139642",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3134139642"
   },
   {
     "id": "70",
@@ -905,9 +715,7 @@
     "folio": 4,
     "renglon": 34,
     "direccion": "MANZANA 77 CASA 09",
-    "telefono": "3042269774",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3042269774"
   },
   {
     "id": "71",
@@ -918,9 +726,7 @@
     "folio": 4,
     "renglon": 35,
     "direccion": "MANZANA 88 CASA 01",
-    "telefono": "3204961931",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3204961931"
   },
   {
     "id": "72",
@@ -932,8 +738,7 @@
     "renglon": 36,
     "direccion": "MANZANA 59 CASA 10",
     "telefono": "3213329108",
-    "pagos": "5000 Certificados Diciembre 2025 Efectivo REC-202512-001",
-    "firma": ""
+    "pagos": "5000 Certificados Diciembre 2025 Efectivo REC-202512-001"
   },
   {
     "id": "73",
@@ -944,9 +749,7 @@
     "folio": 6,
     "renglon": 1,
     "direccion": "MANZANA 62 CASA 04",
-    "telefono": "3118671090",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3118671090"
   },
   {
     "id": "74",
@@ -957,9 +760,7 @@
     "folio": 6,
     "renglon": 2,
     "direccion": "MANZANA  CASA",
-    "telefono": "3123821150",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3123821150"
   },
   {
     "id": "75",
@@ -970,9 +771,7 @@
     "folio": 6,
     "renglon": 3,
     "direccion": "MANZANA 74 CASA 17",
-    "telefono": "3243807254",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3243807254"
   },
   {
     "id": "76",
@@ -983,9 +782,7 @@
     "folio": 6,
     "renglon": 4,
     "direccion": "MANZANA 76 CASA 19",
-    "telefono": "3219140910",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3219140910"
   },
   {
     "id": "77",
@@ -996,9 +793,7 @@
     "folio": 6,
     "renglon": 5,
     "direccion": "MANZANA 74 CASA 17",
-    "telefono": "3118986581",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3118986581"
   },
   {
     "id": "78",
@@ -1009,9 +804,7 @@
     "folio": 6,
     "renglon": 6,
     "direccion": "MANZANA 74 CASA 17",
-    "telefono": "3123604954",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3123604954"
   },
   {
     "id": "79",
@@ -1022,22 +815,13 @@
     "folio": 6,
     "renglon": 7,
     "direccion": "MANZANA  CASA",
-    "telefono": "3227292677",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3227292677"
   },
   {
     "id": "80",
-    "nombre": "",
-    "cedula": "",
-    "fecha_afiliacion": "",
     "registro": 80,
     "folio": 6,
-    "renglon": 8,
-    "direccion": "",
-    "telefono": "",
-    "pagos": "",
-    "firma": ""
+    "renglon": 8
   },
   {
     "id": "81",
@@ -1048,9 +832,7 @@
     "folio": 6,
     "renglon": 9,
     "direccion": "MANZANA 88 CASA 05",
-    "telefono": "3124410097",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3124410097"
   },
   {
     "id": "82",
@@ -1061,9 +843,7 @@
     "folio": 6,
     "renglon": 10,
     "direccion": "MANZANA 74 CASA 13",
-    "telefono": "3223932126",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3223932126"
   },
   {
     "id": "83",
@@ -1074,9 +854,7 @@
     "folio": 6,
     "renglon": 11,
     "direccion": "MANZANA 79 CASA 03",
-    "telefono": "3177806793",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3177806793"
   },
   {
     "id": "84",
@@ -1087,9 +865,7 @@
     "folio": 6,
     "renglon": 12,
     "direccion": "MANZANA 81 CASA 12",
-    "telefono": "3212874160",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3212874160"
   },
   {
     "id": "85",
@@ -1100,9 +876,7 @@
     "folio": 6,
     "renglon": 13,
     "direccion": "MANZANA 80 CASA 24",
-    "telefono": "3143174163",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3143174163"
   },
   {
     "id": "86",
@@ -1113,9 +887,7 @@
     "folio": 6,
     "renglon": 14,
     "direccion": "MANZANA 80 CASA 24",
-    "telefono": "3143174163",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3143174163"
   },
   {
     "id": "87",
@@ -1126,9 +898,7 @@
     "folio": 6,
     "renglon": 15,
     "direccion": "MANZANA 80 CASA 24",
-    "telefono": "3115178046",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3115178046"
   },
   {
     "id": "88",
@@ -1139,9 +909,7 @@
     "folio": 6,
     "renglon": 16,
     "direccion": "MANZANA 80 CASA 24",
-    "telefono": "3224211494",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3224211494"
   },
   {
     "id": "89",
@@ -1152,9 +920,7 @@
     "folio": 6,
     "renglon": 17,
     "direccion": "MANZANA 82 CASA 25",
-    "telefono": "3169298746",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3169298746"
   },
   {
     "id": "90",
@@ -1164,10 +930,7 @@
     "registro": 90,
     "folio": 6,
     "renglon": 18,
-    "direccion": "MANZANA 75 CASA 11",
-    "telefono": "",
-    "pagos": "",
-    "firma": ""
+    "direccion": "MANZANA 75 CASA 11"
   },
   {
     "id": "91",
@@ -1178,9 +941,7 @@
     "folio": 6,
     "renglon": 19,
     "direccion": "MANZANA 79 CASA 09",
-    "telefono": "3103066771",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3103066771"
   },
   {
     "id": "92",
@@ -1191,22 +952,13 @@
     "folio": 6,
     "renglon": 20,
     "direccion": "MANZANA 79 CASA 09",
-    "telefono": "3102020805",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3102020805"
   },
   {
     "id": "93",
-    "nombre": "",
-    "cedula": "",
-    "fecha_afiliacion": "",
     "registro": 93,
     "folio": 6,
-    "renglon": 21,
-    "direccion": "",
-    "telefono": "",
-    "pagos": "",
-    "firma": ""
+    "renglon": 21
   },
   {
     "id": "94",
@@ -1217,9 +969,7 @@
     "folio": 6,
     "renglon": 22,
     "direccion": "MANZANA 78 A CASA 01",
-    "telefono": "3134857699",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3134857699"
   },
   {
     "id": "95",
@@ -1230,9 +980,7 @@
     "folio": 6,
     "renglon": 23,
     "direccion": "MANZANA 64 A CASA 16",
-    "telefono": "3157745264",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3157745264"
   },
   {
     "id": "96",
@@ -1243,9 +991,7 @@
     "folio": 6,
     "renglon": 24,
     "direccion": "MANZANA 79 CASA 06",
-    "telefono": "3204919418",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3204919418"
   },
   {
     "id": "97",
@@ -1256,9 +1002,7 @@
     "folio": 6,
     "renglon": 25,
     "direccion": "MANZANA 80 CASA 02",
-    "telefono": "3104824352",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3104824352"
   },
   {
     "id": "98",
@@ -1269,9 +1013,7 @@
     "folio": 6,
     "renglon": 26,
     "direccion": "MANZANA 76 CASA 02",
-    "telefono": "3153187216",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3153187216"
   },
   {
     "id": "99",
@@ -1282,35 +1024,19 @@
     "folio": 6,
     "renglon": 27,
     "direccion": "MANZANA 76 CASA 02",
-    "telefono": "3107415133",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3107415133"
   },
   {
     "id": "100",
-    "nombre": "",
-    "cedula": "",
-    "fecha_afiliacion": "",
     "registro": 100,
     "folio": 6,
-    "renglon": 28,
-    "direccion": "",
-    "telefono": "",
-    "pagos": "",
-    "firma": ""
+    "renglon": 28
   },
   {
     "id": "101",
-    "nombre": "",
-    "cedula": "",
-    "fecha_afiliacion": "",
     "registro": 101,
     "folio": 6,
-    "renglon": 29,
-    "direccion": "",
-    "telefono": "",
-    "pagos": "",
-    "firma": ""
+    "renglon": 29
   },
   {
     "id": "102",
@@ -1321,9 +1047,7 @@
     "folio": 6,
     "renglon": 30,
     "direccion": "MANZANA 80 CASA 17",
-    "telefono": "3123927906",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3123927906"
   },
   {
     "id": "103",
@@ -1334,9 +1058,7 @@
     "folio": 6,
     "renglon": 31,
     "direccion": "MANZANA 80 CASA 17",
-    "telefono": "3123927906",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3123927906"
   },
   {
     "id": "104",
@@ -1347,9 +1069,7 @@
     "folio": 6,
     "renglon": 32,
     "direccion": "MANZANA 80 CASA 18",
-    "telefono": "3148220345",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3148220345"
   },
   {
     "id": "105",
@@ -1360,22 +1080,14 @@
     "folio": 6,
     "renglon": 33,
     "direccion": "MANZANA 80 CASA 15",
-    "telefono": "3107761018",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3107761018"
   },
   {
     "id": "106",
-    "nombre": "",
-    "cedula": "",
     "fecha_afiliacion": "2024-11-21",
     "registro": 106,
     "folio": 6,
-    "renglon": 34,
-    "direccion": "",
-    "telefono": "",
-    "pagos": "",
-    "firma": ""
+    "renglon": 34
   },
   {
     "id": "107",
@@ -1386,9 +1098,7 @@
     "folio": 6,
     "renglon": 35,
     "direccion": "MANZANA 70 CASA 19",
-    "telefono": "3505462234",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3505462234"
   },
   {
     "id": "108",
@@ -1399,9 +1109,7 @@
     "folio": 6,
     "renglon": 36,
     "direccion": "MANZANA 77 CASA 08",
-    "telefono": "3212377120",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3212377120"
   },
   {
     "id": "109",
@@ -1412,9 +1120,7 @@
     "folio": 8,
     "renglon": 1,
     "direccion": "MANZANA 77 CASA 02",
-    "telefono": "3125357107",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3125357107"
   },
   {
     "id": "110",
@@ -1425,22 +1131,13 @@
     "folio": 8,
     "renglon": 2,
     "direccion": "MANZANA 77 CASA 02",
-    "telefono": "3107581370",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3107581370"
   },
   {
     "id": "111",
-    "nombre": "",
-    "cedula": "",
-    "fecha_afiliacion": "",
     "registro": 111,
     "folio": 8,
-    "renglon": 3,
-    "direccion": "",
-    "telefono": "",
-    "pagos": "",
-    "firma": ""
+    "renglon": 3
   },
   {
     "id": "112",
@@ -1451,9 +1148,7 @@
     "folio": 8,
     "renglon": 4,
     "direccion": "MANZANA 65 CASA 17",
-    "telefono": "3185573466",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3185573466"
   },
   {
     "id": "113",
@@ -1464,22 +1159,13 @@
     "folio": 8,
     "renglon": 5,
     "direccion": "MANZANA 58 CASA 11 B",
-    "telefono": "3156220519",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3156220519"
   },
   {
     "id": "114",
-    "nombre": "",
-    "cedula": "",
-    "fecha_afiliacion": "",
     "registro": 114,
     "folio": 8,
-    "renglon": 6,
-    "direccion": "",
-    "telefono": "",
-    "pagos": "",
-    "firma": ""
+    "renglon": 6
   },
   {
     "id": "115",
@@ -1490,9 +1176,7 @@
     "folio": 8,
     "renglon": 7,
     "direccion": "MANZANA 80 CASA 18",
-    "telefono": "3148220345",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3148220345"
   },
   {
     "id": "116",
@@ -1503,9 +1187,7 @@
     "folio": 8,
     "renglon": 8,
     "direccion": "MANZANA 60 CASA 08",
-    "telefono": "3104202239",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3104202239"
   },
   {
     "id": "117",
@@ -1516,9 +1198,7 @@
     "folio": 8,
     "renglon": 9,
     "direccion": "MANZANA 60 CASA 08",
-    "telefono": "3102172076",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3102172076"
   },
   {
     "id": "118",
@@ -1529,9 +1209,7 @@
     "folio": 8,
     "renglon": 10,
     "direccion": "MANZANA 80 CASA 18",
-    "telefono": "3148220345",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3148220345"
   },
   {
     "id": "119",
@@ -1542,9 +1220,7 @@
     "folio": 8,
     "renglon": 11,
     "direccion": "MANZANA 79 CASA 01",
-    "telefono": "3204861909",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3204861909"
   },
   {
     "id": "120",
@@ -1555,22 +1231,13 @@
     "folio": 8,
     "renglon": 12,
     "direccion": "MANZANA 64 CASA 22",
-    "telefono": "3187489466",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3187489466"
   },
   {
     "id": "121",
-    "nombre": "",
-    "cedula": "",
-    "fecha_afiliacion": "",
     "registro": 121,
     "folio": 8,
-    "renglon": 13,
-    "direccion": "",
-    "telefono": "",
-    "pagos": "",
-    "firma": ""
+    "renglon": 13
   },
   {
     "id": "122",
@@ -1581,9 +1248,7 @@
     "folio": 8,
     "renglon": 14,
     "direccion": "MANZANA 80 CASA 08",
-    "telefono": "3132093017",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3132093017"
   },
   {
     "id": "123",
@@ -1594,9 +1259,7 @@
     "folio": 8,
     "renglon": 15,
     "direccion": "MANZANA 64 CASA 22",
-    "telefono": "3162731192",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3162731192"
   },
   {
     "id": "124",
@@ -1607,9 +1270,7 @@
     "folio": 8,
     "renglon": 16,
     "direccion": "MANZANA 88 CASA 01",
-    "telefono": "3204961931",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3204961931"
   },
   {
     "id": "125",
@@ -1620,9 +1281,7 @@
     "folio": 8,
     "renglon": 17,
     "direccion": "MANZANA 88 CASA 01",
-    "telefono": "3502373295",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3502373295"
   },
   {
     "id": "126",
@@ -1633,9 +1292,7 @@
     "folio": 8,
     "renglon": 18,
     "direccion": "MANZANA 65 CASA 18",
-    "telefono": "3122120787",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3122120787"
   },
   {
     "id": "127",
@@ -1646,9 +1303,7 @@
     "folio": 8,
     "renglon": 19,
     "direccion": "MANZANA 65 CASA 18",
-    "telefono": "3173365860",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3173365860"
   },
   {
     "id": "128",
@@ -1658,10 +1313,7 @@
     "registro": 128,
     "folio": 8,
     "renglon": 20,
-    "direccion": "MANZANA  CASA",
-    "telefono": "",
-    "pagos": "",
-    "firma": ""
+    "direccion": "MANZANA  CASA"
   },
   {
     "id": "129",
@@ -1672,9 +1324,7 @@
     "folio": 8,
     "renglon": 21,
     "direccion": "MANZANA 79 A CASA 08",
-    "telefono": "3142305836",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3142305836"
   },
   {
     "id": "130",
@@ -1685,9 +1335,7 @@
     "folio": 8,
     "renglon": 22,
     "direccion": "MANZANA 79 A CASA 08",
-    "telefono": "3142305836",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3142305836"
   },
   {
     "id": "131",
@@ -1698,9 +1346,7 @@
     "folio": 8,
     "renglon": 23,
     "direccion": "MANZANA 70 CASA 19",
-    "telefono": "3507206174",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3507206174"
   },
   {
     "id": "132",
@@ -1711,9 +1357,7 @@
     "folio": 8,
     "renglon": 24,
     "direccion": "MANZANA 61 CASA 11",
-    "telefono": "3143110139",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3143110139"
   },
   {
     "id": "133",
@@ -1724,9 +1368,7 @@
     "folio": 8,
     "renglon": 25,
     "direccion": "MANZANA 61 CASA 11",
-    "telefono": "3104815896",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3104815896"
   },
   {
     "id": "134",
@@ -1737,9 +1379,7 @@
     "folio": 8,
     "renglon": 26,
     "direccion": "MANZANA 60 CASA 20",
-    "telefono": "3118245736",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3118245736"
   },
   {
     "id": "135",
@@ -1750,35 +1390,19 @@
     "folio": 8,
     "renglon": 27,
     "direccion": "MANZANA 60 CASA 20",
-    "telefono": "3202578389",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3202578389"
   },
   {
     "id": "136",
-    "nombre": "",
-    "cedula": "",
-    "fecha_afiliacion": "",
     "registro": 136,
     "folio": 8,
-    "renglon": 28,
-    "direccion": "",
-    "telefono": "",
-    "pagos": "",
-    "firma": ""
+    "renglon": 28
   },
   {
     "id": "137",
-    "nombre": "",
-    "cedula": "",
-    "fecha_afiliacion": "",
     "registro": 137,
     "folio": 8,
-    "renglon": 29,
-    "direccion": "",
-    "telefono": "",
-    "pagos": "",
-    "firma": ""
+    "renglon": 29
   },
   {
     "id": "138",
@@ -1787,11 +1411,7 @@
     "fecha_afiliacion": "2024-11-21",
     "registro": 138,
     "folio": 8,
-    "renglon": 30,
-    "direccion": "",
-    "telefono": "",
-    "pagos": "",
-    "firma": ""
+    "renglon": 30
   },
   {
     "id": "139",
@@ -1802,9 +1422,7 @@
     "folio": 8,
     "renglon": 31,
     "direccion": "MANZANA 62 CASA 11",
-    "telefono": "3224129001",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3224129001"
   },
   {
     "id": "140",
@@ -1815,9 +1433,7 @@
     "folio": 8,
     "renglon": 32,
     "direccion": "MANZANA 62 CASA 11",
-    "telefono": "3177004328",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3177004328"
   },
   {
     "id": "141",
@@ -1828,35 +1444,19 @@
     "folio": 8,
     "renglon": 33,
     "direccion": "MANZANA 59 CASA 17",
-    "telefono": "3127711026",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3127711026"
   },
   {
     "id": "142",
-    "nombre": "",
-    "cedula": "",
-    "fecha_afiliacion": "",
     "registro": 142,
     "folio": 8,
-    "renglon": 34,
-    "direccion": "",
-    "telefono": "",
-    "pagos": "",
-    "firma": ""
+    "renglon": 34
   },
   {
     "id": "143",
-    "nombre": "",
-    "cedula": "",
-    "fecha_afiliacion": "",
     "registro": 143,
     "folio": 8,
-    "renglon": 35,
-    "direccion": "",
-    "telefono": "",
-    "pagos": "",
-    "firma": ""
+    "renglon": 35
   },
   {
     "id": "144",
@@ -1867,9 +1467,7 @@
     "folio": 8,
     "renglon": 36,
     "direccion": "MANZANA 64 CASA 26",
-    "telefono": "3115432558",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3115432558"
   },
   {
     "id": "145",
@@ -1880,9 +1478,7 @@
     "folio": 10,
     "renglon": 1,
     "direccion": "MANZANA 64 A CASA 24",
-    "telefono": "310309928",
-    "pagos": "",
-    "firma": ""
+    "telefono": "310309928"
   },
   {
     "id": "146",
@@ -1893,9 +1489,7 @@
     "folio": 10,
     "renglon": 2,
     "direccion": "MANZANA 77 CASA 09",
-    "telefono": "3023513037",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3023513037"
   },
   {
     "id": "147",
@@ -1906,9 +1500,7 @@
     "folio": 10,
     "renglon": 3,
     "direccion": "MANZANA 77 CASA 09",
-    "telefono": "3042898700",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3042898700"
   },
   {
     "id": "148",
@@ -1919,9 +1511,7 @@
     "folio": 10,
     "renglon": 4,
     "direccion": "MANZANA 77 CASA 08",
-    "telefono": "3243761596",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3243761596"
   },
   {
     "id": "149",
@@ -1932,9 +1522,7 @@
     "folio": 10,
     "renglon": 5,
     "direccion": "MANZANA 66 CASA 08",
-    "telefono": "3133860843",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3133860843"
   },
   {
     "id": "150",
@@ -1945,9 +1533,7 @@
     "folio": 10,
     "renglon": 6,
     "direccion": "MANZANA 75 CASA 11",
-    "telefono": "3118686296",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3118686296"
   },
   {
     "id": "151",
@@ -1958,9 +1544,7 @@
     "folio": 10,
     "renglon": 7,
     "direccion": "MANZANA 83 CASA 01",
-    "telefono": "3144519010",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3144519010"
   },
   {
     "id": "152",
@@ -1971,9 +1555,7 @@
     "folio": 10,
     "renglon": 8,
     "direccion": "MANZANA 65 CASA 18",
-    "telefono": "3104622114",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3104622114"
   },
   {
     "id": "153",
@@ -1984,9 +1566,7 @@
     "folio": 10,
     "renglon": 9,
     "direccion": "MANZANA 65 CASA 18",
-    "telefono": "3104150283",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3104150283"
   },
   {
     "id": "154",
@@ -1997,9 +1577,7 @@
     "folio": 10,
     "renglon": 10,
     "direccion": "MANZANA 80 CASA 25",
-    "telefono": "3143997109",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3143997109"
   },
   {
     "id": "155",
@@ -2010,9 +1588,7 @@
     "folio": 10,
     "renglon": 11,
     "direccion": "MANZANA 64 A CASA 26",
-    "telefono": "3043352307",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3043352307"
   },
   {
     "id": "156",
@@ -2023,9 +1599,7 @@
     "folio": 10,
     "renglon": 12,
     "direccion": "MANZANA 65 CASA 18",
-    "telefono": "3108625863",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3108625863"
   },
   {
     "id": "157",
@@ -2036,9 +1610,7 @@
     "folio": 10,
     "renglon": 13,
     "direccion": "MANZANA 80 CASA 08",
-    "telefono": "3118049672",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3118049672"
   },
   {
     "id": "158",
@@ -2049,9 +1621,7 @@
     "folio": 10,
     "renglon": 14,
     "direccion": "MANZANA 65 CASA 18",
-    "telefono": "3113974015",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3113974015"
   },
   {
     "id": "159",
@@ -2062,9 +1632,7 @@
     "folio": 10,
     "renglon": 15,
     "direccion": "MANZANA 65 CASA 18",
-    "telefono": "3194902014",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3194902014"
   },
   {
     "id": "160",
@@ -2075,9 +1643,7 @@
     "folio": 10,
     "renglon": 16,
     "direccion": "MANZANA 79 CASA 22",
-    "telefono": "3167834444",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3167834444"
   },
   {
     "id": "161",
@@ -2088,9 +1654,7 @@
     "folio": 10,
     "renglon": 17,
     "direccion": "MANZANA 79 CASA 22",
-    "telefono": "3205416328",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3205416328"
   },
   {
     "id": "162",
@@ -2101,9 +1665,7 @@
     "folio": 10,
     "renglon": 18,
     "direccion": "MANZANA 69 CASA 16",
-    "telefono": "3143489001",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3143489001"
   },
   {
     "id": "163",
@@ -2114,9 +1676,7 @@
     "folio": 10,
     "renglon": 19,
     "direccion": "MANZANA 78 CASA 05",
-    "telefono": "3235213723",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3235213723"
   },
   {
     "id": "164",
@@ -2127,9 +1687,7 @@
     "folio": 10,
     "renglon": 20,
     "direccion": "MANZANA 59 CASA 10",
-    "telefono": "3135815787",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3135815787"
   },
   {
     "id": "165",
@@ -2140,9 +1698,7 @@
     "folio": 10,
     "renglon": 21,
     "direccion": "MANZANA 60 CASA 09",
-    "telefono": "3114975480",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3114975480"
   },
   {
     "id": "166",
@@ -2153,9 +1709,7 @@
     "folio": 10,
     "renglon": 22,
     "direccion": "MANZANA 71 CASA 09",
-    "telefono": "3172777032",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3172777032"
   },
   {
     "id": "167",
@@ -2166,9 +1720,7 @@
     "folio": 10,
     "renglon": 23,
     "direccion": "MZ. 69 CASA 22",
-    "telefono": "3177184767",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3177184767"
   },
   {
     "id": "168",
@@ -2179,9 +1731,7 @@
     "folio": 10,
     "renglon": 24,
     "direccion": "MZ 59 CASA 11",
-    "telefono": "3184448444",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3184448444"
   },
   {
     "id": "169",
@@ -2192,9 +1742,7 @@
     "folio": 10,
     "renglon": 25,
     "direccion": "MZ 60 CASA 14",
-    "telefono": "3104858271",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3104858271"
   },
   {
     "id": "170",
@@ -2205,9 +1753,7 @@
     "folio": 10,
     "renglon": 26,
     "direccion": "MANZANA 62 CASA 10",
-    "telefono": "3127572482",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3127572482"
   },
   {
     "id": "171",
@@ -2218,9 +1764,7 @@
     "folio": 10,
     "renglon": 27,
     "direccion": "MANZANA 64 CASA 24",
-    "telefono": "3142005921",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3142005921"
   },
   {
     "id": "172",
@@ -2231,9 +1775,7 @@
     "folio": 10,
     "renglon": 28,
     "direccion": "MANZANA 64 CASA 24",
-    "telefono": "3142005921",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3142005921"
   },
   {
     "id": "173",
@@ -2244,9 +1786,7 @@
     "folio": 10,
     "renglon": 29,
     "direccion": "MANZANA 69 CASA 22",
-    "telefono": "3112372759",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3112372759"
   },
   {
     "id": "174",
@@ -2257,9 +1797,7 @@
     "folio": 10,
     "renglon": 30,
     "direccion": "MANZANA 72 CASA 06",
-    "telefono": "3118775956",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3118775956"
   },
   {
     "id": "175",
@@ -2270,9 +1808,7 @@
     "folio": 10,
     "renglon": 31,
     "direccion": "MANZANA 58 A CASA 13",
-    "telefono": "3164158742",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3164158742"
   },
   {
     "id": "176",
@@ -2283,9 +1819,7 @@
     "folio": 10,
     "renglon": 32,
     "direccion": "MANZANA 62 CASA 09",
-    "telefono": "3178316611",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3178316611"
   },
   {
     "id": "177",
@@ -2296,9 +1830,7 @@
     "folio": 10,
     "renglon": 33,
     "direccion": "MANZANA 64 CASA 22",
-    "telefono": "3142564854",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3142564854"
   },
   {
     "id": "178",
@@ -2309,9 +1841,7 @@
     "folio": 10,
     "renglon": 34,
     "direccion": "MANZANA 71 CASA 16",
-    "telefono": "3105755543",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3105755543"
   },
   {
     "id": "179",
@@ -2322,9 +1852,7 @@
     "folio": 10,
     "renglon": 35,
     "direccion": "MANZANA 71 CASA 12",
-    "telefono": "3115562262",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3115562262"
   },
   {
     "id": "180",
@@ -2335,9 +1863,7 @@
     "folio": 10,
     "renglon": 36,
     "direccion": "MANZANA 65 CASA 18",
-    "telefono": "3188812960",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3188812960"
   },
   {
     "id": "181",
@@ -2348,9 +1874,7 @@
     "folio": 12,
     "renglon": 1,
     "direccion": "MANZANA 60 CASA 09",
-    "telefono": "3173591031",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3173591031"
   },
   {
     "id": "182",
@@ -2361,9 +1885,7 @@
     "folio": 12,
     "renglon": 2,
     "direccion": "MANZANA 60 CASA 09",
-    "telefono": "3144272032",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3144272032"
   },
   {
     "id": "183",
@@ -2374,9 +1896,7 @@
     "folio": 12,
     "renglon": 3,
     "direccion": "MANZANA 65 CASA 18",
-    "telefono": "3118800878",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3118800878"
   },
   {
     "id": "184",
@@ -2387,9 +1907,7 @@
     "folio": 12,
     "renglon": 4,
     "direccion": "MANZANA 79 A CASA 08",
-    "telefono": "3114523962",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3114523962"
   },
   {
     "id": "185",
@@ -2400,9 +1918,7 @@
     "folio": 12,
     "renglon": 5,
     "direccion": "MANZANA 59 CASA 22",
-    "telefono": "3108217981",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3108217981"
   },
   {
     "id": "186",
@@ -2413,9 +1929,7 @@
     "folio": 12,
     "renglon": 6,
     "direccion": "MANZANA 66 CASA 07",
-    "telefono": "3125429071",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3125429071"
   },
   {
     "id": "187",
@@ -2426,9 +1940,7 @@
     "folio": 12,
     "renglon": 7,
     "direccion": "MANZANA 66 CASA 07",
-    "telefono": "3104834168",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3104834168"
   },
   {
     "id": "188",
@@ -2439,9 +1951,7 @@
     "folio": 12,
     "renglon": 8,
     "direccion": "MANZANA 65 CASA 18",
-    "telefono": "3107997054",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3107997054"
   },
   {
     "id": "189",
@@ -2452,9 +1962,7 @@
     "folio": 12,
     "renglon": 9,
     "direccion": "MANZANA 59 CASA 07",
-    "telefono": "3218267662",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3218267662"
   },
   {
     "id": "190",
@@ -2465,9 +1973,7 @@
     "folio": 12,
     "renglon": 10,
     "direccion": "MANZANA 59 CASA 07",
-    "telefono": "3227600700",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3227600700"
   },
   {
     "id": "191",
@@ -2478,9 +1984,7 @@
     "folio": 12,
     "renglon": 11,
     "direccion": "MANZANA 59 CASA 07",
-    "telefono": "3024206776",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3024206776"
   },
   {
     "id": "192",
@@ -2491,9 +1995,7 @@
     "folio": 12,
     "renglon": 12,
     "direccion": "MANZANA 59 CASA 07",
-    "telefono": "3212909658",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3212909658"
   },
   {
     "id": "193",
@@ -2504,9 +2006,7 @@
     "folio": 12,
     "renglon": 13,
     "direccion": "MANZANA 59 CASA 07",
-    "telefono": "3174627007",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3174627007"
   },
   {
     "id": "194",
@@ -2517,9 +2017,7 @@
     "folio": 12,
     "renglon": 14,
     "direccion": "MANZANA 79 CASA 06",
-    "telefono": "3132163775",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3132163775"
   },
   {
     "id": "195",
@@ -2530,9 +2028,7 @@
     "folio": 12,
     "renglon": 15,
     "direccion": "MANZANA 79 CASA 06",
-    "telefono": "3219372334",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3219372334"
   },
   {
     "id": "196",
@@ -2543,9 +2039,7 @@
     "folio": 12,
     "renglon": 16,
     "direccion": "MANZANA 79 CASA 06",
-    "telefono": "3124428697",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3124428697"
   },
   {
     "id": "197",
@@ -2556,9 +2050,7 @@
     "folio": 12,
     "renglon": 17,
     "direccion": "MANZANA 79 CASA 06",
-    "telefono": "3218138987",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3218138987"
   },
   {
     "id": "198",
@@ -2569,9 +2061,7 @@
     "folio": 12,
     "renglon": 18,
     "direccion": "MANZANA 79 CASA 06",
-    "telefono": "3118056159",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3118056159"
   },
   {
     "id": "199",
@@ -2582,9 +2072,7 @@
     "folio": 12,
     "renglon": 19,
     "direccion": "MANZANA 80 CASA 08",
-    "telefono": "3134848172",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3134848172"
   },
   {
     "id": "200",
@@ -2595,9 +2083,7 @@
     "folio": 12,
     "renglon": 20,
     "direccion": "MANZANA 80 CASA 08",
-    "telefono": "3123344378",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3123344378"
   },
   {
     "id": "201",
@@ -2608,9 +2094,7 @@
     "folio": 12,
     "renglon": 21,
     "direccion": "MANZANA 59 CASA 07",
-    "telefono": "3165599334",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3165599334"
   },
   {
     "id": "202",
@@ -2621,9 +2105,7 @@
     "folio": 12,
     "renglon": 22,
     "direccion": "MANZANA 59 CASA 07",
-    "telefono": "3176428679",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3176428679"
   },
   {
     "id": "203",
@@ -2634,9 +2116,7 @@
     "folio": 12,
     "renglon": 23,
     "direccion": "MANZANA 44 CASA 04",
-    "telefono": "3202057875",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3202057875"
   },
   {
     "id": "204",
@@ -2647,9 +2127,7 @@
     "folio": 12,
     "renglon": 24,
     "direccion": "MANZANA 44 CASA 04",
-    "telefono": "3224645953",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3224645953"
   },
   {
     "id": "205",
@@ -2660,9 +2138,7 @@
     "folio": 12,
     "renglon": 25,
     "direccion": "MANZANA 71 CASA 08",
-    "telefono": "3182254430",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3182254430"
   },
   {
     "id": "206",
@@ -2673,9 +2149,7 @@
     "folio": 12,
     "renglon": 26,
     "direccion": "MANZANA 71 CASA 08",
-    "telefono": "3116072811",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3116072811"
   },
   {
     "id": "207",
@@ -2686,9 +2160,7 @@
     "folio": 12,
     "renglon": 27,
     "direccion": "MANZANA 59 CASA 07",
-    "telefono": "3172520442",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3172520442"
   },
   {
     "id": "208",
@@ -2699,9 +2171,7 @@
     "folio": 12,
     "renglon": 28,
     "direccion": "MANZANA 59 CASA 07",
-    "telefono": "3175033251",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3175033251"
   },
   {
     "id": "209",
@@ -2712,9 +2182,7 @@
     "folio": 12,
     "renglon": 29,
     "direccion": "MANZANA 59 CASA 07",
-    "telefono": "3103206312",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3103206312"
   },
   {
     "id": "210",
@@ -2725,9 +2193,7 @@
     "folio": 12,
     "renglon": 30,
     "direccion": "MANZANA  CASA ",
-    "telefono": "3118689835",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3118689835"
   },
   {
     "id": "211",
@@ -2738,9 +2204,7 @@
     "folio": 12,
     "renglon": 31,
     "direccion": "MANZANA 58 CASA 13",
-    "telefono": "3227356105",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3227356105"
   },
   {
     "id": "212",
@@ -2751,9 +2215,7 @@
     "folio": 12,
     "renglon": 32,
     "direccion": "MANZANA 65 CASA 11",
-    "telefono": "3213290670",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3213290670"
   },
   {
     "id": "213",
@@ -2764,9 +2226,7 @@
     "folio": 12,
     "renglon": 33,
     "direccion": "MANZANA 65 CASA 11",
-    "telefono": "3213907203",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3213907203"
   },
   {
     "id": "214",
@@ -2777,9 +2237,7 @@
     "folio": 12,
     "renglon": 34,
     "direccion": "MANZANA 65 CASA 11",
-    "telefono": "3202002668",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3202002668"
   },
   {
     "id": "215",
@@ -2790,9 +2248,7 @@
     "folio": 12,
     "renglon": 35,
     "direccion": "MANZANA 78 CASA 15",
-    "telefono": "3165123898",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3165123898"
   },
   {
     "id": "216",
@@ -2803,9 +2259,7 @@
     "folio": 12,
     "renglon": 36,
     "direccion": "MANZANA 78 CASA 15",
-    "telefono": "3105889655",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3105889655"
   },
   {
     "id": "217",
@@ -2816,9 +2270,7 @@
     "folio": 14,
     "renglon": 1,
     "direccion": "MANZANA 77 CASA 04",
-    "telefono": "3225120112",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3225120112"
   },
   {
     "id": "218",
@@ -2829,9 +2281,7 @@
     "folio": 14,
     "renglon": 2,
     "direccion": "MANZANA 65 CASA 19",
-    "telefono": "3219951630",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3219951630"
   },
   {
     "id": "219",
@@ -2842,9 +2292,7 @@
     "folio": 14,
     "renglon": 3,
     "direccion": "MANZANA 79 CASA 01",
-    "telefono": "3134179331",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3134179331"
   },
   {
     "id": "220",
@@ -2855,9 +2303,7 @@
     "folio": 14,
     "renglon": 4,
     "direccion": "MANZANA 65 CASA 18",
-    "telefono": "3004541461",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3004541461"
   },
   {
     "id": "221",
@@ -2868,9 +2314,7 @@
     "folio": 14,
     "renglon": 5,
     "direccion": "MANZANA 71 CASA 08",
-    "telefono": "3506501850",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3506501850"
   },
   {
     "id": "222",
@@ -2881,9 +2325,7 @@
     "folio": 14,
     "renglon": 6,
     "direccion": "MANZANA 64 CASA 08",
-    "telefono": "3125316787",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3125316787"
   },
   {
     "id": "223",
@@ -2894,9 +2336,7 @@
     "folio": 14,
     "renglon": 7,
     "direccion": "MANZANA 64 CASA 08",
-    "telefono": "3213288986",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3213288986"
   },
   {
     "id": "224",
@@ -2907,9 +2347,7 @@
     "folio": 14,
     "renglon": 8,
     "direccion": "MANZANA 60 CASA 23",
-    "telefono": "3134263723",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3134263723"
   },
   {
     "id": "225",
@@ -2919,10 +2357,7 @@
     "registro": "225",
     "folio": "14",
     "renglon": "9",
-    "direccion": "MANZANA 60 CASA 23",
-    "telefono": "",
-    "pagos": "",
-    "firma": ""
+    "direccion": "MANZANA 60 CASA 23"
   },
   {
     "id": "226",
@@ -2933,9 +2368,7 @@
     "folio": "14",
     "renglon": "10",
     "direccion": "MANZANA 90 CASA 12",
-    "telefono": "3208667186",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3208667186"
   },
   {
     "id": "227",
@@ -2946,9 +2379,7 @@
     "folio": 14,
     "renglon": 11,
     "direccion": "MANZANA 90 CASA 12",
-    "telefono": "3115602759",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3115602759"
   },
   {
     "id": "228",
@@ -2959,9 +2390,7 @@
     "folio": 14,
     "renglon": 12,
     "direccion": "MANZANA 61 CASA 22",
-    "telefono": "3138535907",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3138535907"
   },
   {
     "id": "229",
@@ -2972,9 +2401,7 @@
     "folio": 14,
     "renglon": 13,
     "direccion": "MANZANA 61 CASA 22",
-    "telefono": "3019266959",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3019266959"
   },
   {
     "id": "230",
@@ -2985,9 +2412,7 @@
     "folio": 14,
     "renglon": 14,
     "direccion": "MANZANA 81 CASA 11",
-    "telefono": "3180286388",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3180286388"
   },
   {
     "id": "231",
@@ -2998,9 +2423,7 @@
     "folio": 14,
     "renglon": 15,
     "direccion": "MANZANA 81 CASA 11",
-    "telefono": "3133815267",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3133815267"
   },
   {
     "id": "232",
@@ -3011,9 +2434,7 @@
     "folio": 14,
     "renglon": 16,
     "direccion": "MANZANA 81 CASA 11",
-    "telefono": "3161302325",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3161302325"
   },
   {
     "id": "233",
@@ -3024,9 +2445,7 @@
     "folio": 14,
     "renglon": 17,
     "direccion": "MANZANA 81 CASA 11",
-    "telefono": "3156784643",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3156784643"
   },
   {
     "id": "234",
@@ -3037,9 +2456,7 @@
     "folio": 14,
     "renglon": 18,
     "direccion": "MANZANA 80 CASA 13",
-    "telefono": "3223059224",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3223059224"
   },
   {
     "id": "235",
@@ -3050,9 +2467,7 @@
     "folio": 14,
     "renglon": 19,
     "direccion": "MANZANA 80 CASA 13",
-    "telefono": "3228752065",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3228752065"
   },
   {
     "id": "236",
@@ -3063,9 +2478,7 @@
     "folio": 14,
     "renglon": 20,
     "direccion": "MANZANA 80 CASA 13",
-    "telefono": "3228447022",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3228447022"
   },
   {
     "id": "237",
@@ -3076,9 +2489,7 @@
     "folio": 14,
     "renglon": 21,
     "direccion": "MANZANA 80 CASA 13",
-    "telefono": "3186219342",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3186219342"
   },
   {
     "id": "238",
@@ -3089,9 +2500,7 @@
     "folio": 14,
     "renglon": 22,
     "direccion": "MANZANA 71 CASA 08",
-    "telefono": "3209220243",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3209220243"
   },
   {
     "id": "239",
@@ -3102,9 +2511,7 @@
     "folio": 14,
     "renglon": 23,
     "direccion": "MANZANA 71 CASA 08",
-    "telefono": "3024577478",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3024577478"
   },
   {
     "id": "240",
@@ -3115,9 +2522,7 @@
     "folio": 14,
     "renglon": 24,
     "direccion": "MANZANA 71 CASA 08",
-    "telefono": "3124380840",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3124380840"
   },
   {
     "id": "241",
@@ -3128,9 +2533,7 @@
     "folio": 14,
     "renglon": 25,
     "direccion": "MANZANA 71 CASA 08",
-    "telefono": "3204615363",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3204615363"
   },
   {
     "id": "242",
@@ -3141,9 +2544,7 @@
     "folio": 14,
     "renglon": 26,
     "direccion": "MANZANA 65 CASA 18",
-    "telefono": "3209215759",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3209215759"
   },
   {
     "id": "243",
@@ -3154,9 +2555,7 @@
     "folio": 14,
     "renglon": 27,
     "direccion": "MANZANA 66 CASA 07",
-    "telefono": "3133743219",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3133743219"
   },
   {
     "id": "244",
@@ -3167,9 +2566,7 @@
     "folio": 14,
     "renglon": 28,
     "direccion": "MANZANA 60 CASA 20",
-    "telefono": "3118245736",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3118245736"
   },
   {
     "id": "245",
@@ -3180,9 +2577,7 @@
     "folio": 14,
     "renglon": 29,
     "direccion": "MANZANA 65 CASA 09",
-    "telefono": "3046256103",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3046256103"
   },
   {
     "id": "246",
@@ -3193,9 +2588,7 @@
     "folio": 14,
     "renglon": 30,
     "direccion": "MANZANA 65 CASA 18",
-    "telefono": "3115796002",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3115796002"
   },
   {
     "id": "247",
@@ -3206,9 +2599,7 @@
     "folio": 14,
     "renglon": 31,
     "direccion": "MANZANA 79 CASA 08",
-    "telefono": "3144035891",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3144035891"
   },
   {
     "id": "248",
@@ -3219,9 +2610,7 @@
     "folio": 14,
     "renglon": 32,
     "direccion": "MANZANA 79 CASA 08",
-    "telefono": "3219298996",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3219298996"
   },
   {
     "id": "249",
@@ -3232,9 +2621,7 @@
     "folio": 14,
     "renglon": 33,
     "direccion": "MANZANA 59 CASA 11",
-    "telefono": "3124970911",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3124970911"
   },
   {
     "id": "250",
@@ -3245,9 +2632,7 @@
     "folio": 14,
     "renglon": 34,
     "direccion": "MANZANA 59 CASA 11",
-    "telefono": "3204921812",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3204921812"
   },
   {
     "id": "251",
@@ -3258,9 +2643,7 @@
     "folio": 14,
     "renglon": 35,
     "direccion": "MANZANA 79 A CASA 08",
-    "telefono": "3102760956",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3102760956"
   },
   {
     "id": "252",
@@ -3271,9 +2654,7 @@
     "folio": 14,
     "renglon": 36,
     "direccion": "MANZANA 65 CASA 18",
-    "telefono": "3222491080",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3222491080"
   },
   {
     "id": "253",
@@ -3284,9 +2665,7 @@
     "folio": 16,
     "renglon": 1,
     "direccion": "MANZANA 64 A CASA 12",
-    "telefono": "3116334854",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3116334854"
   },
   {
     "id": "254",
@@ -3297,9 +2676,7 @@
     "folio": 16,
     "renglon": 2,
     "direccion": "MANZANA 64 A CASA 12",
-    "telefono": "3108646366",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3108646366"
   },
   {
     "id": "255",
@@ -3310,9 +2687,7 @@
     "folio": 16,
     "renglon": 3,
     "direccion": "MANZANA 59 CASA 11",
-    "telefono": "3227623482",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3227623482"
   },
   {
     "id": "256",
@@ -3323,9 +2698,7 @@
     "folio": 16,
     "renglon": 4,
     "direccion": "MANZANA 65 CASA 18",
-    "telefono": "3222287562",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3222287562"
   },
   {
     "id": "257",
@@ -3336,9 +2709,7 @@
     "folio": 16,
     "renglon": 5,
     "direccion": "MANZANA 59 CASA 09",
-    "telefono": "3208254887",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3208254887"
   },
   {
     "id": "258",
@@ -3349,9 +2720,7 @@
     "folio": 16,
     "renglon": 6,
     "direccion": "MANZANA 79 CASA 05",
-    "telefono": "3165868388",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3165868388"
   },
   {
     "id": "259",
@@ -3362,9 +2731,7 @@
     "folio": 16,
     "renglon": 7,
     "direccion": "MANZANA 65 CASA 18",
-    "telefono": "3104985896",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3104985896"
   },
   {
     "id": "260",
@@ -3375,9 +2742,7 @@
     "folio": 16,
     "renglon": 8,
     "direccion": "MANZANA 65 CASA 17",
-    "telefono": "3175679780",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3175679780"
   },
   {
     "id": "261",
@@ -3388,9 +2753,7 @@
     "folio": 16,
     "renglon": 9,
     "direccion": "MANZANA 70 CASA 04",
-    "telefono": "3219847646",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3219847646"
   },
   {
     "id": "262",
@@ -3401,9 +2764,7 @@
     "folio": 16,
     "renglon": 10,
     "direccion": "MANZANA 65 CASA 19",
-    "telefono": "3113806989",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3113806989"
   },
   {
     "id": "263",
@@ -3414,9 +2775,7 @@
     "folio": 16,
     "renglon": 11,
     "direccion": "MANZANA 65 CASA 17",
-    "telefono": "3105881189",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3105881189"
   },
   {
     "id": "264",
@@ -3427,9 +2786,7 @@
     "folio": 16,
     "renglon": 12,
     "direccion": "MANZANA 65 CASA17",
-    "telefono": "3178734916",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3178734916"
   },
   {
     "id": "265",
@@ -3440,9 +2797,7 @@
     "folio": 16,
     "renglon": 13,
     "direccion": "MANZANA 79 A CASA 08",
-    "telefono": "3102024483",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3102024483"
   },
   {
     "id": "266",
@@ -3453,9 +2808,7 @@
     "folio": 16,
     "renglon": 14,
     "direccion": "MANZANA 65 CASA 19",
-    "telefono": "3104200284",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3104200284"
   },
   {
     "id": "267",
@@ -3466,9 +2819,7 @@
     "folio": 16,
     "renglon": 15,
     "direccion": "MANZANA  64 A CASA 12",
-    "telefono": "3044023038",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3044023038"
   },
   {
     "id": "268",
@@ -3479,9 +2830,7 @@
     "folio": 16,
     "renglon": 16,
     "direccion": "MANZANA 64 CASA 23",
-    "telefono": "3246752283",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3246752283"
   },
   {
     "id": "269",
@@ -3492,9 +2841,7 @@
     "folio": 16,
     "renglon": 17,
     "direccion": "MANZANA 83 CASA 01",
-    "telefono": "3116563505",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3116563505"
   },
   {
     "id": "270",
@@ -3505,9 +2852,7 @@
     "folio": 16,
     "renglon": 18,
     "direccion": "MANZANA 69 CASA 07",
-    "telefono": "3209813729",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3209813729"
   },
   {
     "id": "271",
@@ -3518,9 +2863,7 @@
     "folio": 16,
     "renglon": 19,
     "direccion": "MANZANA 62 CASA 28",
-    "telefono": "3212331030",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3212331030"
   },
   {
     "id": "272",
@@ -3531,9 +2874,7 @@
     "folio": 16,
     "renglon": 20,
     "direccion": "MANZANA 62 CASA 28",
-    "telefono": "3224472190",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3224472190"
   },
   {
     "id": "273",
@@ -3544,9 +2885,7 @@
     "folio": 16,
     "renglon": 21,
     "direccion": "MANZANA 62 CASA 28",
-    "telefono": "3224474190",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3224474190"
   },
   {
     "id": "274",
@@ -3557,9 +2896,7 @@
     "folio": 16,
     "renglon": 22,
     "direccion": "MANZANA 60 CASA 22",
-    "telefono": "3102954752",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3102954752"
   },
   {
     "id": "275",
@@ -3570,9 +2907,7 @@
     "folio": 16,
     "renglon": 23,
     "direccion": "MANZANA 61 CASA 17",
-    "telefono": "3155745490",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3155745490"
   },
   {
     "id": "276",
@@ -3583,9 +2918,7 @@
     "folio": 16,
     "renglon": 24,
     "direccion": "MANZANA 60 CASA 22",
-    "telefono": "3229355365",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3229355365"
   },
   {
     "id": "277",
@@ -3596,9 +2929,7 @@
     "folio": 16,
     "renglon": 25,
     "direccion": "MANZANA 66 CASA 07",
-    "telefono": "3138662188",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3138662188"
   },
   {
     "id": "278",
@@ -3609,9 +2940,7 @@
     "folio": 16,
     "renglon": 26,
     "direccion": "MANZANA 59 CASA 14",
-    "telefono": "3224596101",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3224596101"
   },
   {
     "id": "279",
@@ -3622,9 +2951,7 @@
     "folio": 16,
     "renglon": 27,
     "direccion": "MANZANA 59 CASA 14",
-    "telefono": "3224596101",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3224596101"
   },
   {
     "id": "280",
@@ -3635,9 +2962,7 @@
     "folio": 16,
     "renglon": 28,
     "direccion": "MANZANA 60 CASA 09",
-    "telefono": "3186956105",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3186956105"
   },
   {
     "id": "281",
@@ -3648,9 +2973,7 @@
     "folio": 16,
     "renglon": 29,
     "direccion": "MANZANA 60 CASA 09",
-    "telefono": "3213596996",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3213596996"
   },
   {
     "id": "282",
@@ -3661,9 +2984,7 @@
     "folio": 16,
     "renglon": 30,
     "direccion": "MANZANA 65 CASA 09",
-    "telefono": "3180105688",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3180105688"
   },
   {
     "id": "283",
@@ -3674,9 +2995,7 @@
     "folio": 16,
     "renglon": 31,
     "direccion": "MANZANA 70 CASA 15",
-    "telefono": "3154714421",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3154714421"
   },
   {
     "id": "284",
@@ -3687,9 +3006,7 @@
     "folio": 16,
     "renglon": 32,
     "direccion": "MANZANA 80 CASA 23",
-    "telefono": "3053504087",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3053504087"
   },
   {
     "id": "285",
@@ -3700,9 +3017,7 @@
     "folio": 16,
     "renglon": 33,
     "direccion": "MANZANA 60 CASA 09",
-    "telefono": "3138335017",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3138335017"
   },
   {
     "id": "286",
@@ -3713,9 +3028,7 @@
     "folio": 16,
     "renglon": 34,
     "direccion": "MANZANA 60 CASA 09",
-    "telefono": "3503201930",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3503201930"
   },
   {
     "id": "287",
@@ -3726,9 +3039,7 @@
     "folio": 16,
     "renglon": 35,
     "direccion": "MANZANA 70 CASA 20",
-    "telefono": "3115787745",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3115787745"
   },
   {
     "id": "288",
@@ -3739,9 +3050,7 @@
     "folio": 16,
     "renglon": 36,
     "direccion": "MANZANA 79 CASA 07",
-    "telefono": "3154541677",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3154541677"
   },
   {
     "id": "289",
@@ -3752,9 +3061,7 @@
     "folio": 18,
     "renglon": 1,
     "direccion": "MANZANA 59 CASA 27",
-    "telefono": "3178608318",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3178608318"
   },
   {
     "id": "290",
@@ -3765,9 +3072,7 @@
     "folio": 18,
     "renglon": 2,
     "direccion": "MANZANA 78 CASA 06",
-    "telefono": "3235213722",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3235213722"
   },
   {
     "id": "291",
@@ -3778,9 +3083,7 @@
     "folio": 18,
     "renglon": 3,
     "direccion": "MANZANA 66 CASA 10",
-    "telefono": "3132159828",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3132159828"
   },
   {
     "id": "292",
@@ -3791,9 +3094,7 @@
     "folio": 18,
     "renglon": 4,
     "direccion": "MANZANA 66 CASA 10",
-    "telefono": "3228921140",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3228921140"
   },
   {
     "id": "293",
@@ -3804,9 +3105,7 @@
     "folio": 18,
     "renglon": 5,
     "direccion": "MANZANA 75 CASA 02",
-    "telefono": "3155603428",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3155603428"
   },
   {
     "id": "294",
@@ -3817,9 +3116,7 @@
     "folio": 18,
     "renglon": 6,
     "direccion": "MANZANA 81 CASA 10",
-    "telefono": "3132495060",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3132495060"
   },
   {
     "id": "295",
@@ -3830,9 +3127,7 @@
     "folio": 18,
     "renglon": 7,
     "direccion": "MANZANA 75 CASA 16",
-    "telefono": "3182217711",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3182217711"
   },
   {
     "id": "296",
@@ -3843,9 +3138,7 @@
     "folio": 18,
     "renglon": 8,
     "direccion": "MANZANA 60 CASA 25",
-    "telefono": "3124911521",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3124911521"
   },
   {
     "id": "297",
@@ -3856,9 +3149,7 @@
     "folio": 18,
     "renglon": 9,
     "direccion": "MANZANA 60 CASA 25",
-    "telefono": "3219703501",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3219703501"
   },
   {
     "id": "298",
@@ -3869,9 +3160,7 @@
     "folio": 18,
     "renglon": 10,
     "direccion": "MANZANA 75 CASA 16",
-    "telefono": "3104569620",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3104569620"
   },
   {
     "id": "299",
@@ -3882,9 +3171,7 @@
     "folio": 18,
     "renglon": 11,
     "direccion": "MANZANA 75 CASA 02",
-    "telefono": "3145637053",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3145637053"
   },
   {
     "id": "300",
@@ -3895,9 +3182,7 @@
     "folio": 18,
     "renglon": 12,
     "direccion": "MANZANA 64 A CASA 28",
-    "telefono": "3134176259",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3134176259"
   },
   {
     "id": "301",
@@ -3908,9 +3193,7 @@
     "folio": 18,
     "renglon": 13,
     "direccion": "MANZANA 64 A CASA 28",
-    "telefono": "3507019438",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3507019438"
   },
   {
     "id": "302",
@@ -3921,9 +3204,7 @@
     "folio": 18,
     "renglon": 14,
     "direccion": "MANZANA 75 CASA 16",
-    "telefono": "3169790156",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3169790156"
   },
   {
     "id": "303",
@@ -3934,9 +3215,7 @@
     "folio": 18,
     "renglon": 15,
     "direccion": "MANZANA 64 CASA 23 APT 02",
-    "telefono": "3124473837",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3124473837"
   },
   {
     "id": "304",
@@ -3947,9 +3226,7 @@
     "folio": 18,
     "renglon": 16,
     "direccion": "MANZANA 64 CASA 23 APT 02",
-    "telefono": "3203015143",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3203015143"
   },
   {
     "id": "305",
@@ -3960,9 +3237,7 @@
     "folio": 18,
     "renglon": 17,
     "direccion": "MANZANA 64 CASA 23 APT 02",
-    "telefono": "3223654983",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3223654983"
   },
   {
     "id": "306",
@@ -3973,9 +3248,7 @@
     "folio": 18,
     "renglon": 18,
     "direccion": "MANZANA 64 CASA 23 APT 02",
-    "telefono": "3102722801",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3102722801"
   },
   {
     "id": "307",
@@ -3986,9 +3259,7 @@
     "folio": 18,
     "renglon": 19,
     "direccion": "MANZANA 64 CASA 23",
-    "telefono": "3205248749",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3205248749"
   },
   {
     "id": "308",
@@ -3999,9 +3270,7 @@
     "folio": 18,
     "renglon": 20,
     "direccion": "MANZANA 59 CASA 07",
-    "telefono": "3204569986",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3204569986"
   },
   {
     "id": "309",
@@ -4012,9 +3281,7 @@
     "folio": 18,
     "renglon": 21,
     "direccion": "MANZANA 82 CASA 21",
-    "telefono": "3144644888",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3144644888"
   },
   {
     "id": "310",
@@ -4025,9 +3292,7 @@
     "folio": 18,
     "renglon": 22,
     "direccion": "MANZANA 60 CASA 18",
-    "telefono": "3187608104",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3187608104"
   },
   {
     "id": "311",
@@ -4038,9 +3303,7 @@
     "folio": 18,
     "renglon": 23,
     "direccion": "MANZANA 60 CASA 18",
-    "telefono": "3164230194",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3164230194"
   },
   {
     "id": "312",
@@ -4051,9 +3314,7 @@
     "folio": 18,
     "renglon": 24,
     "direccion": "MANZANA 60 CASA 18",
-    "telefono": "3178472386",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3178472386"
   },
   {
     "id": "313",
@@ -4064,9 +3325,7 @@
     "folio": 18,
     "renglon": 25,
     "direccion": "MANZANA 77 CASA 06",
-    "telefono": "3132795016",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3132795016"
   },
   {
     "id": "314",
@@ -4077,9 +3336,7 @@
     "folio": 18,
     "renglon": 26,
     "direccion": "MANZANA 77 CASA 06",
-    "telefono": "3112888929",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3112888929"
   },
   {
     "id": "315",
@@ -4090,9 +3347,7 @@
     "folio": 18,
     "renglon": 27,
     "direccion": "MANZANA 80 CASA 15",
-    "telefono": "3215510507",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3215510507"
   },
   {
     "id": "316",
@@ -4103,9 +3358,7 @@
     "folio": 18,
     "renglon": 28,
     "direccion": "MANZANA 75 CASA 15",
-    "telefono": "3148361653",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3148361653"
   },
   {
     "id": "317",
@@ -4116,9 +3369,7 @@
     "folio": 18,
     "renglon": 29,
     "direccion": "MANZANA 80 CASA 04",
-    "telefono": "3102199039",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3102199039"
   },
   {
     "id": "318",
@@ -4129,9 +3380,7 @@
     "folio": 18,
     "renglon": 30,
     "direccion": "MANZANA 80 CASA 04",
-    "telefono": "3214024134",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3214024134"
   },
   {
     "id": "319",
@@ -4142,9 +3391,7 @@
     "folio": 18,
     "renglon": 31,
     "direccion": "MANZANA 79 CASA 12",
-    "telefono": "3105830870",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3105830870"
   },
   {
     "id": "320",
@@ -4155,9 +3402,7 @@
     "folio": 18,
     "renglon": 32,
     "direccion": "MANZANA 79 CASA 12",
-    "telefono": "3105830870",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3105830870"
   },
   {
     "id": "321",
@@ -4168,9 +3413,7 @@
     "folio": 18,
     "renglon": 33,
     "direccion": "MANZANA 69 CASA 07",
-    "telefono": "3024429673",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3024429673"
   },
   {
     "id": "322",
@@ -4181,9 +3424,7 @@
     "folio": 18,
     "renglon": 34,
     "direccion": "MANZANA 66 CASA 24",
-    "telefono": "3107572906",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3107572906"
   },
   {
     "id": "323",
@@ -4194,9 +3435,7 @@
     "folio": 18,
     "renglon": 35,
     "direccion": "MANZANA 62 CASA 20",
-    "telefono": "3219339407",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3219339407"
   },
   {
     "id": "324",
@@ -4207,9 +3446,7 @@
     "folio": 18,
     "renglon": 36,
     "direccion": "MANZANA 62 CASA 20",
-    "telefono": "3153428400",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3153428400"
   },
   {
     "id": "325",
@@ -4220,9 +3457,7 @@
     "folio": 20,
     "renglon": 1,
     "direccion": "MANZANA 75 CASA 08",
-    "telefono": "3124531827",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3124531827"
   },
   {
     "id": "326",
@@ -4233,9 +3468,7 @@
     "folio": 20,
     "renglon": 2,
     "direccion": "MANZANA 76 CASA 19",
-    "telefono": "3213690963",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3213690963"
   },
   {
     "id": "327",
@@ -4246,9 +3479,7 @@
     "folio": 20,
     "renglon": 3,
     "direccion": "MANZANA 76 CASA 20",
-    "telefono": "3001863099",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3001863099"
   },
   {
     "id": "328",
@@ -4259,9 +3490,7 @@
     "folio": 20,
     "renglon": 4,
     "direccion": "MANZANA 75 CASA 08",
-    "telefono": "3148321229",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3148321229"
   },
   {
     "id": "329",
@@ -4272,9 +3501,7 @@
     "folio": 20,
     "renglon": 5,
     "direccion": "MANZANA 73 CASA 24",
-    "telefono": "3102379887",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3102379887"
   },
   {
     "id": "330",
@@ -4285,9 +3512,7 @@
     "folio": 20,
     "renglon": 6,
     "direccion": "MANZANA 63 CASA 08 A",
-    "telefono": "3212919374",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3212919374"
   },
   {
     "id": "331",
@@ -4298,9 +3523,7 @@
     "folio": 20,
     "renglon": 7,
     "direccion": "MANZANA 63 CASA 08 A",
-    "telefono": "3124163880",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3124163880"
   },
   {
     "id": "332",
@@ -4311,9 +3534,7 @@
     "folio": 20,
     "renglon": 8,
     "direccion": "MANZANA 63 CASA 08 A",
-    "telefono": "3123340582",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3123340582"
   },
   {
     "id": "333",
@@ -4324,9 +3545,7 @@
     "folio": 20,
     "renglon": 9,
     "direccion": "MANZANA 78 CASA 06",
-    "telefono": "3105780290",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3105780290"
   },
   {
     "id": "334",
@@ -4337,9 +3556,7 @@
     "folio": 20,
     "renglon": 10,
     "direccion": "MANZANA 79 CASA 06",
-    "telefono": "3108892499",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3108892499"
   },
   {
     "id": "335",
@@ -4350,9 +3567,7 @@
     "folio": 20,
     "renglon": 11,
     "direccion": "MANZANA 66 CASA 11",
-    "telefono": "3142797304",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3142797304"
   },
   {
     "id": "336",
@@ -4363,9 +3578,7 @@
     "folio": 20,
     "renglon": 12,
     "direccion": "MANZANA 66 CASA 11",
-    "telefono": "3134139674",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3134139674"
   },
   {
     "id": "337",
@@ -4376,9 +3589,7 @@
     "folio": 20,
     "renglon": 13,
     "direccion": "MANZANA 66 CASA 11",
-    "telefono": "3106616410",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3106616410"
   },
   {
     "id": "338",
@@ -4389,9 +3600,7 @@
     "folio": 20,
     "renglon": 14,
     "direccion": "MANZANA 58 CASA 15",
-    "telefono": "3232419662",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3232419662"
   },
   {
     "id": "339",
@@ -4402,9 +3611,7 @@
     "folio": 20,
     "renglon": 15,
     "direccion": "MANZANA 73 CASA 21",
-    "telefono": "3104709649",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3104709649"
   },
   {
     "id": "340",
@@ -4415,9 +3622,7 @@
     "folio": 20,
     "renglon": 16,
     "direccion": "MANZANA 58 CASA 03",
-    "telefono": "3108824384",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3108824384"
   },
   {
     "id": "341",
@@ -4428,9 +3633,7 @@
     "folio": 20,
     "renglon": 17,
     "direccion": "MANZANA 58 CASA 19",
-    "telefono": "3223608259",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3223608259"
   },
   {
     "id": "342",
@@ -4441,9 +3644,7 @@
     "folio": 20,
     "renglon": 18,
     "direccion": "MANZANA 58 CASA 19",
-    "telefono": "3133175874",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3133175874"
   },
   {
     "id": "343",
@@ -4454,9 +3655,7 @@
     "folio": 20,
     "renglon": 19,
     "direccion": "MANZANA 78 CASA 06",
-    "telefono": "3213921430",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3213921430"
   },
   {
     "id": "344",
@@ -4467,9 +3666,7 @@
     "folio": 20,
     "renglon": 20,
     "direccion": "MANZANA 75 CASA 16",
-    "telefono": "3188136630",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3188136630"
   },
   {
     "id": "345",
@@ -4480,9 +3677,7 @@
     "folio": 20,
     "renglon": 21,
     "direccion": "MANZANA 78 CASA 06",
-    "telefono": "3123869840",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3123869840"
   },
   {
     "id": "346",
@@ -4493,9 +3688,7 @@
     "folio": 20,
     "renglon": 22,
     "direccion": "MANZANA 58 CASA 15",
-    "telefono": "3115171453",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3115171453"
   },
   {
     "id": "347",
@@ -4506,9 +3699,7 @@
     "folio": 20,
     "renglon": 23,
     "direccion": "MANZANA 68 CASA 16",
-    "telefono": "3103869670",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3103869670"
   },
   {
     "id": "348",
@@ -4519,9 +3710,7 @@
     "folio": 20,
     "renglon": 24,
     "direccion": "MANZANA 68 CASA 16",
-    "telefono": "3233125953",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3233125953"
   },
   {
     "id": "349",
@@ -4532,9 +3721,7 @@
     "folio": 20,
     "renglon": 25,
     "direccion": "MANZANA 78 CASA 01",
-    "telefono": "3112020542",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3112020542"
   },
   {
     "id": "350",
@@ -4545,9 +3732,7 @@
     "folio": 20,
     "renglon": 26,
     "direccion": "MANZANA 66 CASA 03",
-    "telefono": "3167859269",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3167859269"
   },
   {
     "id": "351",
@@ -4558,9 +3743,7 @@
     "folio": 20,
     "renglon": 27,
     "direccion": "MANZANA 59 CASA 25",
-    "telefono": "3199521122",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3199521122"
   },
   {
     "id": "352",
@@ -4571,9 +3754,7 @@
     "folio": 20,
     "renglon": 28,
     "direccion": "MANZANA 59 CASA 25",
-    "telefono": "3124605057",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3124605057"
   },
   {
     "id": "353",
@@ -4584,9 +3765,7 @@
     "folio": 20,
     "renglon": 29,
     "direccion": "MANZANA 59 CASA 25",
-    "telefono": "3177668736",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3177668736"
   },
   {
     "id": "354",
@@ -4597,9 +3776,7 @@
     "folio": 20,
     "renglon": 30,
     "direccion": "MANZANA 59 CASA 25",
-    "telefono": "3124843089",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3124843089"
   },
   {
     "id": "355",
@@ -4610,9 +3787,7 @@
     "folio": 20,
     "renglon": 31,
     "direccion": "MANZANA 71 CASA 20",
-    "telefono": "3114834312",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3114834312"
   },
   {
     "id": "356",
@@ -4623,9 +3798,7 @@
     "folio": 20,
     "renglon": 32,
     "direccion": "MANZANA 71 CASA 20",
-    "telefono": "3138230461",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3138230461"
   },
   {
     "id": "357",
@@ -4636,9 +3809,7 @@
     "folio": 20,
     "renglon": 33,
     "direccion": "MANZANA 79 A CASA 03",
-    "telefono": "3108648967",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3108648967"
   },
   {
     "id": "358",
@@ -4649,9 +3820,7 @@
     "folio": 20,
     "renglon": 34,
     "direccion": "MANZANA 80 CASA 17",
-    "telefono": "3144833375",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3144833375"
   },
   {
     "id": "359",
@@ -4662,9 +3831,7 @@
     "folio": 20,
     "renglon": 35,
     "direccion": "MANZANA 60 CASA 22",
-    "telefono": "3143445738",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3143445738"
   },
   {
     "id": "360",
@@ -4675,9 +3842,7 @@
     "folio": 20,
     "renglon": 36,
     "direccion": "MANZANA 60 CASA 09",
-    "telefono": "3156846820",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3156846820"
   },
   {
     "id": "361",
@@ -4688,9 +3853,7 @@
     "folio": 22,
     "renglon": 1,
     "direccion": "MANZANA 63 CASA 23",
-    "telefono": "3172671293",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3172671293"
   },
   {
     "id": "362",
@@ -4701,9 +3864,7 @@
     "folio": 22,
     "renglon": 2,
     "direccion": "MANZANA 63 CASA 23",
-    "telefono": "3172279012",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3172279012"
   },
   {
     "id": "363",
@@ -4714,9 +3875,7 @@
     "folio": 22,
     "renglon": 3,
     "direccion": "MANZANA 63 CASA 23",
-    "telefono": "3164315061",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3164315061"
   },
   {
     "id": "364",
@@ -4727,9 +3886,7 @@
     "folio": 22,
     "renglon": 4,
     "direccion": "MANZANA 63 CASA 23",
-    "telefono": "3162809163",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3162809163"
   },
   {
     "id": "365",
@@ -4740,9 +3897,7 @@
     "folio": 22,
     "renglon": 5,
     "direccion": "MANZANA 68 CASA 10",
-    "telefono": "3177937145",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3177937145"
   },
   {
     "id": "366",
@@ -4753,9 +3908,7 @@
     "folio": 22,
     "renglon": 6,
     "direccion": "MANZANA 68 CASA 10",
-    "telefono": "3118060798",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3118060798"
   },
   {
     "id": "367",
@@ -4766,9 +3919,7 @@
     "folio": 22,
     "renglon": 7,
     "direccion": "MANZANA 63 CASA 19",
-    "telefono": "3214954502",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3214954502"
   },
   {
     "id": "368",
@@ -4779,9 +3930,7 @@
     "folio": 22,
     "renglon": 8,
     "direccion": "MANZANA 73 CASA 26",
-    "telefono": "3188621955",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3188621955"
   },
   {
     "id": "369",
@@ -4792,9 +3941,7 @@
     "folio": 22,
     "renglon": 9,
     "direccion": "MANZANA 73 CASA 26",
-    "telefono": "3229397704",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3229397704"
   },
   {
     "id": "370",
@@ -4805,9 +3952,7 @@
     "folio": 22,
     "renglon": 10,
     "direccion": "MANZANA 69 CASA 14",
-    "telefono": "3208121504",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3208121504"
   },
   {
     "id": "371",
@@ -4818,9 +3963,7 @@
     "folio": 22,
     "renglon": 11,
     "direccion": "MANZANA 65 CASA 11",
-    "telefono": "3223111872",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3223111872"
   },
   {
     "id": "372",
@@ -4831,9 +3974,7 @@
     "folio": 22,
     "renglon": 12,
     "direccion": "MANZANA 68 CASA 07",
-    "telefono": "3142026219",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3142026219"
   },
   {
     "id": "373",
@@ -4844,9 +3985,7 @@
     "folio": 22,
     "renglon": 13,
     "direccion": "MANZANA 69 CASA 14",
-    "telefono": "3219810441",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3219810441"
   },
   {
     "id": "374",
@@ -4857,9 +3996,7 @@
     "folio": 22,
     "renglon": 14,
     "direccion": "MANZANA 75 CASA 15",
-    "telefono": "3124214706",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3124214706"
   },
   {
     "id": "375",
@@ -4870,34 +4007,15 @@
     "folio": 22,
     "renglon": 15,
     "direccion": "MANZANA 75 CASA 15",
-    "telefono": "3118856601",
-    "pagos": "",
-    "firma": ""
-  },
-  {
-    "id": "376",
-    "nombre": "asd",
-    "cedula": "11212545",
-    "fecha_afiliacion": "2025-12-28",
-    "registro": 376,
-    "folio": 22,
-    "renglon": 16,
-    "direccion": "MANZANA  CASA ",
-    "telefono": "3118856601",
-    "pagos": "",
-    "firma": ""
+    "telefono": "3118856601"
   },
   {
     "id": "377",
     "nombre": "123454",
     "cedula": "123333",
-    "fecha_afiliacion": "",
     "registro": 377,
     "folio": 22,
     "renglon": 17,
-    "direccion": "MANZANA  CASA ",
-    "telefono": "",
-    "pagos": "",
-    "firma": ""
+    "direccion": "MANZANA  CASA "
   }
 ]
