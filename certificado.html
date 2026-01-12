@@ -543,6 +543,10 @@
                     <button id="btnBuscar" class="btn btn-primary">
                         <i class="fas fa-search"></i> Buscar
                     </button>
+                    </button>
+                    <button id="btnVolverPanel" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i> Volver al Panel
+                    </button>
                     <button id="btnOpciones" class="btn btn-info hidden">
                         <i class="fas fa-cog"></i> Opciones
                     </button>
@@ -760,6 +764,9 @@
         function configurarEventListeners() {
             // Buscar
             document.getElementById('btnBuscar').addEventListener('click', buscarUsuario);
+
+             // Nuevo botón: Volver al Panel
+            document.getElementById('btnVolverPanel').addEventListener('click', volverAlPanel);
             
             // Opciones
             document.getElementById('btnOpciones').addEventListener('click', mostrarOpciones);
@@ -788,6 +795,13 @@
                 }
             });
         }
+
+            // Función para volver al panel
+            function volverAlPanel() {
+                if (confirm('¿Está seguro que desea volver al panel principal? Los cambios no guardados se perderán.')) {
+                    window.location.href = 'panel.html';
+                }
+            }
 
         // Cargar imágenes desde GitHub
         function cargarImagenes() {
@@ -1414,6 +1428,7 @@
     </script>
 </body>
 </html>
+
 
 
 
