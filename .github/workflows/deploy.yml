@@ -12,7 +12,7 @@ permissions:
 
 concurrency:
   group: "pages"
-  cancel-in-progress: false  # ← IMPORTANTE: Cambiar a false
+  cancel-in-progress: false
 
 jobs:
   build:
@@ -26,7 +26,7 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: '.'
-    timeout-minutes: 10  # ← Agregar timeout explícito
+    timeout-minutes: 15
 
   deploy:
     environment:
@@ -38,4 +38,4 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-    timeout-minutes: 5  # ← Agregar timeout explícito
+    timeout-minutes: 10
