@@ -1,0 +1,4 @@
+# Si estás en la terminal:
+echo "" > .nojekyll
+
+# O crea un archivo vacío llamado ".nojekyll" en la raíz de tu repositorio
