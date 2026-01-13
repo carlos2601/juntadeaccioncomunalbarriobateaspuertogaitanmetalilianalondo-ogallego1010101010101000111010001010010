@@ -4873,5 +4873,18 @@
     "celular": "3118856601",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 376,
+    "registro": 376,
+    "folio": 22,
+    "renglon": 16,
+    "nombre": "ROBERT",
+    "cedula": "1234.567.891",
+    "fecha": "13/01/2026",
+    "direccion": "MANZANA  CASA",
+    "celular": "3100000000",
+    "pagos": [],
+    "firma": ""
   }
 ]
