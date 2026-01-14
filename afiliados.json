@@ -4925,5 +4925,18 @@
     "celular": "3164036303",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 380,
+    "registro": 380,
+    "folio": 22,
+    "renglon": 20,
+    "nombre": "JESUS DAVID RAMOS LINARES",
+    "cedula": "1.006.656.635",
+    "fecha": "27/12/2025",
+    "direccion": "MANZANA  79 CASA 08",
+    "celular": "3506362711",
+    "pagos": [],
+    "firma": ""
   }
 ]
