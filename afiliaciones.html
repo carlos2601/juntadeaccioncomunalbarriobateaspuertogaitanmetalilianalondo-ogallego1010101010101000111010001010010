@@ -1091,7 +1091,7 @@
         }
 
         // ============================================
-        // FUNCIÓN PARA GUARDAR EN GITHUB
+        // FUNCIÓN PARA GUARDAR EN GITHUB (ACTUALIZADA CON FORMATO CORRECTO)
         // ============================================
         async function guardarEnGitHub() {
             if (jsonData.length === 0) {
@@ -1109,26 +1109,31 @@
             try {
                 mostrarMensaje('⏳ Guardando en GitHub...', 'info');
                 
-                // Preparar datos limpios para guardar
+                // Preparar datos en el formato CORRECTO
                 const datosParaGuardar = jsonData.map(registro => {
-                    const registroLimpio = {};
+                    // Formato específico requerido
+                    const registroFormateado = {
+                        id: registro.id || (registro.registro ? registro.registro.toString() : "1"),
+                        registro: parseInt(registro.registro) || 1,
+                        folio: parseInt(registro.folio) || 2,
+                        renglon: parseInt(registro.renglon) || 1,
+                        nombre: registro.nombre || "",
+                        cedula: registro.cedula ? registro.cedula.toString().replace(/\D/g, '') : "",
+                        fecha: registro.fecha_afiliacion || "",
+                        direccion: registro.direccion || "",
+                        celular: registro.telefono || "",
+                        pagos: registro.pagos || [],
+                        firma: registro.firma || ""
+                    };
                     
-                    const propiedadesBase = ['id', 'nombre', 'cedula', 'fecha_afiliacion', 'registro', 
-                                            'folio', 'renglon', 'direccion', 'telefono', 'pagos', 'firma'];
-                    
-                    propiedadesBase.forEach(prop => {
-                        if (registro.hasOwnProperty(prop)) {
-                            registroLimpio[prop] = registro[prop];
-                        }
-                    });
-                    
+                    // Mantener columnas personalizadas si existen
                     columnasPersonalizadas.forEach(col => {
                         if (registro.hasOwnProperty(col.clave)) {
-                            registroLimpio[col.clave] = registro[col.clave];
+                            registroFormateado[col.clave] = registro[col.clave];
                         }
                     });
                     
-                    return registroLimpio;
+                    return registroFormateado;
                 });
                 
                 const content = JSON.stringify(datosParaGuardar, null, 2);
@@ -1194,7 +1199,7 @@
         }
 
         // ============================================
-        // FUNCIÓN PARA CARGAR DESDE GITHUB
+        // FUNCIÓN PARA CARGAR DESDE GITHUB (ACTUALIZADA)
         // ============================================
         async function cargarDesdeGitHub(url) {
             // Verificar configuración
@@ -1215,29 +1220,50 @@
                 
                 const data = await response.json();
                 
-                // Procesar los datos
-                jsonData = data;
+                // Procesar los datos y convertirlos al formato interno
+                jsonData = data.map(registroGitHub => {
+                    // Convertir del formato GitHub al formato interno
+                    return {
+                        id: registroGitHub.id || "",
+                        nombre: registroGitHub.nombre || "",
+                        cedula: registroGitHub.cedula || "",
+                        fecha_afiliacion: registroGitHub.fecha || "",
+                        registro: registroGitHub.registro ? registroGitHub.registro.toString() : "",
+                        folio: registroGitHub.folio ? registroGitHub.folio.toString() : "",
+                        renglon: registroGitHub.renglon ? registroGitHub.renglon.toString() : "",
+                        direccion: registroGitHub.direccion || "",
+                        telefono: registroGitHub.celular || "",
+                        pagos: registroGitHub.pagos || "",
+                        firma: registroGitHub.firma || ""
+                    };
+                });
+                
                 originalFileName = GITHUB_CONFIG.path;
                 document.getElementById('fileName').textContent = `Archivo: ${originalFileName} (desde GitHub)`;
                 
                 if (Array.isArray(jsonData)) {
+                    // Asegurar que todos los campos existan
                     jsonData = jsonData.map(registro => {
-                        const nuevoRegistro = {};
+                        const nuevoRegistro = {
+                            id: registro.id || "",
+                            nombre: registro.nombre || "",
+                            cedula: registro.cedula || "",
+                            fecha_afiliacion: registro.fecha_afiliacion || "",
+                            registro: registro.registro || "",
+                            folio: registro.folio || "",
+                            renglon: registro.renglon || "",
+                            direccion: registro.direccion || "",
+                            telefono: registro.telefono || "",
+                            pagos: registro.pagos || "",
+                            firma: registro.firma || ""
+                        };
                         
-                        const propiedadesBase = ['id', 'nombre', 'cedula', 'fecha_afiliacion', 'registro', 
-                                                'folio', 'renglon', 'direccion', 'telefono', 'pagos', 'firma'];
-                        
-                        propiedadesBase.forEach(prop => {
-                            if (registro.hasOwnProperty(prop)) {
-                                nuevoRegistro[prop] = registro[prop];
-                            } else {
-                                nuevoRegistro[prop] = prop === 'firma' ? '' : '';
-                            }
-                        });
-                        
+                        // Agregar columnas personalizadas
                         columnasPersonalizadas.forEach(col => {
                             if (registro.hasOwnProperty(col.clave)) {
                                 nuevoRegistro[col.clave] = registro[col.clave];
+                            } else {
+                                nuevoRegistro[col.clave] = "";
                             }
                         });
                         
@@ -1251,17 +1277,6 @@
                 document.getElementById('saveToGithubBtn').disabled = false;
                 
                 if (jsonData.length > 0) {
-                    jsonData.forEach(registro => {
-                        if (!registro.hasOwnProperty('firma')) {
-                            registro.firma = '';
-                        }
-                        columnasPersonalizadas.forEach(col => {
-                            if (!registro.hasOwnProperty(col.clave)) {
-                                registro[col.clave] = '';
-                            }
-                        });
-                    });
-                    
                     crearTabla();
                     mostrarMensaje('✅ Archivo cargado desde GitHub correctamente', 'success');
                     actualizarContador();
@@ -1346,30 +1361,51 @@
             const reader = new FileReader();
             reader.onload = function(event) {
                 try {
-                    jsonData = JSON.parse(event.target.result);
+                    const datosCargados = JSON.parse(event.target.result);
                     
-                    if (Array.isArray(jsonData)) {
-                        jsonData = jsonData.map(registro => {
-                            const nuevoRegistro = {};
-                            
-                            const propiedadesBase = ['id', 'nombre', 'cedula', 'fecha_afiliacion', 'registro', 
-                                                    'folio', 'renglon', 'direccion', 'telefono', 'pagos', 'firma'];
-                            
-                            propiedadesBase.forEach(prop => {
-                                if (registro.hasOwnProperty(prop)) {
-                                    nuevoRegistro[prop] = registro[prop];
-                                } else {
-                                    nuevoRegistro[prop] = prop === 'firma' ? '' : '';
-                                }
-                            });
-                            
-                            columnasPersonalizadas.forEach(col => {
-                                if (registro.hasOwnProperty(col.clave)) {
-                                    nuevoRegistro[col.clave] = registro[col.clave];
-                                }
-                            });
-                            
-                            return nuevoRegistro;
+                    // Convertir al formato interno si viene en el formato GitHub
+                    if (Array.isArray(datosCargados)) {
+                        jsonData = datosCargados.map(registro => {
+                            // Verificar si es formato GitHub o formato interno
+                            if (registro.hasOwnProperty('celular')) {
+                                // Es formato GitHub, convertir a interno
+                                return {
+                                    id: registro.id || "",
+                                    nombre: registro.nombre || "",
+                                    cedula: registro.cedula || "",
+                                    fecha_afiliacion: registro.fecha || "",
+                                    registro: registro.registro ? registro.registro.toString() : "",
+                                    folio: registro.folio ? registro.folio.toString() : "",
+                                    renglon: registro.renglon ? registro.renglon.toString() : "",
+                                    direccion: registro.direccion || "",
+                                    telefono: registro.celular || "",
+                                    pagos: registro.pagos || "",
+                                    firma: registro.firma || ""
+                                };
+                            } else {
+                                // Es formato interno, mantener como está
+                                const nuevoRegistro = {
+                                    id: registro.id || "",
+                                    nombre: registro.nombre || "",
+                                    cedula: registro.cedula || "",
+                                    fecha_afiliacion: registro.fecha_afiliacion || "",
+                                    registro: registro.registro || "",
+                                    folio: registro.folio || "",
+                                    renglon: registro.renglon || "",
+                                    direccion: registro.direccion || "",
+                                    telefono: registro.telefono || "",
+                                    pagos: registro.pagos || "",
+                                    firma: registro.firma || ""
+                                };
+                                
+                                columnasPersonalizadas.forEach(col => {
+                                    if (registro.hasOwnProperty(col.clave)) {
+                                        nuevoRegistro[col.clave] = registro[col.clave];
+                                    }
+                                });
+                                
+                                return nuevoRegistro;
+                            }
                         });
                     }
                     
@@ -2336,25 +2372,31 @@
         document.getElementById('saveBtn').addEventListener('click', function() {
             if (jsonData.length === 0) return;
             
+            // Guardar en formato CORRECTO para GitHub
             const datosParaGuardar = jsonData.map(registro => {
-                const registroLimpio = {};
+                // Formato específico requerido
+                const registroFormateado = {
+                    id: registro.id || (registro.registro ? registro.registro.toString() : "1"),
+                    registro: parseInt(registro.registro) || 1,
+                    folio: parseInt(registro.folio) || 2,
+                    renglon: parseInt(registro.renglon) || 1,
+                    nombre: registro.nombre || "",
+                    cedula: registro.cedula ? registro.cedula.toString().replace(/\D/g, '') : "",
+                    fecha: registro.fecha_afiliacion || "",
+                    direccion: registro.direccion || "",
+                    celular: registro.telefono || "",
+                    pagos: registro.pagos || [],
+                    firma: registro.firma || ""
+                };
                 
-                const propiedadesBase = ['id', 'nombre', 'cedula', 'fecha_afiliacion', 'registro', 
-                                        'folio', 'renglon', 'direccion', 'telefono', 'pagos', 'firma'];
-                
-                propiedadesBase.forEach(prop => {
-                    if (registro.hasOwnProperty(prop)) {
-                        registroLimpio[prop] = registro[prop];
-                    }
-                });
-                
+                // Mantener columnas personalizadas si existen
                 columnasPersonalizadas.forEach(col => {
                     if (registro.hasOwnProperty(col.clave)) {
-                        registroLimpio[col.clave] = registro[col.clave];
+                        registroFormateado[col.clave] = registro[col.clave];
                     }
                 });
                 
-                return registroLimpio;
+                return registroFormateado;
             });
             
             const dataStr = JSON.stringify(datosParaGuardar, null, 2);
@@ -2405,6 +2447,4 @@
         }
     </script>
 </body>
-
 </html>
-
