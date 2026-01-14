@@ -2,6 +2,14 @@
   {
     "fecha": "2026-01-14T19:39:10.521Z",
     "fechaFormateada": "14/1/2026",
+    "hora": "02:39 p. m.",
+    "nombre": "LEONEL BAUTISTA CARRANZA",
+    "cedula": "6650213",
+    "tipo": "IMPRESIÓN"
+  },
+  {
+    "fecha": "2026-01-14T19:39:10.521Z",
+    "fechaFormateada": "14/1/2026",
     "hora": "02:39 p.�m.",
     "nombre": "LEONEL BAUTISTA CARRANZA",
     "cedula": "6650213",
