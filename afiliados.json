@@ -2657,7 +2657,7 @@
     "folio": 12,
     "renglon": 25,
     "nombre": "VICTOR ALFONSO HERRERA RANGEL",
-    "cedula": "13570305",
+    "cedula": "131570305",
     "fecha": "21/11/2024",
     "direccion": "MANZANA 71 CASA 08",
     "celular": "3182254430",
@@ -4875,28 +4875,15 @@
     "firma": ""
   },
   {
-    "id": 376,
+    "id": 378,
     "registro": 376,
     "folio": 22,
     "renglon": 16,
-    "nombre": "DANIEL ALBERTO PEÑA AVILA",
-    "cedula": "1.124.826.950",
+    "nombre": "MIGUEL IGNACIO FUENTES ORTIZ",
+    "cedula": "1.093.777.872",
     "fecha": "27/12/2025",
-    "direccion": "MANZANA 70  CASA 01",
-    "celular": "3164036303",
-    "pagos": [],
-    "firma": ""
-  },
-  {
-    "id": 377,
-    "registro": 377,
-    "folio": 22,
-    "renglon": 17,
-    "nombre": "JESUS DAVID RAMOS LINARES",
-    "cedula": "1.006.656.635",
-    "fecha": "27/12/2025",
-    "direccion": "MANZANA  79 CASA 08",
-    "celular": "3506362711",
+    "direccion": "MANZANA 79 CASA 08",
+    "celular": "3233060925",
     "pagos": [],
     "firma": ""
   }
