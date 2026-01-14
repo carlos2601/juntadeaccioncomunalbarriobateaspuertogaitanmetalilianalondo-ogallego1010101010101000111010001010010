@@ -7,7 +7,7 @@
     <style>
         :root {
             --verde-primario: #4CAF50;
-            --verde-secundario: #388E3C;
+            --verde-secundario: #f90d0d;
             --amarillo-primario: #FFC107;
             --amarillo-secundario: #FFA000;
             --gris-claro: #f5f5f5;
@@ -20,6 +20,8 @@
             --naranja-secundario: #F57C00;
             --cafe-primario: #964B00;
             --cafe-secundario: #905010;
+            --verde-oscuro: #2E7D32; /* Nuevo color para Registro */
+            --verde-oscuro-secundario: #1B5E20;
         }
         
         * {
@@ -79,7 +81,7 @@
         }
         
         .container {
-            max-width: 1200px;
+            max-width: 1400px; /* Aumentado para acomodar 5 tarjetas */
             margin: 2rem auto;
             padding: 0 1.5rem;
         }
@@ -95,8 +97,8 @@
         
         .sections-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(5, 1fr); /* 5 columnas fijas */
+            gap: 1rem; /* Reducido el espacio entre tarjetas */
         }
         
         .section-card {
@@ -106,6 +108,7 @@
             box-shadow: 0 3px 10px rgba(0,0,0,0.1);
             transition: all 0.3s ease;
             cursor: pointer;
+            min-width: 0; /* Importante para que funcione el ajuste de tamaño */
         }
         
         .section-card:hover {
@@ -114,19 +117,19 @@
         }
         
         .card-header {
-            padding: 1.2rem;
+            padding: 1rem; /* Reducido el padding */
             color: var(--blanco);
             display: flex;
             align-items: center;
-            gap: 0.8rem;
+            gap: 0.6rem;
         }
         
         .afiliaciones {
-            background: linear-gradient(135deg, var(--verde-primario), var(--verde-secundario));
+            background: linear-gradient(135deg, var(--verde-secundario));
         }
         
-        .afiliados {
-            background: linear-gradient(135deg, var(--azul-primario), #1976D2);
+        .registro {
+            background: linear-gradient(135deg, var(--verde-oscuro), var(--verde-oscuro-secundario));
         }
         
         .certificados {
@@ -140,43 +143,43 @@
         .documentos {
             background: linear-gradient(135deg, #9C27B0, #7B1FA2);
         }
-
-        .descargarcertificadodelusuario {
-            background: linear-gradient(135deg, var(--rojo-promario), var(--rojo-secundario));
-        }
-
-        .novedades {
-            background: linear-gradient(135deg, var(--naranja-primario), var(--naranja-secundario));
-        }
         
         .card-header i {
-            font-size: 1.5rem;
+            font-size: 1.3rem; /* Reducido ligeramente */
+        }
+        
+        .card-header h3 {
+            font-size: 1rem; /* Reducido el tamaño de fuente */
+            line-height: 1.2;
         }
         
         .card-body {
-            padding: 1.5rem;
+            padding: 1.2rem; /* Reducido el padding */
         }
         
         .card-body h3 {
-            margin-bottom: 1rem;
+            margin-bottom: 0.8rem;
             color: var(--gris-oscuro);
+            font-size: 0.95rem; /* Reducido ligeramente */
         }
         
         .card-body p {
             color: #616161;
-            font-size: 0.9rem;
-            margin-bottom: 1.5rem;
+            font-size: 0.85rem; /* Reducido el tamaño de fuente */
+            margin-bottom: 1rem;
+            line-height: 1.3;
         }
         
         .card-btn {
             display: inline-block;
-            padding: 0.6rem 1.2rem;
+            padding: 0.5rem 1rem; /* Reducido el padding */
             background-color: var(--gris-claro);
             color: var(--gris-oscuro);
             border-radius: 4px;
             text-decoration: none;
-            font-size: 0.9rem;
+            font-size: 0.85rem; /* Reducido el tamaño de fuente */
             transition: all 0.3s;
+            white-space: nowrap;
         }
         
         .afiliaciones .card-btn:hover {
@@ -184,8 +187,8 @@
             color: var(--blanco);
         }
         
-        .afiliados .card-btn:hover {
-            background-color: var(--azul-primario);
+        .registro .card-btn:hover {
+            background-color: var(--verde-oscuro);
             color: var(--blanco);
         }
         
@@ -203,32 +206,46 @@
             background-color: #9C27B0;
             color: var(--blanco);
         }
-
-        .descargarcertificadodelusuario .card-btn:hover {
-            background-color: var(--rojo-promario);
-            color: var(--blanco);
-        }
-
-        .novedades .card-btn:hover {
-            background-color: var(--naranja-primario);
-            color: var(--blanco);
-        }
         
         .stats {
             display: flex;
             justify-content: space-between;
-            margin-top: 1rem;
-            font-size: 0.8rem;
+            margin-top: 0.8rem;
+            font-size: 0.75rem; /* Reducido el tamaño de fuente */
             color: #757575;
+        }
+        
+        .stats i {
+            font-size: 0.7rem;
+        }
+        
+        @media (max-width: 1200px) {
+            .sections-grid {
+                grid-template-columns: repeat(3, 1fr); /* 3 columnas en pantallas medianas */
+            }
+            
+            .section-card {
+                min-height: 220px; /* Altura mínima para uniformidad */
+            }
         }
         
         @media (max-width: 768px) {
             .sections-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(2, 1fr); /* 2 columnas en tablets */
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .sections-grid {
+                grid-template-columns: 1fr; /* 1 columna en móviles */
             }
             
             .user-info span {
                 display: none;
+            }
+            
+            .section-card {
+                min-height: auto;
             }
         }
     </style>
@@ -256,6 +273,25 @@
         
         <div class="sections-grid">
             <!-- Sección Afiliaciones -->
+            
+            
+            <!-- Sección Registro (NUEVA) -->
+            <div class="section-card" onclick="location.href='https://carlos2601.github.io/bateas3/registro.html'">
+                <div class="card-header registro">
+                    <i class="fas fa-user-plus"></i>
+                    <h3>Registro</h3>
+                </div>
+                <div class="card-body">
+                    <p>Registro de nuevos miembros y gestión de datos personales en el sistema.</p>
+                    <div class="stats">
+                        <span><i class="fas fa-user-plus"></i> Nuevos registros</span>
+                        <span><i class="fas fa-database"></i> Gestión de datos</span>
+                    </div>
+                    <a href="https://carlos2601.github.io/bateas3/registro.html" class="card-btn">Acceder al Registro</a>
+                </div>
+            </div>
+
+
             <div class="section-card" onclick="location.href='afiliaciones.html'">
                 <div class="card-header afiliaciones">
                     <i class="fas fa-users"></i>
@@ -270,8 +306,6 @@
                     <a href="afiliaciones.html" class="card-btn">Gestionar Afiliaciones</a>
                 </div>
             </div>
-            
-           
             
             <!-- Sección Certificados -->
             <div class="section-card" onclick="location.href='certificado.html'">
@@ -289,8 +323,8 @@
                 </div>
             </div>
 
-             <!-- Sección Traslados (CORREGIDA) -->
-             <div class="section-card" onclick="location.href='traslado.html'">
+            <!-- Sección Traslados -->
+            <div class="section-card" onclick="location.href='traslado.html'">
                 <div class="card-header traslados">
                     <i class="fas fa-exchange-alt"></i>
                     <h3>Certificados de Traslados</h3>
@@ -320,9 +354,6 @@
                     <a href="documentos.html" class="card-btn">Ver Documentos</a>
                 </div>
             </div>
-
-            
-
         </div>
     </div>
     
@@ -339,8 +370,3 @@
     </script>
 </body>
 </html>
-
-
-
-
-
