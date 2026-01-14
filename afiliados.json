@@ -4874,17 +4874,44 @@
     "pagos": [],
     "firma": ""
   },
-  {
-    "id": 378,
+{
+    "id": 376,
     "registro": 376,
     "folio": 22,
     "renglon": 16,
-    "nombre": "MIGUEL IGNACIO FUENTES ORTIZ",
-    "cedula": "1.093.777.872",
+    "nombre": "DANIEL ALBERTO PEÑA AVILA",
+    "cedula": "1.124.826.950",
     "fecha": "27/12/2025",
-    "direccion": "MANZANA 79 CASA 08",
+    "direccion": "MANZANA 70  CASA 01",
+    "celular": "3164036303",
+    "pagos": [],
+    "firma": ""
+  },
+  {
+    "id": 377,
+    "registro": 377,
+    "folio": 22,
+    "renglon": 17,
+    "nombre": "JESUS DAVID RAMOS LINARES",
+    "cedula": "1.006.656.635",
+    "fecha": "27/12/2025",
+    "direccion": "MANZANA  79 CASA 08",
+    "celular": "3506362711",
+    "pagos": [],
+    "firma": ""
+  },
+{
+    "id": 378,
+    "registro": 378,
+    "folio": 23,
+    "renglon": 18,
+    "nombre": "MIGUEL IGNACIO FUENTES ORTIZ",
+    "cedula": "1093777872",
+    "fecha": "27/12/2025",
+    "direccion": "MANZANA 70  CASA 08",
     "celular": "3233060925",
     "pagos": [],
     "firma": ""
   }
+
 ]
