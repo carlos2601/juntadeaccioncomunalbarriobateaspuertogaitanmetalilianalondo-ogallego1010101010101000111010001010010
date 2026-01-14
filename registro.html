@@ -871,6 +871,7 @@
             }
         }
         
+        // ========== FUNCIÓN ACTUALIZADA PARA GUARDAR EN GITHUB ==========
         async function guardarEnGitHub() {
             if (!githubConfig.connected || !githubConfig.token) {
                 alert('Primero debe configurar la conexión a GitHub');
@@ -905,7 +906,7 @@
                     // Archivo no existe, continuar sin SHA
                 }
                 
-                // 2. Preparar contenido
+                // 2. Preparar contenido en el FORMATO CORRECTO
                 const contenido = JSON.stringify(afiliados, null, 2);
                 const contenidoBase64 = btoa(contenido);
                 
@@ -945,7 +946,7 @@
             }
         }
         
-        // ========== FUNCIONES EXISTENTES ==========
+        // ========== FUNCIONES EXISTENTES (ACTUALIZADAS) ==========
         
         function cargarDatosIniciales() {
             // Intentar cargar desde respaldo local primero
