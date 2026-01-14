@@ -4886,5 +4886,18 @@
     "celular": "3100000000",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 377,
+    "registro": 377,
+    "folio": 22,
+    "renglon": 17,
+    "nombre": "ÑÑÑÑÑ",
+    "cedula": "1.234.567.890",
+    "fecha": "13/01/2026",
+    "direccion": "MANZANA  CASA",
+    "celular": "3114975480",
+    "pagos": [],
+    "firma": ""
   }
 ]
