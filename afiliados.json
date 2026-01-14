@@ -4912,5 +4912,18 @@
     "celular": "",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 379,
+    "registro": 379,
+    "folio": 22,
+    "renglon": 19,
+    "nombre": "DANIEL ALBERTO PEÑA AVILA",
+    "cedula": "1.124.826.950",
+    "fecha": "27/12/2025",
+    "direccion": "MANZANA 70  CASA 01",
+    "celular": "3164036303",
+    "pagos": [],
+    "firma": ""
   }
 ]
