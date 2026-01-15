@@ -2,25 +2,9 @@
   {
     "fecha": "2026-01-14T23:08:30.500Z",
     "fechaFormateada": "14/1/2026",
-    "hora": "06:08 p.\u00a0m.",
-    "nombre": "LILIANA LONDO\u00d1O GALLEGO",
+    "hora": "06:08 p.m.",
+    "nombre": "LILIANA LONDOÑO GALLEGO",
     "cedula": "42775182",
-    "tipo": "IMPRESI\u00d3N"
-  },
-  {
-    "fecha": "2026-01-14T22:56:27.791Z",
-    "fechaFormateada": "14/1/2026",
-    "hora": "05:56 p.\u00a0m.",
-    "nombre": "CARLOS ALBERTO QUI\u00d1ONES MU\u00d1OZ",
-    "cedula": "4438681",
-    "tipo": "IMPRESI\u00d3N"
-  },
-  {
-    "fecha": "2026-01-14T21:32:31.277Z",
-    "fechaFormateada": "14/1/2026",
-    "hora": "04:32 p.\u00c3\u0082\u00c2\u00a0m.",
-    "nombre": "LEONEL BAUTISTA CARRANZA",
-    "cedula": "6650213",
-    "tipo": "IMPRESI\u00c3\u0083\u00e2\u0080\u009cN"
+    "tipo": "IMPRESIÓN"
   }
 ]
