@@ -1,0 +1,1507 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Visitas</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        :root {
+            --primary: #2c5fa5;
+            --primary-dark: #1e3d73;
+            --secondary: #4CAF50;
+            --secondary-dark: #3d8b40;
+            --light: #f5f7fa;
+            --gray: #e0e0e0;
+            --dark-gray: #757575;
+            --text: #333333;
+            --white: #ffffff;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --shadow-hover: 0 6px 16px rgba(0, 0, 0, 0.12);
+            --border-radius: 8px;
+            --import-export-color: #4a9eff;
+            --import-export-dark: #2c7fdb;
+        }
+
+        body {
+            background-color: #f0f4f8;
+            color: var(--text);
+            line-height: 1.5;
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding: 0;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: var(--white);
+            padding: 15px 20px;
+            text-align: center;
+            flex-shrink: 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+        }
+
+        header p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .logo i {
+            font-size: 2rem;
+        }
+
+        .main-content {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+            padding: 15px;
+            gap: 15px;
+            height: calc(100vh - 100px);
+        }
+
+        .form-container {
+            width: 35%;
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+            overflow: hidden;
+        }
+
+        .form-card {
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            padding: 15px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-card h2 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--gray);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .form-card h2 i {
+            font-size: 1rem;
+        }
+
+        #visitaForm {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .form-group {
+            margin-bottom: 12px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 4px;
+            font-weight: 500;
+            color: var(--primary-dark);
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border: 1.5px solid var(--gray);
+            border-radius: 6px;
+            font-size: 0.9rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .direccion-predeterminada {
+            background-color: #f8f9fa;
+            font-weight: 500;
+            color: var(--primary-dark);
+            border: 1.5px solid var(--primary);
+        }
+
+        .btn-group {
+            margin-top: auto;
+            padding-top: 15px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 10px 16px;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            flex: 1;
+            min-width: 120px;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--primary);
+            border: 1.5px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: var(--white);
+        }
+
+        .btn-import-export {
+            background-color: var(--import-export-color);
+            color: var(--white);
+        }
+
+        .btn-import-export:hover {
+            background-color: var(--import-export-dark);
+        }
+
+        .btn-print-pdf {
+            background-color: var(--secondary);
+            color: var(--white);
+        }
+
+        .btn-print-pdf:hover {
+            background-color: var(--secondary-dark);
+        }
+
+        .table-container {
+            width: 65%;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .table-card {
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            padding: 15px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .table-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-shrink: 0;
+        }
+
+        .table-header h2 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 1.2rem;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .table-header h2 i {
+            font-size: 1rem;
+        }
+
+        .sort-controls {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .sort-select {
+            padding: 6px 10px;
+            border: 1.5px solid var(--gray);
+            border-radius: 6px;
+            background-color: var(--white);
+            font-weight: 500;
+            font-size: 0.85rem;
+            color: var(--text);
+        }
+
+        .table-scroll-container {
+            flex: 1;
+            overflow-y: auto;
+            border: 1px solid var(--gray);
+            border-radius: 6px;
+        }
+
+        .visitas-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 600px;
+        }
+
+        .visitas-table thead {
+            background-color: var(--primary);
+            color: var(--white);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .visitas-table th {
+            padding: 10px 8px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.85rem;
+            border-right: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .visitas-table th:last-child {
+            border-right: none;
+        }
+
+        .visitas-table tbody tr {
+            border-bottom: 1px solid var(--gray);
+            height: 40px;
+        }
+
+        .visitas-table tbody tr:hover {
+            background-color: #f9f9f9;
+        }
+
+        .visitas-table td {
+            padding: 8px;
+            vertical-align: middle;
+            font-size: 0.85rem;
+        }
+
+        .visitas-table .id-col {
+            width: 50px;
+            text-align: center;
+            font-weight: 600;
+            color: var(--primary-dark);
+        }
+
+        .visitas-table .cedula-col {
+            width: 100px;
+            text-align: right;
+        }
+
+        .visitas-table .nombre-col {
+            text-align: left;
+        }
+
+        .visitas-table .direccion-col {
+            text-align: center;
+        }
+
+        .visitas-table .celular-col {
+            width: 100px;
+            text-align: center;
+        }
+
+        .visitas-table .actions-col {
+            width: 80px;
+            text-align: center;
+        }
+
+        .action-btn {
+            background: none;
+            border: none;
+            color: var(--dark-gray);
+            cursor: pointer;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+            padding: 4px;
+            margin: 0 3px;
+        }
+
+        .action-btn:hover {
+            color: var(--primary);
+        }
+
+        .action-btn.edit:hover {
+            color: var(--secondary);
+        }
+
+        .action-btn.delete:hover {
+            color: #e74c3c;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 30px 15px;
+            color: var(--dark-gray);
+        }
+
+        .empty-state i {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: var(--gray);
+        }
+
+        .empty-state p {
+            font-size: 0.9rem;
+        }
+
+        .export-options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+            margin-top: 15px;
+            flex-shrink: 0;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid var(--gray);
+            color: var(--dark-gray);
+            font-size: 0.8rem;
+            flex-shrink: 0;
+        }
+
+        .alert {
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            display: none;
+            font-size: 0.85rem;
+        }
+
+        .alert-success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .alert-error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: var(--white);
+            padding: 20px;
+            border-radius: var(--border-radius);
+            width: 90%;
+            max-width: 450px;
+            box-shadow: var(--shadow-hover);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .modal-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--dark-gray);
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close-btn:hover {
+            color: var(--primary-dark);
+        }
+
+        .modal-body {
+            margin-bottom: 20px;
+        }
+
+        .export-modal {
+            max-width: 400px;
+        }
+
+        .orientation-selector {
+            display: flex;
+            gap: 15px;
+            margin: 15px 0;
+        }
+
+        .orientation-option {
+            flex: 1;
+            text-align: center;
+            padding: 15px;
+            border: 2px solid var(--gray);
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .orientation-option:hover {
+            border-color: var(--primary);
+        }
+
+        .orientation-option.selected {
+            border-color: var(--primary);
+            background-color: rgba(44, 95, 165, 0.1);
+        }
+
+        .orientation-option i {
+            font-size: 2rem;
+            margin-bottom: 8px;
+            color: var(--primary);
+        }
+
+        @media print {
+            @page {
+                margin: 15mm;
+            }
+            
+            body * {
+                visibility: hidden;
+            }
+            
+            .table-card,
+            .table-card * {
+                visibility: visible;
+            }
+            
+            .table-card {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: auto;
+                box-shadow: none;
+                border: none;
+                padding: 0;
+                margin: 0;
+            }
+            
+            .table-header h2,
+            .table-header h2 i,
+            .sort-controls,
+            .actions-col,
+            .export-options,
+            .stats,
+            .btn-group,
+            .form-container,
+            header,
+            .alert,
+            .modal {
+                display: none !important;
+            }
+            
+            .table-scroll-container {
+                overflow: visible;
+                border: none;
+                max-height: none;
+            }
+            
+            .visitas-table {
+                min-width: auto;
+                width: 100%;
+                border-collapse: collapse;
+                page-break-inside: auto;
+            }
+            
+            .visitas-table tr {
+                page-break-inside: avoid;
+                page-break-after: auto;
+            }
+            
+            .visitas-table th {
+                background-color: #f0f0f0 !important;
+                color: #000 !important;
+                border: 1px solid #000;
+                padding: 8px 6px;
+                font-size: 11pt;
+                text-align: center;
+                font-weight: bold;
+            }
+            
+            .visitas-table td {
+                border: 1px solid #000;
+                padding: 7px 6px;
+                font-size: 10pt;
+            }
+            
+            .visitas-table td:nth-child(1) {
+                text-align: center;
+                font-weight: bold;
+                width: 40px;
+            }
+            
+            .visitas-table td:nth-child(2) {
+                text-align: right;
+                width: 100px;
+            }
+            
+            .visitas-table td:nth-child(3) {
+                text-align: left;
+            }
+            
+            .visitas-table td:nth-child(4) {
+                text-align: center;
+            }
+            
+            .visitas-table td:nth-child(5) {
+                text-align: center;
+                width: 100px;
+            }
+            
+            body {
+                background-color: white;
+                font-size: 11pt;
+                margin: 0;
+                padding: 0;
+                width: 100%;
+                height: 100%;
+            }
+            
+            .container {
+                max-width: 100%;
+                padding: 0;
+                margin: 0;
+            }
+        }
+
+        .file-input {
+            display: none;
+        }
+
+        .file-label {
+            display: inline-block;
+            padding: 8px 12px;
+            background-color: var(--primary);
+            color: var(--white);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-size: 0.8rem;
+        }
+
+        .file-label:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .no-print {
+            display: none;
+        }
+
+        .editable-cell {
+            cursor: pointer;
+            position: relative;
+        }
+
+        .editable-cell:hover {
+            background-color: rgba(44, 95, 165, 0.1);
+        }
+
+        .editable-input {
+            width: 100%;
+            height: 100%;
+            border: 2px solid var(--primary);
+            border-radius: 4px;
+            padding: 6px;
+            font-size: 0.85rem;
+            outline: none;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-users"></i>
+                <div>
+                    <h1>Gestión de Visitas</h1>
+                    <p>Junta de Acción Comunal - Sistema de Afiliaciones</p>
+                </div>
+            </div>
+        </header>
+
+        <div class="alert alert-success" id="successAlert">
+            <i class="fas fa-check-circle"></i> <span id="alertMessage">Operación realizada con éxito</span>
+        </div>
+
+        <div class="alert alert-error" id="errorAlert">
+            <i class="fas fa-exclamation-circle"></i> <span id="errorMessage">Ha ocurrido un error</span>
+        </div>
+
+        <div class="main-content">
+            <div class="form-container">
+                <div class="form-card">
+                    <h2><i class="fas fa-edit"></i> Formulario de Registro</h2>
+                    <form id="visitaForm">
+                        <div class="form-group">
+                            <label for="cedula"><i class="fas fa-id-card"></i> Número de Cédula</label>
+                            <input type="text" id="cedula" class="form-control" placeholder="Ej: 123456789" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="nombre"><i class="fas fa-user"></i> Nombres Completos</label>
+                            <input type="text" id="nombre" class="form-control" placeholder="Ej: Juan Pérez González" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="direccion"><i class="fas fa-map-marker-alt"></i> Dirección</label>
+                            <input type="text" id="direccion" class="form-control direccion-predeterminada" 
+                                   value="MANZANA  CASA " 
+                                   required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="celular"><i class="fas fa-mobile-alt"></i> Número de Celular</label>
+                            <input type="tel" id="celular" class="form-control" placeholder="Opcional - Ej: 3001234567">
+                        </div>
+                        
+                        <div class="btn-group">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-plus-circle"></i> Agregar Visita
+                            </button>
+                            <button type="reset" class="btn btn-outline">
+                                <i class="fas fa-redo"></i> Limpiar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="table-container">
+                <div class="table-card">
+                    <div class="table-header">
+                        <h2><i class="fas fa-list"></i> Visitas Registradas</h2>
+                        
+                        <div class="sort-controls">
+                            <select id="sortBy" class="sort-select">
+                                <option value="direccion">Dirección (A-Z)</option>
+                                <option value="cedula">Cédula (Menor a Mayor)</option>
+                                <option value="nombre">Nombre (A-Z)</option>
+                                <option value="id">ID (Menor a Mayor)</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="table-scroll-container">
+                        <table class="visitas-table" id="visitasTable">
+                            <thead>
+                                <tr>
+                                    <th class="id-col">ID</th>
+                                    <th class="cedula-col">Cédula</th>
+                                    <th class="nombre-col">Nombres Completos</th>
+                                    <th class="direccion-col">Dirección</th>
+                                    <th class="celular-col">Celular</th>
+                                    <th class="actions-col no-print">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="visitasTableBody"></tbody>
+                        </table>
+                        
+                        <div id="emptyState" class="empty-state" style="display: none;">
+                            <i class="fas fa-clipboard-list"></i>
+                            <p>No hay visitas registradas aún.</p>
+                            <p>Comienza agregando una nueva visita con el formulario.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stats">
+                        <div>Total de visitas: <span id="totalVisitas">0</span></div>
+                        <div>Última actualización: <span id="lastUpdate">-</span></div>
+                    </div>
+                    
+                    <div class="export-options">
+                        <button class="btn btn-import-export" id="exportJsonBtn">
+                            <i class="fas fa-file-export"></i> Exportar JSON
+                        </button>
+                        <button class="btn btn-import-export" id="importJsonBtn">
+                            <i class="fas fa-file-import"></i> Importar JSON
+                        </button>
+                        <button class="btn btn-print-pdf" id="printBtn">
+                            <i class="fas fa-print"></i> Imprimir Lista
+                        </button>
+                        <button class="btn btn-print-pdf" id="exportPdfBtn">
+                            <i class="fas fa-file-pdf"></i> Exportar PDF
+                        </button>
+                    </div>
+                    
+                    <input type="file" id="jsonFile" class="file-input" accept=".json">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="importModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title"><i class="fas fa-file-import"></i> Importar Visitas</h3>
+                <button class="close-btn" id="closeImportModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Para importar visitas, selecciona un archivo JSON con el nombre <strong>visitas.json</strong>.</p>
+                <p>El archivo debe contener un arreglo de objetos con los siguientes campos: id, cedula, nombre, direccion, celular.</p>
+                <div style="margin-top: 15px;">
+                    <label for="jsonFile" class="file-label">
+                        <i class="fas fa-folder-open"></i> Seleccionar Archivo
+                    </label>
+                    <button class="btn btn-primary" id="confirmImportBtn" disabled style="margin-left: 10px;">
+                        <i class="fas fa-upload"></i> Importar
+                    </button>
+                </div>
+                <p id="fileInfo" style="margin-top: 10px; font-style: italic; color: var(--dark-gray); font-size: 0.85rem;"></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="exportModal">
+        <div class="modal-content export-modal">
+            <div class="modal-header">
+                <h3 class="modal-title"><i class="fas fa-print"></i> Configurar Exportación</h3>
+                <button class="close-btn" id="closeExportModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Seleccione la orientación para la exportación:</p>
+                <div class="orientation-selector">
+                    <div class="orientation-option" data-orientation="portrait">
+                        <i class="fas fa-file-alt"></i>
+                        <p>Vertical</p>
+                    </div>
+                    <div class="orientation-option" data-orientation="landscape">
+                        <i class="fas fa-file-alt"></i>
+                        <p>Horizontal</p>
+                    </div>
+                </div>
+                <div style="margin-top: 20px; display: flex; gap: 10px;">
+                    <button class="btn btn-primary" id="confirmPrintBtn" style="flex: 1;">
+                        <i class="fas fa-print"></i> Imprimir
+                    </button>
+                    <button class="btn btn-primary" id="confirmPdfBtn" style="flex: 1;">
+                        <i class="fas fa-file-pdf"></i> Generar PDF
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let visitas = [];
+        let currentId = 1;
+        let editingCell = null;
+        let exportOrientation = 'portrait';
+        
+        const visitaForm = document.getElementById('visitaForm');
+        const visitasTableBody = document.getElementById('visitasTableBody');
+        const emptyState = document.getElementById('emptyState');
+        const sortBySelect = document.getElementById('sortBy');
+        const exportJsonBtn = document.getElementById('exportJsonBtn');
+        const importJsonBtn = document.getElementById('importJsonBtn');
+        const printBtn = document.getElementById('printBtn');
+        const exportPdfBtn = document.getElementById('exportPdfBtn');
+        const jsonFileInput = document.getElementById('jsonFile');
+        const importModal = document.getElementById('importModal');
+        const exportModal = document.getElementById('exportModal');
+        const closeImportModal = document.getElementById('closeImportModal');
+        const closeExportModal = document.getElementById('closeExportModal');
+        const confirmImportBtn = document.getElementById('confirmImportBtn');
+        const confirmPrintBtn = document.getElementById('confirmPrintBtn');
+        const confirmPdfBtn = document.getElementById('confirmPdfBtn');
+        const successAlert = document.getElementById('successAlert');
+        const errorAlert = document.getElementById('errorAlert');
+        const alertMessage = document.getElementById('alertMessage');
+        const errorMessage = document.getElementById('errorMessage');
+        const fileInfo = document.getElementById('fileInfo');
+        const totalVisitasSpan = document.getElementById('totalVisitas');
+        const lastUpdateSpan = document.getElementById('lastUpdate');
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            cargarVisitas();
+            renderVisitas();
+            actualizarEstadisticas();
+            
+            visitaForm.addEventListener('submit', agregarVisita);
+            sortBySelect.addEventListener('change', renderVisitas);
+            exportJsonBtn.addEventListener('click', exportarJSON);
+            importJsonBtn.addEventListener('click', () => importModal.style.display = 'flex');
+            printBtn.addEventListener('click', () => {
+                exportModal.style.display = 'flex';
+                document.querySelectorAll('.orientation-option').forEach(option => {
+                    option.classList.remove('selected');
+                    if (option.dataset.orientation === exportOrientation) {
+                        option.classList.add('selected');
+                    }
+                });
+            });
+            exportPdfBtn.addEventListener('click', () => {
+                exportModal.style.display = 'flex';
+                document.querySelectorAll('.orientation-option').forEach(option => {
+                    option.classList.remove('selected');
+                    if (option.dataset.orientation === exportOrientation) {
+                        option.classList.add('selected');
+                    }
+                });
+            });
+            jsonFileInput.addEventListener('change', validarArchivoJSON);
+            closeImportModal.addEventListener('click', () => {
+                importModal.style.display = 'none';
+                jsonFileInput.value = '';
+                fileInfo.textContent = '';
+                confirmImportBtn.disabled = true;
+            });
+            closeExportModal.addEventListener('click', () => {
+                exportModal.style.display = 'none';
+            });
+            confirmImportBtn.addEventListener('click', importarJSON);
+            confirmPrintBtn.addEventListener('click', prepararImpresion);
+            confirmPdfBtn.addEventListener('click', exportarPDF);
+            
+            document.querySelectorAll('.orientation-option').forEach(option => {
+                option.addEventListener('click', () => {
+                    document.querySelectorAll('.orientation-option').forEach(opt => opt.classList.remove('selected'));
+                    option.classList.add('selected');
+                    exportOrientation = option.dataset.orientation;
+                });
+            });
+            
+            window.addEventListener('click', (event) => {
+                if (event.target === importModal) {
+                    importModal.style.display = 'none';
+                    jsonFileInput.value = '';
+                    fileInfo.textContent = '';
+                    confirmImportBtn.disabled = true;
+                }
+                if (event.target === exportModal) {
+                    exportModal.style.display = 'none';
+                }
+            });
+            
+            setTimeout(() => {
+                successAlert.style.display = 'none';
+                errorAlert.style.display = 'none';
+            }, 5000);
+            
+            document.getElementById('direccion').value = "MANZANA  CASA ";
+        });
+        
+        function agregarVisita(event) {
+            event.preventDefault();
+            
+            const cedula = document.getElementById('cedula').value.trim();
+            const nombre = document.getElementById('nombre').value.trim();
+            const direccion = document.getElementById('direccion').value.trim();
+            const celular = document.getElementById('celular').value.trim();
+            
+            if (!cedula || !nombre || !direccion) {
+                mostrarError('Complete Cédula, Nombre y Dirección.');
+                return;
+            }
+            
+            const id = currentId.toString();
+            
+            const nuevaVisita = {
+                id,
+                cedula,
+                nombre,
+                direccion,
+                celular: celular || ''
+            };
+            
+            visitas.push(nuevaVisita);
+            currentId++;
+            
+            guardarVisitas();
+            
+            document.getElementById('cedula').value = '';
+            document.getElementById('nombre').value = '';
+            document.getElementById('celular').value = '';
+            document.getElementById('direccion').value = "MANZANA  CASA ";
+            
+            renderVisitas();
+            actualizarEstadisticas();
+            
+            mostrarExito('Visita registrada ID: ' + id);
+        }
+        
+        function eliminarVisita(id) {
+            if (confirm('¿Eliminar esta visita?')) {
+                visitas = visitas.filter(visita => visita.id !== id);
+                guardarVisitas();
+                renderVisitas();
+                actualizarEstadisticas();
+                mostrarExito('Visita eliminada.');
+            }
+        }
+        
+        function editarVisita(id) {
+            const visita = visitas.find(v => v.id === id);
+            if (!visita) return;
+            
+            document.getElementById('cedula').value = visita.cedula;
+            document.getElementById('nombre').value = visita.nombre;
+            document.getElementById('direccion').value = visita.direccion;
+            document.getElementById('celular').value = visita.celular;
+            
+            eliminarVisita(id);
+            
+            document.getElementById('cedula').focus();
+            mostrarExito('Visita cargada para edición. Complete los cambios y presione "Agregar Visita".');
+        }
+        
+        function iniciarEdicionCelda(td, campo, id) {
+            if (editingCell) return;
+            
+            const visita = visitas.find(v => v.id === id);
+            if (!visita) return;
+            
+            const valorOriginal = visita[campo] || '';
+            
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.className = 'editable-input';
+            input.value = valorOriginal;
+            
+            td.innerHTML = '';
+            td.appendChild(input);
+            input.focus();
+            input.select();
+            
+            editingCell = { td, campo, id, valorOriginal, input };
+            
+            function guardarCambio() {
+                const nuevoValor = input.value.trim();
+                const visitaIndex = visitas.findIndex(v => v.id === id);
+                
+                if (visitaIndex !== -1) {
+                    if (nuevoValor !== valorOriginal) {
+                        visitas[visitaIndex][campo] = nuevoValor;
+                        guardarVisitas();
+                        renderVisitas();
+                        actualizarEstadisticas();
+                        mostrarExito('Cambio guardado.');
+                    }
+                    
+                    editingCell = null;
+                }
+            }
+            
+            function cancelarEdicion() {
+                editingCell = null;
+                renderVisitas();
+            }
+            
+            input.addEventListener('blur', guardarCambio);
+            input.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    guardarCambio();
+                } else if (e.key === 'Escape') {
+                    cancelarEdicion();
+                }
+            });
+        }
+        
+        function renderVisitas() {
+            const sortBy = sortBySelect.value;
+            let visitasOrdenadas = [...visitas];
+            
+            switch(sortBy) {
+                case 'direccion':
+                    visitasOrdenadas.sort((a, b) => a.direccion.localeCompare(b.direccion));
+                    break;
+                case 'cedula':
+                    visitasOrdenadas.sort((a, b) => parseInt(a.cedula) - parseInt(b.cedula));
+                    break;
+                case 'nombre':
+                    visitasOrdenadas.sort((a, b) => a.nombre.localeCompare(b.nombre));
+                    break;
+                case 'id':
+                    visitasOrdenadas.sort((a, b) => parseInt(a.id) - parseInt(b.id));
+                    break;
+            }
+            
+            visitasTableBody.innerHTML = '';
+            
+            if (visitasOrdenadas.length === 0) {
+                emptyState.style.display = 'block';
+                return;
+            }
+            
+            emptyState.style.display = 'none';
+            
+            visitasOrdenadas.forEach(visita => {
+                const celularMostrar = visita.celular ? visita.celular : 'NO TIENE';
+                
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td class="id-col">${visita.id}</td>
+                    <td class="cedula-col editable-cell" onclick="iniciarEdicionCelda(this, 'cedula', '${visita.id}')">${visita.cedula}</td>
+                    <td class="nombre-col editable-cell" onclick="iniciarEdicionCelda(this, 'nombre', '${visita.id}')">${visita.nombre}</td>
+                    <td class="direccion-col editable-cell" onclick="iniciarEdicionCelda(this, 'direccion', '${visita.id}')">${visita.direccion}</td>
+                    <td class="celular-col editable-cell" onclick="iniciarEdicionCelda(this, 'celular', '${visita.id}')">${celularMostrar}</td>
+                    <td class="actions-col no-print">
+                        <button class="action-btn edit" onclick="editarVisita('${visita.id}')" title="Editar">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="action-btn delete" onclick="eliminarVisita('${visita.id}')" title="Eliminar">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </td>
+                `;
+                visitasTableBody.appendChild(row);
+            });
+        }
+        
+        function prepararImpresion() {
+            if (visitas.length === 0) {
+                mostrarError('No hay visitas para imprimir.');
+                exportModal.style.display = 'none';
+                return;
+            }
+            
+            exportModal.style.display = 'none';
+            
+            const sortBy = sortBySelect.value;
+            let visitasOrdenadas = [...visitas];
+            
+            switch(sortBy) {
+                case 'direccion':
+                    visitasOrdenadas.sort((a, b) => a.direccion.localeCompare(b.direccion));
+                    break;
+                case 'cedula':
+                    visitasOrdenadas.sort((a, b) => parseInt(a.cedula) - parseInt(b.cedula));
+                    break;
+                case 'nombre':
+                    visitasOrdenadas.sort((a, b) => a.nombre.localeCompare(b.nombre));
+                    break;
+                case 'id':
+                    visitasOrdenadas.sort((a, b) => parseInt(a.id) - parseInt(b.id));
+                    break;
+            }
+            
+            const orientacion = exportOrientation === 'landscape' ? 'landscape' : 'portrait';
+            const margen = orientacion === 'landscape' ? '10mm' : '15mm';
+            
+            const ventanaImpresion = window.open('', '_blank');
+            ventanaImpresion.document.write(`
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <title>Lista de Visitas</title>
+                    <style>
+                        @page {
+                            margin: ${margen};
+                            size: A4 ${orientacion};
+                        }
+                        body {
+                            font-family: Arial, sans-serif;
+                            font-size: ${orientacion === 'landscape' ? '10pt' : '9pt'};
+                            margin: 0;
+                            padding: 0;
+                        }
+                        .titulo {
+                            text-align: center;
+                            font-size: ${orientacion === 'landscape' ? '16pt' : '14pt'};
+                            font-weight: bold;
+                            margin-bottom: 8mm;
+                        }
+                        table {
+                            width: 100%;
+                            border-collapse: collapse;
+                            margin-top: 5mm;
+                        }
+                        th {
+                            border: 1px solid #000;
+                            padding: ${orientacion === 'landscape' ? '6px 4px' : '5px 3px'};
+                            background-color: #f0f0f0;
+                            font-weight: bold;
+                            text-align: center;
+                            font-size: ${orientacion === 'landscape' ? '10pt' : '9pt'};
+                        }
+                        td {
+                            border: 1px solid #000;
+                            padding: ${orientacion === 'landscape' ? '5px 4px' : '4px 3px'};
+                            font-size: ${orientacion === 'landscape' ? '9pt' : '8pt'};
+                        }
+                        .col-numero {
+                            width: 30px;
+                            text-align: center;
+                            font-weight: bold;
+                        }
+                        .col-cedula {
+                            width: 80px;
+                            text-align: right;
+                        }
+                        .col-nombre {
+                            text-align: left;
+                        }
+                        .col-direccion {
+                            text-align: center;
+                        }
+                        .col-celular {
+                            width: 80px;
+                            text-align: center;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <div class="titulo">LISTA DE VISITAS - JUNTA DE ACCIÓN COMUNAL</div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="col-numero">#</th>
+                                <th class="col-cedula">CÉDULA</th>
+                                <th class="col-nombre">NOMBRES COMPLETOS</th>
+                                <th class="col-direccion">DIRECCIÓN</th>
+                                <th class="col-celular">CELULAR</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${visitasOrdenadas.map((visita, index) => {
+                                const celularMostrar = visita.celular ? visita.celular : 'NO TIENE';
+                                return `
+                                    <tr>
+                                        <td class="col-numero">${index + 1}</td>
+                                        <td class="col-cedula">${visita.cedula}</td>
+                                        <td class="col-nombre">${visita.nombre}</td>
+                                        <td class="col-direccion">${visita.direccion}</td>
+                                        <td class="col-celular">${celularMostrar}</td>
+                                    </tr>
+                                `;
+                            }).join('')}
+                        </tbody>
+                    </table>
+                    <script>
+                        setTimeout(() => {
+                            window.print();
+                            setTimeout(() => window.close(), 100);
+                        }, 100);
+                    <\/script>
+                </body>
+                </html>
+            `);
+            ventanaImpresion.document.close();
+        }
+        
+        function exportarPDF() {
+            if (visitas.length === 0) {
+                mostrarError('No hay visitas para PDF.');
+                exportModal.style.display = 'none';
+                return;
+            }
+            
+            exportModal.style.display = 'none';
+            
+            const { jsPDF } = window.jspdf;
+            const orientacion = exportOrientation === 'landscape' ? 'landscape' : 'portrait';
+            const doc = new jsPDF(orientacion, 'mm', 'a4');
+            
+            doc.setFontSize(orientacion === 'landscape' ? 16 : 14);
+            doc.setTextColor(0, 0, 0);
+            doc.text('LISTA DE VISITAS - JUNTA DE ACCIÓN COMUNAL', doc.internal.pageSize.width / 2, 15, { align: 'center' });
+            
+            const sortBy = sortBySelect.value;
+            let visitasOrdenadas = [...visitas];
+            
+            switch(sortBy) {
+                case 'direccion':
+                    visitasOrdenadas.sort((a, b) => a.direccion.localeCompare(b.direccion));
+                    break;
+                case 'cedula':
+                    visitasOrdenadas.sort((a, b) => parseInt(a.cedula) - parseInt(b.cedula));
+                    break;
+                case 'nombre':
+                    visitasOrdenadas.sort((a, b) => a.nombre.localeCompare(b.nombre));
+                    break;
+                case 'id':
+                    visitasOrdenadas.sort((a, b) => parseInt(a.id) - parseInt(b.id));
+                    break;
+            }
+            
+            const tableData = visitasOrdenadas.map((visita, index) => [
+                (index + 1).toString(),
+                visita.cedula,
+                visita.nombre,
+                visita.direccion,
+                visita.celular || 'NO TIENE'
+            ]);
+            
+            const columnStyles = orientacion === 'landscape' ? {
+                0: { cellWidth: 15, halign: 'center' },
+                1: { cellWidth: 30, halign: 'right' },
+                2: { cellWidth: 70, halign: 'left' },
+                3: { cellWidth: 75, halign: 'center' },
+                4: { cellWidth: 30, halign: 'center' }
+            } : {
+                0: { cellWidth: 10, halign: 'center' },
+                1: { cellWidth: 25, halign: 'right' },
+                2: { cellWidth: 50, halign: 'left' },
+                3: { cellWidth: 45, halign: 'center' },
+                4: { cellWidth: 25, halign: 'center' }
+            };
+            
+            doc.autoTable({
+                head: [['#', 'CÉDULA', 'NOMBRES COMPLETOS', 'DIRECCIÓN', 'CELULAR']],
+                body: tableData,
+                startY: 25,
+                theme: 'grid',
+                styles: { 
+                    fontSize: orientacion === 'landscape' ? 9 : 8, 
+                    cellPadding: 2,
+                    textColor: [0, 0, 0]
+                },
+                headStyles: { 
+                    fillColor: [100, 100, 100], 
+                    textColor: [255, 255, 255], 
+                    fontSize: orientacion === 'landscape' ? 10 : 9,
+                    halign: 'center'
+                },
+                columnStyles: columnStyles,
+                margin: { left: 10, right: 10 }
+            });
+            
+            doc.save('lista_visitas.pdf');
+            
+            mostrarExito('PDF exportado.');
+        }
+        
+        function actualizarEstadisticas() {
+            totalVisitasSpan.textContent = visitas.length;
+            
+            const now = new Date();
+            lastUpdateSpan.textContent = now.toLocaleDateString('es-ES', {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+        }
+        
+        function exportarJSON() {
+            if (visitas.length === 0) {
+                mostrarError('No hay visitas para exportar.');
+                return;
+            }
+            
+            const dataStr = JSON.stringify(visitas, null, 2);
+            const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+            
+            const linkElement = document.createElement('a');
+            linkElement.setAttribute('href', dataUri);
+            linkElement.setAttribute('download', 'visitas.json');
+            linkElement.click();
+            
+            mostrarExito('JSON exportado.');
+        }
+        
+        function validarArchivoJSON(event) {
+            const file = event.target.files[0];
+            
+            if (!file) {
+                confirmImportBtn.disabled = true;
+                fileInfo.textContent = '';
+                return;
+            }
+            
+            if (file.name !== 'visitas.json') {
+                fileInfo.textContent = 'Error: El archivo debe llamarse "visitas.json"';
+                fileInfo.style.color = '#e74c3c';
+                confirmImportBtn.disabled = true;
+                return;
+            }
+            
+            if (file.type !== 'application/json' && !file.name.endsWith('.json')) {
+                fileInfo.textContent = 'Error: El archivo debe ser JSON';
+                fileInfo.style.color = '#e74c3c';
+                confirmImportBtn.disabled = true;
+                return;
+            }
+            
+            fileInfo.textContent = `Archivo válido: ${file.name} (${(file.size / 1024).toFixed(2)} KB)`;
+            fileInfo.style.color = '#27ae60';
+            confirmImportBtn.disabled = false;
+        }
+        
+        function importarJSON() {
+            const file = jsonFileInput.files[0];
+            
+            if (!file) {
+                mostrarError('Seleccione un archivo.');
+                return;
+            }
+            
+            const reader = new FileReader();
+            
+            reader.onload = function(event) {
+                try {
+                    const data = JSON.parse(event.target.result);
+                    
+                    if (!Array.isArray(data)) {
+                        mostrarError('Debe ser un arreglo de visitas.');
+                        return;
+                    }
+                    
+                    const camposRequeridos = ['id', 'cedula', 'nombre', 'direccion', 'celular'];
+                    for (let i = 0; i < data.length; i++) {
+                        const visita = data[i];
+                        for (const campo of camposRequeridos) {
+                            if (!visita.hasOwnProperty(campo)) {
+                                mostrarError(`Falta campo "${campo}" en posición ${i}.`);
+                                return;
+                            }
+                        }
+                    }
+                    
+                    visitas = data;
+                    
+                    let maxId = 0;
+                    visitas.forEach(visita => {
+                        const idNum = parseInt(visita.id);
+                        if (!isNaN(idNum) && idNum > maxId) {
+                            maxId = idNum;
+                        }
+                    });
+                    currentId = maxId + 1;
+                    
+                    guardarVisitas();
+                    renderVisitas();
+                    actualizarEstadisticas();
+                    
+                    importModal.style.display = 'none';
+                    jsonFileInput.value = '';
+                    fileInfo.textContent = '';
+                    confirmImportBtn.disabled = true;
+                    
+                    mostrarExito(`${data.length} visitas importadas.`);
+                } catch (error) {
+                    mostrarError(`Error: ${error.message}`);
+                }
+            };
+            
+            reader.readAsText(file);
+        }
+        
+        function guardarVisitas() {
+            localStorage.setItem('visitas_jac', JSON.stringify(visitas));
+            localStorage.setItem('current_id', currentId.toString());
+        }
+        
+        function cargarVisitas() {
+            const storedVisitas = localStorage.getItem('visitas_jac');
+            const storedId = localStorage.getItem('current_id');
+            
+            if (storedVisitas) {
+                visitas = JSON.parse(storedVisitas);
+            }
+            
+            if (storedId) {
+                currentId = parseInt(storedId);
+            } else {
+                let maxId = 0;
+                visitas.forEach(visita => {
+                    const idNum = parseInt(visita.id);
+                    if (!isNaN(idNum) && idNum > maxId) {
+                        maxId = idNum;
+                    }
+                });
+                currentId = maxId + 1 || 1;
+            }
+        }
+        
+        function mostrarExito(mensaje) {
+            alertMessage.textContent = mensaje;
+            successAlert.style.display = 'block';
+            
+            setTimeout(() => {
+                successAlert.style.display = 'none';
+            }, 5000);
+        }
+        
+        function mostrarError(mensaje) {
+            errorMessage.textContent = mensaje;
+            errorAlert.style.display = 'block';
+            
+            setTimeout(() => {
+                errorAlert.style.display = 'none';
+            }, 5000);
+        }
+    </script>
+</body>
+</html>
