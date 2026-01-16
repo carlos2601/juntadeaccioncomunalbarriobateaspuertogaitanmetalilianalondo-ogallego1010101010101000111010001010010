@@ -22,6 +22,8 @@
             --cafe-secundario: #905010;
             --verde-oscuro: #2E7D32; /* Nuevo color para Registro */
             --verde-oscuro-secundario: #1B5E20;
+            --azul-visitas: #2c5fa5; /* Nuevo color para Visitas */
+            --azul-visitas-secundario: #1e3d73;
         }
         
         * {
@@ -81,7 +83,7 @@
         }
         
         .container {
-            max-width: 1400px; /* Aumentado para acomodar 5 tarjetas */
+            max-width: 1680px; /* Aumentado para acomodar 6 tarjetas */
             margin: 2rem auto;
             padding: 0 1.5rem;
         }
@@ -97,7 +99,7 @@
         
         .sections-grid {
             display: grid;
-            grid-template-columns: repeat(5, 1fr); /* 5 columnas fijas */
+            grid-template-columns: repeat(6, 1fr); /* 6 columnas fijas */
             gap: 1rem; /* Reducido el espacio entre tarjetas */
         }
         
@@ -142,6 +144,10 @@
         
         .documentos {
             background: linear-gradient(135deg, #9C27B0, #7B1FA2);
+        }
+        
+        .visitas {
+            background: linear-gradient(135deg, var(--azul-visitas), var(--azul-visitas-secundario));
         }
         
         .card-header i {
@@ -207,6 +213,11 @@
             color: var(--blanco);
         }
         
+        .visitas .card-btn:hover {
+            background-color: var(--azul-visitas);
+            color: var(--blanco);
+        }
+        
         .stats {
             display: flex;
             justify-content: space-between;
@@ -219,9 +230,9 @@
             font-size: 0.7rem;
         }
         
-        @media (max-width: 1200px) {
+        @media (max-width: 1400px) {
             .sections-grid {
-                grid-template-columns: repeat(3, 1fr); /* 3 columnas en pantallas medianas */
+                grid-template-columns: repeat(3, 1fr); /* 3 columnas en pantallas grandes */
             }
             
             .section-card {
@@ -229,13 +240,13 @@
             }
         }
         
-        @media (max-width: 768px) {
+        @media (max-width: 1200px) {
             .sections-grid {
-                grid-template-columns: repeat(2, 1fr); /* 2 columnas en tablets */
+                grid-template-columns: repeat(2, 1fr); /* 2 columnas en pantallas medianas */
             }
         }
         
-        @media (max-width: 576px) {
+        @media (max-width: 768px) {
             .sections-grid {
                 grid-template-columns: 1fr; /* 1 columna en móviles */
             }
@@ -273,25 +284,6 @@
         
         <div class="sections-grid">
             <!-- Sección Afiliaciones -->
-            
-            
-            <!-- Sección Registro (NUEVA) -->
-            <div class="section-card" onclick="location.href='https://carlos2601.github.io/bateas3/registro.html'">
-                <div class="card-header registro">
-                    <i class="fas fa-user-plus"></i>
-                    <h3>Registro</h3>
-                </div>
-                <div class="card-body">
-                    <p>Registro de nuevos miembros y gestión de datos personales en el sistema.</p>
-                    <div class="stats">
-                        <span><i class="fas fa-user-plus"></i> Nuevos registros</span>
-                        <span><i class="fas fa-database"></i> Gestión de datos</span>
-                    </div>
-                    <a href="https://carlos2601.github.io/bateas3/registro.html" class="card-btn">Acceder al Registro</a>
-                </div>
-            </div>
-
-
             <div class="section-card" onclick="location.href='afiliaciones.html'">
                 <div class="card-header afiliaciones">
                     <i class="fas fa-users"></i>
@@ -307,6 +299,23 @@
                 </div>
             </div>
             
+            <!-- Sección Registro -->
+            <div class="section-card" onclick="location.href='https://carlos2601.github.io/bateas3/registro.html'">
+                <div class="card-header registro">
+                    <i class="fas fa-user-plus"></i>
+                    <h3>Registro</h3>
+                </div>
+                <div class="card-body">
+                    <p>Registro de nuevos miembros y gestión de datos personales en el sistema.</p>
+                    <div class="stats">
+                        <span><i class="fas fa-user-plus"></i> Nuevos registros</span>
+                        <span><i class="fas fa-database"></i> Gestión de datos</span>
+                    </div>
+                    <a href="https://carlos2601.github.io/bateas3/registro.html" class="card-btn">Acceder al Registro</a>
+                </div>
+            </div>
+            
+                       
             <!-- Sección Certificados -->
             <div class="section-card" onclick="location.href='certificado.html'">
                 <div class="card-header certificados">
@@ -335,7 +344,7 @@
                         <span><i class="fas fa-file-alt"></i> 15 emitidos</span>
                         <span><i class="fas fa-sync-alt"></i> 2 por renovar</span>
                     </div>
-                    <a href="traslados.html" class="card-btn">Gestionar Traslados</a>
+                    <a href="traslado.html" class="card-btn">Gestionar Traslados</a>
                 </div>
             </div>
             
@@ -354,7 +363,25 @@
                     <a href="documentos.html" class="card-btn">Ver Documentos</a>
                 </div>
             </div>
-        </div>
+       
+
+     <!-- Sección Visitas (NUEVA) -->
+            <div class="section-card" onclick="location.href='https://carlos2601.github.io/bateas3/visitas.html'">
+                <div class="card-header visitas">
+                    <i class="fas fa-address-book"></i>
+                    <h3>Gestión de Visitas</h3>
+                </div>
+                <div class="card-body">
+                    <p>Registro y control de visitas realizadas a miembros de la comunidad.</p>
+                    <div class="stats">
+                        <span><i class="fas fa-list"></i> Registro completo</span>
+                        <span><i class="fas fa-file-export"></i> Exportar datos</span>
+                    </div>
+                    <a href="https://carlos2601.github.io/bateas3/visitas.html" class="card-btn">Acceder a Visitas</a>
+                </div>
+            </div>
+
+             </div>
     </div>
     
     <script>
