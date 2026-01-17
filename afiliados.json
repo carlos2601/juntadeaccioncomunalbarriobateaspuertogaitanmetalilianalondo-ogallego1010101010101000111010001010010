@@ -5120,5 +5120,18 @@
     "celular": "3155240121",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 395,
+    "registro": 395,
+    "folio": 22,
+    "renglon": 35,
+    "nombre": "EGNA CAROLINA CHAPARRO RIAÑO",
+    "cedula": "1.121.847.197",
+    "fecha": "17/01/2026",
+    "direccion": "MANZANA 62 CASA 10",
+    "celular": "3123552157",
+    "pagos": [],
+    "firma": ""
   }
 ]
