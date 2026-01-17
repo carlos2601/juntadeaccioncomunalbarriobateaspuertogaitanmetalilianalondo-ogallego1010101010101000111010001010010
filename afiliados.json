@@ -5211,5 +5211,18 @@
     "celular": "3157058912",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 402,
+    "registro": 402,
+    "folio": 24,
+    "renglon": 6,
+    "nombre": "RAFAEL TEOBALDO ROCHA RIVERA",
+    "cedula": "1.052.572.877",
+    "fecha": "17/01/2026",
+    "direccion": "MANZANA 78 CASA 11",
+    "celular": "3214775014",
+    "pagos": [],
+    "firma": ""
   }
 ]
