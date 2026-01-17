@@ -5263,5 +5263,18 @@
     "celular": "3150788630",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 406,
+    "registro": 406,
+    "folio": 24,
+    "renglon": 10,
+    "nombre": "MARIA ANGELICA AMAYA",
+    "cedula": "1.120.924.243",
+    "fecha": "17/01/2026",
+    "direccion": "MANZANA 64 CASA 09",
+    "celular": "3175408115",
+    "pagos": [],
+    "firma": ""
   }
 ]
