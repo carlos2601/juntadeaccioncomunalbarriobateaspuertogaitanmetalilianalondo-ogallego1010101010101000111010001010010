@@ -5302,5 +5302,18 @@
     "celular": "3143575215",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 409,
+    "registro": 409,
+    "folio": 24,
+    "renglon": 13,
+    "nombre": "MARIA ROCIO CAPERA BARRETO",
+    "cedula": "1.120.924.878",
+    "fecha": "17/01/2026",
+    "direccion": "MANZANA 78 CASA 17",
+    "celular": "3162333231",
+    "pagos": [],
+    "firma": ""
   }
 ]
