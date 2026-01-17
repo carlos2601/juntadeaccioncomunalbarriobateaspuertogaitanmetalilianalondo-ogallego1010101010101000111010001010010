@@ -4964,5 +4964,18 @@
     "celular": "3112603534",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 383,
+    "registro": 383,
+    "folio": 22,
+    "renglon": 23,
+    "nombre": "ARLEY BASTIDAS TRUJILLO",
+    "cedula": "7.733.141",
+    "fecha": "17/01/2026",
+    "direccion": "MANZANA 59 CASA 07",
+    "celular": "3122777032",
+    "pagos": [],
+    "firma": ""
   }
 ]
