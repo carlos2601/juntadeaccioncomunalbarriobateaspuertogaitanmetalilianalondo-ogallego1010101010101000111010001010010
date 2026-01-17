@@ -5042,5 +5042,18 @@
     "celular": "3158396007",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 389,
+    "registro": 389,
+    "folio": 22,
+    "renglon": 29,
+    "nombre": "WILLIAM GUILLERMO GAVIRIA TRIANA",
+    "cedula": "1.104.699.180",
+    "fecha": "17/01/2026",
+    "direccion": "MANZANA 74 CASA 07",
+    "celular": "3205781425",
+    "pagos": [],
+    "firma": ""
   }
 ]
