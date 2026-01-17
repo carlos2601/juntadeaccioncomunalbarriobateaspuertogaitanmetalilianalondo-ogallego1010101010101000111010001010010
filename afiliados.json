@@ -4951,5 +4951,18 @@
     "celular": "3212095800",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 382,
+    "registro": 382,
+    "folio": 22,
+    "renglon": 22,
+    "nombre": "CARLOS ABEL RESTREPO ROMERO",
+    "cedula": "1.006.697.510",
+    "fecha": "17/01/2026",
+    "direccion": "MANZANA 61 CASA 20",
+    "celular": "3112603534",
+    "pagos": [],
+    "firma": ""
   }
 ]
