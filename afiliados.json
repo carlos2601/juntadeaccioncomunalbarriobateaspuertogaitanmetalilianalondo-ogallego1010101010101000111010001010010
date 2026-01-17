@@ -5081,5 +5081,18 @@
     "celular": "3156243980",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 392,
+    "registro": 392,
+    "folio": 22,
+    "renglon": 32,
+    "nombre": "MARTHA LILIANA NARVAEZ MORENO",
+    "cedula": "1.110.177.870",
+    "fecha": "17/01/2026",
+    "direccion": "MANZANA 75 CASA 20",
+    "celular": "3143475634",
+    "pagos": [],
+    "firma": ""
   }
 ]
