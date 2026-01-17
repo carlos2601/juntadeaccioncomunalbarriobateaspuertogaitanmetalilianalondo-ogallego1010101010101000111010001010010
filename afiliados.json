@@ -4990,5 +4990,18 @@
     "celular": "3214635137",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 385,
+    "registro": 385,
+    "folio": 22,
+    "renglon": 25,
+    "nombre": "DAVID SANTIAGO MUÑOZ GUZMAN",
+    "cedula": "1.000.781.040",
+    "fecha": "17/01/2026",
+    "direccion": "MANZANA 65 CASA 18",
+    "celular": "3204828752",
+    "pagos": [],
+    "firma": ""
   }
 ]
