@@ -4925,5 +4925,18 @@
     "celular": "3107203926",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 380,
+    "registro": 380,
+    "folio": 22,
+    "renglon": 20,
+    "nombre": "CARLOS ANDRES RESTREPO ROMERO",
+    "cedula": "1.093.761.880",
+    "fecha": "17/01/2026",
+    "direccion": "MANZANA 61 CASA 20",
+    "celular": "3223386588",
+    "pagos": [],
+    "firma": ""
   }
 ]
