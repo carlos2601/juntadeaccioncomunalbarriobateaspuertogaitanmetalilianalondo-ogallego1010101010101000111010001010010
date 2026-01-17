@@ -5016,5 +5016,18 @@
     "celular": "3224926563",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 387,
+    "registro": 387,
+    "folio": 22,
+    "renglon": 27,
+    "nombre": "HENRY BARRAGAN DELGADO",
+    "cedula": "3.238.767",
+    "fecha": "17/01/2026",
+    "direccion": "MANZANA 74 CASA 07",
+    "celular": "3164051429",
+    "pagos": [],
+    "firma": ""
   }
 ]
