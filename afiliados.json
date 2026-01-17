@@ -5315,5 +5315,18 @@
     "celular": "3162333231",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 410,
+    "registro": 410,
+    "folio": 24,
+    "renglon": 14,
+    "nombre": "GREYSY CHIRLEY CAPERA BARRETO",
+    "cedula": "1.120.925.120",
+    "fecha": "17/01/2026",
+    "direccion": "MANZANA 78 CASA 17",
+    "celular": "3173385600",
+    "pagos": [],
+    "firma": ""
   }
 ]
