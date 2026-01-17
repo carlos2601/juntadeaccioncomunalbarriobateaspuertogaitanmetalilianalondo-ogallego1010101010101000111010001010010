@@ -5003,5 +5003,18 @@
     "celular": "3204828752",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 386,
+    "registro": 386,
+    "folio": 22,
+    "renglon": 26,
+    "nombre": "BRAYAN STIVEN DUARTE GOMEZ",
+    "cedula": "1.121.942.065",
+    "fecha": "17/01/2026",
+    "direccion": "MANZANA 80 CASA 23",
+    "celular": "3224926563",
+    "pagos": [],
+    "firma": ""
   }
 ]
