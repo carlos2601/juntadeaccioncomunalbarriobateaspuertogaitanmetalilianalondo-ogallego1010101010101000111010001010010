@@ -5055,5 +5055,18 @@
     "celular": "3205781425",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 390,
+    "registro": 390,
+    "folio": 22,
+    "renglon": 30,
+    "nombre": "BRAYAN DAREN OBANDO FRANCO",
+    "cedula": "1.121.937.585",
+    "fecha": "17/01/2026",
+    "direccion": "MANZANA 74 CASA 07",
+    "celular": "3225781425",
+    "pagos": [],
+    "firma": ""
   }
 ]
