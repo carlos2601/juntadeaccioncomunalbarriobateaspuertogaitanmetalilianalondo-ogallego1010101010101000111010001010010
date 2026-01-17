@@ -5237,5 +5237,18 @@
     "celular": "3203725941",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 404,
+    "registro": 404,
+    "folio": 24,
+    "renglon": 8,
+    "nombre": "DIEGO ALEJANDRO OLAYA CARDENAS",
+    "cedula": "1.120.362.224",
+    "fecha": "17/01/2026",
+    "direccion": "MANZANA 78 CASA 11",
+    "celular": "3134717615",
+    "pagos": [],
+    "firma": ""
   }
 ]
