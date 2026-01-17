@@ -4903,13 +4903,26 @@
   {
     "id": 378,
     "registro": 378,
-    "folio": 23,
+    "folio": 22,
     "renglon": 18,
     "nombre": "MIGUEL IGNACIO FUENTES ORTIZ",
     "cedula": "1093777872",
     "fecha": "27/12/2025",
     "direccion": "MANZANA 70  CASA 08",
     "celular": "3233060925",
+    "pagos": [],
+    "firma": ""
+  },
+  {
+    "id": 379,
+    "registro": 379,
+    "folio": 22,
+    "renglon": 19,
+    "nombre": "JOHANA ROMERO CORTES",
+    "cedula": "40.405.626",
+    "fecha": "17/01/2026",
+    "direccion": "MANZANA 61 CASA 20",
+    "celular": "3107203926",
     "pagos": [],
     "firma": ""
   }
