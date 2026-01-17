@@ -5159,5 +5159,18 @@
     "celular": "3156882996",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 398,
+    "registro": 398,
+    "folio": 24,
+    "renglon": 2,
+    "nombre": "ANDRES AVELINO CORREA HERNANDEZ",
+    "cedula": "1.067.711.985",
+    "fecha": "17/01/2026",
+    "direccion": "MANZANA 78 A CASA 07",
+    "celular": "3127652942",
+    "pagos": [],
+    "firma": ""
   }
 ]
