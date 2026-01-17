@@ -5094,5 +5094,18 @@
     "celular": "3143475634",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 393,
+    "registro": 393,
+    "folio": 22,
+    "renglon": 33,
+    "nombre": "MAGALYS NARVAEZ MORENO",
+    "cedula": "1.123.564.699",
+    "fecha": "17/01/2026",
+    "direccion": "MANZANA 75 CASA 20",
+    "celular": "3028181760",
+    "pagos": [],
+    "firma": ""
   }
 ]
