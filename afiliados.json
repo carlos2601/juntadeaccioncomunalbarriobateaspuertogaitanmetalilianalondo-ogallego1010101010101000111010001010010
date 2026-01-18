@@ -932,7 +932,9 @@
     "fecha": "21/11/2024",
     "direccion": "MANZANA 59 CASA 10",
     "celular": "3213329108",
-    "pagos": [],
+    "pagos": [
+      "18/1/2026, 20.000"
+    ],
     "firma": ""
   },
   {
