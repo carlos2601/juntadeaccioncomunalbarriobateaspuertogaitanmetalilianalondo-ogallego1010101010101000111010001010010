@@ -1,0 +1,1212 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reporte de Pagos - Bateas Sector 3</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <style>
+        :root {
+            --primary: #8BC34A;
+            --primary-dark: #689F38;
+            --secondary: #FFC107;
+            --secondary-dark: #FFA000;
+            --accent: #4CAF50;
+            --light: #F1F8E9;
+            --dark: #33691E;
+            --text: #212121;
+            --text-light: #757575;
+            --background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            --table-header: linear-gradient(to right, var(--primary), var(--primary-dark));
+            --table-row-even: #F9FDF3;
+            --table-row-hover: #E8F5E9;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: var(--background);
+            height: 100vh;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        
+        /* Encabezado compacto */
+        .header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 10px;
+            flex-shrink: 0;
+            height: 60px;
+        }
+        
+        .logo-icon {
+            font-size: 2rem;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .logo-text {
+            flex: 1;
+        }
+        
+        .logo-text h1 {
+            color: var(--dark);
+            font-weight: 800;
+            font-size: 1.3rem;
+            line-height: 1.2;
+        }
+        
+        .logo-text .subtitle {
+            color: var(--text-light);
+            font-size: 0.85rem;
+        }
+        
+        .current-date {
+            color: var(--text-light);
+            font-size: 0.85rem;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+        
+        /* Panel de Filtros Compacto */
+        .filters-container {
+            background: var(--card-bg);
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            margin-bottom: 10px;
+            flex-shrink: 0;
+            height: 150px;
+            overflow: hidden;
+        }
+        
+        .filters-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 10px;
+            height: 100%;
+        }
+        
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        
+        .filter-label {
+            font-weight: 600;
+            color: var(--dark);
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            white-space: nowrap;
+        }
+        
+        .filter-label i {
+            font-size: 0.9rem;
+            color: var(--primary);
+        }
+        
+        .filter-input, 
+        .filter-select {
+            padding: 8px 10px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            background-color: white;
+            width: 100%;
+        }
+        
+        .filter-input:focus,
+        .filter-select:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(139, 195, 74, 0.2);
+        }
+        
+        .quick-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            justify-content: center;
+        }
+        
+        .action-btn {
+            padding: 8px 12px;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.3s;
+        }
+        
+        .action-btn.primary {
+            background: linear-gradient(to right, var(--primary), var(--primary-dark));
+            color: white;
+        }
+        
+        .action-btn.secondary {
+            background: #f0f0f0;
+            color: var(--text);
+        }
+        
+        .action-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Tabla de Resultados - Ocupa el 60% restante */
+        .results-container {
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            flex: 1;
+            min-height: 0;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        
+        .results-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            border-bottom: 2px solid var(--light);
+            flex-shrink: 0;
+        }
+        
+        .results-title {
+            color: var(--dark);
+            font-size: 1.1rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .stats {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .stat-box {
+            background: var(--light);
+            padding: 8px 15px;
+            border-radius: 8px;
+            text-align: center;
+            min-width: 100px;
+        }
+        
+        .stat-value {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+        
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--text-light);
+        }
+        
+        .table-wrapper {
+            flex: 1;
+            overflow: auto;
+            padding: 0 15px 15px 15px;
+        }
+        
+        .pagos-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 1100px;
+        }
+        
+        .pagos-table th {
+            background: var(--table-header);
+            color: white;
+            padding: 12px 8px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.85rem;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        
+        .pagos-table th:hover {
+            background: linear-gradient(to right, var(--primary-dark), #5a8c29);
+        }
+        
+        .pagos-table th i {
+            margin-left: 5px;
+            font-size: 0.7rem;
+        }
+        
+        .pagos-table td {
+            padding: 10px 6px;
+            text-align: center;
+            border-bottom: 1px solid #e0e0e0;
+            font-size: 0.85rem;
+            vertical-align: middle;
+        }
+        
+        /* Columnas específicas */
+        .col-numero {
+            width: 50px;
+            font-weight: bold;
+            color: var(--dark);
+        }
+        
+        .col-cedula {
+            width: 120px;
+        }
+        
+        .col-nombre {
+            width: 250px;
+            text-align: left;
+            padding-left: 10px !important;
+            white-space: normal;
+            word-wrap: break-word;
+            max-width: 250px;
+        }
+        
+        .col-direccion {
+            width: 200px;
+            text-align: left;
+            padding-left: 10px !important;
+            white-space: normal;
+            word-wrap: break-word;
+            max-width: 200px;
+        }
+        
+        .col-fecha {
+            width: 90px;
+        }
+        
+        .col-valor {
+            width: 90px;
+        }
+        
+        .pagos-table tbody tr:nth-child(even) {
+            background-color: var(--table-row-even);
+        }
+        
+        .pagos-table tbody tr:hover {
+            background-color: var(--table-row-hover);
+        }
+        
+        .valor-pago {
+            background-color: #E8F5E9;
+            color: var(--dark);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.8rem;
+            white-space: nowrap;
+            display: inline-block;
+            min-width: 70px;
+        }
+        
+        .no-pagos {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-light);
+            font-size: 0.95rem;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .no-pagos i {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: #e0e0e0;
+        }
+        
+        /* Botones de control de tabla */
+        .table-controls {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        .control-btn {
+            padding: 6px 12px;
+            border: none;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            background: var(--light);
+            color: var(--dark);
+        }
+        
+        .control-btn:hover {
+            background: #e0e0e0;
+        }
+        
+        .order-control {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--light);
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+        
+        .order-control label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--dark);
+            white-space: nowrap;
+        }
+        
+        .order-select {
+            padding: 4px 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            background: white;
+        }
+        
+        /* Estados de filtro activo */
+        .filter-active {
+            border-color: var(--primary) !important;
+            background-color: #F1F8E9 !important;
+        }
+        
+        /* Loading */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            flex-direction: column;
+            color: white;
+            display: none;
+        }
+        
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+            margin-bottom: 10px;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .filters-grid {
+                grid-template-columns: repeat(3, 1fr);
+                grid-template-rows: repeat(2, 1fr);
+            }
+            
+            .header {
+                flex-direction: column;
+                height: auto;
+                align-items: flex-start;
+                gap: 5px;
+            }
+            
+            .current-date {
+                align-self: flex-end;
+                margin-top: -20px;
+            }
+            
+            .pagos-table {
+                min-width: 900px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .filters-grid {
+                grid-template-columns: 1fr;
+                grid-template-rows: repeat(4, auto);
+            }
+            
+            .filters-container {
+                height: auto;
+                max-height: 200px;
+                overflow-y: auto;
+            }
+            
+            .results-header {
+                flex-direction: column;
+                gap: 10px;
+                align-items: flex-start;
+            }
+            
+            .stats {
+                width: 100%;
+                justify-content: space-between;
+            }
+            
+            .table-controls {
+                width: 100%;
+                justify-content: space-between;
+            }
+            
+            .pagos-table {
+                min-width: 700px;
+            }
+        }
+        
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            .results-container,
+            .results-container * {
+                visibility: visible;
+            }
+            .results-container {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: auto;
+                box-shadow: none;
+            }
+            .header, .filters-container {
+                display: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Encabezado compacto -->
+    <div class="header">
+        <i class="fas fa-chart-line logo-icon"></i>
+        <div class="logo-text">
+            <h1>REPORTE DE PAGOS</h1>
+            <div class="subtitle">JUNTA DE ACCIÓN COMUNAL BATEAS SECTOR 3</div>
+        </div>
+        <div class="current-date" id="currentDate"></div>
+    </div>
+    
+    <!-- Panel de Filtros Compacto en una línea -->
+    <div class="filters-container">
+        <div class="filters-grid">
+            <!-- Búsqueda general -->
+            <div class="filter-group">
+                <div class="filter-label">
+                    <i class="fas fa-search"></i>
+                    Buscar
+                </div>
+                <input type="text" class="filter-input" id="searchGeneral" 
+                       placeholder="Cédula, Nombre o Reg.">
+            </div>
+            
+            <!-- Filtro por día específico -->
+            <div class="filter-group">
+                <div class="filter-label">
+                    <i class="fas fa-calendar-day"></i>
+                    Día
+                </div>
+                <select class="filter-select" id="filterDia">
+                    <option value="">Todos</option>
+                    <!-- Días se generarán dinámicamente -->
+                </select>
+            </div>
+            
+            <!-- Filtro por mes -->
+            <div class="filter-group">
+                <div class="filter-label">
+                    <i class="fas fa-calendar-alt"></i>
+                    Mes
+                </div>
+                <select class="filter-select" id="filterMes">
+                    <option value="">Todos</option>
+                    <option value="1">Enero</option>
+                    <option value="2">Febrero</option>
+                    <option value="3">Marzo</option>
+                    <option value="4">Abril</option>
+                    <option value="5">Mayo</option>
+                    <option value="6">Junio</option>
+                    <option value="7">Julio</option>
+                    <option value="8">Agosto</option>
+                    <option value="9">Septiembre</option>
+                    <option value="10">Octubre</option>
+                    <option value="11">Noviembre</option>
+                    <option value="12">Diciembre</option>
+                </select>
+            </div>
+            
+            <!-- Filtro por año -->
+            <div class="filter-group">
+                <div class="filter-label">
+                    <i class="fas fa-calendar"></i>
+                    Año
+                </div>
+                <select class="filter-select" id="filterAnio">
+                    <option value="">Todos</option>
+                    <option value="2024">2024</option>
+                    <option value="2025">2025</option>
+                    <option value="2026">2026</option>
+                    <option value="2027">2027</option>
+                    <option value="2028">2028</option>
+                </select>
+            </div>
+            
+            <!-- Opciones rápidas -->
+            <div class="filter-group">
+                <div class="filter-label">
+                    <i class="fas fa-bolt"></i>
+                    Rápidos
+                </div>
+                <div style="display: flex; gap: 5px;">
+                    <button class="action-btn secondary" id="btnHoy" title="Mostrar solo hoy">
+                        Hoy
+                    </button>
+                    <button class="action-btn secondary" id="btnTodos" title="Mostrar todos">
+                        Todos
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Acciones -->
+            <div class="quick-actions">
+                <button class="action-btn primary" id="btnFiltrar">
+                    <i class="fas fa-filter"></i> Filtrar
+                </button>
+                <button class="action-btn secondary" id="btnLimpiar">
+                    <i class="fas fa-broom"></i> Limpiar
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Tabla de Resultados (ocupa 60% del alto) -->
+    <div class="results-container" id="resultsContainer">
+        <div class="results-header">
+            <h3 class="results-title">
+                <i class="fas fa-receipt"></i>
+                Resultados de Pagos
+            </h3>
+            
+            <div class="stats">
+                <div class="stat-box">
+                    <div class="stat-value" id="totalPagos">0</div>
+                    <div class="stat-label">Total Pagos</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value" id="totalValor">$0</div>
+                    <div class="stat-label">Valor Total</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value" id="totalUsuarios">0</div>
+                    <div class="stat-label">Usuarios</div>
+                </div>
+            </div>
+            
+            <div class="table-controls">
+                <div class="order-control">
+                    <label>Ordenar:</label>
+                    <select class="order-select" id="orderBy">
+                        <option value="numero">N°</option>
+                        <option value="cedula">Cédula</option>
+                        <option value="nombre">Nombre</option>
+                        <option value="fecha">Fecha</option>
+                    </select>
+                    <select class="order-select" id="orderDirection">
+                        <option value="asc">↑</option>
+                        <option value="desc">↓</option>
+                    </select>
+                </div>
+                <button class="control-btn" id="btnPDF">
+                    <i class="fas fa-file-pdf"></i> PDF
+                </button>
+                <button class="control-btn" id="btnImprimir">
+                    <i class="fas fa-print"></i>
+                </button>
+                <button class="control-btn" id="btnVolver">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+            </div>
+        </div>
+        
+        <div class="table-wrapper">
+            <div id="tableContainer">
+                <div class="no-pagos">
+                    <i class="fas fa-receipt"></i>
+                    <p>No hay pagos para mostrar. Use los filtros para buscar.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="spinner"></div>
+        <p id="loadingText">Cargando datos...</p>
+    </div>
+    
+    <script>
+        const { jsPDF } = window.jspdf;
+        let datosCargados = [];
+        let datosParaTabla = [];
+        let ordenActual = { campo: 'numero', direccion: 'asc' };
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            inicializarApp();
+            configurarEventListeners();
+            generarDias();
+        });
+        
+        function inicializarApp() {
+            const today = new Date();
+            document.getElementById('currentDate').textContent = today.toLocaleDateString('es-ES', {
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric'
+            });
+            
+            // Establecer valores actuales
+            const anioActual = today.getFullYear();
+            const mesActual = today.getMonth() + 1;
+            const diaActual = today.getDate();
+            
+            document.getElementById('filterAnio').value = anioActual;
+            document.getElementById('filterMes').value = mesActual;
+            document.getElementById('filterDia').value = diaActual;
+            
+            // Marcar filtro activo inicial
+            marcarFiltroActivo('filterDia');
+            marcarFiltroActivo('filterMes');
+            marcarFiltroActivo('filterAnio');
+            
+            cargarDatos();
+        }
+        
+        function marcarFiltroActivo(id) {
+            const elemento = document.getElementById(id);
+            if (elemento.value) {
+                elemento.classList.add('filter-active');
+            } else {
+                elemento.classList.remove('filter-active');
+            }
+        }
+        
+        function generarDias() {
+            const selectDia = document.getElementById('filterDia');
+            let options = '<option value="">Todos</option>';
+            
+            for (let dia = 1; dia <= 31; dia++) {
+                options += `<option value="${dia}">${dia}</option>`;
+            }
+            selectDia.innerHTML = options;
+        }
+        
+        function configurarEventListeners() {
+            // Búsqueda al presionar Enter
+            document.getElementById('searchGeneral').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') aplicarFiltros();
+            });
+            
+            // Cambios en filtros
+            ['filterDia', 'filterMes', 'filterAnio', 'searchGeneral'].forEach(id => {
+                document.getElementById(id).addEventListener('change', function() {
+                    marcarFiltroActivo(id);
+                });
+            });
+            
+            // Opciones rápidas
+            document.getElementById('btnHoy').addEventListener('click', function() {
+                const today = new Date();
+                document.getElementById('filterDia').value = today.getDate();
+                document.getElementById('filterMes').value = today.getMonth() + 1;
+                document.getElementById('filterAnio').value = today.getFullYear();
+                document.getElementById('searchGeneral').value = '';
+                
+                ['filterDia', 'filterMes', 'filterAnio'].forEach(marcarFiltroActivo);
+                aplicarFiltros();
+            });
+            
+            document.getElementById('btnTodos').addEventListener('click', function() {
+                document.getElementById('filterDia').value = '';
+                document.getElementById('filterMes').value = '';
+                document.getElementById('filterAnio').value = '';
+                document.getElementById('searchGeneral').value = '';
+                
+                ['filterDia', 'filterMes', 'filterAnio'].forEach(marcarFiltroActivo);
+                aplicarFiltros();
+            });
+            
+            // Botón filtrar
+            document.getElementById('btnFiltrar').addEventListener('click', aplicarFiltros);
+            
+            // Limpiar filtros
+            document.getElementById('btnLimpiar').addEventListener('click', function() {
+                document.getElementById('filterDia').value = '';
+                document.getElementById('filterMes').value = '';
+                document.getElementById('filterAnio').value = '';
+                document.getElementById('searchGeneral').value = '';
+                document.getElementById('orderBy').value = 'numero';
+                document.getElementById('orderDirection').value = 'asc';
+                
+                ['filterDia', 'filterMes', 'filterAnio'].forEach(marcarFiltroActivo);
+                ordenActual = { campo: 'numero', direccion: 'asc' };
+                aplicarFiltros();
+            });
+            
+            // Ordenación
+            document.getElementById('orderBy').addEventListener('change', aplicarOrden);
+            document.getElementById('orderDirection').addEventListener('change', aplicarOrden);
+            
+            // Acciones
+            document.getElementById('btnPDF').addEventListener('click', descargarPDF);
+            document.getElementById('btnImprimir').addEventListener('click', function() {
+                window.print();
+            });
+            document.getElementById('btnVolver').addEventListener('click', function() {
+                window.location.href = 'firmas.html';
+            });
+        }
+        
+        async function cargarDatos() {
+            try {
+                mostrarLoader('Cargando datos...');
+                const response = await fetch('https://raw.githubusercontent.com/carlos2601/bateas3/main/afiliados.json');
+                if (!response.ok) throw new Error('Error cargando datos');
+                
+                datosCargados = await response.json();
+                console.log(`Datos cargados: ${datosCargados.length} registros`);
+                
+                aplicarFiltros();
+                ocultarLoader();
+            } catch (error) {
+                console.error("Error:", error);
+                alert('Error cargando datos de afiliados');
+                ocultarLoader();
+            }
+        }
+        
+        function mostrarLoader(texto = "Cargando...") {
+            document.getElementById('loadingText').textContent = texto;
+            document.getElementById('loadingOverlay').style.display = 'flex';
+        }
+        
+        function ocultarLoader() {
+            document.getElementById('loadingOverlay').style.display = 'none';
+        }
+        
+        function aplicarFiltros() {
+            if (datosCargados.length === 0) return;
+            
+            const busqueda = document.getElementById('searchGeneral').value.trim().toLowerCase();
+            const dia = document.getElementById('filterDia').value;
+            const mes = document.getElementById('filterMes').value;
+            const anio = document.getElementById('filterAnio').value;
+            
+            datosParaTabla = [];
+            
+            datosCargados.forEach(persona => {
+                if (!persona.pagos || !Array.isArray(persona.pagos) || persona.pagos.length === 0) {
+                    return;
+                }
+                
+                persona.pagos.forEach(pago => {
+                    const partes = pago.split(',');
+                    if (partes.length < 2) return;
+                    
+                    const fechaStr = partes[0].trim();
+                    const valor = partes[1].trim();
+                    
+                    // Aplicar filtros de fecha
+                    if (!cumpleFiltrosFecha(fechaStr, dia, mes, anio)) return;
+                    
+                    // Aplicar búsqueda general
+                    const matchBusqueda = !busqueda || 
+                        String(persona.cedula).toLowerCase().includes(busqueda) ||
+                        persona.nombre.toLowerCase().includes(busqueda) ||
+                        String(persona.registro || '').toLowerCase().includes(busqueda);
+                    
+                    if (!matchBusqueda) return;
+                    
+                    datosParaTabla.push({
+                        cedula: persona.cedula,
+                        nombre: persona.nombre,
+                        renglon: persona.renglon || '',
+                        registro: persona.registro || '',
+                        folio: persona.folio || '',
+                        direccion: persona.direccion || '',
+                        fechaPago: fechaStr,
+                        valorPago: valor,
+                        fechaObj: parseFecha(fechaStr),
+                        persona: persona
+                    });
+                });
+            });
+            
+            // Agregar números de conteo
+            datosParaTabla.forEach((item, index) => {
+                item.numero = index + 1;
+            });
+            
+            aplicarOrden();
+        }
+        
+        function parseFecha(fechaStr) {
+            const partes = fechaStr.split('/');
+            if (partes.length !== 3) return new Date(0);
+            
+            const dia = parseInt(partes[0], 10);
+            const mes = parseInt(partes[1], 10) - 1;
+            const anio = parseInt(partes[2], 10);
+            
+            return new Date(anio, mes, dia);
+        }
+        
+        function cumpleFiltrosFecha(fechaStr, diaFiltro, mesFiltro, anioFiltro) {
+            const fecha = parseFecha(fechaStr);
+            
+            if (diaFiltro && fecha.getDate() != diaFiltro) return false;
+            if (mesFiltro && fecha.getMonth() + 1 != mesFiltro) return false;
+            if (anioFiltro && fecha.getFullYear() != anioFiltro) return false;
+            
+            return true;
+        }
+        
+        function aplicarOrden() {
+            ordenActual.campo = document.getElementById('orderBy').value;
+            ordenActual.direccion = document.getElementById('orderDirection').value;
+            
+            if (datosParaTabla.length === 0) {
+                mostrarResultados();
+                return;
+            }
+            
+            datosParaTabla.sort((a, b) => {
+                let valorA, valorB;
+                
+                switch(ordenActual.campo) {
+                    case 'numero':
+                        valorA = a.numero;
+                        valorB = b.numero;
+                        break;
+                    case 'cedula':
+                        valorA = String(a.cedula);
+                        valorB = String(b.cedula);
+                        break;
+                    case 'nombre':
+                        valorA = a.nombre.toLowerCase();
+                        valorB = b.nombre.toLowerCase();
+                        break;
+                    case 'fecha':
+                        valorA = a.fechaObj.getTime();
+                        valorB = b.fechaObj.getTime();
+                        break;
+                    default:
+                        valorA = a.numero;
+                        valorB = b.numero;
+                }
+                
+                if (ordenActual.direccion === 'asc') {
+                    return valorA > valorB ? 1 : valorA < valorB ? -1 : 0;
+                } else {
+                    return valorA < valorB ? 1 : valorA > valorB ? -1 : 0;
+                }
+            });
+            
+            // Re-numerar después de ordenar
+            datosParaTabla.forEach((item, index) => {
+                item.numero = index + 1;
+            });
+            
+            mostrarResultados();
+        }
+        
+        function mostrarResultados() {
+            const container = document.getElementById('tableContainer');
+            
+            if (datosParaTabla.length === 0) {
+                let mensaje = 'No hay pagos para mostrar.';
+                
+                const dia = document.getElementById('filterDia').value;
+                const mes = document.getElementById('filterMes').value;
+                const anio = document.getElementById('filterAnio').value;
+                
+                if (dia || mes || anio) {
+                    const partes = [];
+                    if (dia) partes.push(`día ${dia}`);
+                    if (mes) partes.push(obtenerNombreMes(mes));
+                    if (anio) partes.push(anio);
+                    
+                    if (partes.length > 0) {
+                        mensaje = `No hay pagos para ${partes.join(' de ')}.`;
+                    }
+                }
+                
+                container.innerHTML = `
+                    <div class="no-pagos">
+                        <i class="fas fa-receipt"></i>
+                        <p>${mensaje}</p>
+                    </div>
+                `;
+                actualizarEstadisticas(0, 0, 0);
+                return;
+            }
+            
+            const usuariosUnicos = new Set(datosParaTabla.map(p => p.cedula));
+            let totalValor = 0;
+            
+            let tablaHTML = `
+                <table class="pagos-table">
+                    <thead>
+                        <tr>
+                            <th onclick="ordenarPor('numero')" class="col-numero">
+                                N°
+                                ${ordenActual.campo === 'numero' ? 
+                                    `<i class="fas fa-sort-${ordenActual.direccion === 'asc' ? 'up' : 'down'}"></i>` : 
+                                    '<i class="fas fa-sort"></i>'}
+                            </th>
+                            <th onclick="ordenarPor('cedula')" class="col-cedula">
+                                CÉDULA 
+                                ${ordenActual.campo === 'cedula' ? 
+                                    `<i class="fas fa-sort-${ordenActual.direccion === 'asc' ? 'up' : 'down'}"></i>` : 
+                                    '<i class="fas fa-sort"></i>'}
+                            </th>
+                            <th onclick="ordenarPor('nombre')" class="col-nombre">
+                                NOMBRE COMPLETO
+                                ${ordenActual.campo === 'nombre' ? 
+                                    `<i class="fas fa-sort-${ordenActual.direccion === 'asc' ? 'up' : 'down'}"></i>` : 
+                                    '<i class="fas fa-sort"></i>'}
+                            </th>
+                            <th class="col-direccion">DIRECCIÓN</th>
+                            <th>RENGLÓN</th>
+                            <th>REGISTRO</th>
+                            <th>FOLIO</th>
+                            <th onclick="ordenarPor('fecha')" class="col-fecha">
+                                FECHA
+                                ${ordenActual.campo === 'fecha' ? 
+                                    `<i class="fas fa-sort-${ordenActual.direccion === 'asc' ? 'up' : 'down'}"></i>` : 
+                                    '<i class="fas fa-sort"></i>'}
+                            </th>
+                            <th class="col-valor">VALOR</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+            
+            datosParaTabla.forEach(pago => {
+                totalValor += 20000;
+                
+                tablaHTML += `
+                    <tr>
+                        <td class="col-numero">${pago.numero}</td>
+                        <td class="col-cedula">${formatearCedula(pago.cedula)}</td>
+                        <td class="col-nombre">${pago.nombre}</td>
+                        <td class="col-direccion">${pago.direccion}</td>
+                        <td>${pago.renglon}</td>
+                        <td>${pago.registro}</td>
+                        <td>${pago.folio}</td>
+                        <td class="col-fecha">${pago.fechaPago}</td>
+                        <td class="col-valor"><span class="valor-pago">$${pago.valorPago}</span></td>
+                    </tr>
+                `;
+            });
+            
+            tablaHTML += `</tbody></table>`;
+            container.innerHTML = tablaHTML;
+            actualizarEstadisticas(datosParaTabla.length, totalValor, usuariosUnicos.size);
+        }
+        
+        window.ordenarPor = function(campo) {
+            if (ordenActual.campo === campo) {
+                const nuevaDireccion = ordenActual.direccion === 'asc' ? 'desc' : 'asc';
+                document.getElementById('orderDirection').value = nuevaDireccion;
+            } else {
+                document.getElementById('orderBy').value = campo;
+            }
+            aplicarOrden();
+        };
+        
+        function formatearCedula(cedula) {
+            if (!cedula) return '';
+            return cedula.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        }
+        
+        function obtenerNombreMes(numeroMes) {
+            const meses = [
+                'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+                'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+            ];
+            return meses[parseInt(numeroMes) - 1] || '';
+        }
+        
+        function formatearNumero(numero) {
+            return new Intl.NumberFormat('es-CO').format(numero);
+        }
+        
+        function actualizarEstadisticas(pagos, valor, usuarios) {
+            document.getElementById('totalPagos').textContent = formatearNumero(pagos);
+            document.getElementById('totalValor').textContent = `$${formatearNumero(valor)}`;
+            document.getElementById('totalUsuarios').textContent = formatearNumero(usuarios);
+        }
+        
+        async function descargarPDF() {
+            if (datosParaTabla.length === 0) {
+                alert('No hay datos para generar PDF');
+                return;
+            }
+            
+            try {
+                mostrarLoader('Generando PDF...');
+                
+                const pdf = new jsPDF({
+                    orientation: 'landscape',
+                    unit: 'mm',
+                    format: 'a4'
+                });
+                
+                pdf.setFontSize(14);
+                pdf.setTextColor(51, 105, 30);
+                pdf.text('REPORTE DE PAGOS - BATEAS SECTOR 3', 20, 15);
+                
+                pdf.setFontSize(9);
+                pdf.setTextColor(100, 100, 100);
+                pdf.text(`Fecha: ${new Date().toLocaleDateString('es-CO')}`, 20, 22);
+                
+                // Información del filtro
+                const dia = document.getElementById('filterDia').value;
+                const mes = document.getElementById('filterMes').value;
+                const anio = document.getElementById('filterAnio').value;
+                
+                let filtroTexto = 'Filtro: ';
+                if (dia || mes || anio) {
+                    const partes = [];
+                    if (dia) partes.push(`Día ${dia}`);
+                    if (mes) partes.push(obtenerNombreMes(mes));
+                    if (anio) partes.push(anio);
+                    filtroTexto += partes.join(' de ');
+                } else {
+                    filtroTexto += 'Todos los pagos';
+                }
+                pdf.text(filtroTexto, 20, 27);
+                
+                pdf.text(`Total registros: ${datosParaTabla.length}`, 20, 32);
+                
+                // Tabla
+                const headers = ['N°', 'CÉDULA', 'NOMBRE COMPLETO', 'DIRECCIÓN', 'REN.', 'REG.', 'FOLIO', 'FECHA', 'VALOR'];
+                const columnWidths = [10, 25, 50, 40, 12, 12, 15, 20, 20];
+                
+                let yPos = 40;
+                pdf.setFontSize(8);
+                
+                // Encabezados
+                pdf.setFillColor(139, 195, 74);
+                pdf.setTextColor(255, 255, 255);
+                pdf.rect(20, yPos - 4, 205, 6, 'F');
+                
+                let xPos = 21;
+                headers.forEach((header, i) => {
+                    pdf.text(header, xPos, yPos);
+                    xPos += columnWidths[i];
+                });
+                
+                yPos += 8;
+                pdf.setTextColor(0, 0, 0);
+                
+                // Datos
+                datosParaTabla.forEach((pago, index) => {
+                    if (yPos > 270) {
+                        pdf.addPage();
+                        yPos = 20;
+                    }
+                    
+                    if (index % 2 === 0) {
+                        pdf.setFillColor(241, 248, 233);
+                        pdf.rect(20, yPos - 3, 205, 5, 'F');
+                    }
+                    
+                    xPos = 21;
+                    const datos = [
+                        pago.numero.toString(),
+                        formatearCedula(pago.cedula),
+                        pago.nombre,
+                        pago.direccion,
+                        pago.renglon || '',
+                        pago.registro || '',
+                        pago.folio || '',
+                        pago.fechaPago,
+                        `$${pago.valorPago}`
+                    ];
+                    
+                    datos.forEach((dato, i) => {
+                        pdf.text(String(dato), xPos, yPos);
+                        xPos += columnWidths[i];
+                    });
+                    
+                    yPos += 6;
+                });
+                
+                // Totales
+                const totalValor = datosParaTabla.length * 20000;
+                const usuariosUnicos = new Set(datosParaTabla.map(p => p.cedula)).size;
+                
+                pdf.setFontSize(9);
+                pdf.setTextColor(51, 105, 30);
+                pdf.text(`Total registros: ${formatearNumero(datosParaTabla.length)}`, 20, 280);
+                pdf.text(`Valor total: $${formatearNumero(totalValor)}`, 100, 280);
+                pdf.text(`Usuarios únicos: ${formatearNumero(usuariosUnicos)}`, 180, 280);
+                
+                // Nombre del archivo
+                let nombreArchivo = 'reporte_pagos';
+                if (dia || mes || anio) {
+                    nombreArchivo = 'reporte_';
+                    if (dia) nombreArchivo += dia + '_';
+                    if (mes) nombreArchivo += obtenerNombreMes(mes).toLowerCase() + '_';
+                    if (anio) nombreArchivo += anio;
+                } else {
+                    nombreArchivo += '_completo';
+                }
+                
+                pdf.save(`${nombreArchivo}.pdf`);
+                ocultarLoader();
+                
+            } catch (error) {
+                ocultarLoader();
+                alert('Error generando PDF');
+                console.error(error);
+            }
+        }
+    </script>
+</body>
+</html>
