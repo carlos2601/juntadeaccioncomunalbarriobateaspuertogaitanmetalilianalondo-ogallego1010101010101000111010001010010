@@ -385,14 +385,14 @@
         .datos-certificado {
             text-align: left;
             font-size: 18px;
-            line-height: 1.6;
+            line-height: 1.4;
             margin: 20px 0;
         }
 
          .datos-certificado1 {
             text-align: left;
             font-size: 18px;
-            line-height: 1.6;
+            line-height: 1.4;
             margin: 20px 0;
             text-align: justify;
         }
@@ -434,9 +434,9 @@
             opacity: 3;
         }
         
-        .firma-liliana1 {
+        .firma-liliana {
             position: absolute;
-            top: -40px; /* Ajusta la posición vertical del sello */
+            top: -37px; /* Ajusta la posición vertical del sello */
             left: 50%; /* Centrado horizontalmente */
             transform: translateX(-45%);
             width: 300px; /* Ancho del sello */
@@ -447,16 +447,32 @@
         }
         
         .sello-liliana {
+           
             position: absolute;
-            top: -90px; /* Ajusta la posición vertical del sello */
-            left: 25%; /* Centrado horizontalmente */
-            transform: translateX(-5%);
-            width: 160px; /* Ancho del sello */
+            top: -100px; /* Ajusta la posición vertical del sello */
+            left: 15%; /* Centrado horizontalmente */
+            transform: translateX(15%); /* GIRADO 45 GRADOS */
+            width: 165px; /* Ancho del sello */
             height: auto;
             z-index: 2;
-            opacity: 0.9;
-            filter: brightness(0) saturate(100%) contrast(200%);
-            -webkit-filter: brightness(0) saturate(100%) contrast(200%);
+            opacity: 1.1;
+            /* FILTRO PARA HACER EL SELLO MÁS DEFINIDO */
+            filter: brightness(0.7) saturate(100%) contrast(1.5);
+            
+            /* Para que el giro sea suave */
+            transform-origin: center center;
+            -webkit-filter: brightness(0.7) contrast(0.5);
+   
+
+
+
+
+
+
+
+
+
+
         }
         
         /* Mensaje de restricción */
@@ -758,7 +774,7 @@
              <div class="datos-certificado1">
             La presente constancia se expide a solicitud del interesado, <strong id="fecha-emision"></strong> y tiene vigencia de <strong>30 dias</strong> a partir de la fecha de su expedición.
             </div>
-            <br>Atentamente,<br><br><br><br>
+            <br>Atentamente,<br><br><br><br><br>
 
             <div class="firmas-dobles">
                 <!-- Columna del Presidente -->
@@ -776,7 +792,7 @@
                 <!-- Columna de la Secretaria -->
                 <div class="firma-columna">
                     <!-- Firma y sello de Liliana -->
-                    <img src="https://raw.githubusercontent.com/carlos2601/bateas3/refs/heads/main/firma-liliana.png" class="firma-liliana1" alt="Firma de Liliana Londoño">
+                    <img src="https://raw.githubusercontent.com/carlos2601/bateas3/refs/heads/main/firma-liliana1.png" class="firma-liliana" alt="Firma de Liliana Londoño">
                     <img src="https://raw.githubusercontent.com/carlos2601/bateas3/refs/heads/main/sello-liliana.png" class="sello-liliana" alt="Sello de Liliana Londoño">
                     
                     __________________________________<br>
