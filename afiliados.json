@@ -5354,5 +5354,18 @@
     "celular": "3123552157",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 414,
+    "registro": 413,
+    "folio": 24,
+    "renglon": 17,
+    "nombre": "KKLKNVCD",
+    "cedula": "13.899.000",
+    "fecha": "19/01/2026",
+    "direccion": "MANZANA  CASA",
+    "celular": "3135815787",
+    "pagos": [],
+    "firma": ""
   }
 ]
