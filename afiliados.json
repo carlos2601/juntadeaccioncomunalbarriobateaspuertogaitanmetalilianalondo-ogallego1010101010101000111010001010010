@@ -5419,5 +5419,18 @@
     "celular": "3157692154",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 418,
+    "registro": 418,
+    "folio": 24,
+    "renglon": 22,
+    "nombre": "HERMES DIONISIO PAEZ TUIRAN",
+    "cedula": "78.698.916",
+    "fecha": "17/01/2026",
+    "direccion": "MANZANA 76 CASA 09",
+    "celular": "3153438312",
+    "pagos": [],
+    "firma": ""
   }
 ]
