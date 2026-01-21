@@ -5445,5 +5445,18 @@
     "celular": "3153438312",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 420,
+    "registro": 420,
+    "folio": 24,
+    "renglon": 24,
+    "nombre": "SANTIAGO HIDALGO CARRILLO",
+    "cedula": "1.071.302.004",
+    "fecha": "17/01/2026",
+    "direccion": "MANZANA 72 CASA 04",
+    "celular": "3115503084",
+    "pagos": [],
+    "firma": ""
   }
 ]
