@@ -5406,5 +5406,18 @@
     "celular": "3503207702",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 417,
+    "registro": 417,
+    "folio": 24,
+    "renglon": 21,
+    "nombre": "FANNY MARIA DIAZ MORENO",
+    "cedula": "6.414.705",
+    "fecha": "17/01/2026",
+    "direccion": "MANZANA 76 CASA 09",
+    "celular": "3157692154",
+    "pagos": [],
+    "firma": ""
   }
 ]
