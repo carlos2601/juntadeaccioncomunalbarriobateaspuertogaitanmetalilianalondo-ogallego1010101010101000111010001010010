@@ -5460,7 +5460,9 @@
     "fecha": "17/01/2026",
     "direccion": "MANZANA 72 CASA 04",
     "celular": "3115503084",
-    "pagos": [],
+    "pagos": [
+      "21/1/2026, 20.000"
+    ],
     "firma": ""
   }
 ]
