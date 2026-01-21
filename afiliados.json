@@ -3597,7 +3597,9 @@
     "fecha": "20/12/2025",
     "direccion": "MANZANA 66 CASA 07",
     "celular": "3138662188",
-    "pagos": [],
+    "pagos": [
+      "21/1/2026, 20.000"
+    ],
     "firma": ""
   },
   {
