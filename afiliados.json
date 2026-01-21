@@ -5393,5 +5393,18 @@
     "celular": "3132552571",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 416,
+    "registro": 416,
+    "folio": 24,
+    "renglon": 20,
+    "nombre": "ALVARO JAVIER RAMIREZ GUCHUVO",
+    "cedula": "1.069.741.404",
+    "fecha": "17/01/2026",
+    "direccion": "MANZANA 69 CASA 22",
+    "celular": "3503207702",
+    "pagos": [],
+    "firma": ""
   }
 ]
