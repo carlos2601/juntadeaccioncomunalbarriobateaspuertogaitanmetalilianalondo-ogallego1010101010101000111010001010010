@@ -5417,7 +5417,9 @@
     "fecha": "17/01/2026",
     "direccion": "MANZANA 76 CASA 09",
     "celular": "3157692154",
-    "pagos": [],
+    "pagos": [
+      "21/1/2026, 20.000"
+    ],
     "firma": ""
   },
   {
