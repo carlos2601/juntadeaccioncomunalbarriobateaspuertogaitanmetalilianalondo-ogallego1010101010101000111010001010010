@@ -5367,5 +5367,18 @@
     "celular": "3213772020",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 414,
+    "registro": 414,
+    "folio": 24,
+    "renglon": 18,
+    "nombre": "JULIAN ANDRES ROJAS LONDOÑO",
+    "cedula": "1.121.962.231",
+    "fecha": "17/01/2026",
+    "direccion": "MANZANA 62  CASA 23",
+    "celular": "3132552571",
+    "pagos": [],
+    "firma": ""
   }
 ]
