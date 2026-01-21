@@ -5380,5 +5380,18 @@
     "celular": "3132552571",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 415,
+    "registro": 415,
+    "folio": 24,
+    "renglon": 19,
+    "nombre": "JOSE GIOVANNI LOTE SATOQUE",
+    "cedula": "74.359.945",
+    "fecha": "17/01/2026",
+    "direccion": "MANZANA 69 CASA 22",
+    "celular": "3132552571",
+    "pagos": [],
+    "firma": ""
   }
 ]
