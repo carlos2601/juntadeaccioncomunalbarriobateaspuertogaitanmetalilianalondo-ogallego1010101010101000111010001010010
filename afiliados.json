@@ -5432,5 +5432,18 @@
     "celular": "3153438312",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 419,
+    "registro": 419,
+    "folio": 24,
+    "renglon": 23,
+    "nombre": "DUBER HARLEY HIDALGO CARRILLO",
+    "cedula": "1.121.877.115",
+    "fecha": "17/01/2026",
+    "direccion": "MANZANA 72 CASA 4",
+    "celular": "3153438312",
+    "pagos": [],
+    "firma": ""
   }
 ]
