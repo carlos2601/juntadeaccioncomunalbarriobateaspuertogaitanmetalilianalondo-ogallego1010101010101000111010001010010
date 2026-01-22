@@ -5472,5 +5472,18 @@
       "21/1/2026, 20.000"
     ],
     "firma": ""
+  },
+  {
+    "id": 421,
+    "registro": 421,
+    "folio": 24,
+    "renglon": 25,
+    "nombre": "DIEGO ANDRES DIMAS PEREZ",
+    "cedula": "1.006.531.353",
+    "fecha": "17/01/2026",
+    "direccion": "MANZANA 59  CASA 11",
+    "celular": "3223728465",
+    "pagos": [],
+    "firma": ""
   }
 ]
