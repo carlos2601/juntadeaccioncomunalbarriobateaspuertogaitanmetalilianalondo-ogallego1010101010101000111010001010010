@@ -5485,5 +5485,18 @@
     "celular": "3223728465",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 422,
+    "registro": 422,
+    "folio": 24,
+    "renglon": 26,
+    "nombre": "NINY JOHANA DIMS PEREZ",
+    "cedula": "46.385.857",
+    "fecha": "17/01/2026",
+    "direccion": "MANZANA 59 CASA 11",
+    "celular": "3188180386",
+    "pagos": [],
+    "firma": ""
   }
 ]
