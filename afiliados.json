@@ -5511,5 +5511,18 @@
     "celular": "3164957498",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 424,
+    "registro": 424,
+    "folio": 24,
+    "renglon": 28,
+    "nombre": "JORGE ELIECER TOVAR GUTIERREZ",
+    "cedula": "91.278.984",
+    "fecha": "17/01/2026",
+    "direccion": "MANZANA 72 CASA 6",
+    "celular": "3213772020",
+    "pagos": [],
+    "firma": ""
   }
 ]
