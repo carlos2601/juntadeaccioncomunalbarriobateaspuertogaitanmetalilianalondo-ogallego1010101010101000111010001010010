@@ -3183,7 +3183,9 @@
     "fecha": "15/12/2025",
     "direccion": "MANZANA 65 CASA 09",
     "celular": "3046256103",
-    "pagos": [],
+    "pagos": [
+      "26/1/2026, 20.000"
+    ],
     "firma": ""
   },
   {
