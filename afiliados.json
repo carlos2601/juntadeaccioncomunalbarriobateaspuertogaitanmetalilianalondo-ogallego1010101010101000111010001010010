@@ -2414,7 +2414,9 @@
     "fecha": "21/11/2024",
     "direccion": "MANZANA 66 CASA 07",
     "celular": "3125429071",
-    "pagos": [],
+    "pagos": [
+      "27/1/2026, 20.000"
+    ],
     "firma": ""
   },
   {
