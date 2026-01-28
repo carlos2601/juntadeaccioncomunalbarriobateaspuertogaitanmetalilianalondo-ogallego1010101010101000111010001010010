@@ -3803,7 +3803,9 @@
     "fecha": "27/12/2025",
     "direccion": "MANZANA 66 CASA 10",
     "celular": "3228921140",
-    "pagos": [],
+    "pagos": [
+      "28/1/2026, 20.000"
+    ],
     "firma": ""
   },
   {
