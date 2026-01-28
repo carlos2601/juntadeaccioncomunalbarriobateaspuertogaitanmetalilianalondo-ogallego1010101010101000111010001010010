@@ -4902,9 +4902,9 @@
   },
   {
     "id": 377,
-    "registro": "377",
-    "folio": "22",
-    "renglon": "17",
+    "registro": 377,
+    "folio": 22,
+    "renglon": 17,
     "nombre": "JESUS DAVID RAMOS LINARES",
     "cedula": "1006656635",
     "fecha": "",
@@ -5536,6 +5536,19 @@
     "pagos": [
       "22/1/2026, 20.000"
     ],
+    "firma": ""
+  },
+  {
+    "id": 425,
+    "registro": 425,
+    "folio": 24,
+    "renglon": 29,
+    "nombre": "RAUL ANTONIO ORTIZ GONZALEZ",
+    "cedula": "93.436.315",
+    "fecha": "24/01/2026",
+    "direccion": "MANZANA 69 CASA 22",
+    "celular": "3246805842",
+    "pagos": [],
     "firma": ""
   }
 ]
