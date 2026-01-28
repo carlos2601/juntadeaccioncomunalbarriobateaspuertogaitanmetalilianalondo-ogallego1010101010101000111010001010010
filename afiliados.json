@@ -5563,5 +5563,18 @@
     "celular": "3245524078",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 427,
+    "registro": 427,
+    "folio": 24,
+    "renglon": 31,
+    "nombre": "ELVER ESNEYDER DE ANTONIO RETIZ",
+    "cedula": "86.069.707",
+    "fecha": "24/01/2026",
+    "direccion": "MANZANA 64 CASA 7",
+    "celular": "3157035170",
+    "pagos": [],
+    "firma": ""
   }
 ]
