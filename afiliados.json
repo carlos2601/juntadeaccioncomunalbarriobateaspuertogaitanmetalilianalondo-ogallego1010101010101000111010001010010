@@ -5550,5 +5550,18 @@
     "celular": "3246805842",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 426,
+    "registro": 426,
+    "folio": 24,
+    "renglon": 30,
+    "nombre": "LIDIS AMPARO MARQUEZ JIMENEZ",
+    "cedula": "39.287.007",
+    "fecha": "24/01/2026",
+    "direccion": "MANZANA 69 CASA 22",
+    "celular": "3245524078",
+    "pagos": [],
+    "firma": ""
   }
 ]
