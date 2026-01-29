@@ -5715,5 +5715,18 @@
     "celular": "3112102494",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 438,
+    "registro": 438,
+    "folio": 26,
+    "renglon": 6,
+    "nombre": "JEAN CARLOS FLOREZ BONILLA",
+    "cedula": "1.002.760.251",
+    "fecha": "24/01/2026",
+    "direccion": "MANZANA 60  CASA 24",
+    "celular": "3213230984",
+    "pagos": [],
+    "firma": ""
   }
 ]
