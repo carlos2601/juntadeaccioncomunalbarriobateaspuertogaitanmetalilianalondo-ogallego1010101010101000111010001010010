@@ -4999,7 +4999,9 @@
     "fecha": "17/01/2026",
     "direccion": "MANZANA 59 CASA 07",
     "celular": "3122777032",
-    "pagos": [],
+    "pagos": [
+      "29/1/2026, 20.000"
+    ],
     "firma": ""
   },
   {
