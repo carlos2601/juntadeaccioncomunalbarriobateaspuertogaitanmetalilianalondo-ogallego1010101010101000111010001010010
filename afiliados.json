@@ -5808,5 +5808,18 @@
     "celular": "3174819975",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 445,
+    "registro": 445,
+    "folio": 26,
+    "renglon": 13,
+    "nombre": "JULIAN FELIPE MENDEZ GALEANO",
+    "cedula": "1.007.497.128",
+    "fecha": "24/01/2026",
+    "direccion": "MANZANA 76 CASA 21",
+    "celular": "3133515192",
+    "pagos": [],
+    "firma": ""
   }
 ]
