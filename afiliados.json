@@ -2979,7 +2979,9 @@
     "fecha": "15/12/2025",
     "direccion": "MANZANA 61 CASA 22",
     "celular": "3019266959",
-    "pagos": [],
+    "pagos": [
+      "29/1/2026, 20.000"
+    ],
     "firma": ""
   },
   {
