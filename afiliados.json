@@ -5756,5 +5756,18 @@
     "celular": "3155611674",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 441,
+    "registro": 441,
+    "folio": 26,
+    "renglon": 9,
+    "nombre": "DIEGO ARMANDO AHUMADA GUZMAN",
+    "cedula": "80.800.471",
+    "fecha": "24/01/2026",
+    "direccion": "MANZANA 76 CASA 5",
+    "celular": "3187157452",
+    "pagos": [],
+    "firma": ""
   }
 ]
