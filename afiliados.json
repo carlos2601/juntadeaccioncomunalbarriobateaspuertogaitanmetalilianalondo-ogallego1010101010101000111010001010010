@@ -5821,5 +5821,18 @@
     "celular": "3133515192",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 446,
+    "registro": 446,
+    "folio": 26,
+    "renglon": 14,
+    "nombre": "SAMUEL ESTEBAN SUANCA GALEANO",
+    "cedula": "1.016.950.466",
+    "fecha": "24/01/2026",
+    "direccion": "MANZANA 76  CASA 21",
+    "celular": "3143667396",
+    "pagos": [],
+    "firma": ""
   }
 ]
