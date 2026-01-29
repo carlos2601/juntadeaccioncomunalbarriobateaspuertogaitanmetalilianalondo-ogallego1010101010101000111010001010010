@@ -5669,5 +5669,18 @@
     "celular": "3180286390",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 435,
+    "registro": 435,
+    "folio": 26,
+    "renglon": 3,
+    "nombre": "NELSON FERNANDO PARADA JIMENEZ",
+    "cedula": "1.121.146.381",
+    "fecha": "24/01/2026",
+    "direccion": "MANZANA 63 CASA 25",
+    "celular": "3114168949",
+    "pagos": [],
+    "firma": ""
   }
 ]
