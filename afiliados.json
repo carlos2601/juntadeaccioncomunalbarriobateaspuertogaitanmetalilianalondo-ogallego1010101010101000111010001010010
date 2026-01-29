@@ -5578,5 +5578,18 @@
     "celular": "3157035170",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 428,
+    "registro": 428,
+    "folio": 24,
+    "renglon": 32,
+    "nombre": "JAIME ANTONIO CAÑAS BEDOYA",
+    "cedula": "18.221.135",
+    "fecha": "24/01/2026",
+    "direccion": "MANZANA 66 CASA 22",
+    "celular": "3118441897",
+    "pagos": [],
+    "firma": ""
   }
 ]
