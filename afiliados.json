@@ -5728,5 +5728,18 @@
     "celular": "3213230984",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 439,
+    "registro": 439,
+    "folio": 26,
+    "renglon": 7,
+    "nombre": "GAMALIEL CALDERON CARDONA",
+    "cedula": "17.418.771",
+    "fecha": "24/01/2026",
+    "direccion": "MANZANA 79 CASA 08",
+    "celular": "3214531839",
+    "pagos": [],
+    "firma": ""
   }
 ]
