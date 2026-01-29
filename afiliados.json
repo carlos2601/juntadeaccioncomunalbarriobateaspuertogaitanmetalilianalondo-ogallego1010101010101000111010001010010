@@ -5643,5 +5643,18 @@
     "celular": "3107991845",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 433,
+    "registro": 433,
+    "folio": 26,
+    "renglon": 1,
+    "nombre": "JULIO EDUARDO BECERRA TENJO",
+    "cedula": "1.121.871.553",
+    "fecha": "24/01/2026",
+    "direccion": "MANZANA 68 CASA 12",
+    "celular": "3115855727",
+    "pagos": [],
+    "firma": ""
   }
 ]
