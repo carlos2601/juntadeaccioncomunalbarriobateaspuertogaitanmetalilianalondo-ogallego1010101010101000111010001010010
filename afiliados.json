@@ -5656,5 +5656,18 @@
     "celular": "3115855727",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 434,
+    "registro": 434,
+    "folio": 26,
+    "renglon": 2,
+    "nombre": "WAILER CHAMORRO LUNA",
+    "cedula": "1.078.577.401",
+    "fecha": "24/01/2026",
+    "direccion": "MANZANA 64A CASA 16",
+    "celular": "3180286390",
+    "pagos": [],
+    "firma": ""
   }
 ]
