@@ -5591,5 +5591,18 @@
     "celular": "3118441897",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 429,
+    "registro": 429,
+    "folio": 24,
+    "renglon": 33,
+    "nombre": "SHIRLEY ANDREA CAÑAS SENDOYA",
+    "cedula": "1.007.293.146",
+    "fecha": "24/01/2026",
+    "direccion": "MANZANA 66 CASA 22",
+    "celular": "3123057832",
+    "pagos": [],
+    "firma": ""
   }
 ]
