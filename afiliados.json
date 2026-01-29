@@ -5769,5 +5769,18 @@
     "celular": "3187157452",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 442,
+    "registro": 442,
+    "folio": 26,
+    "renglon": 10,
+    "nombre": "JUAN DAVID GALEANO VARGAS",
+    "cedula": "1.014.190.286",
+    "fecha": "24/01/2026",
+    "direccion": "MANZANA 76 CASA 5",
+    "celular": "3144932067",
+    "pagos": [],
+    "firma": ""
   }
 ]
