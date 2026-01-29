@@ -5617,5 +5617,18 @@
     "celular": "3142814609",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 431,
+    "registro": 431,
+    "folio": 24,
+    "renglon": 35,
+    "nombre": "JORGE LUIS PADILLA PANTOJA",
+    "cedula": "1.064.720.668",
+    "fecha": "24/01/2026",
+    "direccion": "MANZANA 80 CASA 03",
+    "celular": "3106004803",
+    "pagos": [],
+    "firma": ""
   }
 ]
