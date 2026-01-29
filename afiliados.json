@@ -5630,5 +5630,18 @@
     "celular": "3106004803",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 432,
+    "registro": 432,
+    "folio": 24,
+    "renglon": 36,
+    "nombre": "WILMAR CHAMORRO LUNA",
+    "cedula": "1.003.758.318",
+    "fecha": "24/01/2026",
+    "direccion": "MANZANA 64A CASA 16",
+    "celular": "3107991845",
+    "pagos": [],
+    "firma": ""
   }
 ]
