@@ -5604,5 +5604,18 @@
     "celular": "3123057832",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 430,
+    "registro": 430,
+    "folio": 24,
+    "renglon": 34,
+    "nombre": "SORAIDA NAVARRO MENESES",
+    "cedula": "1.004.857.270",
+    "fecha": "24/01/2026",
+    "direccion": "MANZANA 80  CASA 03",
+    "celular": "3142814609",
+    "pagos": [],
+    "firma": ""
   }
 ]
