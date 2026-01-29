@@ -4226,7 +4226,9 @@
     "fecha": "27/12/2025",
     "direccion": "MANZANA 62 CASA 20",
     "celular": "3153428400",
-    "pagos": [],
+    "pagos": [
+      "29/1/2026, 20.000"
+    ],
     "firma": ""
   },
   {
