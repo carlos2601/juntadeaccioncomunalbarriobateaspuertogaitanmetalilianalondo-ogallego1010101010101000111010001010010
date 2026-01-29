@@ -5741,5 +5741,18 @@
     "celular": "3214531839",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 440,
+    "registro": 440,
+    "folio": 26,
+    "renglon": 8,
+    "nombre": "BRAYAN ANDRES MONTERO BETANCOURTH",
+    "cedula": "1.122.512.237",
+    "fecha": "24/01/2026",
+    "direccion": "MANZANA 69 CASA 22",
+    "celular": "3155611674",
+    "pagos": [],
+    "firma": ""
   }
 ]
