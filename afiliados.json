@@ -7395,5 +7395,18 @@
     "celular": "3108073310",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 566,
+    "registro": 566,
+    "folio": 32,
+    "renglon": 26,
+    "nombre": "DORA NELLY GONZALEZ OBANDO",
+    "cedula": "1.121.881.623",
+    "fecha": "30/01/2026",
+    "direccion": "MANZANA 79 CASA 1",
+    "celular": "3125959037",
+    "pagos": [],
+    "firma": ""
   }
 ]
