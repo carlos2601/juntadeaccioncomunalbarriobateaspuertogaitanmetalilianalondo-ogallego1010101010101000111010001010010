@@ -7423,7 +7423,9 @@
     "fecha": "30/01/2026",
     "direccion": "MANZANA 55 CASA 18",
     "celular": "3127094758",
-    "pagos": [],
+    "pagos": [
+      "31/1/2026, 20.000"
+    ],
     "firma": ""
   },
   {
