@@ -6146,5 +6146,18 @@
     "celular": "3134485495",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 471,
+    "registro": 471,
+    "folio": 28,
+    "renglon": 3,
+    "nombre": "JOSE EUDORO R ODRIGUEZ RAMIREZ",
+    "cedula": "86.083.831",
+    "fecha": "24/01/2026",
+    "direccion": "MANZANA 78 CASA 10",
+    "celular": "3156385165",
+    "pagos": [],
+    "firma": ""
   }
 ]
