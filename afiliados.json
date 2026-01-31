@@ -6113,7 +6113,9 @@
     "fecha": "24/01/2026",
     "direccion": "MANZANA 63 CASA 25",
     "celular": "3132027070",
-    "pagos": [],
+    "pagos": [
+      "31/1/2026, 20.000"
+    ],
     "firma": ""
   },
   {
