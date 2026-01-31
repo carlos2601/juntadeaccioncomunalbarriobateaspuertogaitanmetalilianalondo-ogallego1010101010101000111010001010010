@@ -7161,5 +7161,18 @@
     "celular": "3142237983",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 548,
+    "registro": 548,
+    "folio": 32,
+    "renglon": 8,
+    "nombre": "YESID EDUARDO PRIETO BAQUERO",
+    "cedula": "86.042.139",
+    "fecha": "30/01/2026",
+    "direccion": "MANZANA 64 ACASA 16",
+    "celular": "3166192495",
+    "pagos": [],
+    "firma": ""
   }
 ]
