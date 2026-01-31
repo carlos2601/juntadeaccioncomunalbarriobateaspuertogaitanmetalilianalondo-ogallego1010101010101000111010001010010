@@ -7486,5 +7486,18 @@
     "celular": "3144565409",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 573,
+    "registro": 573,
+    "folio": 32,
+    "renglon": 33,
+    "nombre": "GINA MARIA GUTIERREZ JAIMES",
+    "cedula": "1.116.789.007",
+    "fecha": "30/01/2026",
+    "direccion": "MANZANA 59 CASA 8",
+    "celular": "3103455242",
+    "pagos": [],
+    "firma": ""
   }
 ]
