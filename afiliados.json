@@ -7317,5 +7317,18 @@
     "celular": "3105867768",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 560,
+    "registro": 560,
+    "folio": 32,
+    "renglon": 20,
+    "nombre": "BLEY ANDERSON SANCHEZ URREGO",
+    "cedula": "1.007.585.083",
+    "fecha": "30/01/2026",
+    "direccion": "MANZANA 64 CASA 26",
+    "celular": "3018498579",
+    "pagos": [],
+    "firma": ""
   }
 ]
