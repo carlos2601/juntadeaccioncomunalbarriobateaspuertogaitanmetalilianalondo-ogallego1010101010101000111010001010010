@@ -6535,5 +6535,18 @@
     "celular": "3142005545",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 500,
+    "registro": 500,
+    "folio": 28,
+    "renglon": 32,
+    "nombre": "MAIRA ALEXANDRA RODRIGUEZ VEGA",
+    "cedula": "1.006.904.664",
+    "fecha": "28/01/2026",
+    "direccion": "MANZANA 58 CASA 15",
+    "celular": "3227394900",
+    "pagos": [],
+    "firma": ""
   }
 ]
