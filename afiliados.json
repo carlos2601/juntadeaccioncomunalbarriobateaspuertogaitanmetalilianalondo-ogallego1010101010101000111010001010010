@@ -6107,5 +6107,18 @@
     "celular": "3132027070",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 468,
+    "registro": 468,
+    "folio": 26,
+    "renglon": 36,
+    "nombre": "EDISON DAVID BELTRAN CANO",
+    "cedula": "1.119.887.093",
+    "fecha": "24/01/2026",
+    "direccion": "MANZANA 79 CASA 21",
+    "celular": "3148376654",
+    "pagos": [],
+    "firma": ""
   }
 ]
