@@ -6823,5 +6823,18 @@
     "celular": "3222313459",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 522,
+    "registro": 522,
+    "folio": 30,
+    "renglon": 18,
+    "nombre": "CESAR JAVIER GUZMAN VERGARA",
+    "cedula": "1.124.990.057",
+    "fecha": "29/01/2026",
+    "direccion": "MANZANA 64 CASA 24",
+    "celular": "3138893102",
+    "pagos": [],
+    "firma": ""
   }
 ]
