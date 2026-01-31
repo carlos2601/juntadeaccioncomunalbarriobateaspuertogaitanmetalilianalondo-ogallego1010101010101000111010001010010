@@ -7291,5 +7291,18 @@
     "celular": "0000000000",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 558,
+    "registro": 558,
+    "folio": 32,
+    "renglon": 18,
+    "nombre": "GENESIS CAROLINA VASQUEZ ARRIECHE",
+    "cedula": "1.423.022",
+    "fecha": "30/01/2026",
+    "direccion": "MANZANA 58 CASA 14",
+    "celular": "3173354596",
+    "pagos": [],
+    "firma": ""
   }
 ]
