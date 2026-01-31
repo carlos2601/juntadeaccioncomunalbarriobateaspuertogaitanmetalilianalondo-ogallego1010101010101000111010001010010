@@ -7096,5 +7096,18 @@
     "celular": "3107129363",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 543,
+    "registro": 543,
+    "folio": 32,
+    "renglon": 3,
+    "nombre": "DIANA MARCELA SIERRA RODRIGUEZ",
+    "cedula": "52.478.721",
+    "fecha": "30/01/2026",
+    "direccion": "MANZANA 51 CASA 6",
+    "celular": "3178097988",
+    "pagos": [],
+    "firma": ""
   }
 ]
