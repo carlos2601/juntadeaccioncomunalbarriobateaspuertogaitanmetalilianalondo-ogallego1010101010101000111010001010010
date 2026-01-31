@@ -6007,7 +6007,9 @@
     "fecha": "24/01/2026",
     "direccion": "MANZANA 63 CASA 8",
     "celular": "3123586195",
-    "pagos": [],
+    "pagos": [
+      "31/1/2026, 20.000"
+    ],
     "firma": ""
   },
   {
