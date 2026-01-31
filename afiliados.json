@@ -6706,5 +6706,18 @@
     "celular": "0000000000",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 513,
+    "registro": 513,
+    "folio": 30,
+    "renglon": 9,
+    "nombre": "HELENA BOHORQUEZ MORALES",
+    "cedula": "1.123.804.368",
+    "fecha": "28/01/2026",
+    "direccion": "MANZANA 80 CASA 25",
+    "celular": "3105628025",
+    "pagos": [],
+    "firma": ""
   }
 ]
