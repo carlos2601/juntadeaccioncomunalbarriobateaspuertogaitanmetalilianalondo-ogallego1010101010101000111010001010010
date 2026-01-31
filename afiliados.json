@@ -6628,5 +6628,18 @@
     "celular": "3145165542",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 507,
+    "registro": 507,
+    "folio": 30,
+    "renglon": 3,
+    "nombre": "ANA AURORA NIÑO MALAGON",
+    "cedula": "30.333.048",
+    "fecha": "28/01/2026",
+    "direccion": "MANZANA 73  CASA 15",
+    "celular": "3213412397",
+    "pagos": [],
+    "firma": ""
   }
 ]
