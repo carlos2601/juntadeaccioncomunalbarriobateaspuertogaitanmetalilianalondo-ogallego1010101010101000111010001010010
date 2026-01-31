@@ -6522,5 +6522,18 @@
     "celular": "3134622263",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 499,
+    "registro": 499,
+    "folio": 28,
+    "renglon": 31,
+    "nombre": "JAIME ALIDIO PEÑA REYES",
+    "cedula": "3.099.060",
+    "fecha": "28/01/2026",
+    "direccion": "MANZANA 62 CASA 21",
+    "celular": "3142005545",
+    "pagos": [],
+    "firma": ""
   }
 ]
