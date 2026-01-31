@@ -6745,5 +6745,18 @@
     "celular": "3164255722",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 516,
+    "registro": 516,
+    "folio": 30,
+    "renglon": 12,
+    "nombre": "JHON FENER GARZON CORREA",
+    "cedula": "1.124.824.451",
+    "fecha": "29/01/2026",
+    "direccion": "MANZANA 73 CASA 14",
+    "celular": "3203880816",
+    "pagos": [],
+    "firma": ""
   }
 ]
