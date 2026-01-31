@@ -5873,5 +5873,18 @@
     "celular": "3142262348",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 450,
+    "registro": 450,
+    "folio": 26,
+    "renglon": 18,
+    "nombre": "DIEGO ARMANDO GARCIA RENGIFO",
+    "cedula": "94.041.009",
+    "fecha": "24/01/2026",
+    "direccion": "MANZANA 60 CASA 25",
+    "celular": "3227868787",
+    "pagos": [],
+    "firma": ""
   }
 ]
