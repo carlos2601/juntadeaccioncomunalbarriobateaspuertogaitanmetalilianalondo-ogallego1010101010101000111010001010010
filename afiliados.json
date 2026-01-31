@@ -6431,5 +6431,18 @@
     "celular": "3232884637",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 492,
+    "registro": 492,
+    "folio": 28,
+    "renglon": 24,
+    "nombre": "GLENDYS MOSQUERA",
+    "cedula": "2.497.600.000",
+    "fecha": "28/01/2026",
+    "direccion": "MANZANA 00 CASA 00",
+    "celular": "3213772020",
+    "pagos": [],
+    "firma": ""
   }
 ]
