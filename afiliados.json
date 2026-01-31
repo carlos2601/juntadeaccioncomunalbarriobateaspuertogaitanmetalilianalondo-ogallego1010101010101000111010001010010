@@ -6680,5 +6680,18 @@
     "celular": "3223945841",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 511,
+    "registro": 511,
+    "folio": 30,
+    "renglon": 7,
+    "nombre": "MAURICIO ANTONIO CHAMORRO",
+    "cedula": "100.107.599",
+    "fecha": "28/01/2026",
+    "direccion": "MANZANA 64 CASA 14",
+    "celular": "3108836260",
+    "pagos": [],
+    "firma": ""
   }
 ]
