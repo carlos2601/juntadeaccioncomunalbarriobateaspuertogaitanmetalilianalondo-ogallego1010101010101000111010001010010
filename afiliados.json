@@ -6784,5 +6784,18 @@
     "celular": "3102457543",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 519,
+    "registro": 519,
+    "folio": 30,
+    "renglon": 15,
+    "nombre": "JHON EDIER GOMEZ LOPEZ",
+    "cedula": "1.004.766.499",
+    "fecha": "28/01/2026",
+    "direccion": "MANZANA 73 CASA 13",
+    "celular": "3213683670",
+    "pagos": [],
+    "firma": ""
   }
 ]
