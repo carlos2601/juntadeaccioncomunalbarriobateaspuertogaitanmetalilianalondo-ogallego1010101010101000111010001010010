@@ -5938,5 +5938,18 @@
     "celular": "3144797486",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 455,
+    "registro": 455,
+    "folio": 26,
+    "renglon": 23,
+    "nombre": "EDWIN DAVID ALFONSO JIMENEZ",
+    "cedula": "1.007.294.146",
+    "fecha": "24/01/2026",
+    "direccion": "MANZANA 63 CASA 25",
+    "celular": "3228484616",
+    "pagos": [],
+    "firma": ""
   }
 ]
