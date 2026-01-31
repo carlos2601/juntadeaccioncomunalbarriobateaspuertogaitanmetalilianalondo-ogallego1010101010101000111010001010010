@@ -6483,5 +6483,18 @@
     "celular": "3104497212",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 496,
+    "registro": 496,
+    "folio": 28,
+    "renglon": 28,
+    "nombre": "CRISTIAN ERMEL PEDRAZA MUÑOZ",
+    "cedula": "74.188.118",
+    "fecha": "28/01/2026",
+    "direccion": "MANZANA 60 CASA 20",
+    "celular": "3208691556",
+    "pagos": [],
+    "firma": ""
   }
 ]
