@@ -7252,5 +7252,18 @@
     "celular": "3115578070",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 555,
+    "registro": 555,
+    "folio": 32,
+    "renglon": 15,
+    "nombre": "HENRY REAGAN GONZALEZ CARDENAS",
+    "cedula": "86.084.565",
+    "fecha": "30/01/2026",
+    "direccion": "MANZANA 59 CASA 16",
+    "celular": "3157881797",
+    "pagos": [],
+    "firma": ""
   }
 ]
