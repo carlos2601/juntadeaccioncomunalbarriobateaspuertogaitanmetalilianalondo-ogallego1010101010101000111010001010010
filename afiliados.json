@@ -5899,5 +5899,18 @@
     "celular": "3178658174",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 452,
+    "registro": 452,
+    "folio": 26,
+    "renglon": 20,
+    "nombre": "ARLEY  TRUJILLO",
+    "cedula": "7.733.142",
+    "fecha": "24/01/2026",
+    "direccion": "MANZANA 59 CASA 7",
+    "celular": "3162274023",
+    "pagos": [],
+    "firma": ""
   }
 ]
