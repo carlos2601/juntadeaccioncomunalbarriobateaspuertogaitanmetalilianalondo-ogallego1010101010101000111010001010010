@@ -6888,5 +6888,18 @@
     "celular": "3102173065",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 527,
+    "registro": 527,
+    "folio": 30,
+    "renglon": 23,
+    "nombre": "PAOLA ANDREA ALVAREZ GASCA",
+    "cedula": "1.123.317.460",
+    "fecha": "29/01/2026",
+    "direccion": "MANZANA 66 CASA 3",
+    "celular": "3157759647",
+    "pagos": [],
+    "firma": ""
   }
 ]
