@@ -5951,5 +5951,18 @@
     "celular": "3228484616",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 456,
+    "registro": 456,
+    "folio": 26,
+    "renglon": 24,
+    "nombre": "RUBIELA GAMEZ RODRIGUEZ",
+    "cedula": "1.070.730.354",
+    "fecha": "24/01/2026",
+    "direccion": "MANZANA 64 A CASA 15",
+    "celular": "3128067449",
+    "pagos": [],
+    "firma": ""
   }
 ]
