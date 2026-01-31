@@ -5834,5 +5834,18 @@
     "celular": "3143667396",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 447,
+    "registro": 447,
+    "folio": 26,
+    "renglon": 15,
+    "nombre": "HARWER  FLOREZ BOADA",
+    "cedula": "80.311.540",
+    "fecha": "31/01/2026",
+    "direccion": "MANZANA 76 CASA 21",
+    "celular": "3209816782",
+    "pagos": [],
+    "firma": ""
   }
 ]
