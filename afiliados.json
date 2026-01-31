@@ -6953,5 +6953,18 @@
     "celular": "0000000000",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 532,
+    "registro": 532,
+    "folio": 30,
+    "renglon": 28,
+    "nombre": "DANIEL GUILLERMO AGUIRRE MARTINEZ",
+    "cedula": "1.110.467.217",
+    "fecha": "29/01/2026",
+    "direccion": "MANZANA 78 A CASA 2",
+    "celular": "3167065760",
+    "pagos": [],
+    "firma": ""
   }
 ]
