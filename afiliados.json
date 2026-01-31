@@ -6094,5 +6094,18 @@
     "celular": "3132368589",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 467,
+    "registro": 467,
+    "folio": 26,
+    "renglon": 35,
+    "nombre": "CARLOS ANDREY PARADA CHAPARRO",
+    "cedula": "1.006.557.096",
+    "fecha": "24/01/2026",
+    "direccion": "MANZANA 63 CASA 25",
+    "celular": "3132027070",
+    "pagos": [],
+    "firma": ""
   }
 ]
