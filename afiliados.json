@@ -7499,5 +7499,18 @@
     "celular": "3103455242",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 574,
+    "registro": 574,
+    "folio": 32,
+    "renglon": 34,
+    "nombre": "MARTIN EMILIO RODRIGUEZ RODRIGUEZ",
+    "cedula": "88.238.837",
+    "fecha": "31/01/2026",
+    "direccion": "MANZANA 76 CASA 21",
+    "celular": "3165781586",
+    "pagos": [],
+    "firma": ""
   }
 ]
