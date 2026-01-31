@@ -5860,5 +5860,18 @@
     "celular": "3166989272",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 449,
+    "registro": 449,
+    "folio": 26,
+    "renglon": 17,
+    "nombre": "ALEMAR RODRIGUEZ MOSQUERA",
+    "cedula": "1.098.170.987",
+    "fecha": "24/01/2026",
+    "direccion": "MANZANA 64  CASA 6",
+    "celular": "3142262348",
+    "pagos": [],
+    "firma": ""
   }
 ]
