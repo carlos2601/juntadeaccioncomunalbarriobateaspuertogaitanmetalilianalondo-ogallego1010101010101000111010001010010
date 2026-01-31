@@ -6158,7 +6158,9 @@
     "fecha": "24/01/2026",
     "direccion": "MANZANA 78 CASA 10",
     "celular": "3134485495",
-    "pagos": [],
+    "pagos": [
+      "31/1/2026, 20.000"
+    ],
     "firma": ""
   },
   {
