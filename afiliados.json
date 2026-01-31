@@ -6693,5 +6693,18 @@
     "celular": "3108836260",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 512,
+    "registro": 512,
+    "folio": 30,
+    "renglon": 8,
+    "nombre": "RICARDO  MERA",
+    "cedula": "0.000.000",
+    "fecha": "28/01/2026",
+    "direccion": "MANZANA 00 CASA OO",
+    "celular": "0000000000",
+    "pagos": [],
+    "firma": ""
   }
 ]
