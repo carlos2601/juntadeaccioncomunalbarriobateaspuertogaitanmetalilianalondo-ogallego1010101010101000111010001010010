@@ -6210,5 +6210,18 @@
     "celular": "3146798686",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 475,
+    "registro": 475,
+    "folio": 28,
+    "renglon": 7,
+    "nombre": "JOSE ANTONIO ZABALA CASTRO",
+    "cedula": "93.201.774",
+    "fecha": "24/01/2026",
+    "direccion": "MANZANA 82 CASA 24",
+    "celular": "3177602790",
+    "pagos": [],
+    "firma": ""
   }
 ]
