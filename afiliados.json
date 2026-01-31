@@ -5990,5 +5990,18 @@
     "celular": "3223161287",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 459,
+    "registro": 459,
+    "folio": 26,
+    "renglon": 27,
+    "nombre": "JESUS ANTONIO GUTIERREZ",
+    "cedula": "1.118.168.576",
+    "fecha": "24/01/2026",
+    "direccion": "MANZANA 63 CASA 8",
+    "celular": "3123586195",
+    "pagos": [],
+    "firma": ""
   }
 ]
