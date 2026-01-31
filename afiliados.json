@@ -6197,5 +6197,18 @@
     "celular": "3224397891",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 474,
+    "registro": 474,
+    "folio": 28,
+    "renglon": 6,
+    "nombre": "SEBASTIAN AGUIRRE GOMEZ",
+    "cedula": "1.124.995.312",
+    "fecha": "24/01/2026",
+    "direccion": "MANZANA 64A CASA 15",
+    "celular": "3146798686",
+    "pagos": [],
+    "firma": ""
   }
 ]
