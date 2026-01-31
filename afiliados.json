@@ -6133,5 +6133,18 @@
     "celular": "3147150562",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 470,
+    "registro": 470,
+    "folio": 28,
+    "renglon": 2,
+    "nombre": "JULIO CESAR BARON RAMIREZ",
+    "cedula": "86.051.064",
+    "fecha": "24/01/2026",
+    "direccion": "MANZANA 78 CASA 10",
+    "celular": "3134485495",
+    "pagos": [],
+    "firma": ""
   }
 ]
