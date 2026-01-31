@@ -7044,5 +7044,18 @@
     "celular": "3183432216",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 539,
+    "registro": 539,
+    "folio": 30,
+    "renglon": 35,
+    "nombre": "FAUMAN VINASCO ALVAREZ",
+    "cedula": "1.114.453.426",
+    "fecha": "29/01/2026",
+    "direccion": "MANZANA 83 CASA 01",
+    "celular": "3228501114",
+    "pagos": [],
+    "firma": ""
   }
 ]
