@@ -6314,5 +6314,18 @@
     "celular": "3213593280",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 483,
+    "registro": 483,
+    "folio": 28,
+    "renglon": 15,
+    "nombre": "LUS MARINA ESPINOSA VARGAS",
+    "cedula": "33.367.955",
+    "fecha": "24/01/2026",
+    "direccion": "MANZANA 64 CASA  15",
+    "celular": "3184444692",
+    "pagos": [],
+    "firma": ""
   }
 ]
