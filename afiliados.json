@@ -7356,5 +7356,18 @@
     "celular": "3213721827",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 563,
+    "registro": 563,
+    "folio": 32,
+    "renglon": 23,
+    "nombre": "DANIEL PINEDA GUZMAN",
+    "cedula": "1.119.894.538",
+    "fecha": "30/01/2026",
+    "direccion": "MANZANA 55 CASA 18",
+    "celular": "3155645342",
+    "pagos": [],
+    "firma": ""
   }
 ]
