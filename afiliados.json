@@ -6197,7 +6197,9 @@
     "fecha": "24/01/2026",
     "direccion": "MANZANA 70 CASA 19",
     "celular": "3224397891",
-    "pagos": [],
+    "pagos": [
+      "31/1/2026, 20.000"
+    ],
     "firma": ""
   },
   {
