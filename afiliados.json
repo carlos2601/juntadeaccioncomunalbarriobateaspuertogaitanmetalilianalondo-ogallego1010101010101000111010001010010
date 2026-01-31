@@ -7382,5 +7382,18 @@
     "celular": "3158340643",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 565,
+    "registro": 565,
+    "folio": 32,
+    "renglon": 25,
+    "nombre": "NORMA CONSTANZA CAMACHO GARCIA",
+    "cedula": "36.311.651",
+    "fecha": "30/01/2026",
+    "direccion": "MANZANA 79 CASA 01",
+    "celular": "3108073310",
+    "pagos": [],
+    "firma": ""
   }
 ]
