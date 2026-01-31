@@ -6470,5 +6470,18 @@
     "celular": "3125015980",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 495,
+    "registro": 495,
+    "folio": 28,
+    "renglon": 27,
+    "nombre": "ADRIANA ESTHER RIVERA ARROYO",
+    "cedula": "1.002.099.876",
+    "fecha": "28/01/2026",
+    "direccion": "MANZANA 64A CASA 25",
+    "celular": "3104497212",
+    "pagos": [],
+    "firma": ""
   }
 ]
