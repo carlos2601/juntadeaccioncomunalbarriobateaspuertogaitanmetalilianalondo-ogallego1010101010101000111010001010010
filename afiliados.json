@@ -6548,5 +6548,18 @@
     "celular": "3227394900",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 501,
+    "registro": 501,
+    "folio": 28,
+    "renglon": 33,
+    "nombre": "WILSON ALEXANDER MORA VEGA",
+    "cedula": "86.043.702",
+    "fecha": "28/01/2026",
+    "direccion": "MANZANA 78A CASA 2",
+    "celular": "3112095795",
+    "pagos": [],
+    "firma": ""
   }
 ]
