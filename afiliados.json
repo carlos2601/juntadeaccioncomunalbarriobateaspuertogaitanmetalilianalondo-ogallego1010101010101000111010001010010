@@ -6602,5 +6602,18 @@
     "celular": "3103974535",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 505,
+    "registro": 505,
+    "folio": 30,
+    "renglon": 1,
+    "nombre": "HIALMAR ANDRES TUNAROSA GAITA",
+    "cedula": "1.007.749.124",
+    "fecha": "28/01/2026",
+    "direccion": "MANZANA 73 CASA 17",
+    "celular": "3142719000",
+    "pagos": [],
+    "firma": ""
   }
 ]
