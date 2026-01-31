@@ -6836,5 +6836,18 @@
     "celular": "3138893102",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 523,
+    "registro": 523,
+    "folio": 30,
+    "renglon": 19,
+    "nombre": "FABIAN GUZMAN RODRIGUEZ",
+    "cedula": "112.499.053",
+    "fecha": "29/01/2026",
+    "direccion": "MANZANA 64 CASA 24",
+    "celular": "3105852663",
+    "pagos": [],
+    "firma": ""
   }
 ]
