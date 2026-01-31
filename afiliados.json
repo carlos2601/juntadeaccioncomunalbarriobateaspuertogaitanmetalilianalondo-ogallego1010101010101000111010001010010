@@ -7239,5 +7239,18 @@
     "celular": "3154343099",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 554,
+    "registro": 554,
+    "folio": 32,
+    "renglon": 14,
+    "nombre": "ELKIN CAMILO NAVARRETE INTENCIPA",
+    "cedula": "1.006.692.471",
+    "fecha": "30/01/2026",
+    "direccion": "MANZANA 59 CASA 17",
+    "celular": "3115578070",
+    "pagos": [],
+    "firma": ""
   }
 ]
