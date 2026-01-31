@@ -7278,5 +7278,18 @@
     "celular": "3152967786",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 557,
+    "registro": 557,
+    "folio": 32,
+    "renglon": 17,
+    "nombre": "PEPETO PEREZ",
+    "cedula": "000.000",
+    "fecha": "30/01/2026",
+    "direccion": "MANZANA 00 CASA 00",
+    "celular": "0000000000",
+    "pagos": [],
+    "firma": ""
   }
 ]
