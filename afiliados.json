@@ -6068,5 +6068,18 @@
     "celular": "3148220345",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 465,
+    "registro": 465,
+    "folio": 26,
+    "renglon": 33,
+    "nombre": "CARLOS GILBERTO PERALTA VEGA",
+    "cedula": "1.118.541.960",
+    "fecha": "24/01/2026",
+    "direccion": "MANZANA 80 CASA 15",
+    "celular": "3134102204",
+    "pagos": [],
+    "firma": ""
   }
 ]
