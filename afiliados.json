@@ -6901,5 +6901,18 @@
     "celular": "3157759647",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 528,
+    "registro": 528,
+    "folio": 30,
+    "renglon": 24,
+    "nombre": "ANDREA MURCIA VARGAS",
+    "cedula": "1.116.924.045",
+    "fecha": "29/01/2026",
+    "direccion": "MANZANA 78 CASA 14",
+    "celular": "3204129012",
+    "pagos": [],
+    "firma": ""
   }
 ]
