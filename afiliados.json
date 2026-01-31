@@ -6029,5 +6029,18 @@
     "celular": "3123274581",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 462,
+    "registro": 462,
+    "folio": 26,
+    "renglon": 30,
+    "nombre": "JAIBER CAMILO NIETO MORENO",
+    "cedula": "1.006.903.321",
+    "fecha": "24/01/2026",
+    "direccion": "MANZANA Y CASA 5",
+    "celular": "3148220345",
+    "pagos": [],
+    "firma": ""
   }
 ]
