@@ -6561,5 +6561,18 @@
     "celular": "3112095795",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 502,
+    "registro": 502,
+    "folio": 28,
+    "renglon": 34,
+    "nombre": "NOIDER FLOREZ HERNADEZ",
+    "cedula": "1.049.894.027",
+    "fecha": "28/01/2026",
+    "direccion": "MANZANA 66 CASA 10",
+    "celular": "3207765516",
+    "pagos": [],
+    "firma": ""
   }
 ]
