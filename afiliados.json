@@ -7408,5 +7408,18 @@
     "celular": "3125959037",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 567,
+    "registro": 567,
+    "folio": 32,
+    "renglon": 27,
+    "nombre": "JUAN DAVID BALLESTEROS ROA",
+    "cedula": "1.057.411.952",
+    "fecha": "30/01/2026",
+    "direccion": "MANZANA 55 CASA 18",
+    "celular": "3127094758",
+    "pagos": [],
+    "firma": ""
   }
 ]
