@@ -6003,5 +6003,18 @@
     "celular": "3123586195",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 460,
+    "registro": 460,
+    "folio": 26,
+    "renglon": 28,
+    "nombre": "WILMER ORLANDO RODRIGUEZ",
+    "cedula": "7.062.763",
+    "fecha": "24/01/2026",
+    "direccion": "MANZANA 63 CASA 08",
+    "celular": "3224470511",
+    "pagos": [],
+    "firma": ""
   }
 ]
