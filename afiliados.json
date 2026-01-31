@@ -6979,5 +6979,18 @@
     "celular": "3206607586",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 534,
+    "registro": 534,
+    "folio": 30,
+    "renglon": 30,
+    "nombre": "RICHARD JHOAN PEREZ MOLINA",
+    "cedula": "1.115.733.709",
+    "fecha": "29/01/2026",
+    "direccion": "MANZANA 60 CASA 25",
+    "celular": "3112281534",
+    "pagos": [],
+    "firma": ""
   }
 ]
