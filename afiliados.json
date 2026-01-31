@@ -6732,5 +6732,18 @@
     "celular": "3134606085",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 515,
+    "registro": 515,
+    "folio": 30,
+    "renglon": 11,
+    "nombre": "YURIEL MOLINA DIAZ",
+    "cedula": "80.490.544",
+    "fecha": "29/01/2026",
+    "direccion": "MANZANA 78A CASA 2",
+    "celular": "3164255722",
+    "pagos": [],
+    "firma": ""
   }
 ]
