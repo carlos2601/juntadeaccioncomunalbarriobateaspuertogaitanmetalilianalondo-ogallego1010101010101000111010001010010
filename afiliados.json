@@ -5912,5 +5912,18 @@
     "celular": "3162274023",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 453,
+    "registro": 453,
+    "folio": 26,
+    "renglon": 21,
+    "nombre": "GEAN CARLO ORDOÑEZ MOSQUERA",
+    "cedula": "1.007.431.816",
+    "fecha": "24/01/2026",
+    "direccion": "MANZANA 60  CASA 25",
+    "celular": "3114359083",
+    "pagos": [],
+    "firma": ""
   }
 ]
