@@ -6236,5 +6236,18 @@
     "celular": "3107793301",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 477,
+    "registro": 477,
+    "folio": 28,
+    "renglon": 9,
+    "nombre": "ELVER EDUARDO RODRIGUEZ RINCON",
+    "cedula": "13.563.645",
+    "fecha": "24/01/2026",
+    "direccion": "MANZANA 64 CASA 23",
+    "celular": "3204893787",
+    "pagos": [],
+    "firma": ""
   }
 ]
