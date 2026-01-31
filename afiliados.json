@@ -6992,5 +6992,18 @@
     "celular": "3112281534",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 535,
+    "registro": 535,
+    "folio": 30,
+    "renglon": 31,
+    "nombre": "JUAN DAVID SERRANO FLORIAN",
+    "cedula": "1.124.819.101",
+    "fecha": "29/01/2026",
+    "direccion": "MANZANA 81 CASA 5",
+    "celular": "3206607586",
+    "pagos": [],
+    "firma": ""
   }
 ]
