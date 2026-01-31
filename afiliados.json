@@ -5925,5 +5925,18 @@
     "celular": "3114359083",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 454,
+    "registro": 454,
+    "folio": 26,
+    "renglon": 22,
+    "nombre": "OSCAR ANDRES ORDOÑEZ MOSQUERA",
+    "cedula": "1.114.881.286",
+    "fecha": "24/01/2026",
+    "direccion": "MANZANA 60  CASA 25",
+    "celular": "3144797486",
+    "pagos": [],
+    "firma": ""
   }
 ]
