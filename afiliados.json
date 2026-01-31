@@ -6654,5 +6654,18 @@
     "celular": "3125749381",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 509,
+    "registro": 509,
+    "folio": 30,
+    "renglon": 5,
+    "nombre": "VICTOR HUGO VASQUEZ MAHECHA",
+    "cedula": "80.269.357",
+    "fecha": "28/01/2026",
+    "direccion": "MANZANA  73 CASA 15",
+    "celular": "3232029163",
+    "pagos": [],
+    "firma": ""
   }
 ]
