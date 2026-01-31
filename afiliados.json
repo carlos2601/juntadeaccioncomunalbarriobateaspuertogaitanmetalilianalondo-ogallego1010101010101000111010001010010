@@ -7135,5 +7135,18 @@
     "celular": "3213492399",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 546,
+    "registro": 546,
+    "folio": 32,
+    "renglon": 6,
+    "nombre": "WILLIAM GILDARDO ROJAS BAUTISTA",
+    "cedula": "8.193.463",
+    "fecha": "30/01/2026",
+    "direccion": "MANZANA 69 CASA 9",
+    "celular": "3505411793",
+    "pagos": [],
+    "firma": ""
   }
 ]
