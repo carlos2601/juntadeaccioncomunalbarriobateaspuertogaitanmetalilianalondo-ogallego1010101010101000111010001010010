@@ -6862,5 +6862,18 @@
     "celular": "3114576959",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 525,
+    "registro": 525,
+    "folio": 30,
+    "renglon": 21,
+    "nombre": "OSBAR IZAD LOPEZ CASALLAS",
+    "cedula": "1.118.544.414",
+    "fecha": "29/01/2026",
+    "direccion": "MANZANA 59 CASA 18",
+    "celular": "3173286902",
+    "pagos": [],
+    "firma": ""
   }
 ]
