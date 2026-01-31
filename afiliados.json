@@ -7213,5 +7213,18 @@
     "celular": "2324567855",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 552,
+    "registro": 552,
+    "folio": 32,
+    "renglon": 12,
+    "nombre": "LUZ DALIA INTENCIPA ALDANA",
+    "cedula": "40.450.076",
+    "fecha": "30/01/2026",
+    "direccion": "MANZANA 59 CASA 17",
+    "celular": "3123198252",
+    "pagos": [],
+    "firma": ""
   }
 ]
