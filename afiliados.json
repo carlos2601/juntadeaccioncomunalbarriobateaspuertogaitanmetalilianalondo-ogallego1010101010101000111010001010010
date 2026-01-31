@@ -7304,5 +7304,18 @@
     "celular": "3173354596",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 559,
+    "registro": 559,
+    "folio": 32,
+    "renglon": 19,
+    "nombre": "JHON FREDY ORTEGON MUÑOZ",
+    "cedula": "14.136.288",
+    "fecha": "30/01/2026",
+    "direccion": "MANZANA 58 CASA 14",
+    "celular": "3105867768",
+    "pagos": [],
+    "firma": ""
   }
 ]
