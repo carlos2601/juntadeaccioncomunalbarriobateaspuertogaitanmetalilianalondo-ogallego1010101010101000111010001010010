@@ -7187,5 +7187,18 @@
     "celular": "3229335762",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 550,
+    "registro": 550,
+    "folio": 32,
+    "renglon": 10,
+    "nombre": "DILMER ELIAN RUIZ",
+    "cedula": "1.003.624.990",
+    "fecha": "30/01/2026",
+    "direccion": "MANZANA 64A CASA 16",
+    "celular": "3115879940",
+    "pagos": [],
+    "firma": ""
   }
 ]
