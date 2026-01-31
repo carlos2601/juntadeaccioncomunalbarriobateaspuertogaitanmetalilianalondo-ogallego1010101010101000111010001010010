@@ -5977,5 +5977,18 @@
     "celular": "3148220345",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 458,
+    "registro": 458,
+    "folio": 26,
+    "renglon": 26,
+    "nombre": "JOHN ALEXANDER GUTIERREZ ORTIZ",
+    "cedula": "1.118.167.189",
+    "fecha": "24/01/2026",
+    "direccion": "MANZANA 63 CASA 8",
+    "celular": "3223161287",
+    "pagos": [],
+    "firma": ""
   }
 ]
