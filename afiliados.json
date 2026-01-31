@@ -6275,5 +6275,18 @@
     "celular": "3186338226",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 480,
+    "registro": 480,
+    "folio": 28,
+    "renglon": 12,
+    "nombre": "ROSEMBERTG BAUTISTA CARRANZA",
+    "cedula": "7.061.176",
+    "fecha": "24/01/2026",
+    "direccion": "MANZANA 60 CASA 09",
+    "celular": "3128159724",
+    "pagos": [],
+    "firma": ""
   }
 ]
