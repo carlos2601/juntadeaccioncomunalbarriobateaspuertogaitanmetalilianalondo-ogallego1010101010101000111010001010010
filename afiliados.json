@@ -6418,5 +6418,18 @@
     "celular": "3214635583",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 491,
+    "registro": 491,
+    "folio": 28,
+    "renglon": 23,
+    "nombre": "ANA BEL MARTINEZ",
+    "cedula": "1.078.989.999",
+    "fecha": "28/01/2026",
+    "direccion": "MANZANA 00 CASA 23",
+    "celular": "3232884637",
+    "pagos": [],
+    "firma": ""
   }
 ]
