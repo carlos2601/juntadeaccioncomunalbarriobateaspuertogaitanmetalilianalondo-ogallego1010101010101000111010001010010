@@ -6574,5 +6574,18 @@
     "celular": "3207765516",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 503,
+    "registro": 503,
+    "folio": 28,
+    "renglon": 35,
+    "nombre": "FLOR HERLINDA PARDO ALDANA",
+    "cedula": "1.124.190.616",
+    "fecha": "28/01/2026",
+    "direccion": "MANZANA 73 CASA 17",
+    "celular": "3112574170",
+    "pagos": [],
+    "firma": ""
   }
 ]
