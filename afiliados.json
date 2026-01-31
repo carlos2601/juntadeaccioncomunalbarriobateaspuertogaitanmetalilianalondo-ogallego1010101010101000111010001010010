@@ -6509,5 +6509,18 @@
     "celular": "3136083772",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 498,
+    "registro": 498,
+    "folio": 28,
+    "renglon": 30,
+    "nombre": "LUIS FERNANDO PEÑA GARCIA",
+    "cedula": "1.069.900.911",
+    "fecha": "28/01/2026",
+    "direccion": "MANZANA 62 CASA 21",
+    "celular": "3134622263",
+    "pagos": [],
+    "firma": ""
   }
 ]
