@@ -6615,5 +6615,18 @@
     "celular": "3142719000",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 506,
+    "registro": 506,
+    "folio": 30,
+    "renglon": 2,
+    "nombre": "LUIS CARLOS MEJIA CASTRO",
+    "cedula": "1.049.844.908",
+    "fecha": "28/01/2026",
+    "direccion": "MANZANA 66 CASA 9",
+    "celular": "3145165542",
+    "pagos": [],
+    "firma": ""
   }
 ]
