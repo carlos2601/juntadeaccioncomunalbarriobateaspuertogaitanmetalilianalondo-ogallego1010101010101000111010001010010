@@ -7070,5 +7070,18 @@
     "celular": "3233646089",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 541,
+    "registro": 541,
+    "folio": 32,
+    "renglon": 1,
+    "nombre": "ALEXANDER GIRALDO SALGADO",
+    "cedula": "1.019.006.761",
+    "fecha": "30/01/2026",
+    "direccion": "MANZANA 51 CASA 6",
+    "celular": "3108539394",
+    "pagos": [],
+    "firma": ""
   }
 ]
