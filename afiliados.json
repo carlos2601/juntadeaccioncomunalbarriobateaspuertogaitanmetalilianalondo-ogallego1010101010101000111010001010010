@@ -6420,7 +6420,9 @@
     "fecha": "28/01/2026",
     "direccion": "MANZANA 70 CASA 19",
     "celular": "3214635583",
-    "pagos": [],
+    "pagos": [
+      "31/1/2026, 20.000"
+    ],
     "firma": ""
   },
   {
