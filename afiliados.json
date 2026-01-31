@@ -6379,5 +6379,18 @@
     "celular": "3102432152",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 488,
+    "registro": 488,
+    "folio": 28,
+    "renglon": 20,
+    "nombre": "HOVER ANDRES TORRES ESCAMILLA",
+    "cedula": "79.464.657",
+    "fecha": "31/01/2026",
+    "direccion": "MANZANA 59 CASA 11",
+    "celular": "3138785478",
+    "pagos": [],
+    "firma": ""
   }
 ]
