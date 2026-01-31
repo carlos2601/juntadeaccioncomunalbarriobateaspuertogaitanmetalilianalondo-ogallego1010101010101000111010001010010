@@ -6582,7 +6582,9 @@
     "fecha": "28/01/2026",
     "direccion": "MANZANA 66 CASA 10",
     "celular": "3207765516",
-    "pagos": [],
+    "pagos": [
+      "31/1/2026, 20.000"
+    ],
     "firma": ""
   },
   {
