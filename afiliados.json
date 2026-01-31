@@ -6262,5 +6262,18 @@
     "celular": "0000000000",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 479,
+    "registro": 479,
+    "folio": 28,
+    "renglon": 11,
+    "nombre": "CARLOS ALFREDO CARDENAS CARRION",
+    "cedula": "1.003.522.993",
+    "fecha": "24/01/2026",
+    "direccion": "MANZANA 61 CASA 23",
+    "celular": "3186338226",
+    "pagos": [],
+    "firma": ""
   }
 ]
