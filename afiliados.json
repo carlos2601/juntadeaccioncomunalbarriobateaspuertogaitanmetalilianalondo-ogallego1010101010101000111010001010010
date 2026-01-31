@@ -5560,7 +5560,9 @@
     "fecha": "24/01/2026",
     "direccion": "MANZANA 69 CASA 22",
     "celular": "3246805842",
-    "pagos": [],
+    "pagos": [
+      "31/1/2026, 20.000"
+    ],
     "firma": ""
   },
   {
