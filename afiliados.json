@@ -6392,5 +6392,18 @@
     "celular": "3138785478",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 489,
+    "registro": 489,
+    "folio": 28,
+    "renglon": 21,
+    "nombre": "HAROLD JOSE MUÑOZ FLOREZ",
+    "cedula": "1.043.128.890",
+    "fecha": "28/01/2026",
+    "direccion": "MANZANA 70 CASA 19",
+    "celular": "3138785478",
+    "pagos": [],
+    "firma": ""
   }
 ]
