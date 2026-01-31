@@ -7473,5 +7473,18 @@
     "celular": "3184402300",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 572,
+    "registro": 572,
+    "folio": 32,
+    "renglon": 32,
+    "nombre": "EDWIN GIOVANNI NEIRA PRIETO",
+    "cedula": "1.019.046.150",
+    "fecha": "30/01/2026",
+    "direccion": "MANZANA 55 CASA 18",
+    "celular": "3144565409",
+    "pagos": [],
+    "firma": ""
   }
 ]
