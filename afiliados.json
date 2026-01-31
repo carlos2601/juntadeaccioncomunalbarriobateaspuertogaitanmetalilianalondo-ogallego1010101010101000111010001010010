@@ -7226,5 +7226,18 @@
     "celular": "3123198252",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 553,
+    "registro": 553,
+    "folio": 32,
+    "renglon": 13,
+    "nombre": "MARYI JHASLITH GONZALEZ INTENCIPA",
+    "cedula": "1.124.190.526",
+    "fecha": "30/01/2026",
+    "direccion": "MANZANA 59 CASA 17",
+    "celular": "3154343099",
+    "pagos": [],
+    "firma": ""
   }
 ]
