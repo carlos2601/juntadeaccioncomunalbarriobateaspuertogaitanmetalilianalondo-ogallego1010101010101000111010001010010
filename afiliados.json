@@ -6159,5 +6159,18 @@
     "celular": "3156385165",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 472,
+    "registro": 472,
+    "folio": 28,
+    "renglon": 4,
+    "nombre": "BREINER ALEJANDRO AGUIRRE GAMEZ",
+    "cedula": "1.124.823.462",
+    "fecha": "24/01/2026",
+    "direccion": "MANZANA 64 CASA 15",
+    "celular": "3204232520",
+    "pagos": [],
+    "firma": ""
   }
 ]
