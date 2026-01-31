@@ -6587,5 +6587,18 @@
     "celular": "3112574170",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 504,
+    "registro": 504,
+    "folio": 28,
+    "renglon": 36,
+    "nombre": "ANDERSON STIVEN ARIAS PARDO",
+    "cedula": "1.124.190.415",
+    "fecha": "28/01/2026",
+    "direccion": "MANZANA 73 CASA 17",
+    "celular": "3103974535",
+    "pagos": [],
+    "firma": ""
   }
 ]
