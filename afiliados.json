@@ -7369,5 +7369,18 @@
     "celular": "3155645342",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 564,
+    "registro": 564,
+    "folio": 32,
+    "renglon": 24,
+    "nombre": "BLADIMIR VERANO FAJARDO",
+    "cedula": "3.277.447",
+    "fecha": "30/01/2026",
+    "direccion": "MANZANA 55 CASA 18",
+    "celular": "3158340643",
+    "pagos": [],
+    "firma": ""
   }
 ]
