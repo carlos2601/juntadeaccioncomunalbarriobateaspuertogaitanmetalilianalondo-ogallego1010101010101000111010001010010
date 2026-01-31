@@ -6273,7 +6273,9 @@
     "fecha": "24/01/2026",
     "direccion": "MANZANA 61 CASA 23",
     "celular": "3186338226",
-    "pagos": [],
+    "pagos": [
+      "31/1/2026, 20.000"
+    ],
     "firma": ""
   },
   {
