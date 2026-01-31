@@ -7343,5 +7343,18 @@
     "celular": "3186503382",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 562,
+    "registro": 562,
+    "folio": 32,
+    "renglon": 22,
+    "nombre": "JOSE MARIA VASQUEZ ARRIECHE",
+    "cedula": "1.125.545",
+    "fecha": "30/01/2026",
+    "direccion": "MANZANA 58 CASA 14",
+    "celular": "3213721827",
+    "pagos": [],
+    "firma": ""
   }
 ]
