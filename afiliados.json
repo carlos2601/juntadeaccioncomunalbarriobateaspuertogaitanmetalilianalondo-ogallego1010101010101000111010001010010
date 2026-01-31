@@ -6405,5 +6405,18 @@
     "celular": "3138785478",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 490,
+    "registro": 490,
+    "folio": 28,
+    "renglon": 22,
+    "nombre": "JUAN DE LA CRUZ SUAREZ",
+    "cedula": "5.692.359",
+    "fecha": "28/01/2026",
+    "direccion": "MANZANA 70 CASA 19",
+    "celular": "3214635583",
+    "pagos": [],
+    "firma": ""
   }
 ]
