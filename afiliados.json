@@ -5847,5 +5847,18 @@
     "celular": "3209816782",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 448,
+    "registro": 448,
+    "folio": 26,
+    "renglon": 16,
+    "nombre": "NARCISO HOLGUIN LEGUIZAMON",
+    "cedula": "97.611.246",
+    "fecha": "24/01/2026",
+    "direccion": "MANZANA 63 CASA 25",
+    "celular": "3166989272",
+    "pagos": [],
+    "firma": ""
   }
 ]
