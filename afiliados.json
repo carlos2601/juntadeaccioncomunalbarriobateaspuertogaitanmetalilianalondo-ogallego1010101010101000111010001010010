@@ -6353,5 +6353,18 @@
     "celular": "3184444692",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 486,
+    "registro": 486,
+    "folio": 28,
+    "renglon": 18,
+    "nombre": "JAIME RAMOS FUMEQUE",
+    "cedula": "1.049.636.910",
+    "fecha": "24/01/2026",
+    "direccion": "MANZANA 64 CASA 15",
+    "celular": "3108039140",
+    "pagos": [],
+    "firma": ""
   }
 ]
