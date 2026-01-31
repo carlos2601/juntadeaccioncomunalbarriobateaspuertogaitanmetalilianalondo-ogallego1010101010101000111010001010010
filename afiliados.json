@@ -6667,5 +6667,18 @@
     "celular": "3232029163",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 510,
+    "registro": 510,
+    "folio": 30,
+    "renglon": 6,
+    "nombre": "CONSUELO MUÑOZ SUAREZ",
+    "cedula": "63.538.460",
+    "fecha": "28/01/2026",
+    "direccion": "MANZANA 64A CASA 26",
+    "celular": "3223945841",
+    "pagos": [],
+    "firma": ""
   }
 ]
