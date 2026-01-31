@@ -6940,5 +6940,18 @@
     "celular": "3228931623",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 531,
+    "registro": 531,
+    "folio": 30,
+    "renglon": 27,
+    "nombre": "PEPITO COSME",
+    "cedula": "1.000.000",
+    "fecha": "29/01/2026",
+    "direccion": "MANZANA 00 CASA 00",
+    "celular": "0000000000",
+    "pagos": [],
+    "firma": ""
   }
 ]
