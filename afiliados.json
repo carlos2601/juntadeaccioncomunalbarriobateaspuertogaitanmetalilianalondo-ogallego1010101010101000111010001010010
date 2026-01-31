@@ -6875,5 +6875,18 @@
     "celular": "3173286902",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 526,
+    "registro": 526,
+    "folio": 30,
+    "renglon": 22,
+    "nombre": "JOSE GREGORIO BOLIVAR COLON",
+    "cedula": "1.117.458.439",
+    "fecha": "29/01/2026",
+    "direccion": "MANZANA 66 CASA 3",
+    "celular": "3102173065",
+    "pagos": [],
+    "firma": ""
   }
 ]
