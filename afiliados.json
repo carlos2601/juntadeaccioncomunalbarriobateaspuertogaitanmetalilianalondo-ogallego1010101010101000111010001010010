@@ -7434,5 +7434,18 @@
     "celular": "3178604825",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 569,
+    "registro": 569,
+    "folio": 32,
+    "renglon": 29,
+    "nombre": "MILTON ARLEY AGREDO BORDA",
+    "cedula": "1.121.852.377",
+    "fecha": "30/01/2026",
+    "direccion": "MANZANA 68 CASA 11",
+    "celular": "3108011885",
+    "pagos": [],
+    "firma": ""
   }
 ]
