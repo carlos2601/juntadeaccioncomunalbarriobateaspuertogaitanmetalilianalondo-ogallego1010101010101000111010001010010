@@ -6130,7 +6130,9 @@
     "fecha": "24/01/2026",
     "direccion": "MANZANA 79 CASA 21",
     "celular": "3148376654",
-    "pagos": [],
+    "pagos": [
+      "31/1/2026, 20.000"
+    ],
     "firma": ""
   },
   {
