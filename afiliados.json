@@ -6327,5 +6327,18 @@
     "celular": "3184444692",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 484,
+    "registro": 484,
+    "folio": 28,
+    "renglon": 16,
+    "nombre": "ELVER EUDEZ AMAYA",
+    "cedula": "74.428.285",
+    "fecha": "24/01/2026",
+    "direccion": "MANZANA 64 CASA 15",
+    "celular": "3107817503",
+    "pagos": [],
+    "firma": ""
   }
 ]
