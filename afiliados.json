@@ -6927,5 +6927,18 @@
     "celular": "3134537436",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 530,
+    "registro": 530,
+    "folio": 30,
+    "renglon": 26,
+    "nombre": "CAMILO ANDRES TORRES MERCHAN",
+    "cedula": "105.758.328",
+    "fecha": "29/01/2026",
+    "direccion": "MANZANA 66 CASA 3",
+    "celular": "3228931623",
+    "pagos": [],
+    "firma": ""
   }
 ]
