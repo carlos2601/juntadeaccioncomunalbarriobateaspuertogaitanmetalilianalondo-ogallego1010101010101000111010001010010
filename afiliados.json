@@ -6366,5 +6366,18 @@
     "celular": "3108039140",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 487,
+    "registro": 487,
+    "folio": 28,
+    "renglon": 19,
+    "nombre": "LUIS IGNACIO HERNANDEZ JIMENEZ",
+    "cedula": "94.362.157",
+    "fecha": "24/01/2026",
+    "direccion": "MANZANA 65 CASA 22",
+    "celular": "3102432152",
+    "pagos": [],
+    "firma": ""
   }
 ]
