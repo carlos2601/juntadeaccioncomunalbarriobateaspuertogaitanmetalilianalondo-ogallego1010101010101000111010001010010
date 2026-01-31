@@ -5964,5 +5964,18 @@
     "celular": "3128067449",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 457,
+    "registro": 457,
+    "folio": 26,
+    "renglon": 25,
+    "nombre": "EDILBERTO CARO GOMEZ",
+    "cedula": "86.088.433",
+    "fecha": "24/01/2026",
+    "direccion": "MANZANA 80 CASA 18",
+    "celular": "3148220345",
+    "pagos": [],
+    "firma": ""
   }
 ]
