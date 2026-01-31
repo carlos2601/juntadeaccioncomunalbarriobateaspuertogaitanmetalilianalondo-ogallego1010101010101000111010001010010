@@ -6810,5 +6810,18 @@
     "celular": "3213683670",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 521,
+    "registro": 521,
+    "folio": 30,
+    "renglon": 17,
+    "nombre": "FABIO ANTONIO GOMEZ RIOS",
+    "cedula": "70.810.526",
+    "fecha": "29/01/2026",
+    "direccion": "MANZANA 73 CASA 13",
+    "celular": "3222313459",
+    "pagos": [],
+    "firma": ""
   }
 ]
