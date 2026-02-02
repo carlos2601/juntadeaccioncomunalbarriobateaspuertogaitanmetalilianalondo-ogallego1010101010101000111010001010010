@@ -7590,5 +7590,18 @@
     "celular": "3175021409",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 579,
+    "registro": 579,
+    "folio": 34,
+    "renglon": 3,
+    "nombre": "CARLOS GOMEZ GUTIERREZ",
+    "cedula": "97.610.207",
+    "fecha": "31/01/2026",
+    "direccion": "MANZANA 70 CASA 20",
+    "celular": "3173903147",
+    "pagos": [],
+    "firma": ""
   }
 ]
