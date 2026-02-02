@@ -7746,5 +7746,18 @@
     "celular": "3204376227",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 591,
+    "registro": 591,
+    "folio": 34,
+    "renglon": 15,
+    "nombre": "CARLOS JIDREANS CARABALLO MAESTRE",
+    "cedula": "6.484.233",
+    "fecha": "31/01/2026",
+    "direccion": "MANZANA 71 CASA 23",
+    "celular": "3150772465",
+    "pagos": [],
+    "firma": ""
   }
 ]
