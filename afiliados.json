@@ -7616,5 +7616,18 @@
     "celular": "3142751669",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 581,
+    "registro": 581,
+    "folio": 34,
+    "renglon": 5,
+    "nombre": "RAUL BALLEN  RAMIREZ",
+    "cedula": "17.646.030",
+    "fecha": "31/01/2026",
+    "direccion": "MANZANA 78 CASA 3",
+    "celular": "3106089694",
+    "pagos": [],
+    "firma": ""
   }
 ]
