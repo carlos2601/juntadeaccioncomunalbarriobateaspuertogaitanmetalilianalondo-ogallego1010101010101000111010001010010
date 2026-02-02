@@ -7850,5 +7850,18 @@
     "celular": "3102925331",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 599,
+    "registro": 599,
+    "folio": 34,
+    "renglon": 23,
+    "nombre": "LUIS ALBERTO TORRES SOSA",
+    "cedula": "9.506.488",
+    "fecha": "31/01/2026",
+    "direccion": "MANZANA 55 CASA 18",
+    "celular": "3204930076",
+    "pagos": [],
+    "firma": ""
   }
 ]
