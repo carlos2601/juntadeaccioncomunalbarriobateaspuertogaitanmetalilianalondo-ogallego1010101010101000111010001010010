@@ -7759,5 +7759,18 @@
     "celular": "3150772465",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 592,
+    "registro": 592,
+    "folio": 34,
+    "renglon": 16,
+    "nombre": "DIEGO ALEXANDER LUJAN MANCERA",
+    "cedula": "1.006.867.035",
+    "fecha": "31/01/2026",
+    "direccion": "MANZANA 55 CASA 15",
+    "celular": "3213415523",
+    "pagos": [],
+    "firma": ""
   }
 ]
