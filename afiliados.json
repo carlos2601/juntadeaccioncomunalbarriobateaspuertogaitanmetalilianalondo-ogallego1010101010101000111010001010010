@@ -6630,9 +6630,9 @@
   },
   {
     "id": 506,
-    "registro": "506",
-    "folio": "30",
-    "renglon": "2",
+    "registro": 506,
+    "folio": 30,
+    "renglon": 2,
     "nombre": "LUIS CARLOS MEJIA CASTRO",
     "cedula": "1049894908",
     "fecha": "2026-01-28",
@@ -6697,9 +6697,9 @@
   },
   {
     "id": 511,
-    "registro": "511",
-    "folio": "30",
-    "renglon": "7",
+    "registro": 511,
+    "folio": 30,
+    "renglon": 7,
     "nombre": "MAURICIO ANTONIO CHAMORRO",
     "cedula": "1010107599",
     "fecha": "2026-01-30",
@@ -7549,6 +7549,19 @@
     "fecha": "30/01/2026",
     "direccion": "MANZANA 76 CASA 5",
     "celular": "3118398876",
+    "pagos": [],
+    "firma": ""
+  },
+  {
+    "id": 576,
+    "registro": 576,
+    "folio": 32,
+    "renglon": 36,
+    "nombre": "ELVER NICOLAS ORTIZ LOPEZ",
+    "cedula": "1.118.366.207",
+    "fecha": "31/01/2026",
+    "direccion": "MANZANA 68 CASA 10",
+    "celular": "3138981635",
     "pagos": [],
     "firma": ""
   }
