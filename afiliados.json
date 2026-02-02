@@ -7694,5 +7694,18 @@
     "celular": "3132082420",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 587,
+    "registro": 587,
+    "folio": 34,
+    "renglon": 11,
+    "nombre": "YENIFER GOMEZ BAYER",
+    "cedula": "1.124.827.075",
+    "fecha": "31/01/2026",
+    "direccion": "MANZANA 66 CASA 23",
+    "celular": "3186740198",
+    "pagos": [],
+    "firma": ""
   }
 ]
