@@ -7642,5 +7642,18 @@
     "celular": "3174585924",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 583,
+    "registro": 583,
+    "folio": 34,
+    "renglon": 7,
+    "nombre": "OOII OOOOOO",
+    "cedula": "00.000.000",
+    "fecha": "02/02/2026",
+    "direccion": "MANZANA  00 CASA 00",
+    "celular": "0000000000",
+    "pagos": [],
+    "firma": ""
   }
 ]
