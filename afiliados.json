@@ -7785,5 +7785,18 @@
     "celular": "3124019557",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 594,
+    "registro": 594,
+    "folio": 34,
+    "renglon": 18,
+    "nombre": "FERNANDO ROJAS LOAIZA",
+    "cedula": "93.453.204",
+    "fecha": "31/01/2026",
+    "direccion": "MANZANA 72 CASA 13",
+    "celular": "3163474100",
+    "pagos": [],
+    "firma": ""
   }
 ]
