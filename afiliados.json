@@ -7876,5 +7876,18 @@
     "celular": "3173000773",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 601,
+    "registro": 601,
+    "folio": 34,
+    "renglon": 25,
+    "nombre": "MARIA KRISELDA MURILLO SANCHEZ",
+    "cedula": "1.076.650.279",
+    "fecha": "31/01/2026",
+    "direccion": "MANZANA 64 CASA 18",
+    "celular": "3215730654",
+    "pagos": [],
+    "firma": ""
   }
 ]
