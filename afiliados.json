@@ -7824,5 +7824,18 @@
     "celular": "3229796172",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 597,
+    "registro": 597,
+    "folio": 34,
+    "renglon": 21,
+    "nombre": "JUAN DAVID ROJAS CAMACHO",
+    "cedula": "1.005.850.999",
+    "fecha": "31/01/2026",
+    "direccion": "MANZANA 72 CASA 13",
+    "celular": "3223226075",
+    "pagos": [],
+    "firma": ""
   }
 ]
