@@ -7655,5 +7655,18 @@
     "celular": "0000000000",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 584,
+    "registro": 584,
+    "folio": 34,
+    "renglon": 8,
+    "nombre": "YIDREISKYS STEFANNYS MAESTRE TORREALBA",
+    "cedula": "4.892.120",
+    "fecha": "31/01/2026",
+    "direccion": "MANZANA 71 CASA 23",
+    "celular": "3177081543",
+    "pagos": [],
+    "firma": ""
   }
 ]
