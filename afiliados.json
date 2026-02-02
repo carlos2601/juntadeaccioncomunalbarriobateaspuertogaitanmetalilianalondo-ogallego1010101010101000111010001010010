@@ -7837,5 +7837,18 @@
     "celular": "3223226075",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 598,
+    "registro": 598,
+    "folio": 34,
+    "renglon": 22,
+    "nombre": "EDWIN FERNANDO ROJAS CAMACHO",
+    "cedula": "1.007.289.954",
+    "fecha": "31/01/2026",
+    "direccion": "MANZANA 72 CASA 13",
+    "celular": "3102925331",
+    "pagos": [],
+    "firma": ""
   }
 ]
