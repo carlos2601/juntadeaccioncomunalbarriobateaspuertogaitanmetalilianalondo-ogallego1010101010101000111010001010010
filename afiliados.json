@@ -6934,7 +6934,9 @@
     "fecha": "29/01/2026",
     "direccion": "MANZANA 78 CASA 14",
     "celular": "3204129012",
-    "pagos": [],
+    "pagos": [
+      "3/2/2026, 20.000"
+    ],
     "firma": ""
   },
   {
