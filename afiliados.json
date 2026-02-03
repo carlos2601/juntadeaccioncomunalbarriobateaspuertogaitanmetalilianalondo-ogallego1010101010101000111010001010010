@@ -945,7 +945,9 @@
     "fecha": "21/11/2024",
     "direccion": "MANZANA 62 CASA 04",
     "celular": "3118671090",
-    "pagos": [],
+    "pagos": [
+      "3/2/2026, 20.000"
+    ],
     "firma": ""
   },
   {
