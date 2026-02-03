@@ -7779,7 +7779,9 @@
     "fecha": "31/01/2026",
     "direccion": "MANZANA 71 CASA 23",
     "celular": "3150772465",
-    "pagos": [],
+    "pagos": [
+      "3/2/2026, 20.000"
+    ],
     "firma": ""
   },
   {
