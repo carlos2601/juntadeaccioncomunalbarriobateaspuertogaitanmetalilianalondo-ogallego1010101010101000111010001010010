@@ -7514,7 +7514,9 @@
     "fecha": "30/01/2026",
     "direccion": "MANZANA 55 CASA 18",
     "celular": "3144565409",
-    "pagos": [],
+    "pagos": [
+      "3/2/2026, 20.000"
+    ],
     "firma": ""
   },
   {
