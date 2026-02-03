@@ -7993,5 +7993,18 @@
     "celular": "3204145921",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 610,
+    "registro": 610,
+    "folio": 34,
+    "renglon": 34,
+    "nombre": "WILMAR MANUEL CHAMORRO",
+    "cedula": "82.331.966",
+    "fecha": "31/01/2026",
+    "direccion": "MANZANA 64 CASA 16",
+    "celular": "3204618126",
+    "pagos": [],
+    "firma": ""
   }
 ]
