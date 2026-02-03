@@ -7585,7 +7585,9 @@
     "fecha": "31/01/2026",
     "direccion": "MANZANA 68 CASA 10",
     "celular": "3124906056",
-    "pagos": [],
+    "pagos": [
+      "3/2/2026, 20.000"
+    ],
     "firma": ""
   },
   {
