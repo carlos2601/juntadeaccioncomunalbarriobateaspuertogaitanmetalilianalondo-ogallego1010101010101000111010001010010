@@ -7967,5 +7967,18 @@
     "celular": "3219735029",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 608,
+    "registro": 608,
+    "folio": 34,
+    "renglon": 32,
+    "nombre": "JOHN FLAMIR SALGADO RODRIGUEZ",
+    "cedula": "1.121.832.626",
+    "fecha": "31/01/2026",
+    "direccion": "MANZANA 64 CASA 18",
+    "celular": "3114683424",
+    "pagos": [],
+    "firma": ""
   }
 ]
