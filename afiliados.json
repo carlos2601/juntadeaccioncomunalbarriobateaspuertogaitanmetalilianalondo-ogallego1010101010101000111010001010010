@@ -6387,7 +6387,9 @@
     "fecha": "24/01/2026",
     "direccion": "MANZANA 65 CASA 22",
     "celular": "3102432152",
-    "pagos": [],
+    "pagos": [
+      "3/2/2026, 20.000"
+    ],
     "firma": ""
   },
   {
