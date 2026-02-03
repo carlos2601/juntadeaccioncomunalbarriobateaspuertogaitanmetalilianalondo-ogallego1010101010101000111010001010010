@@ -7915,5 +7915,18 @@
     "celular": "3138453638",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 604,
+    "registro": 604,
+    "folio": 34,
+    "renglon": 28,
+    "nombre": "ELIANA CUELLAR",
+    "cedula": "1.121.652.114",
+    "fecha": "31/01/2026",
+    "direccion": "MANZANA 81 CASA 12",
+    "celular": "3213621712",
+    "pagos": [],
+    "firma": ""
   }
 ]
