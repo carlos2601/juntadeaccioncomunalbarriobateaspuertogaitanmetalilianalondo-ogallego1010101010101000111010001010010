@@ -4260,7 +4260,9 @@
     "fecha": "27/12/2025",
     "direccion": "MANZANA 76 CASA 19",
     "celular": "3213690963",
-    "pagos": [],
+    "pagos": [
+      "3/2/2026, 20.000"
+    ],
     "firma": ""
   },
   {
