@@ -7941,5 +7941,18 @@
     "celular": "3138253855",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 606,
+    "registro": 606,
+    "folio": 34,
+    "renglon": 30,
+    "nombre": "DAIRON STIVEN ESQUIVEL",
+    "cedula": "1.121.883.419",
+    "fecha": "31/01/2026",
+    "direccion": "MANZANA 81 CASA 12",
+    "celular": "3103463810",
+    "pagos": [],
+    "firma": ""
   }
 ]
