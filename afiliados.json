@@ -5751,7 +5751,9 @@
     "fecha": "24/01/2026",
     "direccion": "MANZANA 79 CASA 08",
     "celular": "3214531839",
-    "pagos": [],
+    "pagos": [
+      "3/2/2026, 20.000"
+    ],
     "firma": ""
   },
   {
