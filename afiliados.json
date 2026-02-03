@@ -1140,7 +1140,9 @@
     "fecha": "21/11/2024",
     "direccion": "MANZANA 80 CASA 24",
     "celular": "3224211494",
-    "pagos": [],
+    "pagos": [
+      "3/2/2026, 20.000"
+    ],
     "firma": ""
   },
   {
