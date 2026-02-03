@@ -8032,5 +8032,18 @@
     "celular": "3154714421",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 613,
+    "registro": 613,
+    "folio": 36,
+    "renglon": 1,
+    "nombre": "BELLANILFA PARRADA GAMEZ",
+    "cedula": "24.231.387",
+    "fecha": "31/01/2026",
+    "direccion": "MANZANA 58 CASA 26",
+    "celular": "3102859058",
+    "pagos": [],
+    "firma": ""
   }
 ]
