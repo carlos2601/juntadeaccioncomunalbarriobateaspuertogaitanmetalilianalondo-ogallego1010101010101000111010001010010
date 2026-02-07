@@ -6753,7 +6753,9 @@
     "fecha": "28/01/2026",
     "direccion": "MANZANA 80 CASA 25",
     "celular": "3105628025",
-    "pagos": [],
+    "pagos": [
+      "7/2/2026, 20.000"
+    ],
     "firma": ""
   },
   {
