@@ -4801,7 +4801,9 @@
     "fecha": "27/12/2025",
     "direccion": "MANZANA 63 CASA 19",
     "celular": "3214954502",
-    "pagos": [],
+    "pagos": [
+      "7/2/2026, 20.000"
+    ],
     "firma": ""
   },
   {
