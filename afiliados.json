@@ -5422,7 +5422,9 @@
     "fecha": "17/01/2026",
     "direccion": "MANZANA 62  CASA 23",
     "celular": "3132552571",
-    "pagos": [],
+    "pagos": [
+      "7/2/2026, 20.000"
+    ],
     "firma": ""
   },
   {
