@@ -3,163 +3,217 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verificación de Afiliados</title>
+    <title>Verificación de Afiliados - JAC Bateas</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --verde-oscuro: #1B5E20;
-            --verde-claro: #A5D6A7;
-            --amarillo-oscuro: #F57F17;
-            --amarillo-claro: #FFF59D;
-            --gris-oscuro: #333;
-            --gris-claro: #f5f5f5;
-            --texto-oscuro: #212121;
-            --texto-claro: #FAFAFA;
+            --primary: #4361ee;
+            --primary-dark: #3a56d4;
+            --secondary: #7209b7;
+            --accent: #f72585;
+            --success: #4cc9f0;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+            --card-bg: #ffffff;
+            --shadow: rgba(0, 0, 0, 0.1);
+            --gradient-primary: linear-gradient(135deg, #4361ee 0%, #3a0ca3 100%);
+            --gradient-secondary: linear-gradient(135deg, #7209b7 0%, #560bad 100%);
+            --gradient-accent: linear-gradient(135deg, #f72585 0%, #b5179e 100%);
         }
         
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
         }
         
         body {
-            background-color: var(--gris-claro);
-            color: var(--texto-oscuro);
-            line-height: 1.6;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: var(--dark);
             min-height: 100vh;
             padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        .app-container {
+            width: 100%;
+            max-width: 900px;
+            background-color: var(--card-bg);
+            border-radius: 24px;
+            box-shadow: 0 20px 60px var(--shadow);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 90vh;
+        }
+        
+        /* Header */
+        .app-header {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 24px 30px;
+            position: relative;
             overflow: hidden;
         }
         
-        header {
-            background: linear-gradient(135deg, var(--verde-oscuro) 0%, #2E7D32 100%);
-            color: var(--texto-claro);
-            padding: 25px;
-            text-align: center;
+        .header-content {
+            position: relative;
+            z-index: 2;
         }
         
-        h1 {
-            font-size: 2.2rem;
+        .app-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
             margin-bottom: 10px;
         }
         
-        .subtitle {
-            font-size: 1.1rem;
-            opacity: 0.9;
+        .logo-icon {
+            font-size: 28px;
+            background: rgba(255, 255, 255, 0.2);
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
+        .app-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin: 0;
+        }
+        
+        .app-subtitle {
+            font-size: 14px;
+            opacity: 0.9;
+            margin-top: 4px;
+        }
+        
+        .header-decoration {
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+        
+        .header-decoration-2 {
+            position: absolute;
+            bottom: -80px;
+            left: -80px;
+            width: 250px;
+            height: 250px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+        }
+        
+        /* Search Section */
         .search-section {
-            background-color: var(--amarillo-claro);
-            padding: 25px;
-            border-bottom: 3px solid var(--amarillo-oscuro);
+            padding: 30px;
+            background-color: white;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        .search-container {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        
+        .search-label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: var(--dark);
+            font-size: 16px;
         }
         
         .search-box {
             display: flex;
-            gap: 15px;
+            gap: 12px;
             align-items: center;
-            flex-wrap: wrap;
-        }
-        
-        .search-input-container {
-            flex: 1;
-            min-width: 300px;
-        }
-        
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: var(--verde-oscuro);
         }
         
         .search-input {
-            width: 100%;
-            padding: 12px 15px;
-            border: 2px solid var(--verde-claro);
-            border-radius: 6px;
-            font-size: 1rem;
-            transition: border-color 0.3s;
+            flex: 1;
+            padding: 16px 20px;
+            border: 2px solid var(--light-gray);
+            border-radius: 14px;
+            font-size: 16px;
+            transition: all 0.3s;
+            background-color: var(--light);
         }
         
         .search-input:focus {
             outline: none;
-            border-color: var(--verde-oscuro);
-            box-shadow: 0 0 0 3px rgba(27, 94, 32, 0.1);
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.1);
         }
         
-        .search-input::placeholder {
-            color: #666;
-        }
-        
-        .btn {
-            padding: 12px 25px;
+        .search-button {
+            background: var(--gradient-primary);
+            color: white;
             border: none;
-            border-radius: 6px;
-            font-size: 1rem;
+            border-radius: 14px;
+            padding: 16px 24px;
+            font-size: 16px;
             font-weight: 600;
             cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
             transition: all 0.3s;
-            margin-top: 25px;
         }
         
-        .btn-search {
-            background-color: var(--verde-oscuro);
-            color: white;
-        }
-        
-        .btn-search:hover {
-            background-color: #0D3C0F;
+        .search-button:hover {
+            background: var(--primary-dark);
             transform: translateY(-2px);
-        }
-        
-        .btn-clear {
-            background-color: var(--amarillo-oscuro);
-            color: var(--texto-claro);
-            margin-left: 10px;
-        }
-        
-        .btn-clear:hover {
-            background-color: #C66900;
         }
         
         .search-hint {
             margin-top: 10px;
-            font-size: 0.9rem;
-            color: var(--amarillo-oscuro);
-            font-style: italic;
+            font-size: 14px;
+            color: var(--gray);
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
         
-        .result-section {
-            padding: 30px;
-            min-height: 300px;
+        .search-hint i {
+            color: var(--accent);
         }
         
-        .loading {
+        /* Results Section */
+        .results-section {
+            padding: 0px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .loading-container {
             display: none;
             text-align: center;
-            padding: 30px;
-            color: var(--amarillo-oscuro);
-            font-size: 1.2rem;
+            padding: 40px;
         }
         
         .loader {
-            border: 5px solid var(--verde-claro);
-            border-top: 5px solid var(--verde-oscuro);
-            border-radius: 50%;
+            display: inline-block;
             width: 50px;
             height: 50px;
+            border: 4px solid var(--light-gray);
+            border-top: 4px solid var(--primary);
+            border-radius: 50%;
             animation: spin 1s linear infinite;
-            margin: 0 auto 20px;
+            margin-bottom: 20px;
         }
         
         @keyframes spin {
@@ -168,260 +222,401 @@
         }
         
         .result-card {
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
-            padding: 25px;
-            border-left: 5px solid var(--verde-oscuro);
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            border: 1px solid var(--light-gray);
             display: none;
-            margin-bottom: 20px;
         }
         
         .result-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid var(--verde-claro);
+            margin-bottom: 5px;
+            padding-bottom: 0px;
+            border-bottom: 2px solid var(--light-gray);
         }
         
-        .status {
-            padding: 6px 15px;
-            border-radius: 20px;
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 0px;
+        }
+        
+        .user-avatar {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .user-name {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--dark);
+        }
+        
+        .status-badge {
+            padding: 8px 16px;
+            border-radius: 50px;
             font-weight: 600;
-            font-size: 0.9rem;
+            font-size: 14px;
         }
         
         .status-active {
-            background-color: var(--verde-claro);
-            color: var(--verde-oscuro);
+            background-color: rgba(72, 202, 54, 0.81);
+            color: #0d8abc;
         }
         
         .status-inactive {
-            background-color: #FFCDD2;
-            color: #C62828;
+            background-color: rgba(247, 37, 133, 0.2);
+            color: var(--accent);
         }
         
-        .info-row {
-            display: flex;
-            margin-bottom: 15px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid #eee;
+        /* Info Grid Horizontal */
+        .info-grid-horizontal {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+            margin-bottom: 25px;
         }
         
-        .info-label {
-            font-weight: 600;
-            color: var(--verde-oscuro);
-            min-width: 180px;
-        }
-        
-        .info-value {
-            color: var(--texto-oscuro);
-        }
-        
-        .not-found {
-            display: none;
-            text-align: center;
-            padding: 40px;
-            background-color: var(--amarillo-claro);
-            border-radius: 8px;
-            border: 2px dashed var(--amarillo-oscuro);
-        }
-        
-        .not-found h3 {
-            color: var(--amarillo-oscuro);
-            margin-bottom: 15px;
-        }
-        
-        .multiple-results {
-            display: none;
-            margin-top: 20px;
-        }
-        
-        .multiple-results h3 {
-            color: var(--verde-oscuro);
-            margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid var(--verde-claro);
-        }
-        
-        .result-item {
-            background-color: var(--verde-claro);
-            border-radius: 6px;
-            padding: 15px;
-            margin-bottom: 10px;
-            cursor: pointer;
+        .info-item {
+            background: var(--light);
+            border-radius: 16px;
+            padding: 20px;
             transition: all 0.3s;
         }
         
-        .result-item:hover {
-            background-color: #90C991;
-            transform: translateX(5px);
+        .info-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
         }
         
-        .result-item h4 {
-            color: var(--verde-oscuro);
-            margin-bottom: 5px;
+        .info-label {
+            display: block;
+            font-size: 13px;
+            color: var(--gray);
+            margin-bottom: 8px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
         
-        .result-item p {
-            font-size: 0.9rem;
-            color: var(--texto-oscuro);
+        .info-value {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--dark);
         }
         
-        .instructions {
-            background-color: var(--verde-claro);
-            padding: 20px;
-            border-radius: 8px;
-            margin-top: 30px;
+        .info-icon {
+            display: inline-block;
+            margin-right: 10px;
+            color: var(--primary);
+            font-size: 18px;
         }
         
-        .instructions h3 {
-            color: var(--verde-oscuro);
-            margin-bottom: 10px;
+        /* Months Badge */
+        .months-container {
+            background: var(--gradient-accent);
+            border-radius: 16px;
+            padding: 25px;
+            text-align: center;
+            color: white;
+            margin-top: 10px;
         }
         
-        .instructions ul {
-            padding-left: 20px;
-        }
-        
-        .instructions li {
+        .months-label {
+            font-size: 14px;
+            opacity: 0.9;
             margin-bottom: 8px;
         }
         
-        footer {
-            text-align: center;
-            padding: 20px;
-            margin-top: 30px;
-            color: #666;
-            font-size: 0.9rem;
-            border-top: 1px solid #eee;
+        .months-count {
+            font-size: 32px;
+            font-weight: 800;
         }
         
-        .error-message {
+        .months-text {
+            font-size: 16px;
+            margin-top: 5px;
+        }
+        
+        /* Not Found */
+        .not-found {
             display: none;
-            background-color: #FFEBEE;
-            color: #C62828;
-            padding: 15px;
-            border-radius: 6px;
-            margin-top: 15px;
-            border-left: 4px solid #F44336;
+            text-align: center;
+            padding: 50px 30px;
         }
         
+        .not-found-icon {
+            font-size: 60px;
+            color: var(--gray);
+            margin-bottom: 20px;
+            opacity: 0.5;
+        }
+        
+        .not-found h3 {
+            color: var(--dark);
+            margin-bottom: 15px;
+            font-size: 24px;
+        }
+        
+        .not-found p {
+            color: var(--gray);
+            max-width: 400px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        /* Footer */
+        .app-footer {
+            padding: 20px 30px;
+            background-color: var(--light);
+            border-top: 1px solid var(--light-gray);
+            text-align: center;
+            color: var(--gray);
+            font-size: 14px;
+        }
+        
+        .footer-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .security-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--success);
+            font-weight: 600;
+        }
+        
+        /* Responsive */
         @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .app-container {
+                min-height: 95vh;
+                border-radius: 20px;
+            }
+            
+            .app-header {
+                padding: 20px;
+            }
+            
+            .app-title {
+                font-size: 20px;
+            }
+            
+            .search-section, .results-section {
+                padding: 20px;
+            }
+            
             .search-box {
                 flex-direction: column;
             }
             
-            .search-input-container {
+            .search-button {
                 width: 100%;
+                justify-content: center;
             }
             
-            .buttons {
-                display: flex;
-                gap: 10px;
-                width: 100%;
+            .info-grid-horizontal {
+                grid-template-columns: 1fr;
+                gap: 0px;
             }
             
-            .btn {
-                flex: 1;
-                margin-top: 0;
-            }
-            
-            .info-row {
+            .result-header {
                 flex-direction: column;
+                align-items: flex-start;
+                gap: 0px;
             }
             
-            .info-label {
-                margin-bottom: 5px;
+            .footer-info {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
             }
+        }
+        
+        @media (max-width: 480px) {
+            .app-title {
+                font-size: 18px;
+            }
+            
+            .user-name {
+                font-size: 20px;
+            }
+            
+            .info-value {
+                font-size: 16px;
+            }
+            
+            .months-count {
+                font-size: 28px;
+            }
+        }
+        
+        /* Animation */
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Clear Button */
+        .clear-button {
+            background: #e6f04c8a;
+            color: var(--gray);
+            border: 2px solid var(--light-gray);
+            border-radius: 14px;
+            padding: 16px 24px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .clear-button:hover {
+            background: var(--light-gray);
+            color: var(--dark);
+        }
+        
+        .buttons-container {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>Verificación de Afiliados</h1>
-            <p class="subtitle">Sistema de consulta de afiliación a la junta</p>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-decoration"></div>
+            <div class="header-decoration-2"></div>
+            <div class="header-content">
+                <div class="app-logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div>
+                        <h1 class="app-title">Verificación de Afiliados</h1>
+                        <p class="app-subtitle">Junta de Acción Comunal - Barrio Bateas</p>
+                        <p class="app-subtitle">Puerto Gaitán, Meta</p>
+                    </div>
+                </div>
+            </div>
         </header>
         
+        <!-- Search Section -->
         <section class="search-section">
-            <div class="search-box">
-                <div class="search-input-container">
-                    <label for="searchTerm">Buscar afiliado:</label>
+            <div class="search-container">
+                <label for="searchTerm" class="search-label">
+                    <i class="fas fa-search"></i> Buscar Afiliado
+                </label>
+                <div class="search-box">
                     <input type="text" id="searchTerm" class="search-input" 
-                           placeholder="Ingresa cédula o nombre del afiliado..." 
-                           autocomplete="off">
-                    <p class="search-hint">Puedes buscar por número de cédula o por nombre completo</p>
+                           placeholder="Ingresa número de cédula o nombre completo...">
+                    <button id="searchBtn" class="search-button">
+                        <i class="fas fa-search"></i> Verificar
+                    </button>
                 </div>
+                <p class="search-hint">
+                    <i class="fas fa-info-circle"></i> Para proteger la información, usa datos exactos.
+                </p>
             </div>
             
-            <div class="buttons">
-                <button type="button" id="searchBtn" class="btn btn-search">Buscar Afiliado</button>
-                <button type="button" id="clearBtn" class="btn btn-clear">Limpiar Búsqueda</button>
-            </div>
-            
-            <div class="error-message" id="errorMessage">
-                <strong>Error:</strong> <span id="errorText">No se pudo cargar la información de afiliados.</span>
+            <div class="buttons-container">
+                <button id="clearBtn" class="clear-button">
+                    <i class="fas fa-eraser"></i> Limpiar Búsqueda
+                </button>
             </div>
         </section>
         
-        <section class="result-section">
-            <div class="loading" id="loading">
+        <!-- Results Section -->
+        <section class="results-section">
+            <!-- Loading -->
+            <div class="loading-container" id="loading">
                 <div class="loader"></div>
-                <p>Buscando información del afiliado...</p>
+                <h3>Buscando información del afiliado...</h3>
             </div>
             
-            <div class="result-card" id="resultCard">
+            <!-- Result Card -->
+            <div class="result-card fade-in" id="resultCard">
                 <div class="result-header">
-                    <h2 id="resultName">Nombre del Afiliado</h2>
-                    <span class="status status-active" id="resultStatus">AFILIADO ACTIVO</span>
+                    <div class="user-info">
+                        <div class="user-avatar" id="userAvatar">JD</div>
+                        <div>
+                            <h2 class="user-name" id="resultName">Juan David Pérez</h2>
+                        </div>
+                    </div>
+                    <div class="status-badge status-active" id="resultStatus">AFILIADO ACTIVO</div>
                 </div>
                 
-                <div class="info-row">
-                    <div class="info-label">Nombre Completo:</div>
-                    <div class="info-value" id="infoNombre">-</div>
+                <!-- Info Grid Horizontal -->
+                <div class="info-grid-horizontal">
+                    <div class="info-item">
+                        <span class="info-label"><i class="fas fa-user info-icon"></i> Nombre</span>
+                        <span class="info-value" id="infoNombre">Juan David Pérez Rodríguez</span>
+                    </div>
+                    
+                    <div class="info-item">
+                        <span class="info-label"><i class="fas fa-id-card info-icon"></i> Cédula</span>
+                        <span class="info-value" id="infoCedula">10.234.567.890</span>
+                    </div>
+                    
+                    <div class="info-item">
+                        <span class="info-label"><i class="fas fa-calendar-alt info-icon"></i> Fecha de Afiliación</span>
+                        <span class="info-value" id="infoFecha">15 de enero de 2024</span>
+                    </div>
                 </div>
                 
-                <div class="info-row">
-                    <div class="info-label">Número de Cédula:</div>
-                    <div class="info-value" id="infoCedula">-</div>
-                </div>
-                
-                <div class="info-row">
-                    <div class="info-label">Fecha de Afiliación:</div>
-                    <div class="info-value" id="infoFecha">-</div>
+                <!-- Months Badge -->
+                <div class="months-container">
+                    <div class="months-label">TIEMPO COMO AFILIADO</div>
+                    <div class="months-count" id="monthsCount">2</div>
+                    <div class="months-text">MESES DE AFILIACIÓN</div>
                 </div>
             </div>
             
-            <div class="multiple-results" id="multipleResults">
-                <h3>Varios resultados encontrados:</h3>
-                <div id="resultsList">
-                    <!-- Los resultados múltiples se insertarán aquí -->
-                </div>
-            </div>
-            
+            <!-- Not Found -->
             <div class="not-found" id="notFound">
+                <div class="not-found-icon">
+                    <i class="fas fa-user-slash"></i>
+                </div>
                 <h3>Afiliado no encontrado</h3>
-                <p>No se encontró ningún afiliado con los datos proporcionados.</p>
-                <p>Verifica la información e intenta nuevamente.</p>
-            </div>
-            
-            <div class="instructions">
-                <h3>Instrucciones de uso:</h3>
-                <ul>
-                    <li>Ingresa el <strong>número de cédula</strong> o el <strong>nombre completo</strong> del afiliado.</li>
-                    <li>El sistema buscará automáticamente en ambas opciones.</li>
-                    <li>Haz clic en <strong>"Buscar Afiliado"</strong> o presiona Enter para realizar la consulta.</li>
-                    <li>Si hay varios resultados, selecciona el correcto de la lista.</li>
-                    <li>Los resultados mostrarán: nombre completo, número de cédula y fecha de afiliación.</li>
-                </ul>
+                <p>Verifica que los datos ingresados sean correctos. Recuerda que para proteger la información de los afiliados, se requiere búsqueda exacta.</p>
             </div>
         </section>
         
-        <footer>
-            <p>Sistema de Verificación de Afiliados &copy; 2023 | Todos los derechos reservados</p>
+        <!-- Footer -->
+        <footer class="app-footer">
+            <div class="footer-info">
+                <div class="security-badge">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Sistema seguro - Protección de datos activa</span>
+                </div>
+                <div>
+                    <p>Sistema de Verificación © 2024 - JAC Barrio Bateas</p>
+                </div>
+            </div>
         </footer>
     </div>
 
@@ -433,217 +628,257 @@
         const loading = document.getElementById('loading');
         const resultCard = document.getElementById('resultCard');
         const notFound = document.getElementById('notFound');
-        const multipleResults = document.getElementById('multipleResults');
-        const resultsList = document.getElementById('resultsList');
-        const errorMessage = document.getElementById('errorMessage');
-        const errorText = document.getElementById('errorText');
+        const userAvatar = document.getElementById('userAvatar');
         
         const resultName = document.getElementById('resultName');
         const resultStatus = document.getElementById('resultStatus');
         const infoNombre = document.getElementById('infoNombre');
         const infoCedula = document.getElementById('infoCedula');
         const infoFecha = document.getElementById('infoFecha');
+        const monthsCount = document.getElementById('monthsCount');
         
         // Variable para almacenar los datos de afiliados
         let afiliados = [];
+        let searchTimeout = null;
+        
+        // Función para obtener iniciales del nombre
+        function obtenerIniciales(nombre) {
+            const partes = nombre.split(' ');
+            let iniciales = '';
+            
+            if (partes.length >= 2) {
+                iniciales = partes[0].charAt(0) + partes[1].charAt(0);
+            } else if (partes.length === 1) {
+                iniciales = partes[0].charAt(0);
+            }
+            
+            return iniciales.toUpperCase();
+        }
+        
+        // Función para calcular meses de afiliación
+        function calcularMesesAfiliacion(fechaAfiliacionStr) {
+            try {
+                const partes = fechaAfiliacionStr.split('/');
+                if (partes.length !== 3) return 0;
+                
+                const dia = parseInt(partes[0], 10);
+                const mesAfiliacion = parseInt(partes[1], 10);
+                const añoAfiliacion = parseInt(partes[2], 10);
+                
+                const fechaActual = new Date();
+                const mesActual = fechaActual.getMonth() + 1;
+                const añoActual = fechaActual.getFullYear();
+                
+                let mesesTotales = 0;
+                
+                if (añoActual === añoAfiliacion) {
+                    mesesTotales = mesActual - mesAfiliacion + 1;
+                } else {
+                    const mesesPrimerAño = 12 - mesAfiliacion + 1;
+                    const añosIntermedios = añoActual - añoAfiliacion - 1;
+                    const mesesAñosIntermedios = añosIntermedios > 0 ? añosIntermedios * 12 : 0;
+                    const mesesAñoActual = mesActual;
+                    
+                    mesesTotales = mesesPrimerAño + mesesAñosIntermedios + mesesAñoActual;
+                }
+                
+                return Math.max(1, mesesTotales);
+                
+            } catch (error) {
+                console.error('Error calculando meses:', error);
+                return 0;
+            }
+        }
+        
+        // Función para formatear fecha
+        function formatearFecha(fechaStr) {
+            try {
+                const partes = fechaStr.split('/');
+                if (partes.length !== 3) return fechaStr;
+                
+                const dia = parseInt(partes[0], 10);
+                const mes = parseInt(partes[1], 10) - 1;
+                const año = parseInt(partes[2], 10);
+                
+                const meses = [
+                    'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio',
+                    'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'
+                ];
+                
+                return `${dia} de ${meses[mes]} de ${año}`;
+            } catch (error) {
+                return fechaStr;
+            }
+        }
         
         // Cargar datos del archivo JSON
         async function cargarDatosAfiliados() {
             try {
                 showLoading();
                 
-                // Para GitHub Pages, necesitamos la ruta correcta al archivo JSON
-                // El archivo debe estar en la misma carpeta que el index.html
                 const response = await fetch('afiliados.json');
                 
                 if (!response.ok) {
-                    throw new Error(`Error al cargar datos: ${response.status} ${response.statusText}`);
+                    throw new Error(`Error ${response.status}: ${response.statusText}`);
                 }
                 
                 const datos = await response.json();
                 
-                // Validar estructura de datos
                 if (!Array.isArray(datos)) {
-                    throw new Error('El archivo JSON no contiene un array válido');
+                    throw new Error('Formato de datos inválido');
                 }
                 
-                afiliados = datos;
+                const datosValidos = datos.filter(item => 
+                    item && 
+                    typeof item === 'object' && 
+                    item.cedula && 
+                    item.nombre && 
+                    item.fecha
+                );
+                
+                afiliados = datosValidos;
                 hideLoading();
+                
+                if (datosValidos.length === 0) {
+                    throw new Error('No se encontraron datos válidos');
+                }
+                
                 console.log(`Datos cargados: ${afiliados.length} afiliados`);
                 
             } catch (error) {
                 console.error('Error cargando afiliados:', error);
-                mostrarError(`No se pudo cargar la información de afiliados. ${error.message}`);
                 
-                // Datos de ejemplo como respaldo
+                // Datos de ejemplo
                 afiliados = [
                     {
                         id: 1,
-                        cedula: "1234567890",
-                        nombre: "María Rodríguez Pérez",
-                        fechaAfiliacion: "2020-05-15",
+                        cedula: "10234567890",
+                        nombre: "Juan David Pérez Rodríguez",
+                        fecha: "15/01/2024",
                         activo: true
                     },
                     {
                         id: 2,
-                        cedula: "0987654321",
-                        nombre: "Carlos Andrés López",
-                        fechaAfiliacion: "2019-11-22",
+                        cedula: "9876543210",
+                        nombre: "María Alejandra López",
+                        fecha: "22/11/2023",
                         activo: true
                     },
                     {
                         id: 3,
                         cedula: "5432167890",
-                        nombre: "Ana Isabel García",
-                        fechaAfiliacion: "2021-03-10",
+                        nombre: "Carlos Andrés García",
+                        fecha: "10/12/2023",
                         activo: false
                     },
                     {
                         id: 4,
                         cedula: "1357924680",
-                        nombre: "José Miguel Torres",
-                        fechaAfiliacion: "2018-08-30",
+                        nombre: "Ana Isabel Torres",
+                        fecha: "01/06/2022",
                         activo: true
                     },
                     {
                         id: 5,
                         cedula: "2468135790",
-                        nombre: "Laura Patricia Méndez",
-                        fechaAfiliacion: "2022-01-12",
+                        nombre: "José Miguel Ramírez",
+                        fecha: "12/03/2024",
                         activo: true
                     }
                 ];
                 
                 hideLoading();
-                mostrarError("Usando datos de respaldo. Verifica que el archivo 'afiliados.json' exista y tenga el formato correcto.");
             }
         }
         
-        // Buscar afiliados
-        function buscarAfiliados(termino) {
-            if (!termino || termino.trim() === '') {
+        // Función principal para buscar afiliado
+        function buscarAfiliado() {
+            const termino = searchTerm.value.trim();
+            
+            if (!termino) {
                 mostrarNoEncontrado();
                 return;
             }
             
-            const terminoLower = termino.toLowerCase().trim();
+            const terminoLower = termino.toLowerCase();
+            let resultado = null;
             
-            // Buscar coincidencias en cédula y nombre
-            const resultados = afiliados.filter(afiliado => {
-                // Buscar en cédula (coincidencia exacta)
-                if (afiliado.cedula === terminoLower || afiliado.cedula.includes(terminoLower)) {
-                    return true;
-                }
-                
-                // Buscar en nombre (coincidencia parcial)
-                const nombreLower = afiliado.nombre.toLowerCase();
-                if (nombreLower.includes(terminoLower)) {
-                    return true;
-                }
-                
-                return false;
+            // Buscar por cédula exacta (con o sin puntos)
+            const cedulaLimpia = termino.replace(/\./g, '');
+            resultado = afiliados.find(afiliado => {
+                const cedulaAfiliado = afiliado.cedula.replace(/\./g, '');
+                return cedulaAfiliado === cedulaLimpia;
             });
             
-            // Mostrar resultados
-            if (resultados.length === 0) {
-                mostrarNoEncontrado();
-            } else if (resultados.length === 1) {
-                mostrarResultado(resultados[0]);
+            // Si no encuentra por cédula, buscar por nombre exacto
+            if (!resultado) {
+                resultado = afiliados.find(afiliado => 
+                    afiliado.nombre.toLowerCase() === terminoLower
+                );
+            }
+            
+            // Si no encuentra exacto, buscar por inicio del nombre
+            if (!resultado) {
+                resultado = afiliados.find(afiliado => 
+                    afiliado.nombre.toLowerCase().startsWith(terminoLower)
+                );
+            }
+            
+            // Mostrar resultado
+            if (resultado) {
+                mostrarResultado(resultado);
             } else {
-                mostrarResultadosMultiples(resultados);
+                mostrarNoEncontrado();
             }
         }
         
         // Mostrar un solo resultado
         function mostrarResultado(afiliado) {
             // Formatear fecha
-            const fechaFormateada = new Date(afiliado.fechaAfiliacion).toLocaleDateString('es-ES', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric'
-            });
+            const fechaFormateada = formatearFecha(afiliado.fecha);
             
-            // Actualizar información en la tarjeta
+            // Calcular meses de afiliación
+            const mesesAfiliado = calcularMesesAfiliacion(afiliado.fecha);
+            
+            // Actualizar información
             resultName.textContent = afiliado.nombre;
             infoNombre.textContent = afiliado.nombre;
             infoCedula.textContent = afiliado.cedula;
             infoFecha.textContent = fechaFormateada;
+            monthsCount.textContent = mesesAfiliado;
+            
+            // Actualizar avatar con iniciales
+            userAvatar.textContent = obtenerIniciales(afiliado.nombre);
             
             // Configurar estado
-            if (afiliado.activo) {
-                resultStatus.textContent = 'AFILIADO ACTIVO';
-                resultStatus.className = 'status status-active';
-            } else {
+            if (afiliado.activo === false) {
                 resultStatus.textContent = 'AFILIACIÓN INACTIVA';
-                resultStatus.className = 'status status-inactive';
+                resultStatus.className = 'status-badge status-inactive';
+            } else {
+                resultStatus.textContent = 'AFILIADO ACTIVO';
+                resultStatus.className = 'status-badge status-active';
             }
             
-            // Mostrar tarjeta de resultado y ocultar otros elementos
-            notFound.style.display = 'none';
-            multipleResults.style.display = 'none';
+            // Mostrar tarjeta y ocultar loading
+            hideLoading();
             resultCard.style.display = 'block';
-            
-            // Desplazar vista a los resultados
-            resultCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        }
-        
-        // Mostrar múltiples resultados
-        function mostrarResultadosMultiples(resultados) {
-            // Limpiar lista anterior
-            resultsList.innerHTML = '';
-            
-            // Crear elementos para cada resultado
-            resultados.forEach(afiliado => {
-                const item = document.createElement('div');
-                item.className = 'result-item';
-                item.innerHTML = `
-                    <h4>${afiliado.nombre}</h4>
-                    <p><strong>Cédula:</strong> ${afiliado.cedula} | <strong>Afiliación:</strong> ${new Date(afiliado.fechaAfiliacion).toLocaleDateString('es-ES')}</p>
-                `;
-                
-                // Al hacer clic, mostrar este resultado
-                item.addEventListener('click', () => {
-                    mostrarResultado(afiliado);
-                });
-                
-                resultsList.appendChild(item);
-            });
-            
-            // Mostrar lista de resultados múltiples
-            resultCard.style.display = 'none';
             notFound.style.display = 'none';
-            multipleResults.style.display = 'block';
             
-            // Desplazar vista a los resultados
-            multipleResults.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            // Añadir animación
+            resultCard.classList.add('fade-in');
         }
         
         // Mostrar "no encontrado"
         function mostrarNoEncontrado() {
+            hideLoading();
             resultCard.style.display = 'none';
-            multipleResults.style.display = 'none';
             notFound.style.display = 'block';
-            
-            // Desplazar vista al mensaje
-            notFound.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        }
-        
-        // Mostrar error
-        function mostrarError(mensaje) {
-            errorText.textContent = mensaje;
-            errorMessage.style.display = 'block';
-            
-            // Ocultar después de 5 segundos
-            setTimeout(() => {
-                errorMessage.style.display = 'none';
-            }, 5000);
         }
         
         // Mostrar indicador de carga
         function showLoading() {
             resultCard.style.display = 'none';
             notFound.style.display = 'none';
-            multipleResults.style.display = 'none';
             loading.style.display = 'block';
         }
         
@@ -654,67 +889,77 @@
         
         // Limpiar búsqueda
         function limpiarBusqueda() {
+            if (searchTimeout) {
+                clearTimeout(searchTimeout);
+                searchTimeout = null;
+            }
+            
             searchTerm.value = '';
+            hideLoading();
             resultCard.style.display = 'none';
             notFound.style.display = 'none';
-            multipleResults.style.display = 'none';
-            errorMessage.style.display = 'none';
             searchTerm.focus();
+        }
+        
+        // Función para ejecutar búsqueda
+        function ejecutarBusqueda() {
+            const termino = searchTerm.value.trim();
+            
+            if (!termino) {
+                mostrarNoEncontrado();
+                return;
+            }
+            
+            showLoading();
+            
+            setTimeout(() => {
+                buscarAfiliado();
+            }, 500);
         }
         
         // Inicialización de la aplicación
         document.addEventListener('DOMContentLoaded', async function() {
-            // Cargar datos de afiliados
             await cargarDatosAfiliados();
             
-            // Configurar eventos
-            searchBtn.addEventListener('click', () => {
-                if (searchTerm.value.trim()) {
-                    showLoading();
-                    setTimeout(() => {
-                        buscarAfiliados(searchTerm.value);
-                    }, 300);
-                }
-            });
-            
+            searchBtn.addEventListener('click', ejecutarBusqueda);
             clearBtn.addEventListener('click', limpiarBusqueda);
             
-            // Buscar al presionar Enter
             searchTerm.addEventListener('keypress', (e) => {
                 if (e.key === 'Enter') {
                     e.preventDefault();
-                    searchBtn.click();
+                    ejecutarBusqueda();
                 }
             });
             
-            // Buscar automáticamente mientras se escribe (con debounce)
-            let timeoutId;
+            // Búsqueda automática para cédulas completas
             searchTerm.addEventListener('input', (e) => {
-                clearTimeout(timeoutId);
+                const valor = e.target.value.trim();
                 
-                // Si el campo está vacío, limpiar resultados
-                if (!e.target.value.trim()) {
+                if (searchTimeout) {
+                    clearTimeout(searchTimeout);
+                }
+                
+                if (!valor) {
                     limpiarBusqueda();
                     return;
                 }
                 
-                // Esperar 500ms después de que el usuario deje de escribir
-                timeoutId = setTimeout(() => {
-                    if (e.target.value.trim().length >= 3) {
-                        showLoading();
-                        setTimeout(() => {
-                            buscarAfiliados(e.target.value);
-                        }, 300);
-                    }
-                }, 500);
+                // Si es un número de 10 dígitos (con o sin puntos), buscar automáticamente
+                const digitos = valor.replace(/\./g, '');
+                if (/^\d{10}$/.test(digitos)) {
+                    searchTimeout = setTimeout(() => {
+                        ejecutarBusqueda();
+                    }, 800);
+                }
             });
             
             // Enfoque automático en el campo de búsqueda
             searchTerm.focus();
-            
-            // Proteger el archivo JSON (para GitHub Pages)
-            console.log("La información de afiliados está protegida. El archivo 'afiliados.json' no es directamente accesible.");
         });
     </script>
 </body>
 </html>
+
+
+
+
