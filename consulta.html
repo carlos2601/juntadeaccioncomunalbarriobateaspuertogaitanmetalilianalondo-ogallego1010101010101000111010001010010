@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verificación de Afiliados</title>
+    <style>
+        :root {
+            --verde-oscuro: #1B5E20;
+            --verde-claro: #A5D6A7;
+            --amarillo-oscuro: #F57F17;
+            --amarillo-claro: #FFF59D;
+            --gris-oscuro: #333;
+            --gris-claro: #f5f5f5;
+            --texto-oscuro: #212121;
+            --texto-claro: #FAFAFA;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--gris-claro);
+            color: var(--texto-oscuro);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--verde-oscuro) 0%, #2E7D32 100%);
+            color: var(--texto-claro);
+            padding: 25px;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .search-section {
+            background-color: var(--amarillo-claro);
+            padding: 25px;
+            border-bottom: 3px solid var(--amarillo-oscuro);
+        }
+        
+        .search-form {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            align-items: flex-end;
+        }
+        
+        .form-group {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--verde-oscuro);
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid var(--verde-claro);
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--verde-oscuro);
+        }
+        
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn-search {
+            background-color: var(--verde-oscuro);
+            color: white;
+        }
+        
+        .btn-search:hover {
+            background-color: #0D3C0F;
+            transform: translateY(-2px);
+        }
+        
+        .btn-clear {
+            background-color: var(--amarillo-oscuro);
+            color: var(--texto-claro);
+        }
+        
+        .btn-clear:hover {
+            background-color: #C66900;
+        }
+        
+        .result-section {
+            padding: 30px;
+            min-height: 300px;
+        }
+        
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 30px;
+            color: var(--amarillo-oscuro);
+            font-size: 1.2rem;
+        }
+        
+        .loader {
+            border: 5px solid var(--verde-claro);
+            border-top: 5px solid var(--verde-oscuro);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .result-card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+            padding: 25px;
+            border-left: 5px solid var(--verde-oscuro);
+            display: none;
+        }
+        
+        .result-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--verde-claro);
+        }
+        
+        .status {
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        .status-active {
+            background-color: var(--verde-claro);
+            color: var(--verde-oscuro);
+        }
+        
+        .status-inactive {
+            background-color: #FFCDD2;
+            color: #C62828;
+        }
+        
+        .info-row {
+            display: flex;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .info-label {
+            font-weight: 600;
+            color: var(--verde-oscuro);
+            min-width: 180px;
+        }
+        
+        .info-value {
+            color: var(--texto-oscuro);
+        }
+        
+        .not-found {
+            display: none;
+            text-align: center;
+            padding: 40px;
+            background-color: var(--amarillo-claro);
+            border-radius: 8px;
+            border: 2px dashed var(--amarillo-oscuro);
+        }
+        
+        .not-found h3 {
+            color: var(--amarillo-oscuro);
+            margin-bottom: 15px;
+        }
+        
+        .instructions {
+            background-color: var(--verde-claro);
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 30px;
+        }
+        
+        .instructions h3 {
+            color: var(--verde-oscuro);
+            margin-bottom: 10px;
+        }
+        
+        .instructions ul {
+            padding-left: 20px;
+        }
+        
+        .instructions li {
+            margin-bottom: 8px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 30px;
+            color: #666;
+            font-size: 0.9rem;
+            border-top: 1px solid #eee;
+        }
+        
+        @media (max-width: 768px) {
+            .search-form {
+                flex-direction: column;
+            }
+            
+            .form-group {
+                width: 100%;
+            }
+            
+            .buttons {
+                display: flex;
+                gap: 10px;
+                width: 100%;
+            }
+            
+            .btn {
+                flex: 1;
+            }
+            
+            .info-row {
+                flex-direction: column;
+            }
+            
+            .info-label {
+                margin-bottom: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Verificación de Afiliados</h1>
+            <p class="subtitle">Sistema de consulta de afiliación a la junta</p>
+        </header>
+        
+        <section class="search-section">
+            <form id="searchForm" class="search-form">
+                <div class="form-group">
+                    <label for="searchType">Buscar por:</label>
+                    <select id="searchType">
+                        <option value="cedula">Número de Cédula</option>
+                        <option value="nombre">Nombre Completo</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="searchTerm" id="searchTermLabel">Número de Cédula:</label>
+                    <input type="text" id="searchTerm" placeholder="Ej: 1234567890" required>
+                </div>
+                
+                <div class="buttons">
+                    <button type="submit" class="btn btn-search">Buscar Afiliado</button>
+                    <button type="button" id="clearBtn" class="btn btn-clear">Limpiar</button>
+                </div>
+            </form>
+        </section>
+        
+        <section class="result-section">
+            <div class="loading" id="loading">
+                <div class="loader"></div>
+                <p>Buscando información del afiliado...</p>
+            </div>
+            
+            <div class="result-card" id="resultCard">
+                <div class="result-header">
+                    <h2 id="resultName">Nombre del Afiliado</h2>
+                    <span class="status status-active" id="resultStatus">AFILIADO ACTIVO</span>
+                </div>
+                
+                <div class="info-row">
+                    <div class="info-label">Nombre Completo:</div>
+                    <div class="info-value" id="infoNombre">-</div>
+                </div>
+                
+                <div class="info-row">
+                    <div class="info-label">Número de Cédula:</div>
+                    <div class="info-value" id="infoCedula">-</div>
+                </div>
+                
+                <div class="info-row">
+                    <div class="info-label">Fecha de Afiliación:</div>
+                    <div class="info-value" id="infoFecha">-</div>
+                </div>
+            </div>
+            
+            <div class="not-found" id="notFound">
+                <h3>Afiliado no encontrado</h3>
+                <p>No se encontró ningún afiliado con los datos proporcionados.</p>
+                <p>Verifica la información e intenta nuevamente.</p>
+            </div>
+            
+            <div class="instructions">
+                <h3>Instrucciones de uso:</h3>
+                <ul>
+                    <li>Selecciona si deseas buscar por <strong>Número de Cédula</strong> o por <strong>Nombre Completo</strong>.</li>
+                    <li>Ingresa el dato correspondiente en el campo de búsqueda.</li>
+                    <li>Haz clic en <strong>"Buscar Afiliado"</strong> para realizar la consulta.</li>
+                    <li>Los resultados mostrarán: nombre completo, número de cédula y fecha de afiliación.</li>
+                </ul>
+            </div>
+        </section>
+        
+        <footer>
+            <p>Sistema de Verificación de Afiliados &copy; 2023 | Todos los derechos reservados</p>
+        </footer>
+    </div>
+
+    <script>
+        // Datos de ejemplo de afiliados (en un caso real, estos vendrían de un servidor)
+        // NOTA: En producción, estos datos estarían en un archivo protegido en el servidor
+        const afiliadosData = [
+            {
+                id: 1,
+                cedula: "1234567890",
+                nombre: "María Rodríguez Pérez",
+                fechaAfiliacion: "2020-05-15",
+                activo: true
+            },
+            {
+                id: 2,
+                cedula: "0987654321",
+                nombre: "Carlos Andrés López",
+                fechaAfiliacion: "2019-11-22",
+                activo: true
+            },
+            {
+                id: 3,
+                cedula: "5432167890",
+                nombre: "Ana Isabel García",
+                fechaAfiliacion: "2021-03-10",
+                activo: false
+            },
+            {
+                id: 4,
+                cedula: "1357924680",
+                nombre: "José Miguel Torres",
+                fechaAfiliacion: "2018-08-30",
+                activo: true
+            },
+            {
+                id: 5,
+                cedula: "2468135790",
+                nombre: "Laura Patricia Méndez",
+                fechaAfiliacion: "2022-01-12",
+                activo: true
+            }
+        ];
+
+        // Referencias a elementos del DOM
+        const searchForm = document.getElementById('searchForm');
+        const searchType = document.getElementById('searchType');
+        const searchTerm = document.getElementById('searchTerm');
+        const searchTermLabel = document.getElementById('searchTermLabel');
+        const clearBtn = document.getElementById('clearBtn');
+        const loading = document.getElementById('loading');
+        const resultCard = document.getElementById('resultCard');
+        const notFound = document.getElementById('notFound');
+        const resultName = document.getElementById('resultName');
+        const resultStatus = document.getElementById('resultStatus');
+        const infoNombre = document.getElementById('infoNombre');
+        const infoCedula = document.getElementById('infoCedula');
+        const infoFecha = document.getElementById('infoFecha');
+
+        // Cambiar etiqueta según el tipo de búsqueda
+        searchType.addEventListener('change', function() {
+            if (this.value === 'cedula') {
+                searchTermLabel.textContent = 'Número de Cédula:';
+                searchTerm.placeholder = 'Ej: 1234567890';
+            } else {
+                searchTermLabel.textContent = 'Nombre Completo:';
+                searchTerm.placeholder = 'Ej: María Rodríguez Pérez';
+            }
+        });
+
+        // Limpiar formulario
+        clearBtn.addEventListener('click', function() {
+            searchForm.reset();
+            searchTermLabel.textContent = 'Número de Cédula:';
+            searchTerm.placeholder = 'Ej: 1234567890';
+            hideAllResults();
+        });
+
+        // Enviar formulario de búsqueda
+        searchForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const type = searchType.value;
+            const term = searchTerm.value.trim();
+            
+            if (!term) {
+                alert('Por favor ingresa un término de búsqueda');
+                return;
+            }
+            
+            // Mostrar indicador de carga
+            showLoading();
+            
+            // Simular tiempo de búsqueda (en producción esto sería una petición al servidor)
+            setTimeout(() => {
+                buscarAfiliado(type, term);
+            }, 800);
+        });
+
+        // Función para buscar afiliado
+        function buscarAfiliado(type, term) {
+            hideLoading();
+            let resultado = null;
+            
+            if (type === 'cedula') {
+                // Buscar por cédula
+                resultado = afiliadosData.find(afiliado => 
+                    afiliado.cedula === term
+                );
+            } else {
+                // Buscar por nombre (búsqueda parcial sin importar mayúsculas)
+                resultado = afiliadosData.find(afiliado => 
+                    afiliado.nombre.toLowerCase().includes(term.toLowerCase())
+                );
+            }
+            
+            if (resultado) {
+                mostrarResultado(resultado);
+            } else {
+                mostrarNoEncontrado();
+            }
+        }
+
+        // Función para mostrar resultado
+        function mostrarResultado(afiliado) {
+            // Formatear fecha
+            const fechaFormateada = new Date(afiliado.fechaAfiliacion).toLocaleDateString('es-ES', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+            
+            // Actualizar información en la tarjeta
+            resultName.textContent = afiliado.nombre;
+            infoNombre.textContent = afiliado.nombre;
+            infoCedula.textContent = afiliado.cedula;
+            infoFecha.textContent = fechaFormateada;
+            
+            // Configurar estado
+            if (afiliado.activo) {
+                resultStatus.textContent = 'AFILIADO ACTIVO';
+                resultStatus.className = 'status status-active';
+            } else {
+                resultStatus.textContent = 'AFILIACIÓN INACTIVA';
+                resultStatus.className = 'status status-inactive';
+            }
+            
+            // Mostrar tarjeta de resultado y ocultar otros elementos
+            notFound.style.display = 'none';
+            resultCard.style.display = 'block';
+            
+            // Desplazar vista a los resultados
+            resultCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        // Función para mostrar "no encontrado"
+        function mostrarNoEncontrado() {
+            notFound.style.display = 'block';
+            resultCard.style.display = 'none';
+            
+            // Desplazar vista al mensaje
+            notFound.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        // Función para mostrar indicador de carga
+        function showLoading() {
+            resultCard.style.display = 'none';
+            notFound.style.display = 'none';
+            loading.style.display = 'block';
+        }
+
+        // Función para ocultar indicador de carga
+        function hideLoading() {
+            loading.style.display = 'none';
+        }
+
+        // Función para ocultar todos los resultados
+        function hideAllResults() {
+            resultCard.style.display = 'none';
+            notFound.style.display = 'none';
+        }
+
+        // Inicialización de la aplicación
+        document.addEventListener('DOMContentLoaded', function() {
+            hideAllResults();
+            
+            // Para GitHub Pages: Proteger la fuente de datos
+            // En una aplicación real, los datos estarían en el servidor y se accederían mediante API con autenticación
+            console.log("La información de afiliados está protegida y no es accesible públicamente.");
+        });
+    </script>
+</body>
+</html>
