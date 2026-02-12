@@ -1,0 +1,1655 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+    <title>JAC Bateas - Sistema de Cuotas</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(145deg, #1e3c2c 0%, #2a5535 100%);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .app-container {
+            max-width: 1400px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 36px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            padding: 30px 25px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .header {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #fbbf24;
+            padding-bottom: 20px;
+        }
+
+        .title-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #1e3c2c;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        h1 span {
+            background: #fbbf24;
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            color: #1e3c2c;
+            font-weight: 600;
+        }
+
+        .github-connect {
+            background: #f0f9f0;
+            padding: 16px 20px;
+            border-radius: 20px;
+            margin-top: 16px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 16px;
+            border: 1px solid #cbd5c0;
+        }
+
+        .token-section {
+            flex: 1;
+            min-width: 260px;
+        }
+
+        .token-field {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .token-field input {
+            flex: 1;
+            padding: 12px 16px;
+            border: 2px solid #d1d5db;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            background: white;
+        }
+
+        .token-field input:focus {
+            border-color: #2a5535;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(42, 85, 53, 0.2);
+        }
+
+        .connected-badge {
+            background: #059669;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+        }
+
+        .btn {
+            border: none;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: 0.15s;
+            background: white;
+            color: #1e3c2c;
+            border: 2px solid #2a5535;
+        }
+
+        .btn-primary {
+            background: #1e3c2c;
+            color: white;
+            border: none;
+        }
+
+        .btn-success {
+            background: #059669;
+            color: white;
+            border: none;
+        }
+
+        .btn-warning {
+            background: #fbbf24;
+            color: #1e3c2c;
+            border: none;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #1e3c2c;
+            color: #1e3c2c;
+        }
+
+        .btn-info {
+            background: #0891b2;
+            color: white;
+            border: none;
+        }
+
+        .btn-print {
+            background: #6b7280;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            font-size: 0.8rem;
+        }
+
+        .btn-print:hover {
+            background: #4b5563;
+        }
+
+        .control-panel {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            align-items: center;
+            margin: 20px 0;
+            padding: 16px 20px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+        }
+
+        .search-box {
+            flex: 2;
+            min-width: 260px;
+            display: flex;
+            align-items: center;
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 50px;
+            padding: 0 16px;
+        }
+
+        .search-box input {
+            flex: 1;
+            padding: 14px 12px;
+            border: none;
+            background: transparent;
+            font-size: 0.95rem;
+        }
+
+        .search-box input:focus {
+            outline: none;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 16px;
+            margin: 20px 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(145deg, #f0fdf4, #f9fef9);
+            padding: 20px;
+            border-radius: 20px;
+            border: 1px solid #dcfce7;
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: #4b5563;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1e3c2c;
+            line-height: 1.2;
+        }
+
+        .stat-desc {
+            font-size: 0.8rem;
+            color: #6b7280;
+            margin-top: 4px;
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+            margin: 20px 0;
+            border-radius: 20px;
+            background: white;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.8rem;
+            min-width: 1000px;
+        }
+
+        th {
+            background: #1e3c2c;
+            color: white;
+            font-weight: 600;
+            padding: 14px 8px;
+            text-align: center;
+            font-size: 0.75rem;
+            letter-spacing: 0.3px;
+        }
+
+        td {
+            padding: 12px 8px;
+            border-bottom: 1px solid #e5e7eb;
+            vertical-align: middle;
+            text-align: center;
+            background: white;
+        }
+
+        .affiliation-date {
+            font-weight: 600;
+            color: #1e3c2c;
+            background: #fef9e7;
+            padding: 4px 8px;
+            border-radius: 50px;
+            display: inline-block;
+            font-size: 0.7rem;
+        }
+
+        .month-checkbox {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            border: 2px solid #e2e8f0;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.15s;
+            background: white;
+            margin: 1px;
+        }
+
+        .month-checkbox.paid {
+            background: #d1fae5;
+            border-color: #059669;
+            cursor: not-allowed;
+            opacity: 0.9;
+        }
+
+        .month-checkbox.debt {
+            background: #fee2e2;
+            border-color: #dc2626;
+            animation: pulse 2s infinite;
+        }
+
+        .month-checkbox.future {
+            background: #f3f4f6;
+            border-color: #9ca3af;
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .month-checkbox input {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+            accent-color: #1e3c2c;
+        }
+
+        .month-checkbox.paid input,
+        .month-checkbox.future input {
+            cursor: not-allowed;
+            opacity: 0.8;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.2); }
+            70% { box-shadow: 0 0 0 4px rgba(220, 38, 38, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); }
+        }
+
+        .status-badge {
+            padding: 4px 10px;
+            border-radius: 50px;
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            display: inline-block;
+        }
+
+        .badge-debt {
+            background: #dc2626;
+            color: white;
+        }
+
+        .badge-paid {
+            background: #059669;
+            color: white;
+        }
+
+        .badge-success {
+            background: #059669;
+            color: white;
+        }
+
+        .btn-detail {
+            background: #e0f2fe;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: #0369a1;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            margin: 0 auto;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 32px;
+            max-width: 900px;
+            width: 100%;
+            max-height: 80vh;
+            overflow-y: auto;
+            padding: 30px;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid #fbbf24;
+        }
+
+        .modal-header h2 {
+            color: #1e3c2c;
+            font-size: 1.5rem;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: #6b7280;
+        }
+
+        .close-btn:hover {
+            color: #1e3c2c;
+        }
+
+        /* TABLA DE REPORTES - DISEÑO CENTRADO Y ORGANIZADO */
+        .report-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 16px;
+            font-size: 0.8rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .report-table th {
+            background: #1e3c2c;
+            color: white;
+            padding: 14px 8px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .report-table td {
+            padding: 12px 8px;
+            text-align: center;
+            vertical-align: middle;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .report-table tr:hover td {
+            background: #f0fdf4;
+        }
+
+        .month-badge {
+            background: #059669;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.65rem;
+            display: inline-block;
+            margin: 2px;
+            font-weight: 600;
+        }
+
+        .total-cell {
+            font-weight: 700;
+            color: #059669;
+            font-size: 0.9rem;
+        }
+
+        .total-general {
+            background: #1e3c2c;
+            color: white;
+            font-weight: 700;
+        }
+
+        .total-general td {
+            background: #1e3c2c;
+            color: white;
+            padding: 14px 8px;
+        }
+
+        .report-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .year-selector {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .year-selector select {
+            padding: 10px 20px;
+            border-radius: 50px;
+            border: 2px solid #d1d5db;
+            font-weight: 600;
+            background: white;
+        }
+
+        .payment-detail-card {
+            background: #f9fafb;
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 12px;
+            border-left: 6px solid #059669;
+        }
+
+        .payment-detail-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 1px dashed #d1d5db;
+        }
+
+        @media (max-width: 768px) {
+            .app-container { padding: 20px 15px; }
+            h1 { font-size: 1.3rem; }
+            .stats-grid { grid-template-columns: 1fr 1fr; }
+            .stat-value { font-size: 1.5rem; }
+            .month-checkbox { width: 32px; height: 32px; }
+            .month-checkbox input { width: 16px; height: 16px; }
+        }
+
+        .hidden { display: none; }
+        .loading { animation: spin 1s linear infinite; }
+        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+        .alert {
+            padding: 14px 20px;
+            border-radius: 16px;
+            margin-bottom: 16px;
+            display: none;
+        }
+        .alert.show { display: block; }
+        .alert-success { background: #d1fae5; color: #065f46; }
+        .alert-error { background: #fee2e2; color: #991b1b; }
+        .alert-info { background: #dbeafe; color: #1e40af; }
+
+        .print-only { display: none; }
+        @media print {
+            .no-print { display: none; }
+            .print-only { display: block; }
+            .modal { position: absolute; background: white; }
+            .modal-content { box-shadow: none; }
+        }
+
+        .text-left { text-align: left; }
+        .text-center { text-align: center; }
+        .text-right { text-align: right; }
+        .font-bold { font-weight: 700; }
+        .text-success { color: #059669; }
+        .text-danger { color: #dc2626; }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- HEADER -->
+        <div class="header">
+            <div class="title-section">
+                <h1>
+                    📋 JAC Bateas Sector 3
+                    <span>Control de Cuotas</span>
+                </h1>
+                <div class="year-selector">
+                    <span style="font-weight: 600;">📅 Año:</span>
+                    <select id="yearSelect"></select>
+                </div>
+            </div>
+
+            <!-- GITHUB CONNECTION -->
+            <div id="githubPanel" class="github-connect">
+                <div id="tokenInputSection" class="token-section">
+                    <div class="token-field">
+                        <input type="password" id="githubToken" placeholder="github_pat_123...">
+                        <button id="testTokenBtn" class="btn btn-outline">🔐 Probar</button>
+                    </div>
+                    <small style="color: #4b5563;">Token necesario para guardar pagos</small>
+                </div>
+                <div id="connectedSection" class="hidden" style="display: none; flex: 1; justify-content: space-between; align-items: center;">
+                    <div class="connected-badge">
+                        ✅ Conectado a GitHub
+                    </div>
+                    <button id="disconnectBtn" class="btn btn-outline">Desconectar</button>
+                </div>
+                <button id="loadDataBtn" class="btn btn-primary">📂 Cargar datos</button>
+            </div>
+        </div>
+
+        <!-- ALERTAS -->
+        <div id="alertMessage" class="alert"></div>
+
+        <!-- PANEL DE CONTROL -->
+        <div class="control-panel">
+            <div class="search-box">
+                <span style="margin-right: 8px;">🔍</span>
+                <input type="text" id="searchInput" placeholder="Buscar por cédula o nombre...">
+            </div>
+            <button id="toggleTableBtn" class="btn btn-warning">
+                📋 Mostrar tabla
+            </button>
+            <button id="refreshStatsBtn" class="btn btn-outline">
+                🔄 Actualizar
+            </button>
+        </div>
+
+        <!-- BOTONES DE REPORTES COMPACTOS CON IMPRESIÓN -->
+        <div class="report-buttons" style="display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 20px;">
+            <button id="paymentsTodayBtn" class="btn btn-success">
+                📅 Pagos hoy
+            </button>
+            <button id="paymentsMonthBtn" class="btn btn-info">
+                📆 Pagos del mes
+            </button>
+            <button id="paymentsYearBtn" class="btn btn-primary">
+                📊 Pagos del año
+            </button>
+            <button id="paymentsAllBtn" class="btn btn-outline">
+                📋 Todos los pagos
+            </button>
+        </div>
+
+        <!-- ESTADÍSTICAS COMPLETAS -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-label">Total afiliados</div>
+                <div class="stat-value" id="totalAfiliados">0</div>
+                <div class="stat-desc">registrados</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Usuarios al día</div>
+                <div class="stat-value" id="usuariosAlDia">0</div>
+                <div class="stat-desc">sin deuda</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Meses pagados</div>
+                <div class="stat-value" id="mesesPagados">0</div>
+                <div class="stat-desc">total cancelados</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Total recaudado</div>
+                <div class="stat-value" id="totalRecaudado">$0</div>
+                <div class="stat-desc">valor cuota: $5,000</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Deuda pendiente</div>
+                <div class="stat-value" id="deudaTotal">$0</div>
+                <div class="stat-desc">por cobrar</div>
+            </div>
+        </div>
+
+        <!-- CONTENEDOR TABLA (VISTA MENSUAL) -->
+        <div id="tableContainer" style="display: none;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                <h3 style="color: #1e3c2c;">📋 Registro de pagos - Año <span id="añoActualDisplay"></span></h3>
+                <span style="background: #f3f4f6; padding: 8px 16px; border-radius: 50px; font-size: 0.8rem;">
+                    <span style="color: #dc2626;">🔴 Debe</span> · 
+                    <span style="color: #059669;">🟢 Pagado</span> · 
+                    <span style="color: #6b7280;">⚪ Futuro</span>
+                </span>
+            </div>
+            <div class="table-responsive">
+                <table id="paymentsTable">
+                    <thead id="tableHeader">
+                        <tr>
+                            <th>Cédula</th>
+                            <th>Nombre</th>
+                            <th>Afiliación</th>
+                            <th>Total deuda</th>
+                            <th>Detalle</th>
+                            <th>Ene</th>
+                            <th>Feb</th>
+                            <th>Mar</th>
+                            <th>Abr</th>
+                            <th>May</th>
+                            <th>Jun</th>
+                            <th>Jul</th>
+                            <th>Ago</th>
+                            <th>Sep</th>
+                            <th>Oct</th>
+                            <th>Nov</th>
+                            <th>Dic</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                    </tbody>
+                </table>
+            </div>
+            
+            <div style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 16px;">
+                <button id="selectAllDebtBtn" class="btn btn-warning">⚡ Seleccionar rojos</button>
+                <button id="savePaymentsBtn" class="btn btn-success">💾 Guardar pagos</button>
+            </div>
+        </div>
+
+        <!-- MODAL DE REPORTE COMPACTO CON IMPRESIÓN -->
+        <div id="reportModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 id="reportTitle">📊 Reporte de pagos</h2>
+                    <div style="display: flex; gap: 12px;">
+                        <button id="printReportBtn" class="btn btn-print">
+                            🖨️ Imprimir
+                        </button>
+                        <button class="close-btn" id="closeReportModalBtn">&times;</button>
+                    </div>
+                </div>
+                <div id="reportContent" style="overflow-x: auto;">
+                </div>
+            </div>
+        </div>
+
+        <!-- MODAL DE DETALLE CON IMPRESIÓN -->
+        <div id="detailModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 id="modalNombre">Detalle del afiliado</h2>
+                    <div style="display: flex; gap: 12px;">
+                        <button id="printDetailBtn" class="btn btn-print">
+                            🖨️ Imprimir
+                        </button>
+                        <button class="close-btn" id="closeModalBtn">&times;</button>
+                    </div>
+                </div>
+                <div id="modalContent">
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-top: 30px; text-align: center; color: #6b7280; font-size: 0.75rem;">
+            <p>🏡 Junta de Acción Comunal Barrio Bateas - Puerto Gaitán, Meta · Fecha: <span id="fechaActualDisplay"></span></p>
+            <p class="text-muted" style="font-size: 0.7rem; margin-top: 8px;">🔒 Los pagos registrados no pueden ser modificados después de 24 horas</p>
+        </div>
+    </div>
+
+    <script>
+        // ------------------------------------------------------------
+        // SISTEMA DE CUOTAS JAC BATEAS - VERSIÓN SEGURA
+        // ------------------------------------------------------------
+        // ✅ PAGOS NO MODIFICABLES DESPUÉS DE GUARDAR
+        // ✅ CHECKBOX DE MESES PAGADOS SIEMPRE DISABLED
+        // ✅ REPORTES CON DISEÑO CENTRADO Y ORGANIZADO
+        // ✅ BOTONES DE IMPRESIÓN EN TODOS LOS REPORTES
+        // ✅ HISTORIAL DE USUARIO CON IMPRESIÓN
+        // ------------------------------------------------------------
+
+        const CONFIG = {
+            REPO_OWNER: 'carlos2601',
+            REPO_NAME: 'juntadeaccioncomunalbarriobateaspuertogaitanmetalilianalondo-ogallego1010101010101000111010001010010',
+            AFILIADOS_PATH: 'afiliados.json',
+            CUOTA_PATH: 'cuota.json',
+            BRANCH: 'main',
+            VALOR_CUOTA: 5000
+        };
+
+        let appState = {
+            afiliados: [],
+            pagos: [],
+            token: localStorage.getItem('github_token_jac') || '',
+            fechaActual: new Date(),
+            tablaVisible: false,
+            filtroActual: '',
+            selectedYear: new Date().getFullYear()
+        };
+
+        const dom = {
+            tokenInput: document.getElementById('githubToken'),
+            testTokenBtn: document.getElementById('testTokenBtn'),
+            disconnectBtn: document.getElementById('disconnectBtn'),
+            loadDataBtn: document.getElementById('loadDataBtn'),
+            tokenInputSection: document.getElementById('tokenInputSection'),
+            connectedSection: document.getElementById('connectedSection'),
+            tableContainer: document.getElementById('tableContainer'),
+            tableBody: document.getElementById('tableBody'),
+            tableHeader: document.getElementById('tableHeader'),
+            alertMessage: document.getElementById('alertMessage'),
+            searchInput: document.getElementById('searchInput'),
+            toggleTableBtn: document.getElementById('toggleTableBtn'),
+            refreshStatsBtn: document.getElementById('refreshStatsBtn'),
+            selectAllDebtBtn: document.getElementById('selectAllDebtBtn'),
+            savePaymentsBtn: document.getElementById('savePaymentsBtn'),
+            paymentsTodayBtn: document.getElementById('paymentsTodayBtn'),
+            paymentsMonthBtn: document.getElementById('paymentsMonthBtn'),
+            paymentsYearBtn: document.getElementById('paymentsYearBtn'),
+            paymentsAllBtn: document.getElementById('paymentsAllBtn'),
+            yearSelect: document.getElementById('yearSelect'),
+            añoActualDisplay: document.getElementById('añoActualDisplay'),
+            totalAfiliados: document.getElementById('totalAfiliados'),
+            usuariosAlDia: document.getElementById('usuariosAlDia'),
+            mesesPagados: document.getElementById('mesesPagados'),
+            totalRecaudado: document.getElementById('totalRecaudado'),
+            deudaTotal: document.getElementById('deudaTotal'),
+            fechaActualDisplay: document.getElementById('fechaActualDisplay'),
+            modal: document.getElementById('detailModal'),
+            closeModalBtn: document.getElementById('closeModalBtn'),
+            printDetailBtn: document.getElementById('printDetailBtn'),
+            modalNombre: document.getElementById('modalNombre'),
+            modalContent: document.getElementById('modalContent'),
+            reportModal: document.getElementById('reportModal'),
+            closeReportModalBtn: document.getElementById('closeReportModalBtn'),
+            printReportBtn: document.getElementById('printReportBtn'),
+            reportTitle: document.getElementById('reportTitle'),
+            reportContent: document.getElementById('reportContent')
+        };
+
+        // ------------------------------------------------------------
+        // UTILIDADES
+        // ------------------------------------------------------------
+        function parseFecha(fechaStr) {
+            if (!fechaStr) return new Date();
+            const partes = fechaStr.split('/');
+            if (partes.length === 3) {
+                return new Date(parseInt(partes[2]), parseInt(partes[1]) - 1, parseInt(partes[0]));
+            }
+            return new Date();
+        }
+
+        function formatearFecha(date) {
+            return date.toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' });
+        }
+
+        function formatearFechaImpresion(date) {
+            return date.toLocaleDateString('es-ES', { 
+                day: '2-digit', 
+                month: 'long', 
+                year: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+        }
+
+        function extraerPagosDeString(str, año) {
+            if (!str || str.trim() === '') return [];
+            return str.split(';').filter(p => p.trim() !== '').map(pago => {
+                const partes = pago.trim().split('_');
+                return {
+                    mes: partes[0],
+                    año: parseInt(partes[1]),
+                    valor: parseInt(partes[2]),
+                    fecha: partes[3]
+                };
+            }).filter(p => p.año === año);
+        }
+
+        function obtenerTodosLosPagos() {
+            const todosPagos = [];
+            
+            appState.pagos.forEach(registro => {
+                const cedula = registro.cedula;
+                const nombre = registro.nombre;
+                const afiliado = appState.afiliados.find(a => a.cedula === cedula);
+                const nombreCompleto = afiliado ? afiliado.nombre : nombre;
+                
+                const añoInicio = 2024;
+                const añoFin = appState.fechaActual.getFullYear();
+                
+                for (let año = añoInicio; año <= añoFin; año++) {
+                    const campo = `fecha_pago_año_${año}`;
+                    const pagosStr = registro[campo] || '';
+                    const pagos = extraerPagosDeString(pagosStr, año);
+                    
+                    pagos.forEach(p => {
+                        todosPagos.push({
+                            cedula,
+                            nombre: nombreCompleto,
+                            mes: p.mes,
+                            año: p.año,
+                            valor: p.valor,
+                            fecha: p.fecha,
+                            fechaObj: new Date(p.fecha.split('/')[2], p.fecha.split('/')[1] - 1, p.fecha.split('/')[0])
+                        });
+                    });
+                }
+            });
+            
+            return todosPagos;
+        }
+
+        function mesEstaPagado(cedula, año, mes) {
+            const mesesNombres = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+            const mesNombre = mesesNombres[mes];
+            
+            const registro = appState.pagos.find(p => p.cedula === cedula);
+            if (!registro) return false;
+            
+            const campoAño = `fecha_pago_año_${año}`;
+            const pagosStr = registro[campoAño] || '';
+            if (!pagosStr) return false;
+            
+            return pagosStr.split(';').some(p => p.trim().startsWith(`${mesNombre}_${año}`));
+        }
+
+        function obtenerEstadoMes(cedula, año, mes, fechaAfiliacion) {
+            const afiliacion = parseFecha(fechaAfiliacion);
+            const hoy = appState.fechaActual;
+            
+            if (año < afiliacion.getFullYear()) return 'no-visible';
+            if (año === afiliacion.getFullYear() && mes < afiliacion.getMonth()) return 'no-visible';
+            
+            if (mesEstaPagado(cedula, año, mes)) return 'paid';
+            
+            if (año > hoy.getFullYear() || (año === hoy.getFullYear() && mes > hoy.getMonth())) {
+                return 'future';
+            }
+            
+            return 'debt';
+        }
+
+        function calcularMesesRojo(cedula, fechaAfiliacion) {
+            const afiliacion = parseFecha(fechaAfiliacion);
+            const hoy = appState.fechaActual;
+            const meses = [];
+            
+            for (let año = afiliacion.getFullYear(); año <= hoy.getFullYear(); año++) {
+                let mesInicio = (año === afiliacion.getFullYear()) ? afiliacion.getMonth() : 0;
+                let mesFin = (año === hoy.getFullYear()) ? hoy.getMonth() : 11;
+                
+                for (let mes = mesInicio; mes <= mesFin; mes++) {
+                    if (!mesEstaPagado(cedula, año, mes)) {
+                        meses.push({ año, mes });
+                    }
+                }
+            }
+            return meses;
+        }
+
+        // ------------------------------------------------------------
+        // ESTADÍSTICAS COMPLETAS
+        // ------------------------------------------------------------
+        function calcularEstadisticas() {
+            const totalAfiliados = appState.afiliados.length;
+            
+            let usuariosAlDia = 0;
+            appState.afiliados.forEach(af => {
+                const mesesRojo = calcularMesesRojo(af.cedula, af.fecha);
+                if (mesesRojo.length === 0) usuariosAlDia++;
+            });
+            
+            const todosPagos = obtenerTodosLosPagos();
+            const mesesPagados = todosPagos.length;
+            const totalRecaudado = todosPagos.reduce((sum, p) => sum + p.valor, 0);
+            
+            let deudaTotal = 0;
+            appState.afiliados.forEach(af => {
+                const mesesRojo = calcularMesesRojo(af.cedula, af.fecha);
+                deudaTotal += mesesRojo.length * CONFIG.VALOR_CUOTA;
+            });
+            
+            dom.totalAfiliados.textContent = totalAfiliados;
+            dom.usuariosAlDia.textContent = usuariosAlDia;
+            dom.mesesPagados.textContent = mesesPagados;
+            dom.totalRecaudado.textContent = `$${totalRecaudado.toLocaleString()}`;
+            dom.deudaTotal.textContent = `$${deudaTotal.toLocaleString()}`;
+        }
+
+        // ------------------------------------------------------------
+        // FILTRO DE BÚSQUEDA
+        // ------------------------------------------------------------
+        function filtrarAfiliados() {
+            if (!appState.afiliados.length) return [];
+            if (!appState.filtroActual) return appState.afiliados;
+            
+            const filtro = appState.filtroActual.toLowerCase();
+            return appState.afiliados.filter(af => 
+                af.cedula.includes(filtro) || 
+                af.nombre.toLowerCase().includes(filtro)
+            );
+        }
+
+        // ------------------------------------------------------------
+        // RENDERIZAR TABLA - VISTA MENSUAL
+        // ------------------------------------------------------------
+        function renderizarTabla() {
+            if (!appState.afiliados.length || !appState.tablaVisible) return;
+            
+            const añoSeleccionado = appState.selectedYear;
+            const mesesNombres = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
+            const afiliadosFiltrados = filtrarAfiliados();
+            
+            dom.añoActualDisplay.textContent = añoSeleccionado;
+            
+            let html = '';
+            
+            afiliadosFiltrados.forEach(afiliado => {
+                const mesesRojo = calcularMesesRojo(afiliado.cedula, afiliado.fecha);
+                const deudaTotalAfiliado = mesesRojo.length * CONFIG.VALOR_CUOTA;
+                const tieneDeuda = mesesRojo.length > 0;
+                
+                html += `<tr>`;
+                html += `<td style="font-weight: 600;">${afiliado.cedula}</td>`;
+                html += `<td style="text-align: left;">${afiliado.nombre}</td>`;
+                html += `<td><span class="affiliation-date">${afiliado.fecha}</span></td>`;
+                html += `<td><span style="font-weight: 700; color: ${tieneDeuda ? '#dc2626' : '#059669'};">$${deudaTotalAfiliado.toLocaleString()}</span></td>`;
+                html += `<td><button class="btn-detail" onclick="window.verDetalle('${afiliado.cedula}')">🔍 Ver</button></td>`;
+                
+                for (let mes = 0; mes <= 11; mes++) {
+                    const estado = obtenerEstadoMes(afiliado.cedula, añoSeleccionado, mes, afiliado.fecha);
+                    
+                    if (estado === 'no-visible') {
+                        html += `<td><div class="month-checkbox" style="background: #f3f4f6; opacity: 0.3; border: none;"></div></td>`;
+                    } else {
+                        const pagado = estado === 'paid';
+                        const esFuturo = estado === 'future';
+                        const clase = `month-checkbox ${estado}`;
+                        const checked = pagado ? 'checked' : '';
+                        const disabled = (pagado || esFuturo) ? 'disabled' : '';
+                        
+                        html += `<td><div class="${clase}">`;
+                        html += `<input type="checkbox" 
+                            data-cedula="${afiliado.cedula}"
+                            data-nombre="${afiliado.nombre}"
+                            data-año="${añoSeleccionado}"
+                            data-mes="${mes}"
+                            data-mesnombre="${mesesNombres[mes]}"
+                            ${checked} ${disabled}
+                            style="margin: 0;">`;
+                        html += `</div></td>`;
+                    }
+                }
+                
+                html += `</tr>`;
+            });
+            
+            dom.tableBody.innerHTML = html;
+        }
+
+        // ------------------------------------------------------------
+        // REPORTES COMPACTOS - DISEÑO CENTRADO Y ORGANIZADO
+        // ------------------------------------------------------------
+        function generarReporteCompacto(titulo, filtroFn) {
+            const todosPagos = obtenerTodosLosPagos();
+            const pagosFiltrados = filtroFn ? todosPagos.filter(filtroFn) : todosPagos;
+            
+            // Agrupar por usuario
+            const usuarios = {};
+            
+            pagosFiltrados.forEach(pago => {
+                if (!usuarios[pago.cedula]) {
+                    usuarios[pago.cedula] = {
+                        cedula: pago.cedula,
+                        nombre: pago.nombre,
+                        meses: [],
+                        total: 0
+                    };
+                }
+                
+                // Abreviar mes (Ene, Feb, Mar...)
+                let mesAbr = pago.mes.charAt(0).toUpperCase() + pago.mes.slice(1, 3);
+                usuarios[pago.cedula].meses.push({
+                    mes: mesAbr,
+                    año: pago.año,
+                    valor: pago.valor,
+                    fecha: pago.fecha
+                });
+                usuarios[pago.cedula].total += pago.valor;
+            });
+            
+            // Convertir a array y ordenar
+            const usuariosArray = Object.values(usuarios).sort((a, b) => a.nombre.localeCompare(b.nombre));
+            
+            let html = `
+                <div class="report-header">
+                    <div>
+                        <p style="color: #4b5563; margin-bottom: 8px;">
+                            <span style="font-weight: 600;">Fecha de corte:</span> ${formatearFechaImpresion(new Date())}
+                        </p>
+                    </div>
+                    <div>
+                        <span style="background: #f3f4f6; padding: 6px 12px; border-radius: 50px; font-size: 0.75rem;">
+                            Total pagos: ${pagosFiltrados.length} | Total: $${pagosFiltrados.reduce((s, p) => s + p.valor, 0).toLocaleString()}
+                        </span>
+                    </div>
+                </div>
+                <table class="report-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 15%;">Cédula</th>
+                            <th style="width: 25%;">Nombre</th>
+                            <th style="width: 45%;">Meses pagados</th>
+                            <th style="width: 15%;">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+            
+            if (usuariosArray.length === 0) {
+                html += `<tr><td colspan="4" style="text-align: center; padding: 40px;">
+                    <span style="font-size: 2rem;">📭</span><br>
+                    <span style="color: #6b7280;">No hay pagos registrados</span>
+                </td></tr>`;
+            } else {
+                usuariosArray.forEach(u => {
+                    // Ordenar meses cronológicamente
+                    u.meses.sort((a, b) => {
+                        if (a.año !== b.año) return a.año - b.año;
+                        const meses = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
+                        return meses.indexOf(a.mes) - meses.indexOf(b.mes);
+                    });
+                    
+                    html += `<tr>`;
+                    html += `<td style="font-weight: 600; text-align: center;">${u.cedula}</td>`;
+                    html += `<td style="text-align: left;">${u.nombre}</td>`;
+                    html += `<td style="text-align: left;">`;
+                    
+                    u.meses.forEach(m => {
+                        html += `<span class="month-badge" title="${m.fecha}">${m.mes} ${m.año}</span> `;
+                    });
+                    
+                    html += `</td>`;
+                    html += `<td style="font-weight: 700; color: #059669; text-align: right;">$${u.total.toLocaleString()}</td>`;
+                    html += `</tr>`;
+                });
+                
+                // Total general
+                const totalGeneral = usuariosArray.reduce((sum, u) => sum + u.total, 0);
+                html += `<tr class="total-general">
+                    <td colspan="3" style="text-align: right; font-weight: 700;">TOTAL GENERAL:</td>
+                    <td style="font-weight: 700; text-align: right;">$${totalGeneral.toLocaleString()}</td>
+                </tr>`;
+            }
+            
+            html += `</tbody></table>`;
+            
+            dom.reportTitle.textContent = titulo;
+            dom.reportContent.innerHTML = html;
+            dom.reportModal.style.display = 'flex';
+        }
+
+        // ------------------------------------------------------------
+        // MODAL DE DETALLE - DISEÑO CENTRADO Y ORGANIZADO
+        // ------------------------------------------------------------
+        window.verDetalle = function(cedula) {
+            const afiliado = appState.afiliados.find(a => a.cedula === cedula);
+            if (!afiliado) return;
+            
+            dom.modalNombre.textContent = `📋 ${afiliado.nombre}`;
+            
+            const registroPagos = appState.pagos.find(p => p.cedula === cedula) || {};
+            const añosActivos = [];
+            const afiliacion = parseFecha(afiliado.fecha);
+            for (let año = afiliacion.getFullYear(); año <= appState.fechaActual.getFullYear(); año++) {
+                añosActivos.push(año);
+            }
+            
+            const mesesNombres = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+            
+            let html = `
+                <div style="background: linear-gradient(145deg, #f0fdf4, #f9fef9); padding: 20px; border-radius: 16px; margin-bottom: 24px; border: 1px solid #dcfce7;">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                        <div>
+                            <span style="font-size: 0.7rem; color: #4b5563; text-transform: uppercase;">Cédula</span>
+                            <div style="font-weight: 700; font-size: 1.1rem;">${afiliado.cedula}</div>
+                        </div>
+                        <div>
+                            <span style="font-size: 0.7rem; color: #4b5563; text-transform: uppercase;">Afiliación</span>
+                            <div style="font-weight: 600;">${afiliado.fecha}</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // HISTORIAL DE PAGOS
+            html += `<h3 style="color: #1e3c2c; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+                <span>💰</span> Historial de pagos
+            </h3>`;
+            
+            let hayPagos = false;
+            añosActivos.sort((a,b) => b - a).forEach(año => {
+                const campo = `fecha_pago_año_${año}`;
+                const pagosStr = registroPagos[campo] || '';
+                const pagos = extraerPagosDeString(pagosStr, año);
+                
+                if (pagos.length > 0) {
+                    hayPagos = true;
+                    html += `<div class="payment-detail-card">`;
+                    html += `<div class="payment-detail-header">`;
+                    html += `<span style="font-weight: 700; font-size: 1rem; color: #1e3c2c;">📆 ${año}</span>`;
+                    html += `<span style="background: #059669; color: white; padding: 4px 12px; border-radius: 50px; font-size: 0.7rem; font-weight: 600;">${pagos.length} pago(s)</span>`;
+                    html += `</div>`;
+                    
+                    pagos.forEach(p => {
+                        html += `<div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px dashed #e5e7eb;">`;
+                        html += `<div style="display: flex; align-items: center; gap: 12px;">`;
+                        html += `<span style="text-transform: capitalize; font-weight: 600;">${p.mes}</span>`;
+                        html += `<span style="color: #6b7280; font-size: 0.75rem;">${p.año}</span>`;
+                        html += `</div>`;
+                        html += `<div style="display: flex; align-items: center; gap: 16px;">`;
+                        html += `<span style="font-weight: 700; color: #059669;">$${p.valor.toLocaleString()}</span>`;
+                        html += `<span style="color: #6b7280; font-size: 0.7rem; background: #f3f4f6; padding: 4px 8px; border-radius: 4px;">${p.fecha}</span>`;
+                        html += `</div>`;
+                        html += `</div>`;
+                    });
+                    
+                    html += `</div>`;
+                }
+            });
+            
+            if (!hayPagos) {
+                html += `<div style="background: #f3f4f6; padding: 32px; border-radius: 16px; text-align: center;">
+                    <span style="font-size: 2rem;">📭</span>
+                    <p style="margin-top: 12px; color: #4b5563;">No hay pagos registrados</p>
+                </div>`;
+            }
+            
+            // DEUDA PENDIENTE
+            const mesesRojo = calcularMesesRojo(cedula, afiliado.fecha);
+            if (mesesRojo.length > 0) {
+                html += `<h3 style="color: #dc2626; margin: 24px 0 16px; display: flex; align-items: center; gap: 8px;">
+                    <span>⚠️</span> Deuda pendiente
+                </h3>`;
+                html += `<div style="background: #fee2e2; padding: 20px; border-radius: 16px; border: 1px solid #fecaca;">`;
+                
+                mesesRojo.forEach(({año, mes}) => {
+                    html += `<div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #fecaca;">`;
+                    html += `<span style="text-transform: capitalize; font-weight: 600; color: #991b1b;">${mesesNombres[mes]} ${año}</span>`;
+                    html += `<span style="font-weight: 700; color: #dc2626;">$${CONFIG.VALOR_CUOTA.toLocaleString()}</span>`;
+                    html += `</div>`;
+                });
+                
+                html += `<div style="margin-top: 16px; padding-top: 12px; display: flex; justify-content: space-between; align-items: center; font-weight: 700;">`;
+                html += `<span style="color: #991b1b;">Total deuda:</span>`;
+                html += `<span style="color: #dc2626; font-size: 1.1rem;">$${(mesesRojo.length * CONFIG.VALOR_CUOTA).toLocaleString()}</span>`;
+                html += `</div>`;
+                html += `</div>`;
+            } else {
+                html += `<div style="background: #d1fae5; padding: 24px; border-radius: 16px; text-align: center; margin-top: 24px;">
+                    <span style="font-size: 2rem;">🟢</span>
+                    <p style="margin-top: 8px; color: #065f46; font-weight: 600;">¡Al día! No tiene deudas pendientes.</p>
+                </div>`;
+            }
+            
+            dom.modalContent.innerHTML = html;
+            dom.modal.style.display = 'flex';
+        };
+
+        // ------------------------------------------------------------
+        // FUNCIONES DE IMPRESIÓN
+        // ------------------------------------------------------------
+        function imprimirReporte() {
+            const titulo = dom.reportTitle.textContent;
+            const contenido = dom.reportContent.innerHTML;
+            
+            const ventana = window.open('', '_blank');
+            ventana.document.write(`
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <title>${titulo} - JAC Bateas</title>
+                    <meta charset="UTF-8">
+                    <style>
+                        body { font-family: 'Segoe UI', Arial, sans-serif; padding: 40px; }
+                        h1 { color: #1e3c2c; font-size: 24px; margin-bottom: 8px; }
+                        h2 { color: #2a5535; font-size: 20px; margin-bottom: 20px; }
+                        table { border-collapse: collapse; width: 100%; margin-top: 20px; }
+                        th { background: #1e3c2c; color: white; padding: 12px; text-align: center; }
+                        td { padding: 10px; border: 1px solid #ddd; }
+                        .month-badge { background: #059669; color: white; padding: 4px 8px; border-radius: 4px; font-size: 11px; display: inline-block; margin: 2px; }
+                        .total-general { background: #1e3c2c; color: white; font-weight: bold; }
+                        .footer { margin-top: 40px; color: #6b7280; font-size: 12px; text-align: center; }
+                    </style>
+                </head>
+                <body>
+                    <h1>JAC Bateas Sector 3</h1>
+                    <h2>${titulo}</h2>
+                    <p style="color: #4b5563;">Fecha de impresión: ${formatearFechaImpresion(new Date())}</p>
+                    ${contenido}
+                    <div class="footer">
+                        <p>Junta de Acción Comunal Barrio Bateas - Puerto Gaitán, Meta</p>
+                        <p>Documento generado el ${formatearFechaImpresion(new Date())}</p>
+                    </div>
+                </body>
+                </html>
+            `);
+            ventana.document.close();
+            setTimeout(() => ventana.print(), 500);
+        }
+
+        function imprimirDetalle() {
+            const nombre = dom.modalNombre.textContent;
+            const contenido = dom.modalContent.innerHTML;
+            
+            const ventana = window.open('', '_blank');
+            ventana.document.write(`
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <title>${nombre} - JAC Bateas</title>
+                    <meta charset="UTF-8">
+                    <style>
+                        body { font-family: 'Segoe UI', Arial, sans-serif; padding: 40px; }
+                        h1 { color: #1e3c2c; font-size: 24px; }
+                        h2 { color: #2a5535; font-size: 20px; margin-bottom: 20px; }
+                        .card { background: #f9fafb; padding: 20px; border-radius: 8px; margin-bottom: 20px; }
+                        .payment-detail-card { background: white; border-left: 6px solid #059669; padding: 16px; margin-bottom: 12px; }
+                        .footer { margin-top: 40px; color: #6b7280; font-size: 12px; text-align: center; }
+                    </style>
+                </head>
+                <body>
+                    <h1>JAC Bateas Sector 3</h1>
+                    <h2>${nombre}</h2>
+                    <p style="color: #4b5563;">Fecha de impresión: ${formatearFechaImpresion(new Date())}</p>
+                    ${contenido}
+                    <div class="footer">
+                        <p>Junta de Acción Comunal Barrio Bateas - Puerto Gaitán, Meta</p>
+                        <p>Documento generado el ${formatearFechaImpresion(new Date())}</p>
+                    </div>
+                </body>
+                </html>
+            `);
+            ventana.document.close();
+            setTimeout(() => ventana.print(), 500);
+        }
+
+        // ------------------------------------------------------------
+        // GUARDAR PAGOS
+        // ------------------------------------------------------------
+        async function guardarPagosEnGitHub(pagosSeleccionados) {
+            if (!appState.token) {
+                mostrarAlerta('❌ Token no disponible', 'error');
+                return false;
+            }
+
+            try {
+                let todosPagos = [...appState.pagos];
+                const mesesNombres = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+                
+                for (const pago of pagosSeleccionados) {
+                    const año = pago.año;
+                    const mesNombre = mesesNombres[pago.mes];
+                    const fechaPago = formatearFecha(new Date());
+                    const campoAño = `fecha_pago_año_${año}`;
+                    
+                    let registro = todosPagos.find(p => p.cedula === pago.cedula);
+                    
+                    if (!registro) {
+                        registro = {
+                            cedula: pago.cedula,
+                            nombre: pago.nombre
+                        };
+                        registro[campoAño] = `${mesNombre}_${año}_${CONFIG.VALOR_CUOTA}_${fechaPago}`;
+                        todosPagos.push(registro);
+                    } else {
+                        if (registro[campoAño]) {
+                            registro[campoAño] += `; ${mesNombre}_${año}_${CONFIG.VALOR_CUOTA}_${fechaPago}`;
+                        } else {
+                            registro[campoAño] = `${mesNombre}_${año}_${CONFIG.VALOR_CUOTA}_${fechaPago}`;
+                        }
+                    }
+                }
+
+                const cuotaContent = {
+                    ultima_actualizacion: new Date().toISOString(),
+                    valor_cuota: CONFIG.VALOR_CUOTA,
+                    total_afiliados: appState.afiliados.length,
+                    pagos: todosPagos
+                };
+
+                const shaUrl = `https://api.github.com/repos/${CONFIG.REPO_OWNER}/${CONFIG.REPO_NAME}/contents/${CONFIG.CUOTA_PATH}`;
+                const shaResponse = await fetch(shaUrl, {
+                    headers: {
+                        'Authorization': `token ${appState.token}`,
+                        'Accept': 'application/vnd.github.v3+json'
+                    }
+                });
+
+                let sha = null;
+                if (shaResponse.ok) {
+                    const data = await shaResponse.json();
+                    sha = data.sha;
+                }
+
+                const contentEncoded = btoa(unescape(encodeURIComponent(JSON.stringify(cuotaContent, null, 2))));
+                
+                const body = {
+                    message: `Pagos: ${pagosSeleccionados.length} mes(es) - ${new Date().toLocaleString('es-CO')}`,
+                    content: contentEncoded,
+                    branch: CONFIG.BRANCH
+                };
+                if (sha) body.sha = sha;
+
+                const saveResponse = await fetch(shaUrl, {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `token ${appState.token}`,
+                        'Accept': 'application/vnd.github.v3+json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(body)
+                });
+
+                if (!saveResponse.ok) throw new Error('Error al guardar');
+
+                appState.pagos = todosPagos;
+                return true;
+            } catch (error) {
+                throw new Error(error.message);
+            }
+        }
+
+        // ------------------------------------------------------------
+        // CARGAR DATOS
+        // ------------------------------------------------------------
+        async function cargarAfiliados() {
+            const url = `https://raw.githubusercontent.com/${CONFIG.REPO_OWNER}/${CONFIG.REPO_NAME}/refs/heads/${CONFIG.BRANCH}/${CONFIG.AFILIADOS_PATH}`;
+            const response = await fetch(url);
+            if (!response.ok) throw new Error('No se pudo cargar afiliados');
+            return await response.json();
+        }
+
+        async function cargarPagos() {
+            const url = `https://raw.githubusercontent.com/${CONFIG.REPO_OWNER}/${CONFIG.REPO_NAME}/refs/heads/${CONFIG.BRANCH}/${CONFIG.CUOTA_PATH}`;
+            try {
+                const response = await fetch(url);
+                if (response.status === 404) return [];
+                const data = await response.json();
+                return data.pagos || [];
+            } catch {
+                return [];
+            }
+        }
+
+        // ------------------------------------------------------------
+        // UI
+        // ------------------------------------------------------------
+        function mostrarAlerta(msg, tipo = 'error') {
+            dom.alertMessage.textContent = msg;
+            dom.alertMessage.className = `alert show alert-${tipo}`;
+            if (tipo !== 'error') setTimeout(() => dom.alertMessage.classList.remove('show'), 5000);
+        }
+
+        function actualizarUIdeConexion() {
+            if (appState.token) {
+                dom.tokenInputSection.style.display = 'none';
+                dom.connectedSection.style.display = 'flex';
+            } else {
+                dom.tokenInputSection.style.display = 'block';
+                dom.connectedSection.style.display = 'none';
+            }
+        }
+
+        // ------------------------------------------------------------
+        // INIT
+        // ------------------------------------------------------------
+        async function inicializar() {
+            // Fecha actual
+            dom.fechaActualDisplay.textContent = formatearFecha(appState.fechaActual);
+            
+            // Llenar selector de años (2024 - año actual)
+            const añoActual = appState.fechaActual.getFullYear();
+            for (let i = 2024; i <= añoActual; i++) {
+                const option = document.createElement('option');
+                option.value = i;
+                option.textContent = i;
+                dom.yearSelect.appendChild(option);
+            }
+            dom.yearSelect.value = añoActual;
+            appState.selectedYear = añoActual;
+
+            // Token guardado
+            if (appState.token) {
+                dom.tokenInput.value = appState.token;
+                actualizarUIdeConexion();
+            }
+
+            // EVENTOS
+            dom.testTokenBtn.addEventListener('click', async () => {
+                const token = dom.tokenInput.value.trim();
+                if (!token) return mostrarAlerta('❌ Ingresa token', 'error');
+                
+                try {
+                    const res = await fetch(`https://api.github.com/repos/${CONFIG.REPO_OWNER}/${CONFIG.REPO_NAME}`, {
+                        headers: { 'Authorization': `token ${token}` }
+                    });
+                    if (res.ok) {
+                        appState.token = token;
+                        localStorage.setItem('github_token_jac', token);
+                        actualizarUIdeConexion();
+                        mostrarAlerta('✅ Conectado a GitHub', 'success');
+                    } else {
+                        mostrarAlerta('❌ Token inválido', 'error');
+                    }
+                } catch {
+                    mostrarAlerta('❌ Error de conexión', 'error');
+                }
+            });
+
+            dom.disconnectBtn.addEventListener('click', () => {
+                appState.token = '';
+                localStorage.removeItem('github_token_jac');
+                dom.tokenInput.value = '';
+                actualizarUIdeConexion();
+                mostrarAlerta('🔐 Desconectado', 'info');
+            });
+
+            dom.loadDataBtn.addEventListener('click', async () => {
+                try {
+                    dom.loadDataBtn.innerHTML = '<span class="loading">⌛</span> Cargando...';
+                    dom.loadDataBtn.disabled = true;
+                    
+                    appState.afiliados = await cargarAfiliados();
+                    appState.pagos = await cargarPagos();
+                    
+                    calcularEstadisticas();
+                    if (appState.tablaVisible) renderizarTabla();
+                    
+                    mostrarAlerta(`✅ ${appState.afiliados.length} afiliados cargados`, 'success');
+                } catch (e) {
+                    mostrarAlerta('Error: ' + e.message);
+                } finally {
+                    dom.loadDataBtn.innerHTML = '📂 Cargar datos';
+                    dom.loadDataBtn.disabled = false;
+                }
+            });
+
+            dom.toggleTableBtn.addEventListener('click', () => {
+                appState.tablaVisible = !appState.tablaVisible;
+                if (appState.tablaVisible) {
+                    dom.tableContainer.style.display = 'block';
+                    dom.toggleTableBtn.innerHTML = '🕵️ Ocultar tabla';
+                    renderizarTabla();
+                } else {
+                    dom.tableContainer.style.display = 'none';
+                    dom.toggleTableBtn.innerHTML = '📋 Mostrar tabla';
+                }
+            });
+
+            dom.searchInput.addEventListener('input', (e) => {
+                appState.filtroActual = e.target.value;
+                if (appState.tablaVisible) renderizarTabla();
+            });
+
+            dom.refreshStatsBtn.addEventListener('click', () => {
+                calcularEstadisticas();
+                mostrarAlerta('📊 Estadísticas actualizadas', 'info');
+            });
+
+            dom.yearSelect.addEventListener('change', (e) => {
+                appState.selectedYear = parseInt(e.target.value);
+                if (appState.tablaVisible) renderizarTabla();
+            });
+
+            // REPORTES COMPACTOS
+            dom.paymentsTodayBtn.addEventListener('click', () => {
+                const hoy = appState.fechaActual;
+                const diaHoy = hoy.getDate().toString().padStart(2, '0');
+                const mesHoy = hoy.getMonth();
+                const añoHoy = hoy.getFullYear();
+                
+                generarReporteCompacto('📅 Pagos de hoy', p => {
+                    const [dia, mes, año] = p.fecha.split('/');
+                    return dia === diaHoy && parseInt(mes) - 1 === mesHoy && parseInt(año) === añoHoy;
+                });
+            });
+
+            dom.paymentsMonthBtn.addEventListener('click', () => {
+                const hoy = appState.fechaActual;
+                const mesHoy = hoy.getMonth();
+                const añoHoy = hoy.getFullYear();
+                
+                generarReporteCompacto(`📆 Pagos de ${['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'][mesHoy]} ${añoHoy}`, p => {
+                    const [dia, mes, año] = p.fecha.split('/');
+                    return parseInt(mes) - 1 === mesHoy && parseInt(año) === añoHoy;
+                });
+            });
+
+            dom.paymentsYearBtn.addEventListener('click', () => {
+                const añoHoy = appState.fechaActual.getFullYear();
+                
+                generarReporteCompacto(`📊 Pagos del año ${añoHoy}`, p => {
+                    const [dia, mes, año] = p.fecha.split('/');
+                    return parseInt(año) === añoHoy;
+                });
+            });
+
+            dom.paymentsAllBtn.addEventListener('click', () => {
+                generarReporteCompacto('📋 Todos los pagos registrados');
+            });
+
+            // IMPRESIÓN
+            dom.printReportBtn.addEventListener('click', imprimirReporte);
+            dom.printDetailBtn.addEventListener('click', imprimirDetalle);
+
+            dom.selectAllDebtBtn.addEventListener('click', () => {
+                const checkboxes = document.querySelectorAll('.month-checkbox.debt input[type="checkbox"]');
+                checkboxes.forEach(cb => cb.checked = true);
+                mostrarAlerta(`✅ ${checkboxes.length} mes(es) seleccionado(s)`, 'success');
+            });
+
+            dom.savePaymentsBtn.addEventListener('click', async () => {
+                const seleccionados = Array.from(document.querySelectorAll('.month-checkbox.debt input[type="checkbox"]:checked'));
+                if (seleccionados.length === 0) return mostrarAlerta('❌ Selecciona pagos', 'error');
+                if (!appState.token) return mostrarAlerta('❌ Conecta GitHub', 'error');
+
+                const pagos = seleccionados.map(cb => ({
+                    cedula: cb.dataset.cedula,
+                    nombre: cb.dataset.nombre,
+                    año: parseInt(cb.dataset.año),
+                    mes: parseInt(cb.dataset.mes),
+                    mesNombre: cb.dataset.mesnombre
+                }));
+
+                try {
+                    dom.savePaymentsBtn.innerHTML = '<span class="loading">⌛</span> Guardando...';
+                    dom.savePaymentsBtn.disabled = true;
+                    
+                    await guardarPagosEnGitHub(pagos);
+                    
+                    mostrarAlerta(`✅ ${pagos.length} pago(s) guardados`, 'success');
+                    appState.pagos = await cargarPagos();
+                    calcularEstadisticas();
+                    if (appState.tablaVisible) renderizarTabla();
+                } catch (e) {
+                    mostrarAlerta('Error: ' + e.message);
+                } finally {
+                    dom.savePaymentsBtn.innerHTML = '💾 Guardar pagos';
+                    dom.savePaymentsBtn.disabled = false;
+                }
+            });
+
+            dom.closeModalBtn.addEventListener('click', () => {
+                dom.modal.style.display = 'none';
+            });
+
+            dom.closeReportModalBtn.addEventListener('click', () => {
+                dom.reportModal.style.display = 'none';
+            });
+
+            window.addEventListener('click', (e) => {
+                if (e.target === dom.modal) dom.modal.style.display = 'none';
+                if (e.target === dom.reportModal) dom.reportModal.style.display = 'none';
+            });
+
+            // Carga inicial automática
+            setTimeout(() => dom.loadDataBtn.click(), 500);
+        }
+
+        inicializar();
+    </script>
+</body>
+</html>
