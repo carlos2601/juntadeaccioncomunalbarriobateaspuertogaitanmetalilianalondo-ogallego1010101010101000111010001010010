@@ -1,13 +1,1 @@
-{
-  "ultima_actualizacion": "2026-02-12T02:20:40.273Z",
-  "valor_cuota": 5000,
-  "total_afiliados": 613,
-  "pagos": [
-    {
-      "cedula": "4438681",
-      "nombre": "CARLOS ALBERTO QUIÑONES MUÑOZ",
-      "fecha_pago_año_2024": "noviembre_2024_5000_11/02/2026; diciembre_2024_5000_11/02/2026",
-      "fecha_pago_año_2025": "enero_2025_5000_11/02/2026; febrero_2025_5000_11/02/2026; marzo_2025_5000_11/02/2026; abril_2025_5000_11/02/2026; mayo_2025_5000_11/02/2026; junio_2025_5000_11/02/2026; julio_2025_5000_11/02/2026; agosto_2025_5000_11/02/2026; septiembre_2025_5000_11/02/2026; octubre_2025_5000_11/02/2026; noviembre_2025_5000_11/02/2026; diciembre_2025_5000_11/02/2026"
-    }
-  ]
-}
+[]
