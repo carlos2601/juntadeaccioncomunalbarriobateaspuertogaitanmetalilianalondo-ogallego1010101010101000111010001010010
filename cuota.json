@@ -1,1 +1,54 @@
-[]
+{
+  "ultima_actualizacion": "2026-02-12T02:05:27.448Z",
+  "valor_cuota": 5000,
+  "total_afiliados": 613,
+  "pagos": [
+    {
+      "cedula": "1125550926",
+      "año": 2026,
+      "mes": 0,
+      "fecha_pago": "11/02/2026",
+      "cuota": 5000
+    },
+    {
+      "cedula": "1125550926",
+      "año": 2026,
+      "mes": 1,
+      "fecha_pago": "11/02/2026",
+      "cuota": 5000
+    },
+    {
+      "cedula": "1121937585",
+      "año": 2026,
+      "mes": 0,
+      "fecha_pago": "11/02/2026",
+      "cuota": 5000
+    },
+    {
+      "cedula": "1121937585",
+      "año": 2026,
+      "mes": 1,
+      "fecha_pago": "11/02/2026",
+      "cuota": 5000
+    },
+    {
+      "cedula": "24231387",
+      "año": 2026,
+      "mes": 0,
+      "fecha_pago": "11/02/2026",
+      "cuota": 5000
+    },
+    {
+      "cedula": "24231387",
+      "año": 2026,
+      "mes": 1,
+      "fecha_pago": "11/02/2026",
+      "cuota": 5000
+    },
+    {
+      "cedula": "4438681",
+      "nombre": "CARLOS ALBERTO QUIÑONES MUÑOZ",
+      "fecha_pago_año_2024": "noviembre_2024_5000_11/02/2026; diciembre_2024_5000_11/02/2026"
+    }
+  ]
+}
