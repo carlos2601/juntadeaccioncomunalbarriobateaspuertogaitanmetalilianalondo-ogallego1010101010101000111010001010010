@@ -1,5 +1,5 @@
 {
-  "ultima_actualizacion": "2026-02-13T02:12:42.553Z",
+  "ultima_actualizacion": "2026-02-13T02:28:22.355Z",
   "valor_cuota": 5000,
   "pagos": [
     {
@@ -11,6 +11,16 @@
       "cedula": "1124822444",
       "nombre": "OSCAR FERNANDO GONZALEZ",
       "fecha_pago_año_2026": "enero_2026_5000_12/02/2026_00002; febrero_2026_5000_12/02/2026_00003"
+    },
+    {
+      "cedula": "1121858694",
+      "nombre": "NELSON LEANDRO CARRILLO",
+      "fecha_pago_año_2026": "enero_2026_5000_12/02/2026_00004; febrero_2026_5000_12/02/2026_00005"
+    },
+    {
+      "cedula": "1124831884",
+      "nombre": "SEBASTIAN GONZALEZ",
+      "fecha_pago_año_2026": "enero_2026_5000_12/02/2026_00006"
     }
   ]
 }
