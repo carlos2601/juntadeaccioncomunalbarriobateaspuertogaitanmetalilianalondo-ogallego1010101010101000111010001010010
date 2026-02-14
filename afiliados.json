@@ -7038,7 +7038,9 @@
     "fecha": "29/01/2026",
     "direccion": "MANZANA 60 CASA 25",
     "celular": "3112281534",
-    "pagos": [],
+    "pagos": [
+      "14/2/2026, 20.000"
+    ],
     "firma": ""
   },
   {
