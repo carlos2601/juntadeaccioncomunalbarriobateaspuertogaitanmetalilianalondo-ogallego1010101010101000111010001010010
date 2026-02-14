@@ -1,9 +1,7 @@
 {
   "usuarios": [
     {
-      "cedula": "1234567890",
-      "nombre": "María López",
-      "email": "maria.lopez@gmail.com",
+      "usuario": "Tesorera",
       "password": "123456",
       "rol": "tesorera",
       "permisos": {
@@ -17,9 +15,7 @@
       "activo": true
     },
     {
-      "cedula": "9876543210",
-      "nombre": "Carlos Rodríguez",
-      "email": "carlos.rodriguez@hotmail.com",
+      "usuario": "Presidente",
       "password": "123456",
       "rol": "presidente",
       "permisos": {
