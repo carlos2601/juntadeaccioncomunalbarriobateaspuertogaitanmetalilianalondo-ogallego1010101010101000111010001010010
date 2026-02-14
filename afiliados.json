@@ -4202,7 +4202,9 @@
     "fecha": "27/12/2025",
     "direccion": "MANZANA 66 CASA 24",
     "celular": "3107572906",
-    "pagos": [],
+    "pagos": [
+      "14/2/2026, 20.000"
+    ],
     "firma": ""
   },
   {
