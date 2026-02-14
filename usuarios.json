@@ -31,33 +31,10 @@
         "guardar_pagos": false,
         "ver_reportes": true,
         "exportar": true,
-        "ver_panel": true,
         "auditar": true
       },
       "activo": true,
       "fecha_registro": "2024-02-20"
-    },
-    {
-      "cedula": "4567891230",
-      "nombre": "Ana Martínez",
-      "email": "ana.martinez@yahoo.com",
-      "celular": "3204567890",
-      "password": "123456",
-      "rol": "secretaria",
-      "permisos": {
-        "editar": false,
-        "buscar": true,
-        "guardar_pagos": false,
-        "ver_reportes": true,
-        "exportar": false
-      },
-      "activo": true,
-      "fecha_registro": "2024-03-10"
     }
-  ],
-  "configuracion": {
-    "intentos_maximos": 3,
-    "tiempo_bloqueo_minutos": 30,
-    "tiempo_pin_minutos": 10
-  }
+  ]
 }
