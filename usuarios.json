@@ -4,7 +4,6 @@
       "cedula": "1234567890",
       "nombre": "María López",
       "email": "maria.lopez@gmail.com",
-      "celular": "3001234567",
       "password": "123456",
       "rol": "tesorera",
       "permisos": {
@@ -15,14 +14,12 @@
         "exportar": true,
         "configurar": true
       },
-      "activo": true,
-      "fecha_registro": "2024-01-15"
+      "activo": true
     },
     {
       "cedula": "9876543210",
       "nombre": "Carlos Rodríguez",
       "email": "carlos.rodriguez@hotmail.com",
-      "celular": "3109876543",
       "password": "123456",
       "rol": "presidente",
       "permisos": {
@@ -33,8 +30,7 @@
         "exportar": true,
         "auditar": true
       },
-      "activo": true,
-      "fecha_registro": "2024-02-20"
+      "activo": true
     }
   ]
 }
