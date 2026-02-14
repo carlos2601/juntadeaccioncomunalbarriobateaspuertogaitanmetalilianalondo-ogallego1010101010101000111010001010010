@@ -8297,7 +8297,9 @@
     "fecha": "07/02/2026",
     "direccion": "MANZANA 58 CASA14",
     "celular": "3114559814",
-    "pagos": [],
+    "pagos": [
+      "14/2/2026, 20.000"
+    ],
     "firma": ""
   },
   {
