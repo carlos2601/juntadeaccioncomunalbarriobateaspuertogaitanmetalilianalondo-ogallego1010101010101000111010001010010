@@ -7379,7 +7379,9 @@
     "fecha": "30/01/2026",
     "direccion": "MANZANA 79 CASA 10",
     "celular": "3186503382",
-    "pagos": [],
+    "pagos": [
+      "14/2/2026, 20.000"
+    ],
     "firma": ""
   },
   {
