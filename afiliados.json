@@ -3641,7 +3641,9 @@
     "fecha": "20/12/2025",
     "direccion": "MANZANA 59 CASA 14",
     "celular": "3224596101",
-    "pagos": [],
+    "pagos": [
+      "14/2/2026, 20.000"
+    ],
     "firma": ""
   },
   {
