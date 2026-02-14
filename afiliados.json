@@ -6259,7 +6259,7 @@
     "registro": 476,
     "folio": 28,
     "renglon": 8,
-    "nombre": "JENNY PAOLA BELTRAN BERNAL",
+    "nombre": "YENNY PAOLA BELTRAN BERNAL",
     "cedula": "1119893169",
     "fecha": "24/01/2026",
     "direccion": "MANZANA 79 CASA 21",
@@ -7025,7 +7025,9 @@
     "fecha": "29/01/2026",
     "direccion": "MANZANA 81 CASA 05",
     "celular": "3206607586",
-    "pagos": [],
+    "pagos": [
+      "14/2/2026, 20.000"
+    ],
     "firma": ""
   },
   {
