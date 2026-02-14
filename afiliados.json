@@ -8200,7 +8200,9 @@
     "fecha": "07/02/2026",
     "direccion": "MANZANA 79 CASA 10",
     "celular": "3182298349",
-    "pagos": [],
+    "pagos": [
+      "14/2/2026, 20.000"
+    ],
     "firma": ""
   },
   {
