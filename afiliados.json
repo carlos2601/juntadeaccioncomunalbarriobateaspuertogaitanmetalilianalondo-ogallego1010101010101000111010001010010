@@ -8402,7 +8402,9 @@
     "fecha": "07/02/2026",
     "direccion": "MANZANA 74 CASA 18",
     "celular": "3506723538",
-    "pagos": [],
+    "pagos": [
+      "14/2/2026, 20.000"
+    ],
     "firma": ""
   },
   {
