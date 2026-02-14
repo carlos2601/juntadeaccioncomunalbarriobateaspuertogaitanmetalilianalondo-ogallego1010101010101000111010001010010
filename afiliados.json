@@ -8230,7 +8230,9 @@
     "fecha": "07/02/2026",
     "direccion": "MANZANA 63 CASA 21",
     "celular": "3017422090",
-    "pagos": [],
+    "pagos": [
+      "14/2/2026, 20.000"
+    ],
     "firma": ""
   },
   {
