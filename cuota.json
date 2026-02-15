@@ -1,26 +1,26 @@
 {
-  "ultima_actualizacion": "2026-02-15T23:55:40.569Z",
+  "ultima_actualizacion": "2026-02-15T23:56:45.194Z",
   "valor_cuota": 5000,
   "pagos": [
     {
       "cedula": "1124822444",
       "nombre": "OSCAR FERNANDO GONZALEZ",
-      "fecha_pago_aÃ±o_2026": "enero_2026_5000_12/02/2026_00002; febrero_2026_5000_12/02/2026_00003"
+      "fecha_pago_aÃÂ±o_2026": "enero_2026_5000_12/02/2026_00002"
     },
     {
       "cedula": "1121858694",
       "nombre": "NELSON LEANDRO CARRILLO",
-      "fecha_pago_aÃ±o_2026": "enero_2026_5000_12/02/2026_00004; febrero_2026_5000_12/02/2026_00005"
+      "fecha_pago_aÃÂ±o_2026": "enero_2026_5000_12/02/2026_00004; febrero_2026_5000_12/02/2026_00005"
     },
     {
       "cedula": "1124831884",
       "nombre": "SEBASTIAN GONZALEZ",
-      "fecha_pago_aÃ±o_2026": "enero_2026_5000_12/02/2026_00006"
+      "fecha_pago_aÃÂ±o_2026": "enero_2026_5000_12/02/2026_00006"
     },
     {
       "cedula": "91446132",
       "nombre": "JEAN MANUEL CANTERO POLO",
-      "fecha_pago_aÃ±o_2024": "noviembre_2024_5000_13/02/2026_00010; diciembre_2024_5000_13/02/2026_00011"
+      "fecha_pago_aÃÂ±o_2024": "noviembre_2024_5000_13/02/2026_00010; diciembre_2024_5000_13/02/2026_00011"
     }
   ]
 }
