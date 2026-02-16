@@ -1,1 +1,16 @@
-[]
+{
+  "ultima_actualizacion": "2026-02-16T02:06:06.264Z",
+  "valor_cuota": 5000,
+  "pagos": [
+    {
+      "cedula": "1125550926",
+      "nombre": "LEIDY DIANA PERALES CASTAÑEDA",
+      "fecha_pago_año_2026": "enero_2026_5000_15/02/2026_0001; febrero_2026_5000_15/02/2026_0002"
+    },
+    {
+      "cedula": "1124822444",
+      "nombre": "OSCAR FERNANDO GONZALEZ",
+      "fecha_pago_año_2026": "enero_2026_5000_15/02/2026_0003"
+    }
+  ]
+}
