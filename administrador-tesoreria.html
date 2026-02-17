@@ -1,0 +1,1234 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+    <title>JAC Bateas · Editor/Eliminador de Pagos</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(145deg, #4c724c 0%, #4c724c 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+        }
+
+        .app {
+            max-width: 1200px;
+            width: 100%;
+            background: white;
+            border-radius: 28px;
+            box-shadow: 0 15px 35px rgba(30, 74, 44, 0.08);
+            padding: 20px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid #d0e6d0;
+        }
+
+        .logo-area h1 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #1a4a2a;
+        }
+
+        .btn {
+            border: none;
+            padding: 10px 18px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .btn-primary {
+            background: #1a4a2a;
+            color: white;
+            border: none;
+        }
+        .btn-primary:hover {
+            background: #2a6a3a;
+        }
+
+        .btn-danger {
+            background: #c04040;
+            color: white;
+            border: none;
+        }
+        .btn-danger:hover {
+            background: #a03030;
+        }
+
+        .btn-success {
+            background: #1e7a4a;
+            color: white;
+            border: none;
+        }
+        .btn-success:hover {
+            background: #2a8e5a;
+        }
+
+        /* Modal de API */
+        .api-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(145deg, #f0f7f0, #e0ece0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+
+        .api-modal-content {
+            background: white;
+            border-radius: 32px;
+            max-width: 420px;
+            width: 90%;
+            padding: 36px;
+            box-shadow: 0 25px 50px -12px rgba(0, 40, 0, 0.15);
+            border: 1px solid #d0e4d0;
+            text-align: center;
+        }
+
+        .api-modal-content h2 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #1a4a2a;
+            margin-bottom: 12px;
+        }
+
+        .api-input-group {
+            margin-bottom: 24px;
+            text-align: left;
+        }
+
+        .api-input-group input {
+            width: 100%;
+            padding: 14px 18px;
+            border: 2px solid #020000;
+            border-radius: 16px;
+            font-size: 0.9rem;
+            background: #f8fff8;
+        }
+
+        .api-input-group input:focus {
+            border-color: #2a7a4a;
+            outline: none;
+        }
+
+        .api-btn {
+            background: #1a4a2a;
+            color: white;
+            border: none;
+            padding: 14px 24px;
+            border-radius: 16px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            width: 100%;
+            cursor: pointer;
+        }
+
+        /* Panel de búsqueda */
+        .search-section {
+            background: #1a4a2a;
+            padding: 20px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: white;
+            border-radius: 12px;
+            padding: 0 14px;
+        }
+
+        .search-box input {
+            flex: 1;
+            padding: 14px 8px;
+            border: none;
+            background: transparent;
+            font-size: 1rem;
+        }
+        .search-box input:focus { outline: none; }
+
+        /* Lista de pagos */
+        .payments-list {
+            background: white;
+            border-radius: 20px;
+            border: 2px solid #d0e4d0;
+            overflow: hidden;
+        }
+
+        .list-header {
+            display: grid;
+            grid-template-columns: 100px 1fr 80px 70px 100px 100px 120px;
+            background: #1a4a2a;
+            color: white;
+            padding: 15px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .payment-item {
+            display: grid;
+            grid-template-columns: 100px 1fr 80px 70px 100px 100px 120px;
+            padding: 12px 15px;
+            border-bottom: 1px solid #d0e4d0;
+            align-items: center;
+            background: #f8fff8;
+            font-size: 0.9rem;
+        }
+
+        .payment-item:hover {
+            background: #e8f4e8;
+        }
+
+        .payment-item .actions {
+            display: flex;
+            gap: 6px;
+        }
+
+        .action-btn {
+            padding: 5px 10px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .edit-btn {
+            background: #ffd700;
+            color: #1a4a2a;
+        }
+
+        .delete-btn {
+            background: #c04040;
+            color: white;
+        }
+
+        /* Modal de edición */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(26, 74, 42, 0.4);
+            backdrop-filter: blur(4px);
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 28px;
+            max-width: 500px;
+            width: 100%;
+            padding: 28px;
+            border: 1px solid #d0e4d0;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #c8e4c8;
+        }
+
+        .modal-header h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #1a4a2a;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #6a8b6a;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #1a4a2a;
+            margin-bottom: 6px;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #d0e4d0;
+            border-radius: 12px;
+            font-size: 0.95rem;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            border-color: #2a7a4a;
+            outline: none;
+        }
+
+        .form-group input[readonly] {
+            background: #f0f0f0;
+            color: #666;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+            margin-top: 24px;
+        }
+
+        /* Modal de confirmación */
+        .confirm-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(26, 74, 42, 0.4);
+            backdrop-filter: blur(4px);
+            align-items: center;
+            justify-content: center;
+            z-index: 10001;
+            padding: 20px;
+        }
+
+        .confirm-content {
+            background: white;
+            border-radius: 28px;
+            max-width: 400px;
+            width: 100%;
+            padding: 28px;
+            text-align: center;
+        }
+
+        .confirm-buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-top: 24px;
+        }
+
+        /* Alertas */
+        .alert {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 14px 20px;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: none;
+            z-index: 10002;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        }
+        .alert.show { display: block; }
+        .alert-success { background: #e4ffe4; color: #1a4a2a; border-left: 6px solid #2a8e5a; }
+        .alert-error { background: #ffe4e4; color: #8a2a2a; border-left: 6px solid #c04040; }
+        .alert-info { background: #e4f0ff; color: #2a4a6a; border-left: 6px solid #4a8ac0; }
+
+        .loading { animation: spin 0.8s linear infinite; }
+        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+        .badge {
+            background: #1a4a2a;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 100px;
+            font-size: 0.7rem;
+            display: inline-block;
+        }
+
+        .empty-state {
+            padding: 40px;
+            text-align: center;
+            color: #6a8b6a;
+            font-size: 1rem;
+        }
+
+        .stats-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            padding: 10px;
+            background: #e8f4e8;
+            border-radius: 10px;
+            font-size: 0.9rem;
+        }
+
+        .hidden { display: none !important; }
+    </style>
+</head>
+<body>
+    <!-- MODAL DE API -->
+    <div id="apiModal" class="api-modal">
+        <div class="api-modal-content">
+            <h2>🌿 JAC Bateas</h2>
+            <p>Editor y eliminador de pagos</p>
+            <div class="api-input-group">
+                <label style="font-size: 16px;">TOKEN DE GITHUB</label>
+                <input type="password" id="apiTokenInput" placeholder="github_pat_...">
+            </div>
+            <button id="apiConnectBtn" class="api-btn">Conectar</button>
+        </div>
+    </div>
+
+    <!-- APLICACIÓN PRINCIPAL -->
+    <div class="app" id="mainApp" style="display: none;">
+        <div class="header">
+            <div class="logo-area">
+                <h1>✏️ Editor/Eliminador de Pagos</h1>
+            </div>
+            <button id="logoutBtn" class="btn" style="background: #c04040; color: white;">
+                <span>🚪</span> Salir
+            </button>
+        </div>
+
+        <!-- ALERTAS -->
+        <div id="alertMessage" class="alert"></div>
+
+        <!-- ESTADÍSTICAS RÁPIDAS -->
+        <div id="statsBar" class="stats-bar">
+            <span id="totalPagosStats">Cargando...</span>
+            <span id="totalMontoStats"></span>
+        </div>
+
+        <!-- PANEL DE BÚSQUEDA -->
+        <div class="search-section">
+            <div class="search-box">
+                <span style="color: #6a8b6a; margin-right: 10px;">🔍</span>
+                <input type="text" id="searchInput" placeholder="Buscar por cédula, nombre o recibo...">
+                <span id="searchStats" style="color: #6a8b6a; font-size: 0.9rem; min-width: 100px; text-align: right;"></span>
+            </div>
+        </div>
+
+        <!-- LISTA DE PAGOS -->
+        <div class="payments-list">
+            <div class="list-header">
+                <div>Cédula</div>
+                <div>Nombre</div>
+                <div>Mes</div>
+                <div>Año</div>
+                <div>Fecha</div>
+                <div>Recibo</div>
+                <div>Acciones</div>
+            </div>
+            <div id="paymentsContainer">
+                <!-- Los pagos se cargarán aquí -->
+                <div class="empty-state" id="emptyState">
+                    <span class="loading">⌛</span> Cargando pagos...
+                </div>
+            </div>
+        </div>
+
+        <!-- BOTONES DE ACCIÓN -->
+        <div style="display: flex; gap: 12px; justify-content: center; margin-top: 20px;">
+            <button id="refreshBtn" class="btn btn-primary">🔄 Actualizar lista</button>
+        </div>
+    </div>
+
+    <!-- MODAL DE EDICIÓN -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>✏️ Editar Pago</h3>
+                <button class="close-btn" id="closeEditModalBtn">&times;</button>
+            </div>
+            
+            <div class="form-group">
+                <label>CÉDULA</label>
+                <input type="text" id="editCedula" readonly>
+            </div>
+            
+            <div class="form-group">
+                <label>NOMBRE</label>
+                <input type="text" id="editNombre" readonly>
+            </div>
+            
+            <div class="form-group">
+                <label>MES</label>
+                <select id="editMes">
+                    <option value="enero">Enero</option>
+                    <option value="febrero">Febrero</option>
+                    <option value="marzo">Marzo</option>
+                    <option value="abril">Abril</option>
+                    <option value="mayo">Mayo</option>
+                    <option value="junio">Junio</option>
+                    <option value="julio">Julio</option>
+                    <option value="agosto">Agosto</option>
+                    <option value="septiembre">Septiembre</option>
+                    <option value="octubre">Octubre</option>
+                    <option value="noviembre">Noviembre</option>
+                    <option value="diciembre">Diciembre</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label>AÑO</label>
+                <input type="number" id="editAño" min="2020" max="2030" value="2026">
+            </div>
+            
+            <div class="form-group">
+                <label>VALOR</label>
+                <input type="number" id="editValor" value="5000" step="1000">
+            </div>
+            
+            <div class="form-group">
+                <label>FECHA DE PAGO (DD/MM/AAAA)</label>
+                <input type="text" id="editFecha" placeholder="15/02/2026">
+            </div>
+            
+            <div class="form-group">
+                <label>NÚMERO DE RECIBO</label>
+                <input type="text" id="editRecibo" placeholder="0001">
+            </div>
+            
+            <div class="button-group">
+                <button id="deleteFromEditBtn" class="btn btn-danger">🗑️ Eliminar</button>
+                <button id="cancelEditBtn" class="btn">Cancelar</button>
+                <button id="saveEditBtn" class="btn btn-success">💾 Guardar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL DE CONFIRMACIÓN PARA ELIMINAR -->
+    <div id="confirmModal" class="confirm-modal">
+        <div class="confirm-content">
+            <h3 style="color: #c04040; margin-bottom: 16px;">⚠️ Confirmar eliminación</h3>
+            <p id="confirmMessage" style="margin-bottom: 24px;">¿Estás seguro de eliminar este pago?</p>
+            <div class="confirm-buttons">
+                <button id="confirmDeleteBtn" class="btn btn-danger">Sí, eliminar</button>
+                <button id="cancelConfirmBtn" class="btn">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // CONFIGURACIÓN
+        const CONFIG = {
+            REPO_OWNER: 'carlos2601',
+            REPO_NAME: 'juntadeaccioncomunalbarriobateaspuertogaitanmetalilianalondo-ogallego1010101010101000111010001010010',
+            CUOTA_PATH: 'cuota.json',
+            BRANCH: 'main'
+        };
+
+        // ESTADO DE LA APLICACIÓN
+        let appState = {
+            token: localStorage.getItem('github_token_jac') || '',
+            datosCompletos: null, // Aquí guardamos todo el JSON
+            pagos: [], // Lista plana de todos los pagos
+            filtroActual: '',
+            pagoEnEdicion: null,
+            pagoAEliminar: null
+        };
+
+        // DOM ELEMENTS
+        const dom = {
+            apiModal: document.getElementById('apiModal'),
+            mainApp: document.getElementById('mainApp'),
+            apiTokenInput: document.getElementById('apiTokenInput'),
+            apiConnectBtn: document.getElementById('apiConnectBtn'),
+            logoutBtn: document.getElementById('logoutBtn'),
+            searchInput: document.getElementById('searchInput'),
+            searchStats: document.getElementById('searchStats'),
+            paymentsContainer: document.getElementById('paymentsContainer'),
+            emptyState: document.getElementById('emptyState'),
+            refreshBtn: document.getElementById('refreshBtn'),
+            alertMessage: document.getElementById('alertMessage'),
+            totalPagosStats: document.getElementById('totalPagosStats'),
+            totalMontoStats: document.getElementById('totalMontoStats'),
+            
+            // Modal de edición
+            editModal: document.getElementById('editModal'),
+            closeEditModalBtn: document.getElementById('closeEditModalBtn'),
+            editCedula: document.getElementById('editCedula'),
+            editNombre: document.getElementById('editNombre'),
+            editMes: document.getElementById('editMes'),
+            editAño: document.getElementById('editAño'),
+            editValor: document.getElementById('editValor'),
+            editFecha: document.getElementById('editFecha'),
+            editRecibo: document.getElementById('editRecibo'),
+            deleteFromEditBtn: document.getElementById('deleteFromEditBtn'),
+            cancelEditBtn: document.getElementById('cancelEditBtn'),
+            saveEditBtn: document.getElementById('saveEditBtn'),
+            
+            // Modal de confirmación
+            confirmModal: document.getElementById('confirmModal'),
+            confirmMessage: document.getElementById('confirmMessage'),
+            confirmDeleteBtn: document.getElementById('confirmDeleteBtn'),
+            cancelConfirmBtn: document.getElementById('cancelConfirmBtn')
+        };
+
+        // ============================================================
+        // FUNCIONES DE UTILIDAD
+        // ============================================================
+        function mostrarAlerta(msg, tipo = 'info') {
+            dom.alertMessage.textContent = msg;
+            dom.alertMessage.className = `alert show alert-${tipo}`;
+            setTimeout(() => dom.alertMessage.classList.remove('show'), 4000);
+        }
+
+        // Parsear el string de pago: "enero_2026_5000_15/02/2026_0001"
+        function parsearPagoString(pagoStr) {
+            try {
+                const partes = pagoStr.split('_');
+                if (partes.length !== 5) return null;
+                
+                return {
+                    mes: partes[0],
+                    año: parseInt(partes[1]),
+                    valor: parseInt(partes[2]),
+                    fecha: partes[3],
+                    recibo: partes[4],
+                    pagoCompleto: pagoStr
+                };
+            } catch (e) {
+                return null;
+            }
+        }
+
+        // Crear string de pago
+        function crearPagoString(mes, año, valor, fecha, recibo) {
+            return `${mes}_${año}_${valor}_${fecha}_${recibo}`;
+        }
+
+        // Validar formato de fecha
+        function validarFecha(fecha) {
+            const regex = /^\d{2}\/\d{2}\/\d{4}$/;
+            if (!regex.test(fecha)) return false;
+            
+            const [dia, mes, año] = fecha.split('/').map(Number);
+            if (mes < 1 || mes > 12) return false;
+            if (dia < 1 || dia > 31) return false;
+            if (año < 2000 || año > 2030) return false;
+            
+            return true;
+        }
+
+        // ============================================================
+        // CARGAR DATOS DESDE GITHUB
+        // ============================================================
+        async function cargarPagos() {
+            try {
+                const url = `https://raw.githubusercontent.com/${CONFIG.REPO_OWNER}/${CONFIG.REPO_NAME}/refs/heads/${CONFIG.BRANCH}/${CONFIG.CUOTA_PATH}`;
+                console.log('Cargando desde:', url);
+                
+                const res = await fetch(url);
+                
+                if (res.status === 404) {
+                    console.log('Archivo no encontrado, creando estructura vacía');
+                    return { 
+                        ultima_actualizacion: new Date().toISOString(), 
+                        valor_cuota: 5000, 
+                        pagos: [] 
+                    };
+                }
+                
+                if (!res.ok) {
+                    throw new Error(`Error HTTP: ${res.status}`);
+                }
+                
+                const data = await res.json();
+                console.log('Datos cargados:', data);
+                return data;
+            } catch (e) {
+                console.error('Error cargando pagos:', e);
+                mostrarAlerta('Error al cargar datos: ' + e.message, 'error');
+                return null;
+            }
+        }
+
+        // Obtener todos los pagos individuales (versión corregida)
+        function obtenerTodosLosPagos(data) {
+            const todosPagos = [];
+            
+            if (!data || !data.pagos || !Array.isArray(data.pagos)) {
+                console.log('No hay datos de pagos válidos');
+                return todosPagos;
+            }
+            
+            console.log('Procesando', data.pagos.length, 'registros');
+            
+            data.pagos.forEach(registro => {
+                if (!registro.cedula || !registro.nombre) {
+                    console.log('Registro inválido:', registro);
+                    return;
+                }
+                
+                // Buscar todas las propiedades que empiecen con fecha_pago_año_
+                Object.keys(registro).forEach(key => {
+                    if (key.startsWith('fecha_pago_año_')) {
+                        const añoDelCampo = parseInt(key.replace('fecha_pago_año_', ''));
+                        const pagosStr = registro[key];
+                        
+                        if (pagosStr && typeof pagosStr === 'string') {
+                            // Separar por ; si hay múltiples pagos
+                            const pagosArray = pagosStr.split(';').map(s => s.trim()).filter(s => s.length > 0);
+                            
+                            console.log(`Registro ${registro.cedula} - ${key}: ${pagosArray.length} pagos`);
+                            
+                            pagosArray.forEach((pagoStr, index) => {
+                                const pago = parsearPagoString(pagoStr);
+                                if (pago) {
+                                    todosPagos.push({
+                                        cedula: registro.cedula,
+                                        nombre: registro.nombre,
+                                        key: key,
+                                        año: añoDelCampo,
+                                        ...pago,
+                                        registroOriginal: registro,
+                                        indiceEnRegistro: index
+                                    });
+                                } else {
+                                    console.log('Error parseando:', pagoStr);
+                                }
+                            });
+                        }
+                    }
+                });
+            });
+            
+            console.log('Total pagos procesados:', todosPagos.length);
+            return todosPagos;
+        }
+
+        // ============================================================
+        // RENDERIZAR LISTA DE PAGOS
+        // ============================================================
+        function renderizarPagos() {
+            if (!appState.pagos || appState.pagos.length === 0) {
+                dom.paymentsContainer.innerHTML = '<div class="empty-state">No hay pagos registrados</div>';
+                dom.searchStats.textContent = '0 pagos';
+                dom.totalPagosStats.textContent = 'Total: 0 pagos';
+                dom.totalMontoStats.textContent = '';
+                return;
+            }
+            
+            const filtro = appState.filtroActual.toLowerCase().trim();
+            
+            let pagosFiltrados = [...appState.pagos];
+            
+            if (filtro) {
+                pagosFiltrados = appState.pagos.filter(p => 
+                    p.cedula.includes(filtro) || 
+                    p.nombre.toLowerCase().includes(filtro) ||
+                    p.recibo.toLowerCase().includes(filtro) ||
+                    p.mes.toLowerCase().includes(filtro)
+                );
+            }
+            
+            // Ordenar por fecha (más reciente primero)
+            pagosFiltrados.sort((a, b) => {
+                try {
+                    const [diaA, mesA, añoA] = a.fecha.split('/').map(Number);
+                    const [diaB, mesB, añoB] = b.fecha.split('/').map(Number);
+                    const fechaA = new Date(añoA, mesA - 1, diaA);
+                    const fechaB = new Date(añoB, mesB - 1, diaB);
+                    return fechaB - fechaA;
+                } catch (e) {
+                    return 0;
+                }
+            });
+            
+            // Actualizar estadísticas
+            const totalMonto = pagosFiltrados.reduce((sum, p) => sum + (p.valor || 0), 0);
+            dom.searchStats.textContent = `${pagosFiltrados.length} de ${appState.pagos.length} pagos`;
+            dom.totalPagosStats.textContent = `Total: ${appState.pagos.length} pagos`;
+            dom.totalMontoStats.textContent = `Monto total: $${totalMonto.toLocaleString()}`;
+            
+            if (pagosFiltrados.length === 0) {
+                dom.paymentsContainer.innerHTML = '<div class="empty-state">No se encontraron pagos</div>';
+                return;
+            }
+            
+            let html = '';
+            pagosFiltrados.forEach(pago => {
+                const mesCapitalizado = pago.mes.charAt(0).toUpperCase() + pago.mes.slice(1);
+                
+                html += `
+                    <div class="payment-item" data-cedula="${pago.cedula}" data-recibo="${pago.recibo}">
+                        <div style="font-weight: 600; font-size: 0.85rem;">${pago.cedula}</div>
+                        <div style="font-size: 0.85rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${pago.nombre}</div>
+                        <div style="font-size: 0.85rem;">${mesCapitalizado}</div>
+                        <div style="font-size: 0.85rem;">${pago.año}</div>
+                        <div style="font-size: 0.85rem;">${pago.fecha}</div>
+                        <div><span class="badge">${pago.recibo}</span></div>
+                        <div class="actions">
+                            <button class="action-btn edit-btn" onclick="editarPago('${pago.cedula}', '${pago.recibo}', '${pago.fecha}')">✏️</button>
+                            <button class="action-btn delete-btn" onclick="eliminarPago('${pago.cedula}', '${pago.recibo}', '${pago.mes}', ${pago.año})">🗑️</button>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            dom.paymentsContainer.innerHTML = html;
+        }
+
+        // ============================================================
+        // FUNCIONES DE EDICIÓN Y ELIMINACIÓN
+        // ============================================================
+        window.editarPago = function(cedula, recibo, fecha) {
+            console.log('Editando:', cedula, recibo, fecha);
+            
+            const pago = appState.pagos.find(p => 
+                p.cedula === cedula && p.recibo === recibo && p.fecha === fecha
+            );
+            
+            if (!pago) {
+                mostrarAlerta('❌ No se encontró el pago', 'error');
+                return;
+            }
+            
+            appState.pagoEnEdicion = pago;
+            
+            // Llenar el formulario
+            dom.editCedula.value = pago.cedula;
+            dom.editNombre.value = pago.nombre;
+            dom.editMes.value = pago.mes;
+            dom.editAño.value = pago.año;
+            dom.editValor.value = pago.valor;
+            dom.editFecha.value = pago.fecha;
+            dom.editRecibo.value = pago.recibo;
+            
+            dom.editModal.style.display = 'flex';
+        };
+
+        window.eliminarPago = function(cedula, recibo, mes, año) {
+            console.log('Eliminando:', cedula, recibo, mes, año);
+            
+            appState.pagoAEliminar = { cedula, recibo, mes, año };
+            dom.confirmMessage.textContent = `¿Eliminar pago de ${mes}/${año} con recibo ${recibo}?`;
+            dom.confirmModal.style.display = 'flex';
+        };
+
+        // ============================================================
+        // GUARDAR CAMBIOS EN GITHUB
+        // ============================================================
+        async function guardarCambios(nuevosDatos) {
+            if (!appState.token) {
+                mostrarAlerta('❌ Token no disponible', 'error');
+                return false;
+            }
+            
+            try {
+                // Crear respaldo automático
+                const backupKey = `backup_${new Date().toISOString().replace(/[:.]/g, '-')}`;
+                localStorage.setItem(backupKey, JSON.stringify(appState.datosCompletos));
+                
+                // Mantener solo los últimos 5 respaldos
+                const backups = Object.keys(localStorage).filter(k => k.startsWith('backup_')).sort();
+                while (backups.length > 5) {
+                    localStorage.removeItem(backups.shift());
+                }
+                
+                const url = `https://api.github.com/repos/${CONFIG.REPO_OWNER}/${CONFIG.REPO_NAME}/contents/${CONFIG.CUOTA_PATH}`;
+                
+                // Obtener SHA actual
+                const shaRes = await fetch(url, { 
+                    headers: { 'Authorization': `token ${appState.token}` } 
+                });
+                
+                let sha = null;
+                if (shaRes.ok) {
+                    const data = await shaRes.json();
+                    sha = data.sha;
+                }
+                
+                // Preparar contenido
+                const content = {
+                    ultima_actualizacion: new Date().toISOString(),
+                    valor_cuota: nuevosDatos.valor_cuota || 5000,
+                    pagos: nuevosDatos.pagos
+                };
+                
+                console.log('Guardando en GitHub:', content);
+                
+                // Guardar en GitHub
+                const res = await fetch(url, {
+                    method: 'PUT',
+                    headers: { 
+                        'Authorization': `token ${appState.token}`, 
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        message: `Editor: Modificación de pagos - ${new Date().toLocaleDateString()}`,
+                        content: btoa(unescape(encodeURIComponent(JSON.stringify(content, null, 2)))),
+                        sha: sha,
+                        branch: CONFIG.BRANCH
+                    })
+                });
+                
+                if (!res.ok) {
+                    const error = await res.json();
+                    throw new Error(error.message || 'Error al guardar');
+                }
+                
+                const result = await res.json();
+                console.log('Guardado exitoso:', result);
+                return true;
+            } catch (e) {
+                console.error('Error guardando:', e);
+                mostrarAlerta('Error: ' + e.message, 'error');
+                return false;
+            }
+        }
+
+        // ============================================================
+        // ACTUALIZAR UN PAGO
+        // ============================================================
+        async function actualizarPago() {
+            if (!appState.pagoEnEdicion) return;
+            
+            const pagoOriginal = appState.pagoEnEdicion;
+            const nuevoMes = dom.editMes.value;
+            const nuevoAño = parseInt(dom.editAño.value);
+            const nuevoValor = parseInt(dom.editValor.value);
+            const nuevaFecha = dom.editFecha.value;
+            const nuevoRecibo = dom.editRecibo.value;
+            
+            // Validaciones
+            if (!validarFecha(nuevaFecha)) {
+                mostrarAlerta('❌ Formato de fecha inválido (DD/MM/AAAA)', 'error');
+                return;
+            }
+            
+            if (!nuevoRecibo.trim()) {
+                mostrarAlerta('❌ El número de recibo es obligatorio', 'error');
+                return;
+            }
+            
+            if (nuevoValor <= 0) {
+                mostrarAlerta('❌ El valor debe ser mayor a 0', 'error');
+                return;
+            }
+            
+            // Crear el nuevo string de pago
+            const nuevoPagoStr = crearPagoString(nuevoMes, nuevoAño, nuevoValor, nuevaFecha, nuevoRecibo);
+            
+            try {
+                // Clonar los datos
+                const nuevosDatos = JSON.parse(JSON.stringify(appState.datosCompletos));
+                
+                // Encontrar el registro
+                const registro = nuevosDatos.pagos.find(r => r.cedula === pagoOriginal.cedula);
+                if (!registro) {
+                    mostrarAlerta('❌ No se encontró el registro', 'error');
+                    return;
+                }
+                
+                const campoKey = `fecha_pago_año_${pagoOriginal.año}`;
+                const pagosStr = registro[campoKey] || '';
+                
+                // Dividir los pagos
+                let pagosArray = pagosStr.split(';').map(s => s.trim()).filter(s => s.length > 0);
+                
+                // Encontrar el índice del pago original
+                const indice = pagosArray.findIndex(p => {
+                    const parsed = parsearPagoString(p);
+                    return parsed && parsed.recibo === pagoOriginal.recibo && parsed.fecha === pagoOriginal.fecha;
+                });
+                
+                if (indice === -1) {
+                    mostrarAlerta('❌ No se encontró el pago en el registro', 'error');
+                    return;
+                }
+                
+                // Si cambió el año, necesitamos mover el pago a otro campo
+                if (pagoOriginal.año !== nuevoAño) {
+                    // Eliminar del año original
+                    pagosArray.splice(indice, 1);
+                    if (pagosArray.length === 0) {
+                        delete registro[campoKey];
+                    } else {
+                        registro[campoKey] = pagosArray.join('; ');
+                    }
+                    
+                    // Agregar al nuevo año
+                    const nuevoCampoKey = `fecha_pago_año_${nuevoAño}`;
+                    const nuevoPagosArray = registro[nuevoCampoKey] ? 
+                        registro[nuevoCampoKey].split(';').map(s => s.trim()).filter(s => s.length > 0) : [];
+                    nuevoPagosArray.push(nuevoPagoStr);
+                    registro[nuevoCampoKey] = nuevoPagosArray.join('; ');
+                } else {
+                    // Mismo año, solo reemplazar
+                    pagosArray[indice] = nuevoPagoStr;
+                    registro[campoKey] = pagosArray.join('; ');
+                }
+                
+                // Guardar en GitHub
+                dom.saveEditBtn.innerHTML = '<span class="loading">⌛</span> Guardando...';
+                dom.saveEditBtn.disabled = true;
+                
+                const guardado = await guardarCambios(nuevosDatos);
+                
+                if (guardado) {
+                    appState.datosCompletos = nuevosDatos;
+                    appState.pagos = obtenerTodosLosPagos(nuevosDatos);
+                    mostrarAlerta('✅ Pago actualizado correctamente', 'success');
+                    dom.editModal.style.display = 'none';
+                    renderizarPagos();
+                }
+            } catch (e) {
+                mostrarAlerta('Error: ' + e.message, 'error');
+            } finally {
+                dom.saveEditBtn.innerHTML = '💾 Guardar';
+                dom.saveEditBtn.disabled = false;
+            }
+        }
+
+        // ============================================================
+        // ELIMINAR UN PAGO
+        // ============================================================
+        async function eliminarPagoConfirmado() {
+            if (!appState.pagoAEliminar) return;
+            
+            const { cedula, recibo, mes, año } = appState.pagoAEliminar;
+            
+            try {
+                // Clonar los datos
+                const nuevosDatos = JSON.parse(JSON.stringify(appState.datosCompletos));
+                
+                // Encontrar el registro
+                const registro = nuevosDatos.pagos.find(r => r.cedula === cedula);
+                if (!registro) {
+                    mostrarAlerta('❌ No se encontró el registro', 'error');
+                    dom.confirmModal.style.display = 'none';
+                    return;
+                }
+                
+                const campoKey = `fecha_pago_año_${año}`;
+                const pagosStr = registro[campoKey] || '';
+                
+                // Dividir los pagos
+                let pagosArray = pagosStr.split(';').map(s => s.trim()).filter(s => s.length > 0);
+                
+                // Filtrar para eliminar el pago específico
+                pagosArray = pagosArray.filter(p => {
+                    const parsed = parsearPagoString(p);
+                    return !(parsed && parsed.recibo === recibo && parsed.mes === mes);
+                });
+                
+                if (pagosArray.length === 0) {
+                    // Si no quedan pagos, eliminar el campo completo
+                    delete registro[campoKey];
+                } else {
+                    registro[campoKey] = pagosArray.join('; ');
+                }
+                
+                // Guardar en GitHub
+                dom.confirmDeleteBtn.innerHTML = '<span class="loading">⌛</span> Eliminando...';
+                dom.confirmDeleteBtn.disabled = true;
+                
+                const guardado = await guardarCambios(nuevosDatos);
+                
+                if (guardado) {
+                    appState.datosCompletos = nuevosDatos;
+                    appState.pagos = obtenerTodosLosPagos(nuevosDatos);
+                    mostrarAlerta('✅ Pago eliminado correctamente', 'success');
+                    dom.confirmModal.style.display = 'none';
+                    renderizarPagos();
+                }
+            } catch (e) {
+                mostrarAlerta('Error: ' + e.message, 'error');
+            } finally {
+                dom.confirmDeleteBtn.innerHTML = 'Sí, eliminar';
+                dom.confirmDeleteBtn.disabled = false;
+                appState.pagoAEliminar = null;
+            }
+        }
+
+        // ============================================================
+        // INICIALIZACIÓN
+        // ============================================================
+        async function iniciarSistema() {
+            if (appState.token) {
+                dom.apiModal.style.display = 'none';
+                dom.mainApp.style.display = 'block';
+                
+                dom.paymentsContainer.innerHTML = '<div class="empty-state"><span class="loading">⌛</span> Cargando pagos...</div>';
+                
+                const data = await cargarPagos();
+                if (data) {
+                    appState.datosCompletos = data;
+                    appState.pagos = obtenerTodosLosPagos(data);
+                    renderizarPagos();
+                    mostrarAlerta(`✅ ${appState.pagos.length} pagos cargados`, 'success');
+                } else {
+                    mostrarAlerta('❌ Error al cargar datos', 'error');
+                    dom.paymentsContainer.innerHTML = '<div class="empty-state">Error al cargar los datos</div>';
+                }
+            } else {
+                dom.apiModal.style.display = 'flex';
+                dom.mainApp.style.display = 'none';
+            }
+        }
+
+        // ============================================================
+        // EVENT LISTENERS
+        // ============================================================
+        function inicializarEventos() {
+            // Conexión con token
+            dom.apiConnectBtn.addEventListener('click', async () => {
+                const token = dom.apiTokenInput.value.trim();
+                if (!token) {
+                    mostrarAlerta('❌ Ingresa un token', 'error');
+                    return;
+                }
+                
+                try {
+                    // Verificar token
+                    const testUrl = `https://api.github.com/repos/${CONFIG.REPO_OWNER}/${CONFIG.REPO_NAME}`;
+                    const testRes = await fetch(testUrl, {
+                        headers: { 'Authorization': `token ${token}` }
+                    });
+                    
+                    if (testRes.ok) {
+                        localStorage.setItem('github_token_jac', token);
+                        appState.token = token;
+                        dom.apiModal.style.display = 'none';
+                        dom.mainApp.style.display = 'block';
+                        
+                        dom.paymentsContainer.innerHTML = '<div class="empty-state"><span class="loading">⌛</span> Cargando pagos...</div>';
+                        
+                        const data = await cargarPagos();
+                        if (data) {
+                            appState.datosCompletos = data;
+                            appState.pagos = obtenerTodosLosPagos(data);
+                            renderizarPagos();
+                            mostrarAlerta(`✅ Conexión exitosa - ${appState.pagos.length} pagos`, 'success');
+                        } else {
+                            mostrarAlerta('❌ Error al cargar datos', 'error');
+                        }
+                    } else {
+                        mostrarAlerta('❌ Token inválido o sin permisos', 'error');
+                    }
+                } catch (e) {
+                    console.error('Error de conexión:', e);
+                    mostrarAlerta('❌ Error de conexión', 'error');
+                }
+            });
+            
+            // Búsqueda
+            dom.searchInput.addEventListener('input', (e) => {
+                appState.filtroActual = e.target.value;
+                renderizarPagos();
+            });
+            
+            // Actualizar lista
+            dom.refreshBtn.addEventListener('click', async () => {
+                dom.refreshBtn.innerHTML = '<span class="loading">⌛</span> Actualizando...';
+                dom.refreshBtn.disabled = true;
+                
+                const data = await cargarPagos();
+                if (data) {
+                    appState.datosCompletos = data;
+                    appState.pagos = obtenerTodosLosPagos(data);
+                    renderizarPagos();
+                    mostrarAlerta(`✅ Lista actualizada - ${appState.pagos.length} pagos`, 'success');
+                }
+                
+                dom.refreshBtn.innerHTML = '🔄 Actualizar lista';
+                dom.refreshBtn.disabled = false;
+            });
+            
+            // Cerrar modales
+            dom.closeEditModalBtn.addEventListener('click', () => {
+                dom.editModal.style.display = 'none';
+                appState.pagoEnEdicion = null;
+            });
+            
+            dom.cancelEditBtn.addEventListener('click', () => {
+                dom.editModal.style.display = 'none';
+                appState.pagoEnEdicion = null;
+            });
+            
+            dom.cancelConfirmBtn.addEventListener('click', () => {
+                dom.confirmModal.style.display = 'none';
+                appState.pagoAEliminar = null;
+            });
+            
+            // Guardar edición
+            dom.saveEditBtn.addEventListener('click', actualizarPago);
+            
+            // Eliminar desde el modal de edición
+            dom.deleteFromEditBtn.addEventListener('click', () => {
+                if (appState.pagoEnEdicion) {
+                    dom.editModal.style.display = 'none';
+                    eliminarPago(
+                        appState.pagoEnEdicion.cedula,
+                        appState.pagoEnEdicion.recibo,
+                        appState.pagoEnEdicion.mes,
+                        appState.pagoEnEdicion.año
+                    );
+                }
+            });
+            
+            // Confirmar eliminación
+            dom.confirmDeleteBtn.addEventListener('click', eliminarPagoConfirmado);
+            
+            // Salir
+            dom.logoutBtn.addEventListener('click', () => {
+                if (confirm('¿Cerrar sesión?')) {
+                    localStorage.removeItem('github_token_jac');
+                    window.location.reload();
+                }
+            });
+            
+            // Cerrar modales con clic fuera
+            window.addEventListener('click', (e) => {
+                if (e.target === dom.editModal) {
+                    dom.editModal.style.display = 'none';
+                    appState.pagoEnEdicion = null;
+                }
+                if (e.target === dom.confirmModal) {
+                    dom.confirmModal.style.display = 'none';
+                    appState.pagoAEliminar = null;
+                }
+            });
+        }
+
+        // Inicializar
+        inicializarEventos();
+        iniciarSistema();
+    </script>
+</body>
+</html>
