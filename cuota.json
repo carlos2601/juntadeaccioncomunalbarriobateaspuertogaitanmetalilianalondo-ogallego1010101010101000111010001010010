@@ -1,11 +1,10 @@
 {
-  "ultima_actualizacion": "2026-02-17T17:35:59.246Z",
+  "ultima_actualizacion": "2026-02-17T17:36:02.205Z",
   "valor_cuota": 5000,
   "pagos": [
     {
       "cedula": "1125550926",
-      "nombre": "LEIDY DIANA PERALES CASTAÑEDA",
-      "fecha_pago_año_2026": "febrero_2026_5000_17/02/2026_0002"
+      "nombre": "LEIDY DIANA PERALES CASTAÑEDA"
     },
     {
       "cedula": "1124822444",
