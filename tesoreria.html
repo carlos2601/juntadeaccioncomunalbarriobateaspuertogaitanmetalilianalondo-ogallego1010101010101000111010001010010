@@ -558,11 +558,9 @@
             font-size: 1.1rem;
             font-weight: 700;
             color: #1a4a2a;
-            text-align: center; /* Centrar título */
-            flex: 1; /* Para que ocupe el espacio disponible */
+            text-align: center;
+            flex: 1;
         }
-
-        
 
         .close-btn {
             background: none;
@@ -877,111 +875,10 @@
             <span style="margin-left: 16px;">📅 <span id="fechaActualDisplay"></span></span>
         </div>
     </div>
-    <script>
     
-    // config.js - Agregar este archivo y enlazarlo en tesoreria.html antes del script principal
-
-// Detectar modo de acceso desde URL
-function getAccessMode() {
-    const urlParams = new URLSearchParams(window.location.search);
-    return {
-        mode: urlParams.get('mode') || 'full', // 'full' o 'readonly'
-        user: urlParams.get('user') || 'Usuario',
-        token: urlParams.get('token') || ''
-    };
-}
-
-// Validar sesión
-function validarSesion() {
-    const access = getAccessMode();
-    const usuarioGuardado = sessionStorage.getItem('usuario_actual');
-    
-    if (!usuarioGuardado && !access.token) {
-        // No hay sesión válida, redirigir al login
-        window.location.href = 'seccion.html';
-        return null;
-    }
-
-    if (usuarioGuardado) {
-        return JSON.parse(usuarioGuardado);
-    }
-
-    // Si viene por URL pero no hay sesión, crear una básica
-    return {
-        usuario: access.user,
-        rol: access.mode === 'full' ? 'tesorera' : 'presidente',
-        permisos: {
-            editar: access.mode === 'full',
-            buscar: true,
-            guardar_pagos: access.mode === 'full',
-            ver_reportes: true,
-            exportar: true,
-            configurar: access.mode === 'full',
-            auditar: access.mode !== 'full'
-        }
-    };
-}
-
-// Aplicar restricciones según permisos
-function aplicarPermisos(permisos) {
-    if (!permisos.editar) {
-        // Modo solo lectura: deshabilitar todos los botones de edición
-        document.querySelectorAll('.btn-success, #savePaymentsBtn, .month-checkbox.debt').forEach(el => {
-            if (el.id !== 'savePaymentsBtn' && !el.classList.contains('month-checkbox')) return;
-            
-            if (el.classList.contains('month-checkbox')) {
-                // Quitar evento de clic en meses
-                el.style.cursor = 'not-allowed';
-                el.removeAttribute('onclick');
-                el.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    alert('🔒 Modo solo lectura - No puedes modificar pagos');
-                });
-            } else {
-                // Botones de guardar/editar
-                el.disabled = true;
-                el.style.opacity = '0.5';
-                el.style.cursor = 'not-allowed';
-                el.title = 'No tienes permisos de edición';
-            }
-        });
-
-        // Mostrar indicador de solo lectura
-        const header = document.querySelector('.logo-area h1');
-        if (header) {
-            const badge = document.createElement('span');
-            badge.style.background = '#ffd700';
-            badge.style.color = '#1a4a2a';
-            badge.style.marginLeft = '10px';
-            badge.style.padding = '2px 10px';
-            badge.style.borderRadius = '20px';
-            badge.style.fontSize = '0.7rem';
-            badge.textContent = '👁️ SOLO LECTURA';
-            header.appendChild(badge);
-        }
-    }
-
-    if (!permisos.buscar) {
-        document.getElementById('searchInput').disabled = true;
-    }
-}
-
-// Ejecutar validación al cargar la página
-document.addEventListener('DOMContentLoaded', () => {
-    const usuario = validarSesion();
-    if (usuario) {
-        console.log(`Bienvenido ${usuario.usuario} (${usuario.rol})`);
-        // Aplicar permisos después de que la app se haya cargado
-        setTimeout(() => {
-            aplicarPermisos(usuario.permisos);
-        }, 500);
-    }
-});
-</script>
-
     <script>
         // ============================================================
-        // JAC BATEAS - VERSIÓN CON COLORES Y SIN BOTÓN DESCONECTAR
+        // JAC BATEAS - VERSIÓN CORREGIDA (GUARDADO INMEDIATO + DETALLE MEJORADO)
         // ============================================================
         const CONFIG = {
             REPO_OWNER: 'carlos2601',
@@ -1170,6 +1067,34 @@ document.addEventListener('DOMContentLoaded', () => {
             return meses;
         }
 
+        function calcularInfoDetalle(cedula, fechaAfiliacion) {
+            const afiliacion = parseFecha(fechaAfiliacion);
+            const hoy = appState.fechaActual;
+            let mesesPagados = 0;
+            let mesesDebe = 0;
+            let valorPagado = 0;
+            
+            for (let año = afiliacion.getFullYear(); año <= hoy.getFullYear(); año++) {
+                const mesInicio = (año === afiliacion.getFullYear()) ? afiliacion.getMonth() : 0;
+                const mesFin = (año === hoy.getFullYear()) ? hoy.getMonth() : 11;
+                for (let mes = mesInicio; mes <= mesFin; mes++) {
+                    if (mesEstaPagado(cedula, año, mes)) {
+                        mesesPagados++;
+                        valorPagado += CONFIG.VALOR_CUOTA;
+                    } else {
+                        mesesDebe++;
+                    }
+                }
+            }
+            
+            return {
+                mesesPagados,
+                mesesDebe,
+                valorPagado,
+                valorDebe: mesesDebe * CONFIG.VALOR_CUOTA
+            };
+        }
+
         // ============================================================
         // ESTADÍSTICAS
         // ============================================================
@@ -1348,7 +1273,7 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         // ============================================================
-        // GUARDAR RECIBO
+        // GUARDAR RECIBO Y PAGO INMEDIATO
         // ============================================================
         async function guardarPagoConRecibo() {
             if (!appState.pendingPayment) return mostrarAlerta('❌ No hay pago pendiente', 'error');
@@ -1361,55 +1286,87 @@ document.addEventListener('DOMContentLoaded', () => {
                 return mostrarAlerta(`❌ Recibo ${recibo} ya existe`, 'error');
             }
             
-            if (appState.pendingPayment.element) {
-                appState.pendingPayment.element.classList.add('selected');
+            if (!appState.token) return mostrarAlerta('❌ Token no disponible', 'error');
+
+            const saveBtn = dom.saveReceiptBtn;
+            const originalText = saveBtn.innerHTML;
+            
+            try {
+                saveBtn.innerHTML = '<span class="loading">⌛</span> Guardando';
+                saveBtn.disabled = true;
+                
+                // Preparar el pago
+                const meses = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+                const fecha = formatearFecha(new Date());
+                const pagoStr = `${meses[appState.pendingPayment.mes]}_${appState.pendingPayment.año}_${CONFIG.VALOR_CUOTA}_${fecha}_${recibo}`;
+                const campo = `fecha_pago_año_${appState.pendingPayment.año}`;
+                
+                // Actualizar appState.pagos localmente
+                let registro = appState.pagos.find(p => p.cedula === appState.pendingPayment.cedula);
+                if (!registro) {
+                    registro = { 
+                        cedula: appState.pendingPayment.cedula, 
+                        nombre: appState.pendingPayment.nombre, 
+                        [campo]: pagoStr 
+                    };
+                    appState.pagos.push(registro);
+                } else {
+                    registro[campo] = registro[campo] ? `${registro[campo]}; ${pagoStr}` : pagoStr;
+                }
+                
+                // Guardar en GitHub
+                await guardarPagosEnGitHub();
+                
+                // Actualizar UI
+                if (appState.pendingPayment.element) {
+                    appState.pendingPayment.element.classList.remove('debt', 'selected');
+                    appState.pendingPayment.element.classList.add('paid');
+                }
+                
+                // Actualizar estadísticas y tabla
+                calcularEstadisticas();
+                renderizarTabla();
+                
+                mostrarAlerta(`✅ Pago guardado - Recibo: ${recibo}`, 'success');
+                dom.receiptModal.style.display = 'none';
+                appState.pendingPayment = null;
+                
+            } catch (e) {
+                mostrarAlerta('Error al guardar: ' + e.message, 'error');
+                // Revertir cambio local si falló
+                appState.pagos = await cargarPagos();
+            } finally {
+                saveBtn.innerHTML = originalText;
+                saveBtn.disabled = false;
             }
-            
-            if (!window.pagosPendientes) window.pagosPendientes = [];
-            window.pagosPendientes.push({
-                ...appState.pendingPayment,
-                recibo,
-                fecha: formatearFecha(new Date())
-            });
-            
-            mostrarAlerta(`✅ Pago marcado - Recibo: ${recibo}`, 'success');
-            dom.receiptModal.style.display = 'none';
-            appState.pendingPayment = null;
         }
 
         // ============================================================
         // GUARDAR EN GITHUB
         // ============================================================
         async function guardarPagosEnGitHub() {
-            if (!window.pagosPendientes?.length) return mostrarAlerta('❌ No hay pagos pendientes', 'error');
-            if (!appState.token) return mostrarAlerta('❌ Token no disponible', 'error');
-
             try {
-                let todosPagos = [...appState.pagos];
-                const meses = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
-                
-                for (const pago of window.pagosPendientes) {
-                    const campo = `fecha_pago_año_${pago.año}`;
-                    let registro = todosPagos.find(p => p.cedula === pago.cedula);
-                    const pagoStr = `${meses[pago.mes]}_${pago.año}_${CONFIG.VALOR_CUOTA}_${pago.fecha}_${pago.recibo}`;
-                    
-                    if (!registro) {
-                        registro = { cedula: pago.cedula, nombre: pago.nombre, [campo]: pagoStr };
-                        todosPagos.push(registro);
-                    } else {
-                        registro[campo] = registro[campo] ? `${registro[campo]}; ${pagoStr}` : pagoStr;
-                    }
-                }
-
                 const content = {
                     ultima_actualizacion: new Date().toISOString(),
                     valor_cuota: CONFIG.VALOR_CUOTA,
-                    pagos: todosPagos
+                    pagos: appState.pagos
                 };
 
                 const url = `https://api.github.com/repos/${CONFIG.REPO_OWNER}/${CONFIG.REPO_NAME}/contents/${CONFIG.CUOTA_PATH}`;
-                const shaRes = await fetch(url, { headers: { 'Authorization': `token ${appState.token}` } });
-                const sha = shaRes.ok ? (await shaRes.json()).sha : null;
+                
+                // Obtener SHA del archivo actual
+                let sha = null;
+                try {
+                    const shaRes = await fetch(url, { 
+                        headers: { 'Authorization': `token ${appState.token}` } 
+                    });
+                    if (shaRes.ok) {
+                        const shaData = await shaRes.json();
+                        sha = shaData.sha;
+                    }
+                } catch (e) {
+                    // El archivo puede no existir
+                }
                 
                 const res = await fetch(url, {
                     method: 'PUT',
@@ -1418,175 +1375,196 @@ document.addEventListener('DOMContentLoaded', () => {
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
-                        message: `Pagos: ${window.pagosPendientes.length} - ${new Date().toLocaleDateString()}`,
+                        message: `Pago registrado - ${new Date().toLocaleDateString()}`,
                         content: btoa(unescape(encodeURIComponent(JSON.stringify(content, null, 2)))),
                         sha,
                         branch: CONFIG.BRANCH
                     })
                 });
 
-                if (!res.ok) throw new Error('Error al guardar');
+                if (!res.ok) {
+                    const errorData = await res.json();
+                    throw new Error(errorData.message || 'Error al guardar');
+                }
                 
-                appState.pagos = todosPagos;
-                window.pagosPendientes = [];
                 return true;
             } catch (e) {
                 throw new Error(e.message);
             }
         }
 
-       // ============================================================
-// REPORTES
+        // ============================================================
+// MODAL DE DETALLE MEJORADO (CON LISTA DE MESES DEUDORES)
 // ============================================================
-function generarReporteCompacto(titulo, filtroFn) {
-    const pagos = filtroFn ? obtenerTodosLosPagos().filter(filtroFn) : obtenerTodosLosPagos();
-    const usuarios = {};
+window.verDetalle = function(cedula) {
+    const afiliado = appState.afiliados.find(a => a.cedula === cedula);
+    if (!afiliado) return;
     
-    pagos.forEach(p => {
-        if (!usuarios[p.cedula]) {
-            usuarios[p.cedula] = { 
-                cedula: p.cedula, 
-                nombre: p.nombre, 
-                meses: [], 
-                total: 0 
-            };
-        }
-        usuarios[p.cedula].meses.push({ 
-            mes: p.mes.charAt(0).toUpperCase() + p.mes.slice(1, 3), 
-            año: p.año, 
-            recibo: p.recibo 
-        });
-        usuarios[p.cedula].total += p.valor;
-    });
-
-    let html = `<table style="width: 100%; border-collapse: collapse; font-size: 0.75rem; table-layout: fixed;">
-        <colgroup>
-            <col style="width: 15%">  <!-- Cédula -->
-            <col style="width: 30%">  <!-- Nombre (reducido) -->
-            <col style="width: 40%">  <!-- Meses pagados (aumentado) -->
-            <col style="width: 15%">  <!-- Total -->
-        </colgroup>
-        <thead>
-            <tr style="background: #1a4a2a; color: white;">
-                <th style="padding: 12px; text-align: center;">Cédula</th>
-                <th style="padding: 12px; text-align: left;">Nombre</th>
-                <th style="padding: 12px; text-align: left;">Meses pagados</th>
-                <th style="padding: 12px; text-align: right;">Total</th>
-            </tr>
-        </thead>
-        <tbody>`;
+    dom.modalNombre.textContent = `📋 ${afiliado.nombre}`;
+    const registro = appState.pagos.find(p => p.cedula === cedula) || {};
+    const info = calcularInfoDetalle(cedula, afiliado.fecha);
     
-    if (Object.keys(usuarios).length === 0) {
-        html += `<tr><td colspan="4" style="padding: 40px; text-align: center; color: #6a8b6a;">No hay pagos registrados</td></tr>`;
-    } else {
-        Object.values(usuarios).sort((a,b) => a.nombre.localeCompare(b.nombre)).forEach(u => {
-            html += `<tr style="border-bottom: 1px solid #d8ecd8;">`;
-            html += `<td style="padding: 10px; font-weight: 600; text-align: center; word-break: break-word;">${u.cedula}</td>`;
-            html += `<td style="padding: 10px; text-align: left; word-break: break-word;">${u.nombre}</td>`;
-            html += `<td style="padding: 10px; text-align: left; word-break: break-word;">`;
-            u.meses.sort((a,b) => a.año - b.año).forEach(m => {
-                html += `<span class="month-badge" style="display: inline-block; margin: 2px; white-space: nowrap;">${m.mes} ${m.año}</span> `;
-            });
-            html += `</td>`;
-            html += `<td style="padding: 10px; text-align: right; font-weight: 700; color: #1a7a3a; word-break: break-word;">$${u.total.toLocaleString()}</td>`;
-            html += `</tr>`;
-        });
-        const total = Object.values(usuarios).reduce((s, u) => s + u.total, 0);
-        html += `<tr style="background: #e0f0e0; font-weight: 700;">
-            <td colspan="3" style="padding: 12px; text-align: right;">Total general:</td>
-            <td style="padding: 12px; text-align: right; color: #1a4a2a;">$${total.toLocaleString()}</td>
-        </tr>`;
-    }
-    html += `</tbody></table>`;
+    // Tarjeta de resumen horizontal
+    let html = `<div style="background: #f0f8f0; padding: 20px; border-radius: 16px; margin-bottom: 20px; border-left: 6px solid #2a7a4a;">
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; text-align: center;">
+            <div>
+                <div style="font-size: 0.7rem; color: #4a6b4a; text-transform: uppercase; margin-bottom: 5px;">Meses Pagados</div>
+                <div style="font-size: 1.5rem; font-weight: 700; color: #1a7a3a;">${info.mesesPagados}</div>
+            </div>
+            <div>
+                <div style="font-size: 0.7rem; color: #4a6b4a; text-transform: uppercase; margin-bottom: 5px;">Meses Debe</div>
+                <div style="font-size: 1.5rem; font-weight: 700; color: #c04040;">${info.mesesDebe}</div>
+            </div>
+            <div>
+                <div style="font-size: 0.7rem; color: #4a6b4a; text-transform: uppercase; margin-bottom: 5px;">Valor Pagado</div>
+                <div style="font-size: 1.5rem; font-weight: 700; color: #1a7a3a;">$${info.valorPagado.toLocaleString()}</div>
+            </div>
+            <div>
+                <div style="font-size: 0.7rem; color: #4a6b4a; text-transform: uppercase; margin-bottom: 5px;">Valor Debe</div>
+                <div style="font-size: 1.5rem; font-weight: 700; color: #c04040;">$${info.valorDebe.toLocaleString()}</div>
+            </div>
+        </div>
+        <div style="display: flex; justify-content: space-between; margin-top: 15px; padding-top: 15px; border-top: 1px solid #d0e0d0;">
+            <span style="font-weight: 600; color: #1a4a2a;">Cédula:</span>
+            <span style="font-weight: 600;">${afiliado.cedula}</span>
+            <span style="font-weight: 600; color: #1a4a2a;">Afiliación:</span>
+            <span style="background: #e0f0e0; padding: 4px 14px; border-radius: 100px;">${afiliado.fecha}</span>
+        </div>
+    </div>`;
     
-    dom.reportTitle.textContent = titulo;
-    dom.reportContent.innerHTML = html;
-    dom.reportModal.style.display = 'flex';
-}
-
-        // ============================================================
-        // MODAL DE DETALLE (CON SCROLL)
-        // ============================================================
-        window.verDetalle = function(cedula) {
-            const afiliado = appState.afiliados.find(a => a.cedula === cedula);
-            if (!afiliado) return;
-            
-            dom.modalNombre.textContent = `📋 ${afiliado.nombre}`;
-            const registro = appState.pagos.find(p => p.cedula === cedula) || {};
-            const años = [];
-            for (let año = parseFecha(afiliado.fecha).getFullYear(); año <= appState.fechaActual.getFullYear(); año++) años.push(año);
-            
-            let html = `<div style="background: #f0f8f0; padding: 16px; border-radius: 16px; margin-bottom: 20px; border-left: 6px solid #2a7a4a;">
-                <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-                    <span style="font-weight: 600; color: #1a4a2a;">Cédula:</span>
-                    <span style="font-weight: 600;">${afiliado.cedula}</span>
-                </div>
-                <div style="display: flex; justify-content: space-between;">
-                    <span style="font-weight: 600; color: #1a4a2a;">Afiliación:</span>
-                    <span style="background: #e0f0e0; padding: 4px 14px; border-radius: 100px;">${afiliado.fecha}</span>
-                </div>
+    html += `<h4 style="margin-bottom: 16px; font-weight: 700; color: #1a4a2a;">💰 Historial de pagos</h4>`;
+    
+    let hayPagos = false;
+    const años = [];
+    for (let año = parseFecha(afiliado.fecha).getFullYear(); año <= appState.fechaActual.getFullYear(); año++) años.push(año);
+    
+    años.sort((a,b) => b - a).forEach(año => {
+        const pagos = extraerPagosDeString(registro[`fecha_pago_año_${año}`], año);
+        if (pagos.length) {
+            hayPagos = true;
+            html += `<div style="background: white; border: 1px solid #d8ecd8; border-radius: 16px; padding: 16px; margin-bottom: 16px;">`;
+            html += `<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                <span style="font-weight: 700; color: #1a4a2a;">📆 ${año}</span>
+                <span style="background: #e0f0e0; padding: 4px 14px; border-radius: 100px; font-size: 0.7rem; font-weight: 600;">${pagos.length} pagos</span>
             </div>`;
-            
-            html += `<h4 style="margin-bottom: 16px; font-weight: 700; color: #1a4a2a;">💰 Historial de pagos</h4>`;
-            
-            let hayPagos = false;
-            años.sort((a,b) => b - a).forEach(año => {
-                const pagos = extraerPagosDeString(registro[`fecha_pago_año_${año}`], año);
-                if (pagos.length) {
-                    hayPagos = true;
-                    html += `<div style="background: white; border: 1px solid #d8ecd8; border-radius: 16px; padding: 16px; margin-bottom: 16px;">`;
-                    html += `<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-                        <span style="font-weight: 700; color: #1a4a2a;">📆 ${año}</span>
-                        <span style="background: #e0f0e0; padding: 4px 14px; border-radius: 100px; font-size: 0.7rem; font-weight: 600;">${pagos.length} pagos</span>
-                    </div>`;
-                    pagos.forEach(p => {
-                        html += `<div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #e0f0e0;">
-                            <div style="display: flex; align-items: center; gap: 12px;">
-                                <span style="text-transform: capitalize; font-weight: 600;">${p.mes}</span>
-                                <span style="color: #4a6b4a;">${p.año}</span>
-                            </div>
-                            <div style="display: flex; align-items: center; gap: 16px;">
-                                <span style="font-weight: 700; color: #1a7a3a;">$${p.valor.toLocaleString()}</span>
-                                <span style="color: #4a6b4a; background: #f0f8f0; padding: 4px 12px; border-radius: 100px; font-size: 0.65rem;">${p.fecha}</span>
-                                <span style="background: #1a4a2a; color: white; padding: 4px 12px; border-radius: 100px; font-size: 0.65rem;">${p.recibo}</span>
-                            </div>
-                        </div>`;
-                    });
-                    html += `</div>`;
-                }
+            pagos.forEach(p => {
+                html += `<div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #e0f0e0;">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <span style="text-transform: capitalize; font-weight: 600;">${p.mes}</span>
+                        <span style="color: #4a6b4a;">${p.año}</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 16px;">
+                        <span style="font-weight: 700; color: #1a7a3a;">$${p.valor.toLocaleString()}</span>
+                        <span style="color: #4a6b4a; background: #f0f8f0; padding: 4px 12px; border-radius: 100px; font-size: 0.65rem;">${p.fecha}</span>
+                        <span style="background: #1a4a2a; color: white; padding: 4px 12px; border-radius: 100px; font-size: 0.65rem;">${p.recibo}</span>
+                    </div>
+                </div>`;
             });
+            html += `</div>`;
+        }
+    });
+    
+    if (!hayPagos) {
+        html += `<div style="padding: 32px; text-align: center; background: #f0f8f0; border-radius: 16px; color: #4a6b4a;">
+            No hay pagos registrados
+        </div>`;
+    }
+    
+    // ===== SECCIÓN DE DEUDA PENDIENTE RESTAURADA =====
+    const mesesRojo = calcularMesesRojo(cedula, afiliado.fecha);
+    if (mesesRojo.length) {
+        const mesesNombres = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+        html += `<h4 style="color: #c04040; margin: 24px 0 16px; font-weight: 700;">⚠️ Deuda pendiente</h4>`;
+        html += `<div style="background: #fff0f0; padding: 20px; border-radius: 16px; border: 1px solid #e0b0b0;">`;
+        mesesRojo.forEach(({año, mes}) => {
+            html += `<div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #ffd0d0;">
+                <span style="text-transform: capitalize; font-weight: 600; color: #a04040;">${mesesNombres[mes]} ${año}</span>
+                <span style="font-weight: 700; color: #c04040;">$${CONFIG.VALOR_CUOTA.toLocaleString()}</span>
+            </div>`;
+        });
+        html += `<div style="margin-top: 16px; padding-top: 12px; display: flex; justify-content: space-between; align-items: center; font-weight: 700;">
+            <span style="color: #a04040;">Total deuda:</span>
+            <span style="color: #c04040; font-size: 1.1rem;">$${(mesesRojo.length * CONFIG.VALOR_CUOTA).toLocaleString()}</span>
+        </div>`;
+        html += `</div>`;
+    } else {
+        html += `<div style="background: #e4ffe4; padding: 24px; border-radius: 16px; text-align: center; margin-top: 24px; border: 1px solid #a0d0a0;">
+            <span style="color: #1a7a3a; font-weight: 700;">✓ Al día - No tiene deudas</span>
+        </div>`;
+    }
+    
+    dom.modalContent.innerHTML = html;
+    dom.modal.style.display = 'flex';
+};
+
+        // ============================================================
+        // REPORTES
+        // ============================================================
+        function generarReporteCompacto(titulo, filtroFn) {
+            const pagos = filtroFn ? obtenerTodosLosPagos().filter(filtroFn) : obtenerTodosLosPagos();
+            const usuarios = {};
             
-            if (!hayPagos) {
-                html += `<div style="padding: 32px; text-align: center; background: #f0f8f0; border-radius: 16px; color: #4a6b4a;">
-                    No hay pagos registrados
-                </div>`;
-            }
-            
-            const mesesRojo = calcularMesesRojo(cedula, afiliado.fecha);
-            if (mesesRojo.length) {
-                const mesesNombres = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
-                html += `<h4 style="color: #c04040; margin: 24px 0 16px; font-weight: 700;">⚠️ Deuda pendiente</h4>`;
-                html += `<div style="background: #fff0f0; padding: 20px; border-radius: 16px; border: 1px solid #e0b0b0;">`;
-                mesesRojo.forEach(({año, mes}) => {
-                    html += `<div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #ffd0d0;">
-                        <span style="text-transform: capitalize; font-weight: 600; color: #a04040;">${mesesNombres[mes]} ${año}</span>
-                        <span style="font-weight: 700; color: #c04040;">$${CONFIG.VALOR_CUOTA.toLocaleString()}</span>
-                    </div>`;
+            pagos.forEach(p => {
+                if (!usuarios[p.cedula]) {
+                    usuarios[p.cedula] = { 
+                        cedula: p.cedula, 
+                        nombre: p.nombre, 
+                        meses: [], 
+                        total: 0 
+                    };
+                }
+                usuarios[p.cedula].meses.push({ 
+                    mes: p.mes.charAt(0).toUpperCase() + p.mes.slice(1, 3), 
+                    año: p.año, 
+                    recibo: p.recibo 
                 });
-                html += `<div style="margin-top: 16px; padding-top: 12px; display: flex; justify-content: space-between; align-items: center; font-weight: 700;">
-                    <span style="color: #a04040;">Total deuda:</span>
-                    <span style="color: #c04040; font-size: 1.1rem;">$${(mesesRojo.length * CONFIG.VALOR_CUOTA).toLocaleString()}</span>
-                </div>`;
-                html += `</div>`;
-            } else {
-                html += `<div style="background: #e4ffe4; padding: 24px; border-radius: 16px; text-align: center; margin-top: 24px; border: 1px solid #a0d0a0;">
-                    <span style="color: #1a7a3a; font-weight: 700;">✓ Al día - No tiene deudas</span>
-                </div>`;
-            }
+                usuarios[p.cedula].total += p.valor;
+            });
+
+            let html = `<table style="width: 100%; border-collapse: collapse; font-size: 0.75rem; table-layout: fixed;">
+                <colgroup>
+                    <col style="width: 15%">
+                    <col style="width: 30%">
+                    <col style="width: 40%">
+                    <col style="width: 15%">
+                </colgroup>
+                <thead>
+                    <tr style="background: #1a4a2a; color: white;">
+                        <th style="padding: 12px; text-align: center;">Cédula</th>
+                        <th style="padding: 12px; text-align: left;">Nombre</th>
+                        <th style="padding: 12px; text-align: left;">Meses pagados</th>
+                        <th style="padding: 12px; text-align: right;">Total</th>
+                    </tr>
+                </thead>
+                <tbody>`;
             
-            dom.modalContent.innerHTML = html;
-            dom.modal.style.display = 'flex';
-        };
+            if (Object.keys(usuarios).length === 0) {
+                html += `<tr><td colspan="4" style="padding: 40px; text-align: center; color: #6a8b6a;">No hay pagos registrados</td></tr>`;
+            } else {
+                Object.values(usuarios).sort((a,b) => a.nombre.localeCompare(b.nombre)).forEach(u => {
+                    html += `<tr style="border-bottom: 1px solid #d8ecd8;">`;
+                    html += `<td style="padding: 10px; font-weight: 600; text-align: center; word-break: break-word;">${u.cedula}</td>`;
+                    html += `<td style="padding: 10px; text-align: left; word-break: break-word;">${u.nombre}</td>`;
+                    html += `<td style="padding: 10px; text-align: left; word-break: break-word;">`;
+                    u.meses.sort((a,b) => a.año - b.año).forEach(m => {
+                        html += `<span class="month-badge" style="display: inline-block; margin: 2px; white-space: nowrap;">${m.mes} ${m.año}</span> `;
+                    });
+                    html += `</td>`;
+                    html += `<td style="padding: 10px; text-align: right; font-weight: 700; color: #1a7a3a; word-break: break-word;">$${u.total.toLocaleString()}</td>`;
+                    html += `</tr>`;
+                });
+                const total = Object.values(usuarios).reduce((s, u) => s + u.total, 0);
+                html += `<tr style="background: #e0f0e0; font-weight: 700;">
+                    <td colspan="3" style="padding: 12px; text-align: right;">Total general:</td>
+                    <td style="padding: 12px; text-align: right; color: #1a4a2a;">$${total.toLocaleString()}</td>
+                </tr>`;
+            }
+            html += `</tbody></table>`;
+            
+            dom.reportTitle.textContent = titulo;
+            dom.reportContent.innerHTML = html;
+            dom.reportModal.style.display = 'flex';
+        }
 
         // ============================================================
         // CARGAR DATOS
@@ -1650,52 +1628,43 @@ function generarReporteCompacto(titulo, filtroFn) {
             });
 
             // ===== BOTÓN DE SALIR =====
-const logoutBtn = document.getElementById('logoutBtn');
-const logoutConfirmModal = document.getElementById('logoutConfirmModal');
-const closeLogoutModalBtn = document.getElementById('closeLogoutModalBtn');
-const confirmLogoutBtn = document.getElementById('confirmLogoutBtn');
-const cancelLogoutBtn = document.getElementById('cancelLogoutBtn');
+            const logoutBtn = document.getElementById('logoutBtn');
+            const logoutConfirmModal = document.getElementById('logoutConfirmModal');
+            const closeLogoutModalBtn = document.getElementById('closeLogoutModalBtn');
+            const confirmLogoutBtn = document.getElementById('confirmLogoutBtn');
+            const cancelLogoutBtn = document.getElementById('cancelLogoutBtn');
 
-if (logoutBtn) {
-    logoutBtn.addEventListener('click', () => {
-        logoutConfirmModal.style.display = 'flex';
-    });
-}
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', () => {
+                    logoutConfirmModal.style.display = 'flex';
+                });
+            }
 
-// Cerrar modal de confirmación
-if (closeLogoutModalBtn) {
-    closeLogoutModalBtn.addEventListener('click', () => {
-        logoutConfirmModal.style.display = 'none';
-    });
-}
+            if (closeLogoutModalBtn) {
+                closeLogoutModalBtn.addEventListener('click', () => {
+                    logoutConfirmModal.style.display = 'none';
+                });
+            }
 
-if (cancelLogoutBtn) {
-    cancelLogoutBtn.addEventListener('click', () => {
-        logoutConfirmModal.style.display = 'none';
-    });
-}
+            if (cancelLogoutBtn) {
+                cancelLogoutBtn.addEventListener('click', () => {
+                    logoutConfirmModal.style.display = 'none';
+                });
+            }
 
-// Confirmar cierre de sesión
-if (confirmLogoutBtn) {
-    confirmLogoutBtn.addEventListener('click', () => {
-        // Limpiar sessionStorage
-        sessionStorage.removeItem('usuario_actual');
-        sessionStorage.removeItem('session_token');
-        
-        // Limpiar cualquier otra variable de sesión
-        window.pagosPendientes = [];
-        
-        // Redirigir al login
-        window.location.href = 'index.html';
-    });
-}
+            if (confirmLogoutBtn) {
+                confirmLogoutBtn.addEventListener('click', () => {
+                    sessionStorage.removeItem('usuario_actual');
+                    sessionStorage.removeItem('session_token');
+                    window.location.href = 'index.html';
+                });
+            }
 
-// Cerrar modal si se hace clic fuera
-window.addEventListener('click', (e) => {
-    if (e.target === logoutConfirmModal) {
-        logoutConfirmModal.style.display = 'none';
-    }
-});
+            window.addEventListener('click', (e) => {
+                if (e.target === logoutConfirmModal) {
+                    logoutConfirmModal.style.display = 'none';
+                }
+            });
 
             // ===== TOGGLE TABLA =====
             dom.toggleTableBtn.addEventListener('click', () => {
@@ -1757,24 +1726,19 @@ window.addEventListener('click', (e) => {
 
             dom.saveReceiptBtn.addEventListener('click', guardarPagoConRecibo);
 
-            // ===== GUARDAR PAGOS =====
+            // ===== GUARDAR PAGOS (BOTÓN PRINCIPAL AHORA RECARGA DATOS) =====
             const saveBtn = document.getElementById('savePaymentsBtn');
             if (saveBtn) {
                 saveBtn.addEventListener('click', async () => {
-                    if (!window.pagosPendientes?.length) return mostrarAlerta('❌ No hay pagos pendientes', 'error');
-                    if (!appState.token) return mostrarAlerta('❌ Token no disponible', 'error');
-                    
                     try {
-                        saveBtn.innerHTML = '<span class="loading">⌛</span> Guardando';
+                        saveBtn.innerHTML = '<span class="loading">⌛</span> Actualizando';
                         saveBtn.disabled = true;
-                        await guardarPagosEnGitHub();
-                        mostrarAlerta(`✅ ${window.pagosPendientes.length} pagos guardados`, 'success');
                         appState.pagos = await cargarPagos();
                         calcularEstadisticas();
-                        if (appState.tablaVisible) renderizarTabla();
-                        window.pagosPendientes = [];
+                        renderizarTabla();
+                        mostrarAlerta('✅ Datos actualizados desde GitHub', 'success');
                     } catch (e) {
-                        mostrarAlerta('Error: ' + e.message, 'error');
+                        mostrarAlerta('Error al actualizar: ' + e.message, 'error');
                     } finally {
                         saveBtn.innerHTML = '💾 Guardar pagos';
                         saveBtn.disabled = false;
@@ -1897,16 +1861,11 @@ window.addEventListener('click', (e) => {
             
             dom.fechaActualDisplay.textContent = formatearFecha(appState.fechaActual);
             
-            window.pagosPendientes = [];
-            
             inicializarEventos();
             iniciarSistema();
         }
 
         inicializar();
-
-
-        
     </script>
 </body>
 </html>
