@@ -2,964 +2,1175 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verificación de Afiliados - JAC Bateas</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>JAC Bateas · Mi Cuenta</title>
     <style>
-        :root {
-            --primary: #4361ee;
-            --primary-dark: #3a56d4;
-            --secondary: #7209b7;
-            --accent: #f72585;
-            --success: #4cc9f0;
-            --light: #f8f9fa;
-            --dark: #212529;
-            --gray: #6c757d;
-            --light-gray: #e9ecef;
-            --card-bg: #ffffff;
-            --shadow: rgba(0, 0, 0, 0.1);
-            --gradient-primary: linear-gradient(135deg, #4361ee 0%, #3a0ca3 100%);
-            --gradient-secondary: linear-gradient(135deg, #7209b7 0%, #560bad 100%);
-            --gradient-accent: linear-gradient(135deg, #f72585 0%, #b5179e 100%);
-        }
-        
+        /* ===== RESET Y VARIABLES - PALETA VERDES Y AMARILLOS ===== */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
-        
+
         body {
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            color: var(--dark);
+            background: linear-gradient(145deg, #2b5e2b 0%, #1e4a1e 100%);
             min-height: 100vh;
-            padding: 20px;
             display: flex;
             justify-content: center;
             align-items: center;
+            padding: 12px;
         }
-        
-        .app-container {
+
+        .app {
+            max-width: 380px;
             width: 100%;
-            max-width: 900px;
-            background-color: var(--card-bg);
-            border-radius: 24px;
-            box-shadow: 0 20px 60px var(--shadow);
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            min-height: 90vh;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            border-radius: 32px;
+            box-shadow: 0 20px 40px rgba(0, 40, 0, 0.2);
+            padding: 24px 20px;
+            border: 1px solid rgba(160, 200, 160, 0.3);
         }
-        
-        /* Header */
-        .app-header {
-            background: var(--gradient-primary);
-            color: white;
-            padding: 24px 30px;
-            position: relative;
-            overflow: hidden;
+
+        /* ===== HEADER COMPACTO ===== */
+        .header {
+            text-align: center;
+            margin-bottom: 28px;
         }
-        
-        .header-content {
-            position: relative;
-            z-index: 2;
-        }
-        
-        .app-logo {
+
+        .logo {
             display: flex;
             align-items: center;
-            gap: 12px;
-            margin-bottom: 10px;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 4px;
         }
-        
+
         .logo-icon {
-            font-size: 28px;
-            background: rgba(255, 255, 255, 0.2);
-            width: 50px;
-            height: 50px;
+            background: linear-gradient(135deg, #2d6a4f 0%, #1b4d3e 100%);
+            color: white;
+            width: 40px;
+            height: 40px;
             border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
+            font-size: 20px;
+            box-shadow: 0 8px 15px rgba(29, 78, 49, 0.25);
         }
-        
-        .app-title {
-            font-size: 24px;
+
+        .logo-text {
+            font-size: 1.4rem;
             font-weight: 700;
-            margin: 0;
+            background: linear-gradient(135deg, #2d6a4f 0%, #1b4d3e 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
-        
-        .app-subtitle {
-            font-size: 14px;
-            opacity: 0.9;
-            margin-top: 4px;
-        }
-        
-        .header-decoration {
-            position: absolute;
-            top: -50px;
-            right: -50px;
-            width: 200px;
-            height: 200px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-        }
-        
-        .header-decoration-2 {
-            position: absolute;
-            bottom: -80px;
-            left: -80px;
-            width: 250px;
-            height: 250px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 50%;
-        }
-        
-        /* Search Section */
-        .search-section {
-            padding: 30px;
-            background-color: white;
-            border-bottom: 1px solid var(--light-gray);
-        }
-        
-        .search-container {
-            position: relative;
-            margin-bottom: 20px;
-        }
-        
-        .search-label {
-            display: block;
-            margin-bottom: 10px;
+
+        .badge {
+            background: #e9f5e9;
+            padding: 4px 12px;
+            border-radius: 100px;
+            font-size: 0.65rem;
             font-weight: 600;
-            color: var(--dark);
-            font-size: 16px;
+            color: #2d6a4f;
+            display: inline-block;
+            border: 1px solid #b7e4b7;
         }
-        
-        .search-box {
-            display: flex;
-            gap: 12px;
-            align-items: center;
+
+        /* ===== BUSCADOR CENTRADO Y COMPACTO ===== */
+        .search-section {
+            background: white;
+            border-radius: 24px;
+            padding: 20px 16px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 25px rgba(45, 106, 79, 0.1);
+            border: 1px solid #d0ebd0;
         }
-        
-        .search-input {
-            flex: 1;
-            padding: 16px 20px;
-            border: 2px solid var(--light-gray);
-            border-radius: 14px;
-            font-size: 16px;
-            transition: all 0.3s;
-            background-color: var(--light);
+
+        .search-title {
+            text-align: center;
+            margin-bottom: 16px;
         }
-        
-        .search-input:focus {
+
+        .search-title h2 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1e4a1e;
+            margin-bottom: 4px;
+        }
+
+        .search-title p {
+            font-size: 0.7rem;
+            color: #5b8c5b;
+        }
+
+        .input-wrapper {
+            position: relative;
+            margin-bottom: 12px;
+        }
+
+        .input-wrapper i {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #8bb88b;
+            font-size: 1rem;
+        }
+
+        #cedulaInput {
+            width: 100%;
+            padding: 14px 16px 14px 45px;
+            border: 2px solid #d0ebd0;
+            border-radius: 16px;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            background: #f8fff8;
+            text-align: center;
+            letter-spacing: 1px;
+        }
+
+        #cedulaInput:focus {
+            border-color: #2d6a4f;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(45, 106, 79, 0.1);
             outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.1);
         }
-        
-        .search-button {
-            background: var(--gradient-primary);
+
+        #cedulaInput::placeholder {
+            color: #b7d9b7;
+            font-size: 0.8rem;
+            letter-spacing: normal;
+        }
+
+        .btn-consulta {
+            width: 100%;
+            background: linear-gradient(135deg, #2d6a4f 0%, #1b4d3e 100%);
             color: white;
             border: none;
-            border-radius: 14px;
-            padding: 16px 24px;
-            font-size: 16px;
+            padding: 14px;
+            border-radius: 16px;
             font-weight: 600;
+            font-size: 0.9rem;
             cursor: pointer;
+            transition: all 0.2s;
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 8px;
-            transition: all 0.3s;
+            box-shadow: 0 8px 15px rgba(45, 106, 79, 0.25);
         }
-        
-        .search-button:hover {
-            background: var(--primary-dark);
-            transform: translateY(-2px);
+
+        .btn-consulta:active {
+            transform: scale(0.98);
+            box-shadow: 0 4px 10px rgba(45, 106, 79, 0.2);
         }
-        
-        .search-hint {
-            margin-top: 10px;
-            font-size: 14px;
-            color: var(--gray);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .search-hint i {
-            color: var(--accent);
-        }
-        
-        /* Results Section */
-        .results-section {
-            padding: 0px;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .loading-container {
+
+        /* ===== MODAL MODERNO CON DESPLAZAMIENTO ===== */
+        .modal-overlay {
             display: none;
-            text-align: center;
-            padding: 40px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 40, 0, 0.5);
+            backdrop-filter: blur(8px);
+            align-items: flex-end;
+            justify-content: center;
+            z-index: 10000;
+            animation: fadeIn 0.2s ease;
         }
-        
-        .loader {
-            display: inline-block;
-            width: 50px;
-            height: 50px;
-            border: 4px solid var(--light-gray);
-            border-top: 4px solid var(--primary);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin-bottom: 20px;
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
-        .result-card {
+
+        .modal-content {
             background: white;
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-            border: 1px solid var(--light-gray);
-            display: none;
+            width: 100%;
+            max-width: 380px;
+            border-radius: 32px 32px 0 0;
+            padding: 24px 20px;
+            transform: translateY(100%);
+            animation: slideUp 0.3s ease forwards;
+            max-height: 85vh;
+            overflow-y: auto;
+            box-shadow: 0 -10px 30px rgba(0, 40, 0, 0.15);
         }
-        
-        .result-header {
+
+        @keyframes slideUp {
+            from { transform: translateY(100%); }
+            to { transform: translateY(0); }
+        }
+
+        .modal-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 5px;
-            padding-bottom: 0px;
-            border-bottom: 2px solid var(--light-gray);
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid #e3f0e3;
+            position: sticky;
+            top: 0;
+            background: white;
+            z-index: 10;
         }
-        
-        .user-info {
+
+        .modal-header h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #1e4a1e;
             display: flex;
             align-items: center;
-            gap: 0px;
+            gap: 8px;
         }
-        
-        .user-avatar {
+
+        .btn-close {
+            background: #e3f0e3;
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 12px;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #2d6a4f;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-close:active {
+            background: #c8e0c8;
+            transform: scale(0.9);
+        }
+
+        /* ===== PERFIL COMPACTO CON FECHA DE AFILIACIÓN ===== */
+        .profile-card {
+            background: linear-gradient(135deg, #f0f9f0 0%, #ffffff 100%);
+            border-radius: 20px;
+            padding: 16px;
+            margin-bottom: 20px;
+            border: 1px solid #c8e4c8;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .avatar-mini {
             width: 60px;
             height: 60px;
-            background: var(--gradient-primary);
-            border-radius: 50%;
+            background: linear-gradient(135deg, #2d6a4f 0%, #1b4d3e 100%);
+            border-radius: 18px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 24px;
-            font-weight: bold;
+            font-size: 1.8rem;
+            font-weight: 600;
+            box-shadow: 0 8px 15px rgba(45, 106, 79, 0.2);
         }
-        
-        .user-name {
-            font-size: 22px;
+
+        .profile-info {
+            flex: 1;
+        }
+
+        .profile-name {
+            font-size: 0.95rem;
             font-weight: 700;
-            color: var(--dark);
+            color: #1e4a1e;
+            margin-bottom: 6px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 180px;
         }
-        
+
+        .profile-detail {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.7rem;
+            color: #5b8c5b;
+            margin-bottom: 4px;
+        }
+
+        .profile-detail i {
+            color: #8bb88b;
+            width: 16px;
+        }
+
+        .profile-detail span {
+            color: #2d6a4f;
+            font-weight: 600;
+        }
+
         .status-badge {
-            padding: 8px 16px;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 14px;
+            display: inline-block;
+            padding: 4px 14px;
+            border-radius: 100px;
+            font-size: 0.6rem;
+            font-weight: 700;
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #a3d0b1;
         }
-        
-        .status-active {
-            background-color: rgba(72, 202, 54, 0.81);
-            color: #0d8abc;
+
+        .status-badge.debt {
+            background: #fff3cd;
+            color: #856404;
+            border-color: #ffeaa7;
         }
-        
-        .status-inactive {
-            background-color: rgba(247, 37, 133, 0.2);
-            color: var(--accent);
-        }
-        
-        /* Info Grid Horizontal */
-        .info-grid-horizontal {
+
+        /* ===== STATS COMPACTAS CON INFORMACIÓN DE DEUDA ===== */
+        .stats-mini {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 25px;
-            margin-bottom: 25px;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 20px;
         }
-        
-        .info-item {
-            background: var(--light);
-            border-radius: 16px;
-            padding: 20px;
-            transition: all 0.3s;
+
+        .stat-mini-card {
+            background: #f5fbf5;
+            border-radius: 18px;
+            padding: 16px 12px;
+            border: 1px solid #d4e8d4;
+            box-shadow: 0 4px 10px rgba(45, 106, 79, 0.03);
         }
-        
-        .info-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
-        }
-        
-        .info-label {
-            display: block;
-            font-size: 13px;
-            color: var(--gray);
-            margin-bottom: 8px;
-            font-weight: 600;
+
+        .stat-mini-label {
+            font-size: 0.6rem;
+            font-weight: 700;
+            color: #5b8c5b;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-        }
-        
-        .info-value {
-            font-size: 18px;
-            font-weight: 600;
-            color: var(--dark);
-        }
-        
-        .info-icon {
-            display: inline-block;
-            margin-right: 10px;
-            color: var(--primary);
-            font-size: 18px;
-        }
-        
-        /* Months Badge */
-        .months-container {
-            background: var(--gradient-accent);
-            border-radius: 16px;
-            padding: 25px;
-            text-align: center;
-            color: white;
-            margin-top: 10px;
-        }
-        
-        .months-label {
-            font-size: 14px;
-            opacity: 0.9;
             margin-bottom: 8px;
         }
-        
-        .months-count {
-            font-size: 32px;
-            font-weight: 800;
+
+        .stat-mini-value {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #1e4a1e;
+            line-height: 1;
+            margin-bottom: 4px;
         }
-        
-        .months-text {
-            font-size: 16px;
-            margin-top: 5px;
+
+        .stat-mini-desc {
+            font-size: 0.55rem;
+            color: #8bb88b;
         }
-        
-        /* Not Found */
-        .not-found {
-            display: none;
-            text-align: center;
-            padding: 50px 30px;
-        }
-        
-        .not-found-icon {
-            font-size: 60px;
-            color: var(--gray);
+
+        /* ===== TARJETA DE DEuda - DESTACADA ===== */
+        .debt-summary-card {
+            background: #fff9e6;
+            border-radius: 18px;
+            padding: 16px;
             margin-bottom: 20px;
-            opacity: 0.5;
-        }
-        
-        .not-found h3 {
-            color: var(--dark);
-            margin-bottom: 15px;
-            font-size: 24px;
-        }
-        
-        .not-found p {
-            color: var(--gray);
-            max-width: 400px;
-            margin: 0 auto;
-            line-height: 1.6;
-        }
-        
-        /* Footer */
-        .app-footer {
-            padding: 20px 30px;
-            background-color: var(--light);
-            border-top: 1px solid var(--light-gray);
-            text-align: center;
-            color: var(--gray);
-            font-size: 14px;
-        }
-        
-        .footer-info {
+            border: 2px solid #ffd966;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
         }
-        
-        .security-badge {
+
+        .debt-info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .debt-label {
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: #856404;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .debt-months {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #b9770e;
+        }
+
+        .debt-total {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: #b9770e;
+            background: #fff3cd;
+            padding: 8px 16px;
+            border-radius: 100px;
+            border: 1px solid #ffe5a3;
+        }
+
+        /* ===== SECCIÓN MESES PENDIENTES ===== */
+        .pending-section {
+            background: #fff9e6;
+            border-radius: 18px;
+            padding: 16px;
+            margin-bottom: 20px;
+            border: 1px solid #ffe5a3;
+        }
+
+        .pending-title {
             display: flex;
             align-items: center;
             gap: 8px;
-            color: var(--success);
-            font-weight: 600;
+            margin-bottom: 14px;
+            color: #856404;
+            font-size: 0.8rem;
+            font-weight: 700;
         }
-        
-        /* Responsive */
-        @media (max-width: 768px) {
-            body {
-                padding: 10px;
-            }
-            
-            .app-container {
-                min-height: 95vh;
-                border-radius: 20px;
-            }
-            
-            .app-header {
-                padding: 20px;
-            }
-            
-            .app-title {
-                font-size: 20px;
-            }
-            
-            .search-section, .results-section {
-                padding: 20px;
-            }
-            
-            .search-box {
-                flex-direction: column;
-            }
-            
-            .search-button {
-                width: 100%;
-                justify-content: center;
-            }
-            
-            .info-grid-horizontal {
-                grid-template-columns: 1fr;
-                gap: 0px;
-            }
-            
-            .result-header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 0px;
-            }
-            
-            .footer-info {
-                flex-direction: column;
-                gap: 10px;
-                text-align: center;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .app-title {
-                font-size: 18px;
-            }
-            
-            .user-name {
-                font-size: 20px;
-            }
-            
-            .info-value {
-                font-size: 16px;
-            }
-            
-            .months-count {
-                font-size: 28px;
-            }
-        }
-        
-        /* Animation */
-        .fade-in {
-            animation: fadeIn 0.5s ease-in-out;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        /* Clear Button */
-        .clear-button {
-            background: #e6f04c8a;
-            color: var(--gray);
-            border: 2px solid var(--light-gray);
-            border-radius: 14px;
-            padding: 16px 24px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .clear-button:hover {
-            background: var(--light-gray);
-            color: var(--dark);
-        }
-        
-        .buttons-container {
+
+        .pending-list {
             display: flex;
-            gap: 12px;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .pending-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 14px;
+            background: white;
+            border-radius: 14px;
+            border: 1px solid #ffe5a3;
+        }
+
+        .pending-month {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #856404;
+        }
+
+        .pending-amount {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #b9770e;
+            background: #fff3cd;
+            padding: 4px 12px;
+            border-radius: 100px;
+        }
+
+        /* ===== HISTORIAL COMPACTO ===== */
+        .history-section {
+            background: #f5fbf5;
+            border-radius: 18px;
+            padding: 16px;
+        }
+
+        .history-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .history-header h4 {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #1e4a1e;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .year-filter {
+            background: white;
+            border: 1px solid #c8e4c8;
+            border-radius: 100px;
+            padding: 6px 14px;
+            font-size: 0.65rem;
+            font-weight: 600;
+            color: #2d6a4f;
+            outline: none;
+        }
+
+        .timeline-mini {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .timeline-item-mini {
+            display: flex;
+            align-items: center;
+            padding: 10px 12px;
+            background: white;
+            border-radius: 14px;
+            border: 1px solid #d4e8d4;
+            gap: 8px;
+        }
+
+        .timeline-month-mini {
+            min-width: 65px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: #1e4a1e;
+        }
+
+        .timeline-badge-mini {
+            padding: 4px 10px;
+            border-radius: 100px;
+            font-size: 0.6rem;
+            font-weight: 600;
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .timeline-amount-mini {
+            margin-left: auto;
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: #2d6a4f;
+        }
+
+        .timeline-receipt-mini {
+            background: #e3f0e3;
+            padding: 3px 8px;
+            border-radius: 100px;
+            font-size: 0.55rem;
+            color: #2d6a4f;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 24px;
+            background: white;
+            border-radius: 16px;
+            color: #8bb88b;
+            font-size: 0.7rem;
+        }
+
+        /* ===== LOADING ===== */
+        .loading-mini {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(5px);
+            align-items: center;
+            justify-content: center;
+            z-index: 20000;
+        }
+
+        .loading-spinner-mini {
+            background: white;
+            padding: 20px;
+            border-radius: 24px;
+            box-shadow: 0 15px 30px rgba(45, 106, 79, 0.15);
+            text-align: center;
+            border: 1px solid #c8e4c8;
+        }
+
+        .spinner-mini {
+            width: 40px;
+            height: 40px;
+            border: 3px solid #e3f0e3;
+            border-top: 3px solid #2d6a4f;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin-bottom: 8px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* ===== ALERTAS ===== */
+        .alert-toast {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            padding: 12px 20px;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            display: none;
+            z-index: 30000;
+            box-shadow: 0 10px 25px rgba(0,40,0,0.1);
+            border-left: 4px solid;
+            width: 90%;
+            max-width: 300px;
+            text-align: center;
+        }
+
+        .alert-success {
+            background: #d4edda;
+            border-left-color: #28a745;
+            color: #155724;
+        }
+
+        .alert-error {
+            background: #f8d7da;
+            border-left-color: #dc3545;
+            color: #721c24;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer-mini {
             margin-top: 20px;
+            text-align: center;
+            color: #8bb88b;
+            font-size: 0.55rem;
+            border-top: 1px solid #d4e8d4;
+            padding-top: 16px;
+        }
+
+        /* ===== SCROLL PERSONALIZADO ===== */
+        .modal-content::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .modal-content::-webkit-scrollbar-track {
+            background: #e3f0e3;
+        }
+
+        .modal-content::-webkit-scrollbar-thumb {
+            background: #8bb88b;
+            border-radius: 10px;
         }
     </style>
 </head>
 <body>
-    <div class="app-container">
-        <!-- Header -->
-        <header class="app-header">
-            <div class="header-decoration"></div>
-            <div class="header-decoration-2"></div>
-            <div class="header-content">
-                <div class="app-logo">
-                    <div class="logo-icon">
-                        <i class="fas fa-users"></i>
-                    </div>
-                    <div>
-                        <h1 class="app-title">Verificación de Afiliados</h1>
-                        <p class="app-subtitle">Junta de Acción Comunal - Barrio Bateas</p>
-                        <p class="app-subtitle">Puerto Gaitán, Meta</p>
-                    </div>
-                </div>
+    <!-- LOADING COMPACTO -->
+    <div id="loadingMini" class="loading-mini">
+        <div class="loading-spinner-mini">
+            <div class="spinner-mini"></div>
+            <p style="color: #2d6a4f; font-size: 0.8rem; font-weight: 500;">Consultando...</p>
+        </div>
+    </div>
+
+    <!-- ALERTA TOAST -->
+    <div id="alertToast" class="alert-toast"></div>
+
+    <!-- APLICACIÓN PRINCIPAL -->
+    <div class="app">
+        <!-- HEADER COMPACTO -->
+        <div class="header">
+            <div class="logo">
+                <div class="logo-icon">🌿</div>
+                <span class="logo-text">JAC Bateas</span>
             </div>
-        </header>
-        
-        <!-- Search Section -->
-        <section class="search-section">
-            <div class="search-container">
-                <label for="searchTerm" class="search-label">
-                    <i class="fas fa-search"></i> Buscar Afiliado
-                </label>
-                <div class="search-box">
-                    <input type="text" id="searchTerm" class="search-input" 
-                           placeholder="Ingresa número de cédula o nombre completo...">
-                    <button id="searchBtn" class="search-button">
-                        <i class="fas fa-search"></i> Verificar
-                    </button>
-                </div>
-                <p class="search-hint">
-                    <i class="fas fa-info-circle"></i> Para proteger la información, usa datos exactos.
-                </p>
+            <span class="badge">Mi Cuenta</span>
+        </div>
+
+        <!-- BUSCADOR CENTRADO -->
+        <div class="search-section">
+            <div class="search-title">
+                <h2>🔍 Consulta tu estado</h2>
+                <p>Ingresa tu número de documento</p>
             </div>
             
-            <div class="buttons-container">
-                <button id="clearBtn" class="clear-button">
-                    <i class="fas fa-eraser"></i> Limpiar Búsqueda
-                </button>
-            </div>
-        </section>
-        
-        <!-- Results Section -->
-        <section class="results-section">
-            <!-- Loading -->
-            <div class="loading-container" id="loading">
-                <div class="loader"></div>
-                <h3>Buscando información del afiliado...</h3>
+            <div class="input-wrapper">
+                <i>📄</i>
+                <input type="text" id="cedulaInput" placeholder="Cédula" inputmode="numeric" autocomplete="off">
             </div>
             
-            <!-- Result Card -->
-            <div class="result-card fade-in" id="resultCard">
-                <div class="result-header">
-                    <div class="user-info">
-                        <div class="user-avatar" id="userAvatar">JD</div>
-                        <div>
-                            <h2 class="user-name" id="resultName">Juan David Pérez</h2>
+            <button id="btnConsultar" class="btn-consulta">
+                <span>📋</span>
+                Ver mi información
+            </button>
+        </div>
+
+        <!-- INFORMACIÓN DE AYUDA -->
+        <div style="text-align: center; color: #8bb88b; font-size: 0.6rem;">
+            <span>Junta de Acción Comunal · Bateas</span>
+        </div>
+    </div>
+
+    <!-- MODAL DE RESULTADOS CON DESPLAZAMIENTO -->
+    <div id="resultModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>
+                    <span style="font-size: 1.2rem;">👤</span>
+                    Mi información
+                </h3>
+                <button id="closeModalBtn" class="btn-close">✕</button>
+            </div>
+
+            <!-- CONTENIDO DEL MODAL CON SCROLL -->
+            <div id="modalBody">
+                <!-- PERFIL COMPACTO CON FECHA DE AFILIACIÓN -->
+                <div class="profile-card">
+                    <div class="avatar-mini" id="avatarMini">👤</div>
+                    <div class="profile-info">
+                        <div class="profile-name" id="nombreAfiliado">Nombre completo</div>
+                        <div class="profile-detail">
+                            <i>📄</i>
+                            <span id="cedulaAfiliado">4438681</span>
+                        </div>
+                        <div class="profile-detail">
+                            <i>📅</i>
+                            <span>Afiliación: <span id="fechaAfiliacionMini">01/01/2024</span></span>
+                        </div>
+                        <div style="margin-top: 8px;">
+                            <span class="status-badge" id="estadoBadge">✓ AL DÍA</span>
                         </div>
                     </div>
-                    <div class="status-badge status-active" id="resultStatus">AFILIADO ACTIVO</div>
                 </div>
-                
-                <!-- Info Grid Horizontal -->
-                <div class="info-grid-horizontal">
-                    <div class="info-item">
-                        <span class="info-label"><i class="fas fa-user info-icon"></i> Nombre</span>
-                        <span class="info-value" id="infoNombre">Juan David Pérez Rodríguez</span>
+
+                <!-- ESTADÍSTICAS COMPACTAS -->
+                <div class="stats-mini">
+                    <div class="stat-mini-card">
+                        <div class="stat-mini-label">💰 Pagado</div>
+                        <div class="stat-mini-value" id="totalPagadoMini">$0</div>
+                        <div class="stat-mini-desc">total cancelado</div>
+                    </div>
+                    <div class="stat-mini-card">
+                        <div class="stat-mini-label">✅ Cuotas</div>
+                        <div class="stat-mini-value" id="cuotasPagadasMini">0</div>
+                        <div class="stat-mini-desc">meses pagados</div>
+                    </div>
+                </div>
+
+                <!-- TARJETA RESUMEN DE DEUDA (meses y valor total) -->
+                <div class="debt-summary-card" id="debtSummary">
+                    <div class="debt-info">
+                        <span class="debt-label">📊 MESES PENDIENTES</span>
+                        <span class="debt-months" id="mesesPendientesCount">0 meses</span>
+                    </div>
+                    <div class="debt-total" id="deudaTotalValue">$0</div>
+                </div>
+
+                <!-- MESES PENDIENTES POR PAGAR (LISTA DETALLADA) -->
+                <div class="pending-section" id="pendingSection">
+                    <div class="pending-title">
+                        <span>⚠️</span>
+                        <span>Detalle de meses pendientes</span>
+                    </div>
+                    <div class="pending-list" id="pendingList">
+                        <!-- CONTENIDO DINÁMICO -->
+                    </div>
+                </div>
+
+                <!-- HISTORIAL DE PAGOS -->
+                <div class="history-section">
+                    <div class="history-header">
+                        <h4>
+                            <span>📊</span>
+                            Historial de pagos
+                        </h4>
+                        <select id="filtroAnioModal" class="year-filter">
+                            <option value="todos">Todos</option>
+                        </select>
                     </div>
                     
-                    <div class="info-item">
-                        <span class="info-label"><i class="fas fa-id-card info-icon"></i> Cédula</span>
-                        <span class="info-value" id="infoCedula">10.234.567.890</span>
-                    </div>
-                    
-                    <div class="info-item">
-                        <span class="info-label"><i class="fas fa-calendar-alt info-icon"></i> Fecha de Afiliación</span>
-                        <span class="info-value" id="infoFecha">15 de enero de 2024</span>
+                    <div id="timelineContainerMini">
+                        <!-- CONTENIDO DINÁMICO -->
                     </div>
                 </div>
-                
-                <!-- Months Badge -->
-                <div class="months-container">
-                    <div class="months-label">TIEMPO COMO AFILIADO</div>
-                    <div class="months-count" id="monthsCount">2</div>
-                    <div class="months-text">MESES DE AFILIACIÓN</div>
+
+                <!-- FECHA DE CONSULTA -->
+                <div style="text-align: center; margin-top: 16px; color: #8bb88b; font-size: 0.55rem;">
+                    Consulta realizada el <span id="fechaConsultaModal"></span>
                 </div>
             </div>
-            
-            <!-- Not Found -->
-            <div class="not-found" id="notFound">
-                <div class="not-found-icon">
-                    <i class="fas fa-user-slash"></i>
-                </div>
-                <h3>Afiliado no encontrado</h3>
-                <p>Verifica que los datos ingresados sean correctos. Recuerda que para proteger la información de los afiliados, se requiere búsqueda exacta.</p>
-            </div>
-        </section>
-        
-        <!-- Footer -->
-        <footer class="app-footer">
-            <div class="footer-info">
-                <div class="security-badge">
-                    <i class="fas fa-shield-alt"></i>
-                    <span>Sistema seguro - Protección de datos activa</span>
-                </div>
-                <div>
-                    <p>Sistema de Verificación © 2024 - JAC Barrio Bateas</p>
-                </div>
-            </div>
-        </footer>
+        </div>
     </div>
 
     <script>
-        // Referencias a elementos del DOM
-        const searchTerm = document.getElementById('searchTerm');
-        const searchBtn = document.getElementById('searchBtn');
-        const clearBtn = document.getElementById('clearBtn');
-        const loading = document.getElementById('loading');
-        const resultCard = document.getElementById('resultCard');
-        const notFound = document.getElementById('notFound');
-        const userAvatar = document.getElementById('userAvatar');
-        
-        const resultName = document.getElementById('resultName');
-        const resultStatus = document.getElementById('resultStatus');
-        const infoNombre = document.getElementById('infoNombre');
-        const infoCedula = document.getElementById('infoCedula');
-        const infoFecha = document.getElementById('infoFecha');
-        const monthsCount = document.getElementById('monthsCount');
-        
-        // Variable para almacenar los datos de afiliados
-        let afiliados = [];
-        let searchTimeout = null;
-        
-        // Función para obtener iniciales del nombre
-        function obtenerIniciales(nombre) {
-            const partes = nombre.split(' ');
-            let iniciales = '';
-            
-            if (partes.length >= 2) {
-                iniciales = partes[0].charAt(0) + partes[1].charAt(0);
-            } else if (partes.length === 1) {
-                iniciales = partes[0].charAt(0);
-            }
-            
-            return iniciales.toUpperCase();
+        // ============================================================
+        // JAC BATEAS - CONSULTA MÓVIL MODERNA
+        // Colores: verdes oscuros (#2d6a4f, #1b4d3e) y amarillo oscuro (#856404)
+        // ============================================================
+
+        const CONFIG = {
+            REPO_OWNER: 'carlos2601',
+            REPO_NAME: 'juntadeaccioncomunalbarriobateaspuertogaitanmetalilianalondo-ogallego1010101010101000111010001010010',
+            AFILIADOS_PATH: 'afiliados.json',
+            CUOTA_PATH: 'cuota.json',
+            BRANCH: 'main',
+            VALOR_CUOTA: 5000
+        };
+
+        let appState = {
+            afiliados: [],
+            pagos: [],
+            fechaActual: new Date()
+        };
+
+        const dom = {
+            loading: document.getElementById('loadingMini'),
+            alert: document.getElementById('alertToast'),
+            cedulaInput: document.getElementById('cedulaInput'),
+            btnConsultar: document.getElementById('btnConsultar'),
+            modal: document.getElementById('resultModal'),
+            closeModalBtn: document.getElementById('closeModalBtn'),
+            avatarMini: document.getElementById('avatarMini'),
+            nombreAfiliado: document.getElementById('nombreAfiliado'),
+            cedulaAfiliado: document.getElementById('cedulaAfiliado'),
+            fechaAfiliacionMini: document.getElementById('fechaAfiliacionMini'),
+            estadoBadge: document.getElementById('estadoBadge'),
+            totalPagadoMini: document.getElementById('totalPagadoMini'),
+            cuotasPagadasMini: document.getElementById('cuotasPagadasMini'),
+            mesesPendientesCount: document.getElementById('mesesPendientesCount'),
+            deudaTotalValue: document.getElementById('deudaTotalValue'),
+            debtSummary: document.getElementById('debtSummary'),
+            pendingSection: document.getElementById('pendingSection'),
+            pendingList: document.getElementById('pendingList'),
+            filtroAnioModal: document.getElementById('filtroAnioModal'),
+            timelineContainerMini: document.getElementById('timelineContainerMini'),
+            fechaConsultaModal: document.getElementById('fechaConsultaModal')
+        };
+
+        // ============================================================
+        // UTILIDADES
+        // ============================================================
+
+        function mostrarLoading() {
+            dom.loading.style.display = 'flex';
         }
-        
-        // Función para calcular meses de afiliación
-        function calcularMesesAfiliacion(fechaAfiliacionStr) {
-            try {
-                const partes = fechaAfiliacionStr.split('/');
-                if (partes.length !== 3) return 0;
-                
-                const dia = parseInt(partes[0], 10);
-                const mesAfiliacion = parseInt(partes[1], 10);
-                const añoAfiliacion = parseInt(partes[2], 10);
-                
-                const fechaActual = new Date();
-                const mesActual = fechaActual.getMonth() + 1;
-                const añoActual = fechaActual.getFullYear();
-                
-                let mesesTotales = 0;
-                
-                if (añoActual === añoAfiliacion) {
-                    mesesTotales = mesActual - mesAfiliacion + 1;
-                } else {
-                    const mesesPrimerAño = 12 - mesAfiliacion + 1;
-                    const añosIntermedios = añoActual - añoAfiliacion - 1;
-                    const mesesAñosIntermedios = añosIntermedios > 0 ? añosIntermedios * 12 : 0;
-                    const mesesAñoActual = mesActual;
-                    
-                    mesesTotales = mesesPrimerAño + mesesAñosIntermedios + mesesAñoActual;
-                }
-                
-                return Math.max(1, mesesTotales);
-                
-            } catch (error) {
-                console.error('Error calculando meses:', error);
-                return 0;
-            }
+
+        function ocultarLoading() {
+            dom.loading.style.display = 'none';
         }
-        
-        // Función para formatear fecha
-        function formatearFecha(fechaStr) {
-            try {
-                const partes = fechaStr.split('/');
-                if (partes.length !== 3) return fechaStr;
-                
-                const dia = parseInt(partes[0], 10);
-                const mes = parseInt(partes[1], 10) - 1;
-                const año = parseInt(partes[2], 10);
-                
-                const meses = [
-                    'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio',
-                    'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'
-                ];
-                
-                return `${dia} de ${meses[mes]} de ${año}`;
-            } catch (error) {
-                return fechaStr;
-            }
-        }
-        
-        // Cargar datos del archivo JSON
-        async function cargarDatosAfiliados() {
-            try {
-                showLoading();
-                
-                const response = await fetch('afiliados.json');
-                
-                if (!response.ok) {
-                    throw new Error(`Error ${response.status}: ${response.statusText}`);
-                }
-                
-                const datos = await response.json();
-                
-                if (!Array.isArray(datos)) {
-                    throw new Error('Formato de datos inválido');
-                }
-                
-                const datosValidos = datos.filter(item => 
-                    item && 
-                    typeof item === 'object' && 
-                    item.cedula && 
-                    item.nombre && 
-                    item.fecha
-                );
-                
-                afiliados = datosValidos;
-                hideLoading();
-                
-                if (datosValidos.length === 0) {
-                    throw new Error('No se encontraron datos válidos');
-                }
-                
-                console.log(`Datos cargados: ${afiliados.length} afiliados`);
-                
-            } catch (error) {
-                console.error('Error cargando afiliados:', error);
-                
-                // Datos de ejemplo
-                afiliados = [
-                    {
-                        id: 1,
-                        cedula: "10234567890",
-                        nombre: "Juan David Pérez Rodríguez",
-                        fecha: "15/01/2024",
-                        activo: true
-                    },
-                    {
-                        id: 2,
-                        cedula: "9876543210",
-                        nombre: "María Alejandra López",
-                        fecha: "22/11/2023",
-                        activo: true
-                    },
-                    {
-                        id: 3,
-                        cedula: "5432167890",
-                        nombre: "Carlos Andrés García",
-                        fecha: "10/12/2023",
-                        activo: false
-                    },
-                    {
-                        id: 4,
-                        cedula: "1357924680",
-                        nombre: "Ana Isabel Torres",
-                        fecha: "01/06/2022",
-                        activo: true
-                    },
-                    {
-                        id: 5,
-                        cedula: "2468135790",
-                        nombre: "José Miguel Ramírez",
-                        fecha: "12/03/2024",
-                        activo: true
-                    }
-                ];
-                
-                hideLoading();
-            }
-        }
-        
-        // Función principal para buscar afiliado
-        function buscarAfiliado() {
-            const termino = searchTerm.value.trim();
-            
-            if (!termino) {
-                mostrarNoEncontrado();
-                return;
-            }
-            
-            const terminoLower = termino.toLowerCase();
-            let resultado = null;
-            
-            // Buscar por cédula exacta (con o sin puntos)
-            const cedulaLimpia = termino.replace(/\./g, '');
-            resultado = afiliados.find(afiliado => {
-                const cedulaAfiliado = afiliado.cedula.replace(/\./g, '');
-                return cedulaAfiliado === cedulaLimpia;
-            });
-            
-            // Si no encuentra por cédula, buscar por nombre exacto
-            if (!resultado) {
-                resultado = afiliados.find(afiliado => 
-                    afiliado.nombre.toLowerCase() === terminoLower
-                );
-            }
-            
-            // Si no encuentra exacto, buscar por inicio del nombre
-            if (!resultado) {
-                resultado = afiliados.find(afiliado => 
-                    afiliado.nombre.toLowerCase().startsWith(terminoLower)
-                );
-            }
-            
-            // Mostrar resultado
-            if (resultado) {
-                mostrarResultado(resultado);
-            } else {
-                mostrarNoEncontrado();
-            }
-        }
-        
-        // Mostrar un solo resultado
-        function mostrarResultado(afiliado) {
-            // Formatear fecha
-            const fechaFormateada = formatearFecha(afiliado.fecha);
-            
-            // Calcular meses de afiliación
-            const mesesAfiliado = calcularMesesAfiliacion(afiliado.fecha);
-            
-            // Actualizar información
-            resultName.textContent = afiliado.nombre;
-            infoNombre.textContent = afiliado.nombre;
-            infoCedula.textContent = afiliado.cedula;
-            infoFecha.textContent = fechaFormateada;
-            monthsCount.textContent = mesesAfiliado;
-            
-            // Actualizar avatar con iniciales
-            userAvatar.textContent = obtenerIniciales(afiliado.nombre);
-            
-            // Configurar estado
-            if (afiliado.activo === false) {
-                resultStatus.textContent = 'AFILIACIÓN INACTIVA';
-                resultStatus.className = 'status-badge status-inactive';
-            } else {
-                resultStatus.textContent = 'AFILIADO ACTIVO';
-                resultStatus.className = 'status-badge status-active';
-            }
-            
-            // Mostrar tarjeta y ocultar loading
-            hideLoading();
-            resultCard.style.display = 'block';
-            notFound.style.display = 'none';
-            
-            // Añadir animación
-            resultCard.classList.add('fade-in');
-        }
-        
-        // Mostrar "no encontrado"
-        function mostrarNoEncontrado() {
-            hideLoading();
-            resultCard.style.display = 'none';
-            notFound.style.display = 'block';
-        }
-        
-        // Mostrar indicador de carga
-        function showLoading() {
-            resultCard.style.display = 'none';
-            notFound.style.display = 'none';
-            loading.style.display = 'block';
-        }
-        
-        // Ocultar indicador de carga
-        function hideLoading() {
-            loading.style.display = 'none';
-        }
-        
-        // Limpiar búsqueda
-        function limpiarBusqueda() {
-            if (searchTimeout) {
-                clearTimeout(searchTimeout);
-                searchTimeout = null;
-            }
-            
-            searchTerm.value = '';
-            hideLoading();
-            resultCard.style.display = 'none';
-            notFound.style.display = 'none';
-            searchTerm.focus();
-        }
-        
-        // Función para ejecutar búsqueda
-        function ejecutarBusqueda() {
-            const termino = searchTerm.value.trim();
-            
-            if (!termino) {
-                mostrarNoEncontrado();
-                return;
-            }
-            
-            showLoading();
+
+        function mostrarAlerta(mensaje, tipo = 'error') {
+            dom.alert.textContent = mensaje;
+            dom.alert.className = `alert-toast alert-${tipo}`;
+            dom.alert.style.display = 'block';
             
             setTimeout(() => {
-                buscarAfiliado();
-            }, 500);
+                dom.alert.style.display = 'none';
+            }, 3000);
         }
-        
-        // Inicialización de la aplicación
-        document.addEventListener('DOMContentLoaded', async function() {
-            await cargarDatosAfiliados();
+
+        function formatearMoneda(valor) {
+            return `$${valor.toLocaleString('es-CO')}`;
+        }
+
+        function formatearFechaCorta(date) {
+            return date.toLocaleDateString('es-ES', { 
+                day: '2-digit', 
+                month: '2-digit', 
+                year: 'numeric' 
+            });
+        }
+
+        function parseFecha(fechaStr) {
+            if (!fechaStr) return new Date();
+            const partes = fechaStr.split('/');
+            return new Date(parseInt(partes[2]), parseInt(partes[1]) - 1, parseInt(partes[0]));
+        }
+
+        function obtenerNumeroMes(nombreMes) {
+            const meses = {
+                'enero': 0, 'febrero': 1, 'marzo': 2, 'abril': 3,
+                'mayo': 4, 'junio': 5, 'julio': 6, 'agosto': 7,
+                'septiembre': 8, 'octubre': 9, 'noviembre': 10, 'diciembre': 11
+            };
+            return meses[nombreMes?.toLowerCase()] || 0;
+        }
+
+        function nombreMes(numero) {
+            const meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+            return meses[numero];
+        }
+
+        // ============================================================
+        // CARGA DE DATOS
+        // ============================================================
+
+        async function cargarAfiliados() {
+            const url = `https://raw.githubusercontent.com/${CONFIG.REPO_OWNER}/${CONFIG.REPO_NAME}/refs/heads/${CONFIG.BRANCH}/${CONFIG.AFILIADOS_PATH}`;
+            try {
+                const res = await fetch(url);
+                if (!res.ok) throw new Error('Error cargando afiliados');
+                return await res.json();
+            } catch (e) {
+                console.error(e);
+                return [];
+            }
+        }
+
+        async function cargarPagos() {
+            const url = `https://raw.githubusercontent.com/${CONFIG.REPO_OWNER}/${CONFIG.REPO_NAME}/refs/heads/${CONFIG.BRANCH}/${CONFIG.CUOTA_PATH}`;
+            try {
+                const res = await fetch(url);
+                if (res.status === 404) return [];
+                const data = await res.json();
+                return data.pagos || [];
+            } catch (e) {
+                console.error(e);
+                return [];
+            }
+        }
+
+        // ============================================================
+        // PROCESAMIENTO DE PAGOS
+        // ============================================================
+
+        function extraerPagosDeString(str, año) {
+            if (!str) return [];
+            return str.split(';').filter(p => p.trim()).map(p => {
+                const partes = p.trim().split('_');
+                return {
+                    mes: partes[0],
+                    año: parseInt(partes[1]),
+                    valor: parseInt(partes[2]),
+                    fecha: partes[3],
+                    recibo: partes[4] || 'N/A'
+                };
+            }).filter(p => p.año === año);
+        }
+
+        function obtenerPagosAfiliado(cedula) {
+            const registro = appState.pagos.find(p => p.cedula === cedula);
+            if (!registro) return [];
             
-            searchBtn.addEventListener('click', ejecutarBusqueda);
-            clearBtn.addEventListener('click', limpiarBusqueda);
+            const pagos = [];
+            const años = [2024, 2025, 2026];
             
-            searchTerm.addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') {
-                    e.preventDefault();
-                    ejecutarBusqueda();
-                }
+            años.forEach(año => {
+                const campo = `fecha_pago_año_${año}`;
+                const pagosAño = extraerPagosDeString(registro[campo], año);
+                pagos.push(...pagosAño);
             });
             
-            // Búsqueda automática para cédulas completas
-            searchTerm.addEventListener('input', (e) => {
-                const valor = e.target.value.trim();
+            return pagos.sort((a, b) => {
+                const fechaA = new Date(b.año, obtenerNumeroMes(b.mes), 1);
+                const fechaB = new Date(a.año, obtenerNumeroMes(a.mes), 1);
+                return fechaA - fechaB;
+            });
+        }
+
+        function mesEstaPagado(cedula, año, mes) {
+            const meses = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+            const registro = appState.pagos.find(p => p.cedula === cedula);
+            if (!registro) return false;
+            const pagosStr = registro[`fecha_pago_año_${año}`] || '';
+            return pagosStr.split(';').some(p => p.trim().startsWith(`${meses[mes]}_${año}`));
+        }
+
+        function calcularMesesDeuda(cedula, fechaAfiliacion) {
+            const afiliacion = parseFecha(fechaAfiliacion);
+            const hoy = appState.fechaActual;
+            const meses = [];
+            
+            for (let año = afiliacion.getFullYear(); año <= hoy.getFullYear(); año++) {
+                const mesInicio = (año === afiliacion.getFullYear()) ? afiliacion.getMonth() : 0;
+                const mesFin = (año === hoy.getFullYear()) ? hoy.getMonth() : 11;
                 
-                if (searchTimeout) {
-                    clearTimeout(searchTimeout);
+                for (let mes = mesInicio; mes <= mesFin; mes++) {
+                    if (!mesEstaPagado(cedula, año, mes)) {
+                        meses.push({ año, mes });
+                    }
                 }
+            }
+            
+            return meses;
+        }
+
+        // ============================================================
+        // CONSULTA PRINCIPAL
+        // ============================================================
+
+        async function consultarAfiliado() {
+            const cedula = dom.cedulaInput.value.trim();
+            
+            if (!cedula) {
+                mostrarAlerta('Ingresa tu número de cédula', 'error');
+                return;
+            }
+
+            if (cedula.length < 5) {
+                mostrarAlerta('Cédula inválida', 'error');
+                return;
+            }
+
+            mostrarLoading();
+
+            try {
+                const afiliado = appState.afiliados.find(a => a.cedula === cedula);
                 
-                if (!valor) {
-                    limpiarBusqueda();
+                if (!afiliado) {
+                    ocultarLoading();
+                    mostrarAlerta('Afiliado no encontrado', 'error');
                     return;
                 }
+
+                // Procesar información
+                const pagosAfiliado = obtenerPagosAfiliado(cedula);
+                const mesesDeuda = calcularMesesDeuda(cedula, afiliado.fecha);
+                const totalPagado = pagosAfiliado.reduce((sum, p) => sum + p.valor, 0);
+                const deudaTotal = mesesDeuda.length * CONFIG.VALOR_CUOTA;
                 
-                // Si es un número de 10 dígitos (con o sin puntos), buscar automáticamente
-                const digitos = valor.replace(/\./g, '');
-                if (/^\d{10}$/.test(digitos)) {
-                    searchTimeout = setTimeout(() => {
-                        ejecutarBusqueda();
-                    }, 800);
+                // Limitar nombre a 25 caracteres
+                const nombreCorto = afiliado.nombre.length > 25 
+                    ? afiliado.nombre.substring(0, 22) + '...' 
+                    : afiliado.nombre;
+
+                // Actualizar perfil
+                dom.nombreAfiliado.textContent = nombreCorto;
+                dom.cedulaAfiliado.textContent = afiliado.cedula;
+                dom.fechaAfiliacionMini.textContent = afiliado.fecha;
+                dom.avatarMini.textContent = afiliado.nombre.charAt(0).toUpperCase();
+                
+                const estaAlDia = mesesDeuda.length === 0;
+                dom.estadoBadge.textContent = estaAlDia ? '✓ AL DÍA' : '⚠️ CON DEUDA';
+                dom.estadoBadge.className = estaAlDia ? 'status-badge' : 'status-badge debt';
+                
+                // Actualizar estadísticas
+                dom.totalPagadoMini.textContent = formatearMoneda(totalPagado);
+                dom.cuotasPagadasMini.textContent = pagosAfiliado.length;
+                
+                // Actualizar resumen de deuda (meses y valor total)
+                dom.mesesPendientesCount.textContent = `${mesesDeuda.length} ${mesesDeuda.length === 1 ? 'mes' : 'meses'}`;
+                dom.deudaTotalValue.textContent = formatearMoneda(deudaTotal);
+                
+                // Renderizar meses pendientes (lista detallada)
+                if (mesesDeuda.length > 0) {
+                    let pendingHtml = '';
+                    mesesDeuda.forEach(({año, mes}) => {
+                        pendingHtml += `
+                            <div class="pending-item">
+                                <span class="pending-month">${nombreMes(mes)} ${año}</span>
+                                <span class="pending-amount">${formatearMoneda(CONFIG.VALOR_CUOTA)}</span>
+                            </div>
+                        `;
+                    });
+                    dom.pendingList.innerHTML = pendingHtml;
+                    dom.pendingSection.style.display = 'block';
+                    dom.debtSummary.style.display = 'flex';
+                } else {
+                    dom.pendingList.innerHTML = `
+                        <div style="text-align: center; padding: 20px; color: #2d6a4f; background: white; border-radius: 14px;">
+                            ✓ No tienes deudas pendientes
+                        </div>
+                    `;
+                    // Si no hay deuda, mostrar mensaje en el resumen
+                    dom.mesesPendientesCount.textContent = '0 meses';
+                    dom.deudaTotalValue.textContent = '$0';
+                }
+                
+                // Generar filtro de años
+                const años = [...new Set(pagosAfiliado.map(p => p.año))];
+                años.sort((a,b) => b - a);
+                
+                let añoOptions = '<option value="todos">📆 Todos los años</option>';
+                años.forEach(año => {
+                    añoOptions += `<option value="${año}">${año}</option>`;
+                });
+                dom.filtroAnioModal.innerHTML = añoOptions;
+                
+                // Renderizar timeline
+                renderizarTimelineMini(pagosAfiliado);
+                
+                // Fecha de consulta
+                dom.fechaConsultaModal.textContent = formatearFechaCorta(new Date());
+                
+                // Mostrar modal
+                ocultarLoading();
+                dom.modal.style.display = 'flex';
+                
+            } catch (e) {
+                ocultarLoading();
+                mostrarAlerta('Error al consultar', 'error');
+                console.error(e);
+            }
+        }
+
+        // ============================================================
+        // RENDERIZAR TIMELINE COMPACTO
+        // ============================================================
+
+        function renderizarTimelineMini(pagos) {
+            const filtro = dom.filtroAnioModal.value;
+            const mesesNombres = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
+            
+            let pagosFiltrados = pagos;
+            
+            if (filtro !== 'todos') {
+                const añoFiltro = parseInt(filtro);
+                pagosFiltrados = pagosFiltrados.filter(p => p.año === añoFiltro);
+            }
+            
+            let html = '<div class="timeline-mini">';
+            
+            if (pagosFiltrados.length === 0) {
+                html += '<div class="empty-state">';
+                html += '📭 No hay pagos registrados en este período';
+                html += '</div>';
+            } else {
+                pagosFiltrados.forEach(pago => {
+                    const mesAbr = pago.mes.substring(0, 3);
+                    const mesCapitalize = mesAbr.charAt(0).toUpperCase() + mesAbr.slice(1);
+                    
+                    html += `<div class="timeline-item-mini">`;
+                    html += `<div class="timeline-month-mini">${mesCapitalize} ${pago.año}</div>`;
+                    html += `<div class="timeline-badge-mini">✅ Pagado</div>`;
+                    html += `<div class="timeline-amount-mini">${formatearMoneda(pago.valor)}</div>`;
+                    html += `<div class="timeline-receipt-mini">${pago.recibo.substring(0, 8)}</div>`;
+                    html += `</div>`;
+                });
+            }
+            
+            html += '</div>';
+            dom.timelineContainerMini.innerHTML = html;
+        }
+
+        // ============================================================
+        // INICIALIZACIÓN
+        // ============================================================
+
+        async function inicializar() {
+            mostrarLoading();
+            
+            try {
+                appState.afiliados = await cargarAfiliados();
+                appState.pagos = await cargarPagos();
+                console.log(`✅ ${appState.afiliados.length} afiliados, ${appState.pagos.length} registros`);
+            } catch (e) {
+                console.error(e);
+                mostrarAlerta('Error cargando datos', 'error');
+            } finally {
+                ocultarLoading();
+            }
+
+            // Event listeners
+            dom.btnConsultar.addEventListener('click', consultarAfiliado);
+            
+            dom.cedulaInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    consultarAfiliado();
                 }
             });
-            
-            // Enfoque automático en el campo de búsqueda
-            searchTerm.focus();
-        });
+
+            dom.closeModalBtn.addEventListener('click', () => {
+                dom.modal.style.display = 'none';
+            });
+
+            dom.modal.addEventListener('click', (e) => {
+                if (e.target === dom.modal) {
+                    dom.modal.style.display = 'none';
+                }
+            });
+
+            dom.filtroAnioModal.addEventListener('change', () => {
+                const cedula = dom.cedulaAfiliado.textContent;
+                if (cedula && cedula !== '1234567890') {
+                    const pagosAfiliado = obtenerPagosAfiliado(cedula);
+                    renderizarTimelineMini(pagosAfiliado);
+                }
+            });
+
+            // Limpiar input al abrir
+            dom.cedulaInput.value = '';
+        }
+
+        inicializar();
     </script>
 </body>
 </html>
-
-
-
-
