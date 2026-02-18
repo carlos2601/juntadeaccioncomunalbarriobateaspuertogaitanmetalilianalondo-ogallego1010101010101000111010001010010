@@ -1,5 +1,5 @@
 {
-  "ultima_actualizacion": "2026-02-18T18:13:25.418Z",
+  "ultima_actualizacion": "2026-02-18T18:15:24.487Z",
   "valor_cuota": 5000,
   "pagos": [
     {
@@ -10,7 +10,8 @@
     {
       "cedula": "1124822444",
       "nombre": "OSCAR FERNANDO GONZALEZ",
-      "certificado": "febrero_2026_20000_18/02/2026_13:13:25_0003"
+      "certificado": "febrero_2026_20000_18/02/2026_13:13:25_0003",
+      "fecha_pago_año_2026": "enero_2026_5000_18/02/2026_0004"
     },
     {
       "cedula": "1121858694",
