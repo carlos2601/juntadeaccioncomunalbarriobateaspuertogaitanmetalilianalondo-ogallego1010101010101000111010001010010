@@ -1,0 +1,2229 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+    <title>JAC Bateas · Control de Cuotas y Certificados</title>
+    <style>
+        /* ===== RESET Y VARIABLES - DISEÑO CON COLORES ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(145deg, #4c724c 0%, #4c724c 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 5px;
+        }
+
+        .app {
+            max-width: 1440px;
+            width: 100%;
+            background: white;
+            border-radius: 28px;
+            box-shadow: 0 15px 35px rgba(30, 74, 44, 0.08);
+            padding: 5px;
+            border: 1px solid rgba(200, 220, 200, 0.3);
+        }
+
+        /* ===== HEADER CON COLOR ===== */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid #d0e6d0;
+        }
+
+        .logo-area h1 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #1a4a2a;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo-area h1 span {
+            background: #e6f0e6;
+            padding: 4px 12px;
+            border-radius: 100px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: #1a4a2a;
+            letter-spacing: 0.3px;
+            border: 1px solid #b8d8b8;
+        }
+
+        .year-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: #f2f9f2;
+            padding: 6px 18px;
+            border-radius: 100px;
+            font-size: 0.85rem;
+            color: #1a4a2a;
+            border: 1px solid #c0e0c0;
+            font-weight: 500;
+        }
+
+        .year-badge select {
+            border: none;
+            background: transparent;
+            padding: 4px 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #1a4a2a;
+            outline: none;
+            cursor: pointer;
+        }
+
+        /* ===== MODAL DE API - ÚNICA VENTANA AL INICIO ===== */
+        .api-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(145deg, #f0f7f0, #e0ece0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+
+        .api-modal-content {
+            background: white;
+            border-radius: 32px;
+            max-width: 420px;
+            width: 90%;
+            padding: 36px;
+            box-shadow: 0 25px 50px -12px rgba(0, 40, 0, 0.15);
+            border: 1px solid #d0e4d0;
+            text-align: center;
+        }
+
+        .api-modal-content h2 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #1a4a2a;
+            margin-bottom: 12px;
+        }
+
+        .api-modal-content p {
+            color: #4a6b4a;
+            font-size: 0.9rem;
+            margin-bottom: 28px;
+            line-height: 1.5;
+        }
+
+        .api-input-group {
+            margin-bottom: 24px;
+            text-align: left;
+        }
+
+        .api-input-group label {
+            display: block;
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: #1a4a2a;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .api-input-group input {
+            width: 100%;
+            padding: 14px 18px;
+            border: 2px solid #020000;
+            border-radius: 16px;
+            font-size: 0.9rem;
+            transition: all 0.15s;
+            background: #f8fff8;
+        }
+
+        .api-input-group input:focus {
+            border-color: #2a7a4a;
+            outline: none;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(42, 122, 74, 0.1);
+        }
+
+        .api-btn {
+            background: #1a4a2a;
+            color: white;
+            border: none;
+            padding: 14px 24px;
+            border-radius: 16px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            width: 100%;
+            cursor: pointer;
+            transition: background 0.15s;
+        }
+
+        .api-btn:hover {
+            background: #2a6a3a;
+        }
+
+        /* ===== BOTONES CON COLORES ===== */
+        .btn {
+            border: none;
+            padding: 10px 18px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.8rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            cursor: pointer;
+            transition: all 0.15s;
+            background: white;
+            color: #1e293b;
+            border: 1px solid #d0e0d0;
+        }
+
+        .btn:hover {
+            background: #f0f8f0;
+            border-color: #a0c0a0;
+        }
+
+        .btn-primary {
+            background: #1a4a2a;
+            color: white;
+            border: none;
+        }
+        .btn-primary:hover {
+            background: #2a6a3a;
+        }
+
+        .btn-success {
+            background: #1e7a4a;
+            color: white;
+            border: none;
+        }
+        .btn-success:hover {
+            background: #2a8e5a;
+        }
+
+        .btn-warning {
+            background: #fff1e0;
+            color: #c10e0e;
+            border: 1px solid #ff2100;
+        }
+        .btn-warning:hover {
+            background: #ffe8d0;
+        }
+
+        /* ===== BARRA DE ACCIONES ===== */
+        .action-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 2px;
+            align-items: center;
+            background: #1a4a2a;
+            padding: 16px 20px;
+            border-radius: 20px;
+            border: 1px solid #d8ecd8;
+        }
+
+        .search-box {
+            flex: 2;
+            min-width: 260px;
+            display: flex;
+            align-items: center;
+            background: white;
+            border: 1.5px solid #d8ecd8;
+            border-radius: 12px;
+            padding: 0 14px;
+            transition: all 0.15s;
+        }
+
+        .search-box:focus-within {
+            border-color: #2a7a4a;
+            box-shadow: 0 0 0 3px rgba(42, 122, 74, 0.1);
+        }
+
+        .search-box input {
+            flex: 1;
+            padding: 12px 8px;
+            border: none;
+            background: transparent;
+            font-size: 0.9rem;
+        }
+        .search-box input:focus { outline: none; }
+
+        .report-group {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        /* ===== NUEVO: BADGE PARA SIGUIENTE RECIBO ===== */
+        .next-receipt-badge {
+            background: #ffd966;
+            color: #1a4a2a;
+            padding: 6px 16px;
+            border-radius: 100px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            border: 1px solid #b68b40;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-left: auto;
+        }
+        .next-receipt-badge span {
+            background: #1a4a2a;
+            color: white;
+            padding: 2px 10px;
+            border-radius: 100px;
+            font-size: 0.9rem;
+        }
+
+        /* ===== TARJETAS DE ESTADÍSTICAS CON COLORES - AHORA 7 TARJETAS ===== */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr); /* Fijo 7 columnas */
+            gap: 8px;
+            margin-bottom: 5px;
+            text-align: center;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 8px 2px;
+            border-radius: 10px;
+            border: 1px solid #39b339;
+            box-shadow: 0 4px 12px rgba(0, 40, 0, 0.02);
+            border-top: 4px solid #8fc98f;
+        }
+
+        .stat-card:nth-child(1) { border-top-color: #4a90e2; }
+        .stat-card:nth-child(2) { border-top-color: #50c878; }
+        .stat-card:nth-child(3) { border-top-color: #9370db; }
+        .stat-card:nth-child(4) { border-top-color: #ffaa00; }
+        .stat-card:nth-child(5) { border-top-color: #b68b40; }
+        .stat-card:nth-child(6) { border-top-color: #ff6b6b; }
+        .stat-card:nth-child(7) { border-top-color: #ff4444; }
+
+        .stat-label {
+            font-size: 0.55rem;
+            color: #4a6b4a;
+            text-transform: uppercase;
+            letter-spacing: 0.2px;
+            font-weight: 700;
+            margin-bottom: 2px;
+            white-space: nowrap;
+        }
+
+        .stat-value {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #1a3a2a;
+            line-height: 1.2;
+        }
+
+        .stat-desc {
+            font-size: 0.5rem;
+            color: #6a8b6a;
+            margin-top: 2px;
+            white-space: nowrap;
+        }
+
+        /* ===== TABLA CON COLORES ===== */
+        .table-section {
+            background: #2b831c;
+            border-radius: 20px;
+            border: 3px solid #2b831c;
+            margin-bottom: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 40, 0, 0.02);
+        }
+
+        .table-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 6px 5px;
+            background: #f4fff4;
+            border-bottom: 2px solid #c8e4c8;        
+            background-color: #caddce;
+        }
+
+        .table-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #1a4a2a;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .legend {
+            display: flex;
+            gap: 16px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            align-items: center;
+        }
+        .legend span { display: flex; align-items: center; gap: 4px; }
+
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.75rem;
+        }
+
+        th {
+            background: #1a4a2a;
+            color: rgb(255, 255, 255);
+            font-weight: 600;
+            padding: 14px 6px;
+            text-align: center;
+            font-size: 1.3rem;
+            letter-spacing: 0.5px;
+            align-content: center;
+        }
+
+        td {
+            padding: 5px 5px;
+            border-bottom: 1px solid #e8f4e8;
+            vertical-align: middle;
+            text-align: center;
+            background: rgb(191, 255, 220);
+            font-size: 15px;
+            padding: 2px;
+            background-color: #e7e6e6;
+            font-weight: 500;
+        }
+        tr:hover td { background: #c7cac7; }
+
+        .month-checkbox {
+            width: 30px;
+            height: 30px;
+            border-radius: 8px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            transition: all 0.1s;
+        }
+
+        .month-checkbox.debt {
+            background: #fff1f0;
+            border: 2px solid #d41515;
+            cursor: pointer;
+        }
+        .month-checkbox.debt:hover {
+            background: #ffe4e0;
+            transform: scale(1.05);
+            border-color: #c04040;
+        }
+
+        .month-checkbox.paid {
+            background: #e4ffe4;
+            border: 2px solid #5ab05a;
+        }
+        .month-checkbox.paid::after {
+            content: "✓";
+            color: #2a7a2a;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .month-checkbox.future {
+            background: #f0f8f0;
+            border: 2px solid #a0c0a0;
+            opacity: 0.6;
+        }
+
+        .month-checkbox.selected {
+            background: #1a4a2a;
+            border: 2px solid #1a4a2a;
+        }
+        .month-checkbox.selected::after {
+            content: "✓";
+            color: white;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .badge {
+            padding: 4px 10px;
+            border-radius: 100px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            display: inline-block;
+            background: #f0f8f0;
+            color: #1a4a2a;
+        }
+
+        .btn-detail {
+            background: #e4f0e4;
+            border: none;
+            padding: 6px 14px;
+            border-radius: 100px;
+            font-size: 0.65rem;
+            font-weight: 700;
+            color: #1a4a2a;
+            cursor: pointer;
+            transition: all 0.1s;
+            border: 1px solid #b8d8b8;
+        }
+        .btn-detail:hover { background: #d4e8d4; }
+
+        /* ===== PAGINACIÓN CENTRADA ===== */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 16px 20px;
+            gap: 20px;
+            border-top: 2px solid #d8ecd8;
+            background: #caddce;
+            flex-wrap: wrap;
+        }
+
+        .pagination-controls {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .page-btn {
+            min-width: 34px;
+            height: 34px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            border: 1px solid #c8e0c8;
+            background: white;
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            color: #1a4a2a;
+            padding: 0 6px;
+        }
+        .page-btn:hover {
+            background: #e0f0e0;
+        }
+        .page-btn.active {
+            background: #1a4a2a;
+            color: white;
+            border-color: #1a4a2a;
+        }
+
+        .page-input {
+            width: 60px;
+            padding: 6px;
+            border: 2px solid #c8e0c8;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+            color: #1a4a2a;
+        }
+
+        /* ===== MODALES ===== */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(26, 74, 42, 0.4);
+            backdrop-filter: blur(4px);
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 28px;
+            max-width: 1200px;
+            width: 100%;
+            max-height: 80vh;
+            overflow-y: auto;
+            padding: 28px;
+            box-shadow: 0 25px 50px -12px rgba(0, 40, 0, 0.3);
+            border: 1px solid #d0e4d0;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #c8e4c8;
+            position: sticky;
+            top: 0;
+            background: white;
+            z-index: 10;
+        }
+        .modal-header h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #1a4a2a;
+            text-align: center;
+            flex: 1;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #6a8b6a;
+            padding: 4px 8px;
+        }
+        .close-btn:hover { color: #1a4a2a; }
+
+        .receipt-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(26, 74, 42, 0.4);
+            backdrop-filter: blur(4px);
+            align-items: center;
+            justify-content: center;
+            z-index: 10001;
+            padding: 20px;
+        }
+
+        .receipt-content {
+            background: white;
+            border-radius: 28px;
+            max-width: 450px;
+            width: 100%;
+            padding: 28px;
+            border: 1px solid #d0e4d0;
+        }
+
+        .receipt-info {
+            background: #f2fff2;
+            padding: 16px;
+            border-radius: 16px;
+            margin-bottom: 20px;
+            border-left: 6px solid;
+        }
+
+        /* ===== SELECTOR DE TIPO DE PAGO ===== */
+        .payment-type-selector {
+            margin-bottom: 20px;
+            padding: 16px;
+            background: #f8fff8;
+            border-radius: 16px;
+            border: 2px solid #d0e4d0;
+        }
+        .payment-type-selector label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 700;
+            color: #1a4a2a;
+        }
+        .payment-option {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px 12px;
+            margin-bottom: 4px;
+            background: white;
+            border-radius: 12px;
+            border: 1px solid #e0e0e0;
+            cursor: pointer;
+        }
+        .payment-option.selected {
+            background: #e4ffe4;
+            border: 2px solid #2a7a4a;
+        }
+        .payment-option input[type="radio"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        .payment-option .valor {
+            font-weight: 700;
+            color: #1a4a2a;
+            margin-left: auto;
+        }
+
+        .receipt-field {
+            margin-bottom: 20px;
+        }
+        .receipt-field label {
+            display: block;
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: #1a4a2a;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+        }
+        .receipt-field input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #d0e4d0;
+            border-radius: 12px;
+            font-size: 0.9rem;
+        }
+        .receipt-field input:focus {
+            border-color: #2a7a4a;
+            outline: none;
+        }
+
+        .month-badge {
+            background: #ffffff;
+            color: rgb(0, 0, 0);
+            padding: 4px 10px;
+            border-radius: 100px;
+            font-size: 0.65rem;
+            display: inline-block;
+            margin: 2px;
+        }
+
+        .hidden { display: none !important; }
+        .loading { animation: spin 0.8s linear infinite; }
+        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+        .alert {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 14px 20px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: none;
+            z-index: 10002;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        }
+        .alert.show { display: block; }
+        .alert-success { background: #e4ffe4; color: #1a4a2a; border-left: 6px solid #2a8e5a; }
+        .alert-error { background: #ffe4e4; color: #8a2a2a; border-left: 6px solid #c04040; }
+        .alert-info { background: #e4f0ff; color: #2a4a6a; border-left: 6px solid #4a8ac0; }
+
+        /* Responsive para móviles */
+        @media (max-width: 1200px) {
+            .stats-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+        @media (max-width: 800px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- MODAL DE API - ÚNICA VENTANA DE INICIO -->
+    <div id="apiModal" class="api-modal">
+        <div class="api-modal-content">
+            <h2>🌿 JAC Bateas</h2>
+            <p>Ingresa tu contraseña para acceder al sistema de control de cuotas y certificados</p>
+            <div class="api-input-group">
+                <label style="font-size: 16px; text-align: center;">CLAVE DINAMICA</label>
+                <input type="password" id="apiTokenInput" placeholder="">
+            </div>
+            <button id="apiConnectBtn" class="api-btn">Conectar al sistema</button>
+        </div>
+    </div>
+
+    <!-- APLICACIÓN PRINCIPAL -->
+    <div class="app" id="mainApp" style="display: none;">
+        <!-- HEADER -->
+        <div class="header">
+            <div class="logo-area">
+                <h1 style="text-align: center; align-items: center;">
+                    🌿 Sistema de Recaudo - Junta de Accion Comunal Bateas sector 3
+                </h1>
+            </div>
+            <div style="display: flex; gap: 10px; align-items: center;">
+                <div class="year-badge">
+                    <span>📅</span>
+                    <select id="yearSelect"></select>
+                </div>
+                <button id="logoutBtn" class="btn" style="background: #c04040; color: white; border: none; padding: 8px 16px; border-radius: 100px; font-weight: 600; display: flex; align-items: center; gap: 6px;">
+                    <span>🚪</span> Salir
+                </button>
+            </div>
+        </div>
+
+        <!-- MODAL DE CONFIRMACIÓN DE CIERRE DE SESIÓN -->
+        <div id="logoutConfirmModal" class="modal" style="display: none;">
+            <div class="modal-content" style="max-width: 400px; text-align: center;">
+                <div class="modal-header">
+                    <h3 style="text-align: center; flex: 1;">🔒 Cerrar sesión</h3>
+                    <button class="close-btn" id="closeLogoutModalBtn">&times;</button>
+                </div>
+                <div style="padding: 20px 0;">
+                    <p style="margin-bottom: 20px; font-size: 1rem;">¿Estás seguro que deseas cerrar la sesión?</p>
+                    <div style="display: flex; gap: 12px; justify-content: center;">
+                        <button id="confirmLogoutBtn" class="btn" style="background: #c04040; color: white; border: none; padding: 10px 24px;">Sí, salir</button>
+                        <button id="cancelLogoutBtn" class="btn">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ALERTAS FLOTANTES -->
+        <div id="alertMessage" class="alert"></div>
+
+        <!-- ACCIONES -->
+        <div class="action-bar">
+            <div class="search-box">
+                <span style="color: #6a8b6a;">🔍</span>
+                <input type="text" id="searchInput" placeholder="Buscar por cédula o nombre...">
+            </div>
+            <button id="toggleTableBtn" class="btn btn-primary">
+                📋 Mostrar tabla
+            </button>
+            <div class="report-group">
+                <button id="paymentsTodayBtn" class="btn">📅 Hoy</button>
+                <button id="paymentsMonthBtn" class="btn">📆 Mes</button>
+                <button id="paymentsYearBtn" class="btn">📊 Año</button>
+                <button id="paymentsAllBtn" class="btn">📋 Todos</button>
+                <button id="certificatesReportBtn" class="btn" style="background: #ffd966;">📜 Certificados</button>
+            </div>
+            <!-- Badge con el siguiente número de recibo -->
+            <div class="next-receipt-badge">
+                Sgte. Recibo <span id="nextReceiptNumber">0001</span>
+            </div>
+        </div>
+
+        <!-- ESTADÍSTICAS CON COLORES - AHORA 7 TARJETAS -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-label">👥 Afiliados</div>
+                <div class="stat-value" id="totalAfiliados">0</div>
+                <div class="stat-desc">total registrados</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">✅ Al día</div>
+                <div class="stat-value" id="usuariosAlDia">0</div>
+                <div class="stat-desc">sin deuda</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">📆 Meses pagados</div>
+                <div class="stat-value" id="mesesPagados">0</div>
+                <div class="stat-desc">cancelados</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">💰 Total Recaudado</div>
+                <div class="stat-value" id="totalRecaudado">$0</div>
+                <div class="stat-desc">total</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">📜 Certificados</div>
+                <div class="stat-value" id="totalCertificados">0</div>
+                <div class="stat-desc">emitidos</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">🧾 Recaudado Cert</div>
+                <div class="stat-value" id="recaudadoCertificados">$0</div>
+                <div class="stat-desc">valor certificados</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">⚠️ Deuda</div>
+                <div class="stat-value" id="deudaTotal">$0</div>
+                <div class="stat-desc">pendiente</div>
+            </div>
+        </div>
+
+        <!-- TABLA CON PAGINACIÓN -->
+        <div id="tableContainer" style="display: none;">
+            <div class="table-section">
+                <div class="table-header">
+                    <div class="table-title">
+                        📋 Registro de pagos · <span style="background: #d0e8d0; padding: 4px 14px; border-radius: 100px;" id="añoActualDisplay"></span>
+                    </div>
+                    <div class="legend">
+
+                        <span style="display: inline-flex; align-items: center; gap: 6px;"><span style="color: #dd2626; font-size: 30px; position: relative; top: -3px;">●</span>Debe</span>
+                        <span style="display: inline-flex; align-items: center; gap: 6px;"><span style="color: #2aac2a; font-size: 30px; position: relative; top: -3px;">●</span>Pagado</span>
+                        <span style="display: inline-flex; align-items: center; gap: 6px;"><span style="color: #ffffff; font-size: 30px; position: relative; top: -3px;">●</span>Futuro</span>
+                        <span style="display: inline-flex; align-items: center; gap: 6px;"><span style="color: #ffd966; font-size: 15px; position: relative; top: -3px;">📜</span>Certificado</span>
+
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table id="paymentsTable">
+                        <thead id="tableHeader">
+                            <tr>
+                                <th>Cédula</th>
+                                <th>Nombre y Apellidos</th>
+                                <th>Afiliación</th>
+                                <th>Deuda</th>
+                                <th>Cert</th>
+                                <th>Detalle</th>
+                                <th>Ene</th>
+                                <th>Feb</th>
+                                <th>Mar</th>
+                                <th>Abr</th>
+                                <th>May</th>
+                                <th>Jun</th>
+                                <th>Jul</th>
+                                <th>Ago</th>
+                                <th>Sep</th>
+                                <th>Oct</th>
+                                <th>Nov</th>
+                                <th>Dic</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody">
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- PAGINACIÓN CENTRADA -->
+                <div class="pagination" id="paginationContainer">
+                    <div style="display: flex; gap: 8px; align-items: center;">
+                        <span style="font-size: 0.75rem; color: #4a6b4a; font-weight: 600;">📌 página</span>
+                    </div>
+                    <div class="pagination-controls">
+                        <button class="page-btn" id="prevPageBtn">‹</button>
+                        <div id="pageNumbers" style="display: flex; gap: 4px;"></div>
+                        <button class="page-btn" id="nextPageBtn">›</button>
+                        <div style="display: flex; align-items: center; gap: 8px; margin-left: 8px;">
+                            <span style="font-size: 0.7rem; font-weight: 600;">Ir a</span>
+                            <input type="number" id="pageInput" class="page-input" min="1" value="1">
+                            <button class="page-btn" id="goToPageBtn">→</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="display: flex; justify-content: center; gap: 12px; margin-top: 16px;">
+                <button id="selectAllDebtBtn" class="btn btn-warning">⚡ Seleccionar rojos</button>
+                <button id="savePaymentsBtn" class="btn btn-success">💾 Guardar pagos</button>
+            </div>
+        </div>
+
+        <!-- MODAL DE RECIBO -->
+        <div id="receiptModal" class="receipt-modal">
+            <div class="receipt-content">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                    <h3 style="font-size: 1.1rem; font-weight: 700; color: #1a4a2a;">🧾 Registrar pago</h3>
+                    <button id="closeReceiptBtn" style="background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #6a8b6a;">&times;</button>
+                </div>
+                <div id="receiptInfo" class="receipt-info"></div>
+                
+                <!-- Selector de tipo de pago -->
+                <div class="payment-type-selector">
+                    <label>TIPO DE PAGO</label>
+                    <div class="payment-option selected" id="optionCuota">
+                        <input type="radio" name="tipoPago" id="tipoCuota" value="cuota" checked>
+                        <span>💰 Cuota mensual</span>
+                        <span class="valor">$5.000</span>
+                    </div>
+                    <div class="payment-option" id="optionCertificado">
+                        <input type="radio" name="tipoPago" id="tipoCertificado" value="certificado">
+                        <span>📜 Certificado</span>
+                        <span class="valor">$20.000</span>
+                    </div>
+                </div>
+
+                <div class="receipt-field">
+                    <label>NÚMERO DE RECIBO</label>
+                    <input type="text" id="receiptNumber" placeholder="Ej: 0001, 0002..." value="">
+                </div>
+                <div style="display: flex; gap: 12px; justify-content: flex-end;">
+                    <button id="cancelReceiptBtn" class="btn">Cancelar</button>
+                    <button id="saveReceiptBtn" class="btn btn-success">Guardar pago</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODAL DE REPORTE -->
+        <div id="reportModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="reportTitle">Reporte de pagos</h3>
+                    <div style="display: flex; gap: 8px;">
+                        <button id="printReportBtn" class="btn" style="padding: 6px 12px;">🖨️</button>
+                        <button class="close-btn" id="closeReportModalBtn">&times;</button>
+                    </div>
+                </div>
+                <div id="reportContent" style="overflow-x: auto;"></div>
+            </div>
+        </div>
+
+        <!-- MODAL DE DETALLE -->
+        <div id="detailModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="modalNombre">Detalle del afiliado</h3>
+                    <div style="display: flex; gap: 8px;">
+                        <button id="printDetailBtn" class="btn" style="padding: 6px 12px;">🖨️</button>
+                        <button class="close-btn" id="closeModalBtn">&times;</button>
+                    </div>
+                </div>
+                <div id="modalContent"></div>
+            </div>
+        </div>
+
+        <div style="margin-top: 24px; text-align: center; color: #6a8b6a; font-size: 0.65rem; font-weight: 500;">
+            <span>Junta de Acción Comunal Barrio Bateas · Puerto Gaitán, Meta</span>
+            <span style="margin-left: 16px;">📅 <span id="fechaActualDisplay"></span></span>
+        </div>
+    </div>
+    
+    <script>
+        // ============================================================
+        // JAC BATEAS - VERSIÓN CON CERTIFICADOS (ESTRUCTURA SIMPLE)
+        // ============================================================
+        const CONFIG = {
+            REPO_OWNER: 'carlos2601',
+            REPO_NAME: 'juntadeaccioncomunalbarriobateaspuertogaitanmetalilianalondo-ogallego1010101010101000111010001010010',
+            AFILIADOS_PATH: 'afiliados.json',
+            CUOTA_PATH: 'cuota.json',
+            BRANCH: 'main',
+            VALOR_CUOTA: 5000,
+            VALOR_CERTIFICADO: 20000,
+            PAGE_SIZE: 6
+        };
+
+        let appState = {
+            afiliados: [],
+            pagos: [],
+            token: localStorage.getItem('github_token_jac') || '',
+            fechaActual: new Date(),
+            tablaVisible: false,
+            filtroActual: '',
+            selectedYear: new Date().getFullYear(),
+            pendingPayment: null,
+            currentPage: 1,
+            totalPages: 1
+        };
+
+        const dom = {
+            apiModal: document.getElementById('apiModal'),
+            mainApp: document.getElementById('mainApp'),
+            apiTokenInput: document.getElementById('apiTokenInput'),
+            apiConnectBtn: document.getElementById('apiConnectBtn'),
+            tableContainer: document.getElementById('tableContainer'),
+            tableBody: document.getElementById('tableBody'),
+            tableHeader: document.getElementById('tableHeader'),
+            alertMessage: document.getElementById('alertMessage'),
+            searchInput: document.getElementById('searchInput'),
+            toggleTableBtn: document.getElementById('toggleTableBtn'),
+            paymentsTodayBtn: document.getElementById('paymentsTodayBtn'),
+            paymentsMonthBtn: document.getElementById('paymentsMonthBtn'),
+            paymentsYearBtn: document.getElementById('paymentsYearBtn'),
+            paymentsAllBtn: document.getElementById('paymentsAllBtn'),
+            certificatesReportBtn: document.getElementById('certificatesReportBtn'),
+            yearSelect: document.getElementById('yearSelect'),
+            añoActualDisplay: document.getElementById('añoActualDisplay'),
+            totalAfiliados: document.getElementById('totalAfiliados'),
+            usuariosAlDia: document.getElementById('usuariosAlDia'),
+            mesesPagados: document.getElementById('mesesPagados'),
+            totalRecaudado: document.getElementById('totalRecaudado'),
+            totalCertificados: document.getElementById('totalCertificados'),
+            recaudadoCertificados: document.getElementById('recaudadoCertificados'),
+            deudaTotal: document.getElementById('deudaTotal'),
+            fechaActualDisplay: document.getElementById('fechaActualDisplay'),
+            modal: document.getElementById('detailModal'),
+            closeModalBtn: document.getElementById('closeModalBtn'),
+            printDetailBtn: document.getElementById('printDetailBtn'),
+            modalNombre: document.getElementById('modalNombre'),
+            modalContent: document.getElementById('modalContent'),
+            reportModal: document.getElementById('reportModal'),
+            closeReportModalBtn: document.getElementById('closeReportModalBtn'),
+            printReportBtn: document.getElementById('printReportBtn'),
+            reportTitle: document.getElementById('reportTitle'),
+            reportContent: document.getElementById('reportContent'),
+            receiptModal: document.getElementById('receiptModal'),
+            closeReceiptBtn: document.getElementById('closeReceiptBtn'),
+            cancelReceiptBtn: document.getElementById('cancelReceiptBtn'),
+            saveReceiptBtn: document.getElementById('saveReceiptBtn'),
+            receiptInfo: document.getElementById('receiptInfo'),
+            receiptNumber: document.getElementById('receiptNumber'),
+            nextReceiptNumber: document.getElementById('nextReceiptNumber'),
+            tipoCuota: document.getElementById('tipoCuota'),
+            tipoCertificado: document.getElementById('tipoCertificado'),
+            optionCuota: document.getElementById('optionCuota'),
+            optionCertificado: document.getElementById('optionCertificado'),
+            paginationContainer: document.getElementById('paginationContainer'),
+            prevPageBtn: document.getElementById('prevPageBtn'),
+            nextPageBtn: document.getElementById('nextPageBtn'),
+            pageNumbers: document.getElementById('pageNumbers'),
+            pageInput: document.getElementById('pageInput'),
+            goToPageBtn: document.getElementById('goToPageBtn')
+        };
+
+        // ============================================================
+        // INICIO - VERIFICAR TOKEN GUARDADO
+        // ============================================================
+        function iniciarSistema() {
+            const tokenGuardado = localStorage.getItem('github_token_jac');
+            
+            if (tokenGuardado) {
+                appState.token = tokenGuardado;
+                dom.apiModal.style.display = 'none';
+                dom.mainApp.style.display = 'block';
+                cargarDatosIniciales();
+            } else {
+                dom.apiModal.style.display = 'flex';
+                dom.mainApp.style.display = 'none';
+            }
+        }
+
+        // ============================================================
+        // CARGAR DATOS INICIALES
+        // ============================================================
+        async function cargarDatosIniciales() {
+            try {
+                appState.afiliados = await cargarAfiliados();
+                appState.pagos = await cargarPagos();
+                calcularEstadisticas();
+                actualizarSiguienteRecibo();
+                
+                appState.tablaVisible = true;
+                dom.tableContainer.style.display = 'block';
+                dom.toggleTableBtn.innerHTML = '🕵️ Ocultar tabla';
+                appState.currentPage = 1;
+                renderizarTabla();
+                
+                mostrarAlerta(`✅ ${appState.afiliados.length} afiliados cargados`, 'success');
+            } catch (e) {
+                mostrarAlerta('Error al cargar datos: ' + e.message, 'error');
+            }
+        }
+
+        // ============================================================
+        // UTILIDADES
+        // ============================================================
+        function parseFecha(fechaStr) {
+            if (!fechaStr) return new Date();
+            const partes = fechaStr.split('/');
+            return new Date(parseInt(partes[2]), parseInt(partes[1]) - 1, parseInt(partes[0]));
+        }
+
+        function formatearFecha(date) {
+            return date.toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' });
+        }
+
+        function formatearHora(date) {
+            return date.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+        }
+
+        // Extraer pagos de cuota
+        function extraerPagosDeString(str, año) {
+            if (!str) return [];
+            return str.split(';').filter(p => p.trim()).map(p => {
+                const partes = p.trim().split('_');
+                return {
+                    mes: partes[0],
+                    año: parseInt(partes[1]),
+                    valor: parseInt(partes[2]),
+                    fecha: partes[3],
+                    recibo: partes[4] || 'N/A'
+                };
+            }).filter(p => p.año === año);
+        }
+
+        // Extraer certificados
+        function extraerCertificadosDeString(str) {
+            if (!str) return [];
+            return str.split(';').filter(c => c.trim()).map(c => {
+                const partes = c.trim().split('_');
+                return {
+                    mes: partes[0],
+                    año: parseInt(partes[1]),
+                    valor: parseInt(partes[2]),
+                    fecha: partes[3],
+                    hora: partes[4] || '00:00:00',
+                    recibo: partes[5] || 'N/A'
+                };
+            });
+        }
+
+        function obtenerTodosLosPagos() {
+            const pagos = [];
+            appState.pagos.forEach(reg => {
+                const afiliado = appState.afiliados.find(a => a.cedula === reg.cedula);
+                const nombre = afiliado ? afiliado.nombre : reg.nombre;
+                
+                // Pagos de cuotas
+                for (let año = 2024; año <= appState.fechaActual.getFullYear(); año++) {
+                    const campo = `fecha_pago_año_${año}`;
+                    const pagosAño = extraerPagosDeString(reg[campo], año);
+                    pagosAño.forEach(p => {
+                        pagos.push({
+                            cedula: reg.cedula,
+                            nombre,
+                            tipo: 'cuota',
+                            ...p,
+                            fechaObj: new Date(p.fecha.split('/')[2], p.fecha.split('/')[1] - 1, p.fecha.split('/')[0])
+                        });
+                    });
+                }
+                
+                // Certificados
+                if (reg.certificado) {
+                    const certificados = extraerCertificadosDeString(reg.certificado);
+                    certificados.forEach(c => {
+                        pagos.push({
+                            cedula: reg.cedula,
+                            nombre,
+                            tipo: 'certificado',
+                            mes: c.mes,
+                            año: c.año,
+                            valor: c.valor,
+                            fecha: c.fecha,
+                            hora: c.hora,
+                            recibo: c.recibo,
+                            fechaObj: new Date(c.fecha.split('/')[2], c.fecha.split('/')[1] - 1, c.fecha.split('/')[0])
+                        });
+                    });
+                }
+            });
+            return pagos;
+        }
+
+        function mesEstaPagado(cedula, año, mes) {
+            const meses = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+            const registro = appState.pagos.find(p => p.cedula === cedula);
+            if (!registro) return false;
+            const pagosStr = registro[`fecha_pago_año_${año}`] || '';
+            return pagosStr.split(';').some(p => p.trim().startsWith(`${meses[mes]}_${año}`));
+        }
+
+        function obtenerEstadoMes(cedula, año, mes, fechaAfiliacion) {
+            const afiliacion = parseFecha(fechaAfiliacion);
+            const hoy = appState.fechaActual;
+            if (año < afiliacion.getFullYear() || (año === afiliacion.getFullYear() && mes < afiliacion.getMonth())) return 'no-visible';
+            if (mesEstaPagado(cedula, año, mes)) return 'paid';
+            if (año > hoy.getFullYear() || (año === hoy.getFullYear() && mes > hoy.getMonth())) return 'future';
+            return 'debt';
+        }
+
+        function calcularMesesRojo(cedula, fechaAfiliacion) {
+            const afiliacion = parseFecha(fechaAfiliacion);
+            const hoy = appState.fechaActual;
+            const meses = [];
+            for (let año = afiliacion.getFullYear(); año <= hoy.getFullYear(); año++) {
+                const mesInicio = (año === afiliacion.getFullYear()) ? afiliacion.getMonth() : 0;
+                const mesFin = (año === hoy.getFullYear()) ? hoy.getMonth() : 11;
+                for (let mes = mesInicio; mes <= mesFin; mes++) {
+                    if (!mesEstaPagado(cedula, año, mes)) meses.push({ año, mes });
+                }
+            }
+            return meses;
+        }
+
+        function calcularInfoDetalle(cedula, fechaAfiliacion) {
+            const afiliacion = parseFecha(fechaAfiliacion);
+            const hoy = appState.fechaActual;
+            let mesesPagados = 0;
+            let mesesDebe = 0;
+            let valorPagado = 0;
+            
+            for (let año = afiliacion.getFullYear(); año <= hoy.getFullYear(); año++) {
+                const mesInicio = (año === afiliacion.getFullYear()) ? afiliacion.getMonth() : 0;
+                const mesFin = (año === hoy.getFullYear()) ? hoy.getMonth() : 11;
+                for (let mes = mesInicio; mes <= mesFin; mes++) {
+                    if (mesEstaPagado(cedula, año, mes)) {
+                        mesesPagados++;
+                        valorPagado += CONFIG.VALOR_CUOTA;
+                    } else {
+                        mesesDebe++;
+                    }
+                }
+            }
+            
+            return {
+                mesesPagados,
+                mesesDebe,
+                valorPagado,
+                valorDebe: mesesDebe * CONFIG.VALOR_CUOTA
+            };
+        }
+
+        // Calcular el siguiente número de recibo
+        function actualizarSiguienteRecibo() {
+            const todosPagos = obtenerTodosLosPagos();
+            let maxRecibo = 0;
+            
+            todosPagos.forEach(p => {
+                if (p.recibo && p.recibo !== 'N/A') {
+                    const num = parseInt(p.recibo);
+                    if (!isNaN(num) && num > maxRecibo) {
+                        maxRecibo = num;
+                    }
+                }
+            });
+            
+            const siguiente = (maxRecibo + 1).toString().padStart(4, '0');
+            dom.nextReceiptNumber.textContent = siguiente;
+            return siguiente;
+        }
+
+        // ============================================================
+        // ESTADÍSTICAS - CORREGIDO PARA 7 TARJETAS
+        // ============================================================
+        function calcularEstadisticas() {
+            const totalAfiliados = appState.afiliados.length;
+            let usuariosAlDia = 0;
+            appState.afiliados.forEach(af => {
+                if (calcularMesesRojo(af.cedula, af.fecha).length === 0) usuariosAlDia++;
+            });
+            
+            const todosPagos = obtenerTodosLosPagos();
+            const pagosCuota = todosPagos.filter(p => p.tipo === 'cuota');
+            const pagosCertificado = todosPagos.filter(p => p.tipo === 'certificado');
+            
+            const mesesPagados = pagosCuota.length;
+            const totalRecaudadoCuotas = pagosCuota.reduce((sum, p) => sum + p.valor, 0);
+            const totalRecaudadoCertificados = pagosCertificado.reduce((sum, p) => sum + p.valor, 0);
+            const totalRecaudado = totalRecaudadoCuotas + totalRecaudadoCertificados;
+            const totalCertificados = pagosCertificado.length;
+            
+            let deudaTotal = 0;
+            appState.afiliados.forEach(af => {
+                deudaTotal += calcularMesesRojo(af.cedula, af.fecha).length * CONFIG.VALOR_CUOTA;
+            });
+            
+            // Actualizar todas las tarjetas
+            dom.totalAfiliados.textContent = totalAfiliados;
+            dom.usuariosAlDia.textContent = usuariosAlDia;
+            dom.mesesPagados.textContent = mesesPagados;
+            dom.totalRecaudado.textContent = `$${totalRecaudado.toLocaleString()}`;
+            dom.totalCertificados.textContent = totalCertificados;
+            dom.recaudadoCertificados.textContent = `$${totalRecaudadoCertificados.toLocaleString()}`;
+            dom.deudaTotal.textContent = `$${deudaTotal.toLocaleString()}`;
+        }
+
+        // ============================================================
+        // PAGINACIÓN
+        // ============================================================
+        function getPaginatedData(data, page) {
+            const start = (page - 1) * CONFIG.PAGE_SIZE;
+            const end = start + CONFIG.PAGE_SIZE;
+            return {
+                data: data.slice(start, end),
+                totalPages: Math.max(1, Math.ceil(data.length / CONFIG.PAGE_SIZE)),
+                currentPage: page,
+                total: data.length
+            };
+        }
+
+        function renderPagination(totalPages, currentPage) {
+            if (!dom.pageNumbers) return;
+            
+            let html = '';
+            const maxVisible = 5;
+            let start = Math.max(1, currentPage - 2);
+            let end = Math.min(totalPages, start + maxVisible - 1);
+            
+            if (end - start + 1 < maxVisible) {
+                start = Math.max(1, end - maxVisible + 1);
+            }
+
+            if (start > 1) {
+                html += `<button class="page-btn" data-page="1">1</button>`;
+                if (start > 2) html += `<span style="padding: 0 6px; color: #6a8b6a;">…</span>`;
+            }
+
+            for (let i = start; i <= end; i++) {
+                html += `<button class="page-btn ${i === currentPage ? 'active' : ''}" data-page="${i}">${i}</button>`;
+            }
+
+            if (end < totalPages) {
+                if (end < totalPages - 1) html += `<span style="padding: 0 6px; color: #6a8b6a;">…</span>`;
+                html += `<button class="page-btn" data-page="${totalPages}">${totalPages}</button>`;
+            }
+
+            dom.pageNumbers.innerHTML = html;
+            if (dom.pageInput) dom.pageInput.value = currentPage;
+            if (dom.prevPageBtn) dom.prevPageBtn.disabled = currentPage === 1;
+            if (dom.nextPageBtn) dom.nextPageBtn.disabled = currentPage === totalPages;
+            
+            document.querySelectorAll('.page-btn[data-page]').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const page = parseInt(e.target.dataset.page);
+                    if (page !== appState.currentPage) {
+                        appState.currentPage = page;
+                        renderizarTabla();
+                    }
+                });
+            });
+        }
+
+        // ============================================================
+        // RENDERIZAR TABLA
+        // ============================================================
+        function renderizarTabla() {
+            if (!appState.afiliados.length || !appState.tablaVisible) return;
+            
+            const añoSeleccionado = appState.selectedYear;
+            const mesesNombres = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+            let afiliadosFiltrados = filtrarAfiliados();
+            
+            const paginated = getPaginatedData(afiliadosFiltrados, appState.currentPage);
+            afiliadosFiltrados = paginated.data;
+            appState.totalPages = paginated.totalPages;
+            
+            if (appState.currentPage > appState.totalPages) {
+                appState.currentPage = 1;
+                return renderizarTabla();
+            }
+            
+            dom.añoActualDisplay.textContent = añoSeleccionado;
+            renderPagination(appState.totalPages, appState.currentPage);
+            
+            let html = '';
+            afiliadosFiltrados.forEach(afiliado => {
+                const mesesRojo = calcularMesesRojo(afiliado.cedula, afiliado.fecha);
+                const deudaTotal = mesesRojo.length * CONFIG.VALOR_CUOTA;
+                
+                // Verificar si tiene certificados
+                const registro = appState.pagos.find(p => p.cedula === afiliado.cedula);
+                const tieneCertificado = registro && registro.certificado ? '📜' : '';
+                
+                html += `<tr>`;
+                html += `<td style="font-weight: 600; color: #1a4a2a;">${afiliado.cedula}</td>`;
+                html += `<td style="text-align: left;">${afiliado.nombre}</td>`;
+                html += `<td><span class="badge">${afiliado.fecha}</span></td>`;
+                html += `<td><span style="font-weight: 700; color: ${deudaTotal > 0 ? '#dd0f0f' : '#5ab05a'};">$${deudaTotal.toLocaleString()}</span></td>`;
+                html += `<td style="font-size: 1.2rem;">${tieneCertificado}</td>`;
+                html += `<td><button class="btn-detail" onclick="window.verDetalle('${afiliado.cedula}')">Ver</button></td>`;
+                
+                for (let mes = 0; mes < 12; mes++) {
+                    const estado = obtenerEstadoMes(afiliado.cedula, añoSeleccionado, mes, afiliado.fecha);
+                    if (estado === 'no-visible') {
+                        html += `<td><div style="width: 30px; height: 30px;"></div></td>`;
+                    } else {
+                        const attrs = `data-cedula="${afiliado.cedula}" data-nombre="${afiliado.nombre}" data-año="${añoSeleccionado}" data-mes="${mes}" data-mesnombre="${mesesNombres[mes]}"`;
+                        if (estado === 'debt') {
+                            html += `<td><div class="month-checkbox debt" ${attrs} onclick="window.handleMonthClick(this)"></div></td>`;
+                        } else {
+                            html += `<td><div class="month-checkbox ${estado}"></div></td>`;
+                        }
+                    }
+                }
+                html += `</tr>`;
+            });
+            
+            dom.tableBody.innerHTML = html;
+        }
+
+        // ============================================================
+        // FILTRO
+        // ============================================================
+        function filtrarAfiliados() {
+            if (!appState.afiliados.length) return [];
+            if (!appState.filtroActual) return appState.afiliados;
+            const filtro = appState.filtroActual.toLowerCase();
+            return appState.afiliados.filter(af => 
+                af.cedula.includes(filtro) || af.nombre.toLowerCase().includes(filtro)
+            );
+        }
+
+        // ============================================================
+        // MANEJADOR DE CLIC EN MES
+        // ============================================================
+        window.handleMonthClick = function(element) {
+            if (!element.classList.contains('debt') || element.classList.contains('selected')) return;
+            
+            appState.pendingPayment = {
+                cedula: element.dataset.cedula,
+                nombre: element.dataset.nombre,
+                año: parseInt(element.dataset.año),
+                mes: parseInt(element.dataset.mes),
+                mesNombre: element.dataset.mesnombre,
+                element: element,
+                tipo: 'cuota' // Por defecto cuota
+            };
+            
+            const meses = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+            dom.receiptInfo.innerHTML = `
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-weight: 700; color: #1a4a2a;">${appState.pendingPayment.nombre}</span>
+                    <span style="background: #e0f0e0; padding: 4px 14px; border-radius: 100px; font-size: 0.7rem; font-weight: 600;">${appState.pendingPayment.cedula}</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-weight: 600;">${meses[appState.pendingPayment.mes]} ${appState.pendingPayment.año}</span>
+                    <span style="font-weight: 700; color: #1a7a3a;">$${CONFIG.VALOR_CUOTA.toLocaleString()}</span>
+                </div>
+            `;
+            
+            // Seleccionar cuota por defecto
+            dom.tipoCuota.checked = true;
+            dom.optionCuota.classList.add('selected');
+            dom.optionCertificado.classList.remove('selected');
+            
+            dom.receiptNumber.value = dom.nextReceiptNumber.textContent;
+            dom.receiptModal.style.display = 'flex';
+            setTimeout(() => dom.receiptNumber.focus(), 100);
+        };
+
+        // ============================================================
+        // MANEJADOR DE CLIC EN OPCIONES DE PAGO
+        // ============================================================
+        dom.optionCuota.addEventListener('click', () => {
+            dom.tipoCuota.checked = true;
+            dom.optionCuota.classList.add('selected');
+            dom.optionCertificado.classList.remove('selected');
+            
+            if (appState.pendingPayment && appState.pendingPayment.mes !== undefined) {
+                const meses = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+                dom.receiptInfo.innerHTML = `
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                        <span style="font-weight: 700; color: #1a4a2a;">${appState.pendingPayment.nombre}</span>
+                        <span style="background: #e0f0e0; padding: 4px 14px; border-radius: 100px; font-size: 0.7rem; font-weight: 600;">${appState.pendingPayment.cedula}</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="font-weight: 600;">${meses[appState.pendingPayment.mes]} ${appState.pendingPayment.año}</span>
+                        <span style="font-weight: 700; color: #1a7a3a;">$${CONFIG.VALOR_CUOTA.toLocaleString()}</span>
+                    </div>
+                `;
+            }
+        });
+
+        dom.optionCertificado.addEventListener('click', () => {
+            dom.tipoCertificado.checked = true;
+            dom.optionCertificado.classList.add('selected');
+            dom.optionCuota.classList.remove('selected');
+            
+            if (appState.pendingPayment) {
+                dom.receiptInfo.innerHTML = `
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                        <span style="font-weight: 700; color: #1a4a2a;">${appState.pendingPayment.nombre}</span>
+                        <span style="background: #e0f0e0; padding: 4px 14px; border-radius: 100px; font-size: 0.7rem; font-weight: 600;">${appState.pendingPayment.cedula}</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="font-weight: 600;">CERTIFICADO</span>
+                        <span style="font-weight: 700; color: #b68b40;">$${CONFIG.VALOR_CERTIFICADO.toLocaleString()}</span>
+                    </div>
+                `;
+            }
+        });
+
+        // ============================================================
+        // GUARDAR RECIBO Y PAGO INMEDIATO
+        // ============================================================
+        async function guardarPagoConRecibo() {
+            if (!appState.pendingPayment) return mostrarAlerta('❌ No hay pago pendiente', 'error');
+            
+            const recibo = dom.receiptNumber.value.trim();
+            if (!recibo) return mostrarAlerta('❌ Número de recibo obligatorio', 'error');
+            
+            // Validar que el recibo no exista
+            const todosPagos = obtenerTodosLosPagos();
+            if (todosPagos.some(p => p.recibo === recibo)) {
+                return mostrarAlerta(`❌ Recibo ${recibo} ya existe`, 'error');
+            }
+            
+            if (!appState.token) return mostrarAlerta('❌ Token no disponible', 'error');
+
+            const tipoPago = dom.tipoCuota.checked ? 'cuota' : 'certificado';
+            const valor = tipoPago === 'cuota' ? CONFIG.VALOR_CUOTA : CONFIG.VALOR_CERTIFICADO;
+
+            const saveBtn = dom.saveReceiptBtn;
+            const originalText = saveBtn.innerHTML;
+            
+            try {
+                saveBtn.innerHTML = '<span class="loading">⌛</span> Guardando';
+                saveBtn.disabled = true;
+                
+                // Preparar el pago
+                const fecha = formatearFecha(new Date());
+                const hora = formatearHora(new Date());
+                
+                // Actualizar appState.pagos localmente
+                let registro = appState.pagos.find(p => p.cedula === appState.pendingPayment.cedula);
+                if (!registro) {
+                    registro = { 
+                        cedula: appState.pendingPayment.cedula, 
+                        nombre: appState.pendingPayment.nombre
+                    };
+                    appState.pagos.push(registro);
+                }
+                
+                if (tipoPago === 'cuota') {
+                    // Pago de cuota mensual
+                    const meses = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+                    const campo = `fecha_pago_año_${appState.pendingPayment.año}`;
+                    const pagoStr = `${meses[appState.pendingPayment.mes]}_${appState.pendingPayment.año}_${CONFIG.VALOR_CUOTA}_${fecha}_${recibo}`;
+                    
+                    registro[campo] = registro[campo] ? `${registro[campo]}; ${pagoStr}` : pagoStr;
+                    
+                    // Actualizar UI del mes
+                    if (appState.pendingPayment.element) {
+                        appState.pendingPayment.element.classList.remove('debt', 'selected');
+                        appState.pendingPayment.element.classList.add('paid');
+                    }
+                } else {
+                    // Pago de certificado
+                    const mesActual = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'][appState.fechaActual.getMonth()];
+                    const añoActual = appState.fechaActual.getFullYear();
+                    const certificadoStr = `${mesActual}_${añoActual}_${CONFIG.VALOR_CERTIFICADO}_${fecha}_${hora}_${recibo}`;
+                    
+                    registro.certificado = registro.certificado ? `${registro.certificado}; ${certificadoStr}` : certificadoStr;
+                    
+                    // No se actualiza ningún mes en la tabla
+                }
+                
+                // Guardar en GitHub
+                await guardarPagosEnGitHub();
+                
+                // Actualizar estadísticas y tabla
+                calcularEstadisticas();
+                actualizarSiguienteRecibo();
+                renderizarTabla();
+                
+                mostrarAlerta(`✅ ${tipoPago === 'cuota' ? 'Cuota' : 'Certificado'} guardado - Recibo: ${recibo}`, 'success');
+                dom.receiptModal.style.display = 'none';
+                appState.pendingPayment = null;
+                
+            } catch (e) {
+                mostrarAlerta('Error al guardar: ' + e.message, 'error');
+                // Revertir cambio local si falló
+                appState.pagos = await cargarPagos();
+            } finally {
+                saveBtn.innerHTML = originalText;
+                saveBtn.disabled = false;
+            }
+        }
+
+        // ============================================================
+        // GUARDAR EN GITHUB
+        // ============================================================
+        async function guardarPagosEnGitHub() {
+            try {
+                const content = {
+                    ultima_actualizacion: new Date().toISOString(),
+                    valor_cuota: CONFIG.VALOR_CUOTA,
+                    pagos: appState.pagos
+                };
+
+                const url = `https://api.github.com/repos/${CONFIG.REPO_OWNER}/${CONFIG.REPO_NAME}/contents/${CONFIG.CUOTA_PATH}`;
+                
+                // Obtener SHA del archivo actual
+                let sha = null;
+                try {
+                    const shaRes = await fetch(url, { 
+                        headers: { 'Authorization': `token ${appState.token}` } 
+                    });
+                    if (shaRes.ok) {
+                        const shaData = await shaRes.json();
+                        sha = shaData.sha;
+                    }
+                } catch (e) {
+                    // El archivo puede no existir
+                }
+                
+                const res = await fetch(url, {
+                    method: 'PUT',
+                    headers: { 
+                        'Authorization': `token ${appState.token}`, 
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        message: `Pago ${dom.tipoCuota.checked ? 'cuota' : 'certificado'} - ${new Date().toLocaleDateString()}`,
+                        content: btoa(unescape(encodeURIComponent(JSON.stringify(content, null, 2)))),
+                        sha,
+                        branch: CONFIG.BRANCH
+                    })
+                });
+
+                if (!res.ok) {
+                    const errorData = await res.json();
+                    throw new Error(errorData.message || 'Error al guardar');
+                }
+                
+                return true;
+            } catch (e) {
+                throw new Error(e.message);
+            }
+        }
+
+        // ============================================================
+        // MODAL DE DETALLE MEJORADO (CON CERTIFICADOS)
+        // ============================================================
+        window.verDetalle = function(cedula) {
+            const afiliado = appState.afiliados.find(a => a.cedula === cedula);
+            if (!afiliado) return;
+            
+            dom.modalNombre.textContent = `📋 ${afiliado.nombre}`;
+            const registro = appState.pagos.find(p => p.cedula === cedula) || {};
+            const info = calcularInfoDetalle(cedula, afiliado.fecha);
+            
+            // Tarjeta de resumen
+            let html = `<div style="background: #f0f8f0; padding: 20px; border-radius: 16px; margin-bottom: 20px; border-left: 6px solid #2a7a4a;">
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; text-align: center;">
+                    <div>
+                        <div style="font-size: 0.7rem; color: #4a6b4a; text-transform: uppercase; margin-bottom: 5px;">Meses Pagados</div>
+                        <div style="font-size: 1.5rem; font-weight: 700; color: #1a7a3a;">${info.mesesPagados}</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 0.7rem; color: #4a6b4a; text-transform: uppercase; margin-bottom: 5px;">Meses Debe</div>
+                        <div style="font-size: 1.5rem; font-weight: 700; color: #c04040;">${info.mesesDebe}</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 0.7rem; color: #4a6b4a; text-transform: uppercase; margin-bottom: 5px;">Valor Pagado</div>
+                        <div style="font-size: 1.5rem; font-weight: 700; color: #1a7a3a;">$${info.valorPagado.toLocaleString()}</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 0.7rem; color: #4a6b4a; text-transform: uppercase; margin-bottom: 5px;">Valor Debe</div>
+                        <div style="font-size: 1.5rem; font-weight: 700; color: #c04040;">$${info.valorDebe.toLocaleString()}</div>
+                    </div>
+                </div>
+                <div style="display: flex; justify-content: space-between; margin-top: 15px; padding-top: 15px; border-top: 1px solid #d0e0d0;">
+                    <span style="font-weight: 600; color: #1a4a2a;">Cédula:</span>
+                    <span style="font-weight: 600;">${afiliado.cedula}</span>
+                    <span style="font-weight: 600; color: #1a4a2a;">Afiliación:</span>
+                    <span style="background: #e0f0e0; padding: 4px 14px; border-radius: 100px;">${afiliado.fecha}</span>
+                </div>
+            </div>`;
+            
+            // Historial de pagos
+            html += `<h4 style="margin-bottom: 16px; font-weight: 700; color: #1a4a2a;">💰 Historial de pagos</h4>`;
+            
+            let hayPagos = false;
+            
+            // Mostrar pagos de cuotas por año
+            const años = [];
+            for (let año = parseFecha(afiliado.fecha).getFullYear(); año <= appState.fechaActual.getFullYear(); año++) años.push(año);
+            
+            años.sort((a,b) => b - a).forEach(año => {
+                const pagos = extraerPagosDeString(registro[`fecha_pago_año_${año}`], año);
+                if (pagos.length) {
+                    hayPagos = true;
+                    html += `<div style="background: white; border: 1px solid #d8ecd8; border-radius: 16px; padding: 16px; margin-bottom: 16px;">`;
+                    html += `<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                        <span style="font-weight: 700; color: #1a4a2a;">📆 ${año}</span>
+                        <span style="background: #e0f0e0; padding: 4px 14px; border-radius: 100px; font-size: 0.7rem; font-weight: 600;">${pagos.length} cuotas</span>
+                    </div>`;
+                    pagos.forEach(p => {
+                        html += `<div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #e0f0e0;">
+                            <div style="display: flex; align-items: center; gap: 12px;">
+                                <span style="text-transform: capitalize; font-weight: 600;">${p.mes}</span>
+                                <span style="color: #4a6b4a;">${p.año}</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 16px;">
+                                <span style="font-weight: 700; color: #1a7a3a;">$${p.valor.toLocaleString()}</span>
+                                <span style="color: #4a6b4a; background: #f0f8f0; padding: 4px 12px; border-radius: 100px; font-size: 0.65rem;">${p.fecha}</span>
+                                <span style="background: #1a4a2a; color: white; padding: 4px 12px; border-radius: 100px; font-size: 0.65rem;">${p.recibo}</span>
+                            </div>
+                        </div>`;
+                    });
+                    html += `</div>`;
+                }
+            });
+            
+            // Mostrar certificados
+            if (registro.certificado) {
+                const certificados = extraerCertificadosDeString(registro.certificado);
+                if (certificados.length) {
+                    hayPagos = true;
+                    html += `<h4 style="margin: 24px 0 16px; font-weight: 700; color: #b68b40;">📜 Certificados emitidos</h4>`;
+                    html += `<div style="background: #fff9e6; border: 1px solid #ffd966; border-radius: 16px; padding: 16px; margin-bottom: 16px;">`;
+                    certificados.forEach(c => {
+                        html += `<div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #ffd966;">
+                            <div style="display: flex; align-items: center; gap: 12px;">
+                                <span style="text-transform: capitalize; font-weight: 600;">${c.mes} ${c.año}</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 16px;">
+                                <span style="font-weight: 700; color: #b68b40;">$${c.valor.toLocaleString()}</span>
+                                <span style="color: #4a6b4a; background: #f0f8f0; padding: 4px 12px; border-radius: 100px; font-size: 0.65rem;">${c.fecha} ${c.hora}</span>
+                                <span style="background: #b68b40; color: white; padding: 4px 12px; border-radius: 100px; font-size: 0.65rem;">${c.recibo}</span>
+                            </div>
+                        </div>`;
+                    });
+                    html += `</div>`;
+                }
+            }
+            
+            if (!hayPagos) {
+                html += `<div style="padding: 32px; text-align: center; background: #f0f8f0; border-radius: 16px; color: #4a6b4a;">
+                    No hay pagos registrados
+                </div>`;
+            }
+            
+            // Deuda pendiente
+            const mesesRojo = calcularMesesRojo(cedula, afiliado.fecha);
+            if (mesesRojo.length) {
+                const mesesNombres = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+                html += `<h4 style="color: #c04040; margin: 24px 0 16px; font-weight: 700;">⚠️ Deuda pendiente</h4>`;
+                html += `<div style="background: #fff0f0; padding: 20px; border-radius: 16px; border: 1px solid #e0b0b0;">`;
+                mesesRojo.forEach(({año, mes}) => {
+                    html += `<div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #ffd0d0;">
+                        <span style="text-transform: capitalize; font-weight: 600; color: #a04040;">${mesesNombres[mes]} ${año}</span>
+                        <span style="font-weight: 700; color: #c04040;">$${CONFIG.VALOR_CUOTA.toLocaleString()}</span>
+                    </div>`;
+                });
+                html += `<div style="margin-top: 16px; padding-top: 12px; display: flex; justify-content: space-between; align-items: center; font-weight: 700;">
+                    <span style="color: #a04040;">Total deuda:</span>
+                    <span style="color: #c04040; font-size: 1.1rem;">$${(mesesRojo.length * CONFIG.VALOR_CUOTA).toLocaleString()}</span>
+                </div>`;
+                html += `</div>`;
+            } else {
+                html += `<div style="background: #e4ffe4; padding: 24px; border-radius: 16px; text-align: center; margin-top: 24px; border: 1px solid #a0d0a0;">
+                    <span style="color: #1a7a3a; font-weight: 700;">✓ Al día - No tiene deudas</span>
+                </div>`;
+            }
+            
+            dom.modalContent.innerHTML = html;
+            dom.modal.style.display = 'flex';
+        };
+
+        // ============================================================
+        // REPORTES (MODIFICADO PARA INCLUIR CERTIFICADOS)
+        // ============================================================
+        function generarReporteCompacto(titulo, filtroFn) {
+            const pagos = filtroFn ? obtenerTodosLosPagos().filter(filtroFn) : obtenerTodosLosPagos();
+            
+            // Agrupar por usuario
+            const usuarios = {};
+            
+            pagos.forEach(p => {
+                if (!usuarios[p.cedula]) {
+                    usuarios[p.cedula] = { 
+                        cedula: p.cedula, 
+                        nombre: p.nombre, 
+                        items: [], 
+                        total: 0 
+                    };
+                }
+                const tipoIcon = p.tipo === 'cuota' ? '💰' : '📜';
+                usuarios[p.cedula].items.push({ 
+                    tipo: p.tipo,
+                    icon: tipoIcon,
+                    mes: p.mes ? p.mes.charAt(0).toUpperCase() + p.mes.slice(1, 3) : 'Cert',
+                    año: p.año, 
+                    fecha: p.fecha,
+                    hora: p.hora || '',
+                    valor: p.valor,
+                    recibo: p.recibo 
+                });
+                usuarios[p.cedula].total += p.valor;
+            });
+
+            let html = `<table style="width: 100%; border-collapse: collapse; font-size: 0.75rem; table-layout: fixed;">
+                <colgroup>
+                    <col style="width: 12%">
+                    <col style="width: 25%">
+                    <col style="width: 38%">
+                    <col style="width: 25%">
+                </colgroup>
+                <thead>
+                    <tr style="background: #1a4a2a; color: white;">
+                        <th style="padding: 12px; text-align: center;">Cédula</th>
+                        <th style="padding: 12px; text-align: left;">Nombre</th>
+                        <th style="padding: 12px; text-align: left;">Detalle</th>
+                        <th style="padding: 12px; text-align: right;">Total</th>
+                    </tr>
+                </thead>
+                <tbody>`;
+            
+            if (Object.keys(usuarios).length === 0) {
+                html += `<tr><td colspan="4" style="padding: 40px; text-align: center; color: #6a8b6a;">No hay registros</td></tr>`;
+            } else {
+                Object.values(usuarios).sort((a,b) => a.nombre.localeCompare(b.nombre)).forEach(u => {
+                    html += `<tr style="border-bottom: 1px solid #d8ecd8;">`;
+                    html += `<td style="padding: 10px; font-weight: 600; text-align: center; word-break: break-word;">${u.cedula}</td>`;
+                    html += `<td style="padding: 10px; text-align: left; word-break: break-word;">${u.nombre}</td>`;
+                    html += `<td style="padding: 10px; text-align: left; word-break: break-word;">`;
+                    u.items.sort((a,b) => b.año - a.año || a.mes.localeCompare(b.mes)).forEach(item => {
+                        let detalle = '';
+                        if (item.tipo === 'cuota') {
+                            detalle = `${item.icon} ${item.mes} ${item.año}`;
+                        } else {
+                            detalle = `${item.icon} Certificado ${item.mes} ${item.año}`;
+                        }
+                        html += `<span class="month-badge" style="display: inline-block; margin: 2px; background: ${item.tipo === 'cuota' ? '#e0f0e0' : '#fff3cd'}; white-space: nowrap;" title="Recibo: ${item.recibo}">${detalle}</span> `;
+                    });
+                    html += `</td>`;
+                    html += `<td style="padding: 10px; text-align: right; font-weight: 700; color: #1a7a3a; word-break: break-word;">$${u.total.toLocaleString()}</td>`;
+                    html += `</tr>`;
+                });
+                const total = Object.values(usuarios).reduce((s, u) => s + u.total, 0);
+                html += `<tr style="background: #e0f0e0; font-weight: 700;">
+                    <td colspan="3" style="padding: 12px; text-align: right;">Total general:</td>
+                    <td style="padding: 12px; text-align: right; color: #1a4a2a;">$${total.toLocaleString()}</td>
+                </tr>`;
+            }
+            html += `</tbody></table>`;
+            
+            dom.reportTitle.textContent = titulo;
+            dom.reportContent.innerHTML = html;
+            dom.reportModal.style.display = 'flex';
+        }
+
+        // Reporte solo de certificados
+        function generarReporteCertificados() {
+            const todosPagos = obtenerTodosLosPagos();
+            const certificados = todosPagos.filter(p => p.tipo === 'certificado');
+            
+            let html = `<table style="width: 100%; border-collapse: collapse; font-size: 0.75rem;">
+                <thead>
+                    <tr style="background: #b68b40; color: white;">
+                        <th style="padding: 12px;">Recibo</th>
+                        <th style="padding: 12px;">Cédula</th>
+                        <th style="padding: 12px;">Nombre</th>
+                        <th style="padding: 12px;">Fecha</th>
+                        <th style="padding: 12px;">Hora</th>
+                        <th style="padding: 12px;">Valor</th>
+                    </tr>
+                </thead>
+                <tbody>`;
+            
+            if (certificados.length === 0) {
+                html += `<tr><td colspan="6" style="padding: 40px; text-align: center;">No hay certificados emitidos</td></tr>`;
+            } else {
+                certificados.sort((a,b) => b.fechaObj - a.fechaObj).forEach(c => {
+                    html += `<tr style="border-bottom: 1px solid #ffd966;">
+                        <td style="padding: 10px; text-align: center; font-weight: 600;">${c.recibo}</td>
+                        <td style="padding: 10px; text-align: center;">${c.cedula}</td>
+                        <td style="padding: 10px;">${c.nombre}</td>
+                        <td style="padding: 10px; text-align: center;">${c.fecha}</td>
+                        <td style="padding: 10px; text-align: center;">${c.hora}</td>
+                        <td style="padding: 10px; text-align: right; font-weight: 700; color: #b68b40;">$${c.valor.toLocaleString()}</td>
+                    </tr>`;
+                });
+                
+                const total = certificados.reduce((s, c) => s + c.valor, 0);
+                html += `<tr style="background: #fff3cd; font-weight: 700;">
+                    <td colspan="5" style="padding: 12px; text-align: right;">Total certificados:</td>
+                    <td style="padding: 12px; text-align: right;">$${total.toLocaleString()}</td>
+                </tr>`;
+            }
+            html += `</tbody></table>`;
+            
+            dom.reportTitle.textContent = '📜 Certificados emitidos';
+            dom.reportContent.innerHTML = html;
+            dom.reportModal.style.display = 'flex';
+        }
+
+        // ============================================================
+        // CARGAR DATOS
+        // ============================================================
+        async function cargarAfiliados() {
+            const url = `https://raw.githubusercontent.com/${CONFIG.REPO_OWNER}/${CONFIG.REPO_NAME}/refs/heads/${CONFIG.BRANCH}/${CONFIG.AFILIADOS_PATH}`;
+            const res = await fetch(url);
+            if (!res.ok) throw new Error('No se pudo cargar afiliados');
+            return await res.json();
+        }
+
+        async function cargarPagos() {
+            const url = `https://raw.githubusercontent.com/${CONFIG.REPO_OWNER}/${CONFIG.REPO_NAME}/refs/heads/${CONFIG.BRANCH}/${CONFIG.CUOTA_PATH}`;
+            try {
+                const res = await fetch(url);
+                if (res.status === 404) return [];
+                return (await res.json()).pagos || [];
+            } catch {
+                return [];
+            }
+        }
+
+        // ============================================================
+        // UI
+        // ============================================================
+        function mostrarAlerta(msg, tipo = 'error') {
+            dom.alertMessage.textContent = msg;
+            dom.alertMessage.className = `alert show alert-${tipo}`;
+            setTimeout(() => dom.alertMessage.classList.remove('show'), 4000);
+        }
+
+        // ============================================================
+        // EVENT LISTENERS
+        // ============================================================
+        function inicializarEventos() {
+            // ===== MODAL DE API =====
+            dom.apiConnectBtn.addEventListener('click', async () => {
+                const token = dom.apiTokenInput.value.trim();
+                if (!token) {
+                    mostrarAlerta('❌ Ingresa un token', 'error');
+                    return;
+                }
+
+                try {
+                    const res = await fetch(`https://api.github.com/repos/${CONFIG.REPO_OWNER}/${CONFIG.REPO_NAME}`, {
+                        headers: { 'Authorization': `token ${token}` }
+                    });
+
+                    if (res.ok) {
+                        localStorage.setItem('github_token_jac', token);
+                        appState.token = token;
+                        dom.apiModal.style.display = 'none';
+                        dom.mainApp.style.display = 'block';
+                        await cargarDatosIniciales();
+                    } else {
+                        mostrarAlerta('❌ Token inválido', 'error');
+                    }
+                } catch (e) {
+                    mostrarAlerta('❌ Error de conexión', 'error');
+                }
+            });
+
+            // ===== BOTÓN DE SALIR =====
+            const logoutBtn = document.getElementById('logoutBtn');
+            const logoutConfirmModal = document.getElementById('logoutConfirmModal');
+            const closeLogoutModalBtn = document.getElementById('closeLogoutModalBtn');
+            const confirmLogoutBtn = document.getElementById('confirmLogoutBtn');
+            const cancelLogoutBtn = document.getElementById('cancelLogoutBtn');
+
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', () => {
+                    logoutConfirmModal.style.display = 'flex';
+                });
+            }
+
+            if (closeLogoutModalBtn) {
+                closeLogoutModalBtn.addEventListener('click', () => {
+                    logoutConfirmModal.style.display = 'none';
+                });
+            }
+
+            if (cancelLogoutBtn) {
+                cancelLogoutBtn.addEventListener('click', () => {
+                    logoutConfirmModal.style.display = 'none';
+                });
+            }
+
+            if (confirmLogoutBtn) {
+                confirmLogoutBtn.addEventListener('click', () => {
+                    sessionStorage.removeItem('usuario_actual');
+                    sessionStorage.removeItem('session_token');
+                    window.location.href = 'index.html';
+                });
+            }
+
+            window.addEventListener('click', (e) => {
+                if (e.target === logoutConfirmModal) {
+                    logoutConfirmModal.style.display = 'none';
+                }
+            });
+
+            // ===== TOGGLE TABLA =====
+            dom.toggleTableBtn.addEventListener('click', () => {
+                appState.tablaVisible = !appState.tablaVisible;
+                dom.tableContainer.style.display = appState.tablaVisible ? 'block' : 'none';
+                dom.toggleTableBtn.innerHTML = appState.tablaVisible ? '🕵️ Ocultar tabla' : '📋 Mostrar tabla';
+                if (appState.tablaVisible) {
+                    appState.currentPage = 1;
+                    renderizarTabla();
+                }
+            });
+
+            // ===== BÚSQUEDA =====
+            dom.searchInput.addEventListener('input', (e) => {
+                appState.filtroActual = e.target.value;
+                appState.currentPage = 1;
+                if (appState.tablaVisible) renderizarTabla();
+            });
+
+            // ===== SELECTOR DE AÑO =====
+            dom.yearSelect.addEventListener('change', (e) => {
+                appState.selectedYear = parseInt(e.target.value);
+                if (appState.tablaVisible) renderizarTabla();
+            });
+
+            // ===== PAGINACIÓN =====
+            dom.prevPageBtn.addEventListener('click', () => {
+                if (appState.currentPage > 1) {
+                    appState.currentPage--;
+                    renderizarTabla();
+                }
+            });
+
+            dom.nextPageBtn.addEventListener('click', () => {
+                if (appState.currentPage < appState.totalPages) {
+                    appState.currentPage++;
+                    renderizarTabla();
+                }
+            });
+
+            dom.goToPageBtn.addEventListener('click', () => {
+                const page = parseInt(dom.pageInput.value);
+                if (page >= 1 && page <= appState.totalPages) {
+                    appState.currentPage = page;
+                    renderizarTabla();
+                }
+            });
+
+            // ===== RECIBOS =====
+            dom.closeReceiptBtn.addEventListener('click', () => {
+                dom.receiptModal.style.display = 'none';
+                appState.pendingPayment = null;
+            });
+
+            dom.cancelReceiptBtn.addEventListener('click', () => {
+                dom.receiptModal.style.display = 'none';
+                appState.pendingPayment = null;
+            });
+
+            dom.saveReceiptBtn.addEventListener('click', guardarPagoConRecibo);
+
+            // ===== GUARDAR PAGOS (BOTÓN PRINCIPAL AHORA RECARGA DATOS) =====
+            const saveBtn = document.getElementById('savePaymentsBtn');
+            if (saveBtn) {
+                saveBtn.addEventListener('click', async () => {
+                    try {
+                        saveBtn.innerHTML = '<span class="loading">⌛</span> Actualizando';
+                        saveBtn.disabled = true;
+                        appState.pagos = await cargarPagos();
+                        calcularEstadisticas();
+                        actualizarSiguienteRecibo();
+                        renderizarTabla();
+                        mostrarAlerta('✅ Datos actualizados desde GitHub', 'success');
+                    } catch (e) {
+                        mostrarAlerta('Error al actualizar: ' + e.message, 'error');
+                    } finally {
+                        saveBtn.innerHTML = '💾 Guardar pagos';
+                        saveBtn.disabled = false;
+                    }
+                });
+            }
+
+            // ===== SELECCIONAR ROJOS =====
+            const selectBtn = document.getElementById('selectAllDebtBtn');
+            if (selectBtn) {
+                selectBtn.addEventListener('click', () => {
+                    const meses = document.querySelectorAll('.month-checkbox.debt');
+                    mostrarAlerta(`${meses.length} meses en rojo disponibles`, 'info');
+                });
+            }
+
+            // ===== REPORTES =====
+            dom.paymentsTodayBtn.addEventListener('click', () => {
+                const hoy = appState.fechaActual;
+                const d = hoy.getDate().toString().padStart(2,'0');
+                const m = hoy.getMonth();
+                const a = hoy.getFullYear();
+                generarReporteCompacto('Pagos de hoy', p => {
+                    const [dd, mm, aa] = p.fecha.split('/');
+                    return dd === d && parseInt(mm)-1 === m && parseInt(aa) === a;
+                });
+            });
+
+            dom.paymentsMonthBtn.addEventListener('click', () => {
+                const m = appState.fechaActual.getMonth();
+                const a = appState.fechaActual.getFullYear();
+                generarReporteCompacto(`Pagos de ${['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'][m]} ${a}`, p => {
+                    const [dd, mm, aa] = p.fecha.split('/');
+                    return parseInt(mm)-1 === m && parseInt(aa) === a;
+                });
+            });
+
+            dom.paymentsYearBtn.addEventListener('click', () => {
+                const a = appState.fechaActual.getFullYear();
+                generarReporteCompacto(`Pagos ${a}`, p => parseInt(p.fecha.split('/')[2]) === a);
+            });
+
+            dom.paymentsAllBtn.addEventListener('click', () => generarReporteCompacto('Todos los pagos'));
+            
+            // Reporte de certificados
+            dom.certificatesReportBtn.addEventListener('click', generarReporteCertificados);
+
+            // ===== IMPRIMIR =====
+            dom.printReportBtn.addEventListener('click', () => {
+                const w = window.open('', '_blank');
+                w.document.write(`
+                    <html>
+                        <head>
+                            <title>${dom.reportTitle.textContent}</title>
+                            <style>
+                                body { font-family: 'Inter', Arial; padding: 40px; }
+                                table { border-collapse: collapse; width: 100%; }
+                                th { background: #1a4a2a; color: white; padding: 12px; }
+                                td { padding: 10px; border: 1px solid #ddd; }
+                                .month-badge { background: #1a4a2a; color: white; padding: 4px 10px; border-radius: 100px; }
+                            </style>
+                        </head>
+                        <body>
+                            <h1 style="color: #1a4a2a;">JAC Bateas - ${dom.reportTitle.textContent}</h1>
+                            <p>Fecha: ${new Date().toLocaleDateString('es-ES')}</p>
+                            ${dom.reportContent.innerHTML}
+                        </body>
+                    </html>
+                `);
+                w.document.close();
+                setTimeout(() => w.print(), 300);
+            });
+
+            dom.printDetailBtn.addEventListener('click', () => {
+                const w = window.open('', '_blank');
+                w.document.write(`
+                    <html>
+                        <head>
+                            <title>${dom.modalNombre.textContent}</title>
+                            <style>
+                                body { font-family: 'Inter', Arial; padding: 40px; }
+                                .badge { background: #f0f8f0; padding: 4px 14px; border-radius: 100px; }
+                            </style>
+                        </head>
+                        <body>
+                            <h1 style="color: #1a4a2a;">${dom.modalNombre.textContent}</h1>
+                            <p>Fecha: ${new Date().toLocaleDateString('es-ES')}</p>
+                            ${dom.modalContent.innerHTML}
+                        </body>
+                    </html>
+                `);
+                w.document.close();
+                setTimeout(() => w.print(), 300);
+            });
+
+            // ===== CERRAR MODALES =====
+            dom.closeModalBtn.addEventListener('click', () => dom.modal.style.display = 'none');
+            dom.closeReportModalBtn.addEventListener('click', () => dom.reportModal.style.display = 'none');
+
+            window.addEventListener('click', (e) => {
+                if (e.target === dom.modal) dom.modal.style.display = 'none';
+                if (e.target === dom.reportModal) dom.reportModal.style.display = 'none';
+                if (e.target === dom.receiptModal) {
+                    dom.receiptModal.style.display = 'none';
+                    appState.pendingPayment = null;
+                }
+            });
+        }
+
+        // ============================================================
+        // INICIALIZACIÓN
+        // ============================================================
+        async function inicializar() {
+            // Configurar año selector
+            const añoActual = appState.fechaActual.getFullYear();
+            for (let i = 2024; i <= añoActual; i++) {
+                const opt = document.createElement('option');
+                opt.value = i;
+                opt.textContent = i;
+                dom.yearSelect.appendChild(opt);
+            }
+            dom.yearSelect.value = añoActual;
+            
+            dom.fechaActualDisplay.textContent = formatearFecha(appState.fechaActual);
+            
+            inicializarEventos();
+            iniciarSistema();
+        }
+
+        inicializar();
+    </script>
+</body>
+</html>
