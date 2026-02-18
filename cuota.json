@@ -1,5 +1,5 @@
 {
-  "ultima_actualizacion": "2026-02-18T18:16:27.608Z",
+  "ultima_actualizacion": "2026-02-18T18:16:31.359Z",
   "valor_cuota": 5000,
   "pagos": [
     {
@@ -16,7 +16,8 @@
     {
       "cedula": "1121858694",
       "nombre": "NELSON LEANDRO CARRILLO",
-      "certificado": "febrero_2026_20000_18/02/2026_13:16:27_0006"
+      "certificado": "febrero_2026_20000_18/02/2026_13:16:27_0006",
+      "fecha_pago_año_2026": "enero_2026_5000_18/02/2026_0007"
     }
   ]
 }
