@@ -1,5 +1,5 @@
 {
-  "ultima_actualizacion": "2026-02-18T18:16:33.942Z",
+  "ultima_actualizacion": "2026-02-18T19:02:57.795Z",
   "valor_cuota": 5000,
   "pagos": [
     {
@@ -18,6 +18,11 @@
       "nombre": "NELSON LEANDRO CARRILLO",
       "certificado": "febrero_2026_20000_18/02/2026_13:16:27_0006",
       "fecha_pago_año_2026": "enero_2026_5000_18/02/2026_0007; febrero_2026_5000_18/02/2026_0008"
+    },
+    {
+      "cedula": "1124831884",
+      "nombre": "SEBASTIAN GONZALEZ",
+      "certificado": "febrero_2026_20000_18/02/2026_14:02:57_0009"
     }
   ]
 }
