@@ -1,22 +1,25 @@
 {
-  "ultima_actualizacion": "2026-02-20T02:34:55.405Z",
+  "ultima_actualizacion": "2026-02-20T02:36:37.695Z",
   "valor_cuota": 5000,
   "pagos": [
     {
       "cedula": "4438681",
       "nombre": "CARLOS ALBERTO QUIÑONES MUÑOZ",
       "fecha_pago_año_undefined": "undefined_undefined_5000_19/02/2026_0001; undefined_undefined_5000_19/02/2026_0001",
+      "fecha_pago_año_2026": "enero_2026_5000_19/02/2026_0001",
       "certificado": "febrero_2026_20000_19/02/2026_19:43:40_0002"
     },
     {
       "cedula": "42775182",
       "nombre": "LILIANA LONDOÑO GALLEGO",
-      "certificado": "febrero_2026_20000_19/02/2026_19:43:54_0003"
+      "certificado": "febrero_2026_20000_19/02/2026_19:43:54_0003",
+      "fecha_pago_año_2026": "enero_2026_5000_19/02/2026_0004"
     },
     {
       "cedula": "1096231946",
       "nombre": "BRANDOWN JAIR RINCON VILLA",
-      "certificado": "febrero_2026_20000_19/02/2026_19:53:18_0005; febrero_2026_20000_19/02/2026_20:13:32_0006"
+      "certificado": "febrero_2026_20000_19/02/2026_19:53:18_0005; febrero_2026_20000_19/02/2026_20:13:32_0006",
+      "fecha_pago_año_2026": "enero_2026_5000_19/02/2026_0007"
     }
   ]
 }
