@@ -5268,7 +5268,9 @@
     "fecha": "17/01/2026",
     "direccion": "MANZANA 78 CASA 11",
     "celular": "3214775014",
-    "pagos": [],
+    "pagos": [
+      "21/2/2026, 20.000"
+    ],
     "firma": ""
   },
   {
@@ -8864,7 +8866,9 @@
     "fecha": "21/02/2026",
     "direccion": "MANZANA 76 CASA 11",
     "celular": "3158381780",
-    "pagos": [],
+    "pagos": [
+      "21/2/2026, 20.000"
+    ],
     "firma": ""
   },
   {
@@ -8877,7 +8881,9 @@
     "fecha": "21/02/2026",
     "direccion": "MANZANA 76 CASA 11",
     "celular": "3169475147",
-    "pagos": [],
+    "pagos": [
+      "21/2/2026, 20.000"
+    ],
     "firma": ""
   },
   {
@@ -8885,45 +8891,6 @@
     "registro": 672,
     "folio": 38,
     "renglon": 24,
-    "nombre": "MIGUEL SEBASTIAN RINCON POPAYAN",
-    "cedula": "1120818409",
-    "fecha": "21/02/2026",
-    "direccion": "MANZANA 76 CASA 11",
-    "celular": "3169475147",
-    "pagos": [],
-    "firma": ""
-  },
-  {
-    "id": "673",
-    "registro": 673,
-    "folio": 38,
-    "renglon": 25,
-    "nombre": "",
-    "cedula": "",
-    "fecha": "",
-    "direccion": "MANZANA  CASA ",
-    "celular": "",
-    "pagos": [],
-    "firma": ""
-  },
-  {
-    "id": "674",
-    "registro": 674,
-    "folio": 38,
-    "renglon": 26,
-    "nombre": "",
-    "cedula": "",
-    "fecha": "",
-    "direccion": "MANZANA  CASA ",
-    "celular": "",
-    "pagos": [],
-    "firma": ""
-  },
-  {
-    "id": "675",
-    "registro": 675,
-    "folio": 38,
-    "renglon": 27,
     "nombre": "",
     "cedula": "",
     "fecha": "",
