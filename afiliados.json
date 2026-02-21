@@ -8797,7 +8797,9 @@
     "fecha": "14/02/2026",
     "direccion": "MANZANA 59 CASA 13",
     "celular": "3142933494",
-    "pagos": [],
+    "pagos": [
+      "21/2/2026, 20.000"
+    ],
     "firma": ""
   },
   {
