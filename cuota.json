@@ -1,5 +1,5 @@
 {
-  "ultima_actualizacion": "2026-02-21T23:12:45.926Z",
+  "ultima_actualizacion": "2026-02-21T23:18:12.610Z",
   "valor_cuota": 5000,
   "pagos": [
     {
@@ -52,8 +52,7 @@
     },
     {
       "cedula": "1120839321",
-      "nombre": "BRAYAN MAURICIO BELTRAN RODRIGUEZ",
-      "fecha_pago_año_2026": "enero_2026_5000_21/02/2026_0015"
+      "nombre": "BRAYAN MAURICIO BELTRAN RODRIGUEZ"
     }
   ]
 }
