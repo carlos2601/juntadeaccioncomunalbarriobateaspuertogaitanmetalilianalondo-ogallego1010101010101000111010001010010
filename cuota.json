@@ -1,5 +1,5 @@
 {
-  "ultima_actualizacion": "2026-02-21T23:27:34.957Z",
+  "ultima_actualizacion": "2026-02-21T23:28:07.086Z",
   "valor_cuota": 5000,
   "pagos": [
     {
@@ -65,6 +65,11 @@
       "cedula": "1234789853",
       "nombre": "JHOJAN ESTIVEN VANEGAS RAMOS",
       "certificado": "febrero_2026_20000_21/02/2026_18:27:34_0018"
+    },
+    {
+      "cedula": "98539025",
+      "nombre": "GIOVANNI OBANDO LOPEZ",
+      "certificado": "febrero_2026_20000_21/02/2026_18:28:07_0019"
     }
   ]
 }
