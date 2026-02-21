@@ -8613,5 +8613,18 @@
     "celular": "3215074577",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 652,
+    "registro": 652,
+    "folio": 38,
+    "renglon": 4,
+    "nombre": "RUBEN DARIO MARTINEZ",
+    "cedula": "1.124.821.473",
+    "fecha": "07/02/2026",
+    "direccion": "MANZANA 62 CASA 29",
+    "celular": "3118687238",
+    "pagos": [],
+    "firma": ""
   }
 ]
