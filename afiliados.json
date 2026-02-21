@@ -8981,7 +8981,9 @@
     "fecha": "21/02/2026",
     "direccion": "MANZANA 71 CASA 01",
     "celular": "3112956975",
-    "pagos": [],
+    "pagos": [
+      "21/2/2026, 20.000"
+    ],
     "firma": ""
   },
   {
@@ -8994,84 +8996,6 @@
     "fecha": "21/02/2026",
     "direccion": "MANZANA 71 CASA 01",
     "celular": "3006034263",
-    "pagos": [],
-    "firma": ""
-  },
-  {
-    "id": "681",
-    "registro": 681,
-    "folio": 38,
-    "renglon": 33,
-    "nombre": "",
-    "cedula": "",
-    "fecha": "",
-    "direccion": "MANZANA  CASA ",
-    "celular": "",
-    "pagos": [],
-    "firma": ""
-  },
-  {
-    "id": "682",
-    "registro": 682,
-    "folio": 38,
-    "renglon": 34,
-    "nombre": "",
-    "cedula": "",
-    "fecha": "",
-    "direccion": "MANZANA  CASA ",
-    "celular": "",
-    "pagos": [],
-    "firma": ""
-  },
-  {
-    "id": "683",
-    "registro": 683,
-    "folio": 38,
-    "renglon": 35,
-    "nombre": "",
-    "cedula": "",
-    "fecha": "",
-    "direccion": "MANZANA  CASA ",
-    "celular": "",
-    "pagos": [],
-    "firma": ""
-  },
-  {
-    "id": "684",
-    "registro": 684,
-    "folio": 38,
-    "renglon": 36,
-    "nombre": "",
-    "cedula": "",
-    "fecha": "",
-    "direccion": "MANZANA  CASA ",
-    "celular": "",
-    "pagos": [],
-    "firma": ""
-  },
-  {
-    "id": "685",
-    "registro": 685,
-    "folio": 40,
-    "renglon": 1,
-    "nombre": "NESTOR ALEXANDER GOMEZ ALVAREZ",
-    "cedula": "1122626590",
-    "fecha": "21/02/2026",
-    "direccion": "MANZANA 80 CASA 21",
-    "celular": "3157272445",
-    "pagos": [],
-    "firma": ""
-  },
-  {
-    "id": "686",
-    "registro": 686,
-    "folio": 40,
-    "renglon": 2,
-    "nombre": "",
-    "cedula": "",
-    "fecha": "",
-    "direccion": "MANZANA  CASA ",
-    "celular": "",
     "pagos": [],
     "firma": ""
   }
