@@ -5016,8 +5016,7 @@
     "direccion": "MANZANA 73 CASA 21",
     "celular": "3122777032",
     "pagos": [
-      "29/1/2026, 20.000",
-      "21/2/2026, 20.000"
+      "29/1/2026, 20.000"
     ],
     "firma": ""
   },
@@ -8925,6 +8924,58 @@
     "registro": 675,
     "folio": 38,
     "renglon": 27,
+    "nombre": "",
+    "cedula": "",
+    "fecha": "",
+    "direccion": "MANZANA  CASA ",
+    "celular": "",
+    "pagos": [],
+    "firma": ""
+  },
+  {
+    "id": "676",
+    "registro": 676,
+    "folio": 38,
+    "renglon": 28,
+    "nombre": "",
+    "cedula": "",
+    "fecha": "",
+    "direccion": "MANZANA  CASA ",
+    "celular": "",
+    "pagos": [],
+    "firma": ""
+  },
+  {
+    "id": "677",
+    "registro": 677,
+    "folio": 38,
+    "renglon": 29,
+    "nombre": "",
+    "cedula": "",
+    "fecha": "",
+    "direccion": "MANZANA  CASA ",
+    "celular": "",
+    "pagos": [],
+    "firma": ""
+  },
+  {
+    "id": "678",
+    "registro": 678,
+    "folio": 38,
+    "renglon": 30,
+    "nombre": "BRAYAN MAURICIO BELTRAN RODRIGUEZ",
+    "cedula": "1120839321",
+    "fecha": "21/02/2021",
+    "direccion": "MANZANA 38 CASA 11",
+    "celular": "3204204125",
+    "pagos": [],
+    "firma": ""
+  },
+  {
+    "id": "679",
+    "registro": 679,
+    "folio": 38,
+    "renglon": 31,
     "nombre": "",
     "cedula": "",
     "fecha": "",
