@@ -8639,5 +8639,18 @@
     "celular": "3127372881",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 654,
+    "registro": 654,
+    "folio": 38,
+    "renglon": 6,
+    "nombre": "MARIA JOSE TORRES ALVAREZ",
+    "cedula": "1.006.415.712",
+    "fecha": "07/02/2026",
+    "direccion": "MANZANA 63 CASA 10",
+    "celular": "3222393411",
+    "pagos": [],
+    "firma": ""
   }
 ]
