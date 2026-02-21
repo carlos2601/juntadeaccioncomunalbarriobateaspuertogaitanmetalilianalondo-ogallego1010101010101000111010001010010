@@ -6076,7 +6076,9 @@
     "fecha": "24/01/2026",
     "direccion": "MANZANA Y CASA 5",
     "celular": "3148220345",
-    "pagos": [],
+    "pagos": [
+      "21/2/2026, 20.000"
+    ],
     "firma": ""
   },
   {
