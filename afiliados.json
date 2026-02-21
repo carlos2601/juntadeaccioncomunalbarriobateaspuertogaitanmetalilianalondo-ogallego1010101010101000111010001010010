@@ -5016,8 +5016,7 @@
     "direccion": "MANZANA 59 CASA 07",
     "celular": "3122777032",
     "pagos": [
-      "29/1/2026, 20.000",
-      "21/2/2026, 20.000"
+      "29/1/2026, 20.000"
     ],
     "firma": ""
   },
@@ -8860,11 +8859,11 @@
     "registro": 670,
     "folio": 38,
     "renglon": 22,
-    "nombre": "",
-    "cedula": "",
-    "fecha": "",
-    "direccion": "MANZANA  CASA ",
-    "celular": "",
+    "nombre": "LUZ MILA POPAYAN CASTRO",
+    "cedula": "40429401",
+    "fecha": "21/02/2026",
+    "direccion": "MANZANA 76 CASA 11",
+    "celular": "3158381780",
     "pagos": [],
     "firma": ""
   },
@@ -8873,11 +8872,11 @@
     "registro": 671,
     "folio": 38,
     "renglon": 23,
-    "nombre": "",
-    "cedula": "",
-    "fecha": "",
-    "direccion": "MANZANA  CASA ",
-    "celular": "",
+    "nombre": "LINDA JACKELINE RINCON POPAYAN",
+    "cedula": "1122127266",
+    "fecha": "21/02/2026",
+    "direccion": "MANZANA 76 CASA 11",
+    "celular": "3169475147",
     "pagos": [],
     "firma": ""
   },
