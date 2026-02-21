@@ -1,5 +1,5 @@
 {
-  "ultima_actualizacion": "2026-02-21T21:29:04.604Z",
+  "ultima_actualizacion": "2026-02-21T21:29:32.800Z",
   "valor_cuota": 5000,
   "pagos": [
     {
@@ -17,7 +17,8 @@
     {
       "cedula": "17281622",
       "nombre": "ANGEL MAURICIO BELTRAN CHARRY",
-      "certificado": "febrero_2026_20000_21/02/2026_16:29:04_00001"
+      "certificado": "febrero_2026_20000_21/02/2026_16:29:04_00001",
+      "fecha_pago_año_2025": "diciembre_2025_5000_21/02/2026_00002"
     }
   ]
 }
