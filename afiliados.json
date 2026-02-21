@@ -8611,7 +8611,9 @@
     "fecha": "07/02/2026",
     "direccion": "MANZANA 58 CASA 22",
     "celular": "3215074577",
-    "pagos": [],
+    "pagos": [
+      "21/2/2026, 20.000"
+    ],
     "firma": ""
   },
   {
