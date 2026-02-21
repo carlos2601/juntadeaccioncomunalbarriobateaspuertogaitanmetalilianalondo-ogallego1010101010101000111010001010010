@@ -1,5 +1,5 @@
 {
-  "ultima_actualizacion": "2026-02-21T22:59:39.995Z",
+  "ultima_actualizacion": "2026-02-21T22:59:48.603Z",
   "valor_cuota": 5000,
   "pagos": [
     {
@@ -48,7 +48,7 @@
       "cedula": "1052572877",
       "nombre": "RAFAEL TEOBALDO ROCHA RIVERA",
       "certificado": "febrero_2026_20000_21/02/2026_17:59:10_0012",
-      "fecha_pago_año_2026": "enero_2026_5000_21/02/2026_0013"
+      "fecha_pago_año_2026": "enero_2026_5000_21/02/2026_0013; febrero_2026_5000_21/02/2026_0014"
     }
   ]
 }
