@@ -4037,7 +4037,9 @@
     "fecha": "27/12/2025",
     "direccion": "MANZANA 82 CASA 21",
     "celular": "3144644888",
-    "pagos": [],
+    "pagos": [
+      "21/2/2026, 20.000"
+    ],
     "firma": ""
   },
   {
