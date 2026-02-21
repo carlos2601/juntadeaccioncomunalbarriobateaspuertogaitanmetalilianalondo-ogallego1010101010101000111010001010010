@@ -8730,5 +8730,18 @@
     "celular": "3212528130",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 661,
+    "registro": 661,
+    "folio": 38,
+    "renglon": 13,
+    "nombre": "OVIDIO ALFREDO FUENTES SANCHEZ",
+    "cedula": "1.049.894.640",
+    "fecha": "21/02/2026",
+    "direccion": "MANZANA 66 CASA 10",
+    "celular": "3117499950",
+    "pagos": [],
+    "firma": ""
   }
 ]
