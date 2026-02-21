@@ -1,5 +1,5 @@
 {
-  "ultima_actualizacion": "2026-02-21T22:33:37.695Z",
+  "ultima_actualizacion": "2026-02-21T22:33:47.645Z",
   "valor_cuota": 5000,
   "pagos": [
     {
@@ -36,7 +36,8 @@
     {
       "cedula": "40429401",
       "nombre": "LUZ MILA POPAYAN CASTRO",
-      "certificado": "febrero_2026_20000_21/02/2026_17:33:37_0009"
+      "certificado": "febrero_2026_20000_21/02/2026_17:33:37_0009",
+      "fecha_pago_año_2026": "febrero_2026_5000_21/02/2026_0010"
     }
   ]
 }
