@@ -8678,5 +8678,18 @@
     "celular": "3122204387",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 657,
+    "registro": 657,
+    "folio": 38,
+    "renglon": 9,
+    "nombre": "WILFREDO SALAS GUTIERREZ",
+    "cedula": "7.716.345",
+    "fecha": "07/02/2026",
+    "direccion": "MANZANA 90 CASA 11",
+    "celular": "3123929205",
+    "pagos": [],
+    "firma": ""
   }
 ]
