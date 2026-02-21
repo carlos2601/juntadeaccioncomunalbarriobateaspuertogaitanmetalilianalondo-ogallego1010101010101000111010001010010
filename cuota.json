@@ -1,5 +1,5 @@
 {
-  "ultima_actualizacion": "2026-02-21T23:28:26.686Z",
+  "ultima_actualizacion": "2026-02-21T23:29:44.726Z",
   "valor_cuota": 5000,
   "pagos": [
     {
@@ -64,7 +64,8 @@
     {
       "cedula": "1234789853",
       "nombre": "JHOJAN ESTIVEN VANEGAS RAMOS",
-      "certificado": "febrero_2026_20000_21/02/2026_18:27:34_0018"
+      "certificado": "febrero_2026_20000_21/02/2026_18:27:34_0018",
+      "fecha_pago_año_2026": "febrero_2026_5000_21/02/2026_0021"
     },
     {
       "cedula": "98539025",
