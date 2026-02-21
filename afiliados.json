@@ -8600,5 +8600,18 @@
     "celular": "3227626050",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 651,
+    "registro": 651,
+    "folio": 38,
+    "renglon": 3,
+    "nombre": "FERNEY ANTONIO RONDON",
+    "cedula": "86.074.942",
+    "fecha": "07/02/2026",
+    "direccion": "MANZANA 58 CASA 22",
+    "celular": "3215074577",
+    "pagos": [],
+    "firma": ""
   }
 ]
