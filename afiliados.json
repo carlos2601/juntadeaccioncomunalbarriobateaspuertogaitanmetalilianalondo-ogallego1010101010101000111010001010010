@@ -8587,5 +8587,18 @@
     "celular": "3138653909",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 650,
+    "registro": 650,
+    "folio": 38,
+    "renglon": 2,
+    "nombre": "DUMAR ESTEBAN MORALES MARIN",
+    "cedula": "1.006.695.923",
+    "fecha": "07/02/2026",
+    "direccion": "MANZANA 77 CASA 08",
+    "celular": "3227626050",
+    "pagos": [],
+    "firma": ""
   }
 ]
