@@ -8704,5 +8704,18 @@
     "celular": "3123929205",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 659,
+    "registro": 659,
+    "folio": 38,
+    "renglon": 11,
+    "nombre": "OMAR WLADIMIR GUDIÑO DIAZ",
+    "cedula": "6.974.209",
+    "fecha": "07/02/2026",
+    "direccion": "MANZANA 78 CASA 19",
+    "celular": "3228800213",
+    "pagos": [],
+    "firma": ""
   }
 ]
