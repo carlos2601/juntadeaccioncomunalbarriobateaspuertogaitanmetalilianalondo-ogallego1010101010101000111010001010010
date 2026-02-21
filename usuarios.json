@@ -27,6 +27,20 @@
         "auditar": true
       },
       "activo": true
+    },
+    {
+      "usuario": "4438681",
+      "password": "4438681",
+      "rol": "Administrado",
+      "permisos": {
+        "editar": false,
+        "buscar": false,
+        "guardar_pagos": false,
+        "ver_reportes": true,
+        "exportar": true,
+        "auditar": true
+      },
+      "activo": true
     }
   ]
 }
