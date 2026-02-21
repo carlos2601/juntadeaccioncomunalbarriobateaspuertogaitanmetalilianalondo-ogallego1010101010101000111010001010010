@@ -8996,7 +8996,9 @@
     "fecha": "21/02/2026",
     "direccion": "MANZANA 71 CASA 01",
     "celular": "3006034263",
-    "pagos": [],
+    "pagos": [
+      "21/2/2026, 20.000"
+    ],
     "firma": ""
   }
 ]
