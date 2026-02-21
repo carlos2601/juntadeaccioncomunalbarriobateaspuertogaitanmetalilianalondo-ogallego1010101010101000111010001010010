@@ -8968,7 +8968,9 @@
     "fecha": "21/02/2026",
     "direccion": "MANZANA 78 CASA 11",
     "celular": "3204204125",
-    "pagos": [],
+    "pagos": [
+      "21/2/2026, 20.000"
+    ],
     "firma": ""
   },
   {
