@@ -1,5 +1,5 @@
 {
-  "ultima_actualizacion": "2026-02-21T19:01:51.885Z",
+  "ultima_actualizacion": "2026-02-21T21:08:18.991Z",
   "valor_cuota": 5000,
   "pagos": [
     {
@@ -9,6 +9,11 @@
     {
       "cedula": "4438681",
       "nombre": "CARLOS ALBERTO QUIÑONES MUÑOZ"
+    },
+    {
+      "cedula": "1121896567",
+      "nombre": "YEISON BELTRAN URREA",
+      "certificado": "febrero_2026_20000_21/02/2026_16:08:18_0001"
     }
   ]
 }
