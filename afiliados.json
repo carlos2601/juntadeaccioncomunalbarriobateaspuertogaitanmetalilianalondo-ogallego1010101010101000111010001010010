@@ -9059,7 +9059,9 @@
     "fecha": "21/02/2026",
     "direccion": "MANZANA 80 CASA 21",
     "celular": "3157272445",
-    "pagos": [],
+    "pagos": [
+      "21/2/2026, 20.000"
+    ],
     "firma": ""
   },
   {
