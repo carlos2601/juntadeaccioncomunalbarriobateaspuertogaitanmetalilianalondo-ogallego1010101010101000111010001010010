@@ -8717,5 +8717,18 @@
     "celular": "3228800213",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 660,
+    "registro": 660,
+    "folio": 38,
+    "renglon": 12,
+    "nombre": "EDWIN SALAS GUTIERREZ",
+    "cedula": "7.723.266",
+    "fecha": "14/02/2026",
+    "direccion": "MANZANA 90 CASA 11",
+    "celular": "3212528130",
+    "pagos": [],
+    "firma": ""
   }
 ]
