@@ -8574,5 +8574,18 @@
     "celular": "",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": 649,
+    "registro": 649,
+    "folio": 38,
+    "renglon": 1,
+    "nombre": "ROCY ANDREA SALAS RODRIGUEZ",
+    "cedula": "1.075.313.748",
+    "fecha": "07/02/2026",
+    "direccion": "MANZANA 90 CASA 11",
+    "celular": "3138653909",
+    "pagos": [],
+    "firma": ""
   }
 ]
