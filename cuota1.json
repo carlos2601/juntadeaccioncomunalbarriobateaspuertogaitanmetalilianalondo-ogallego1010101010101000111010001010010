@@ -1,5 +1,5 @@
 {
-  "ultima_actualizacion": "2026-02-23T01:36:23.937Z",
+  "ultima_actualizacion": "2026-02-23T01:36:38.374Z",
   "valor_cuota": 5000,
   "pagos": [
     {
@@ -16,7 +16,8 @@
     {
       "cedula": "1121839613",
       "nombre": "CARLOS ANDRES PARRA ESPITIA",
-      "certificado": "febrero_2026_20000_22/02/2026_20:36:23_00003"
+      "certificado": "febrero_2026_20000_22/02/2026_20:36:23_00003",
+      "fecha_pago_año_2026": "febrero_2026_5000_22/02/2026_20:36:30_00003"
     }
   ]
 }
