@@ -86,45 +86,80 @@
             cursor: pointer;
         }
 
-        /* ===== MODAL DE CONFIGURACIÓN API ===== */
-        .api-config {
-            background: #f2f9f2;
-            padding: 10px 15px;
-            border-radius: 100px;
-            border: 1px solid #c0e0c0;
-            display: inline-flex;
+        /* ===== MODAL DE API ===== */
+        .api-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(26, 74, 42, 0.4);
+            backdrop-filter: blur(4px);
+            display: flex;
             align-items: center;
-            gap: 10px;
+            justify-content: center;
+            z-index: 20000;
+            padding: 20px;
         }
-        
-        .api-config input {
-            border: 1px solid #a0c0a0;
-            border-radius: 100px;
-            padding: 6px 15px;
-            width: 250px;
-            font-size: 0.8rem;
+
+        .api-modal-content {
+            background: white;
+            border-radius: 24px;
+            max-width: 400px;
+            width: 100%;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 25px 50px -12px rgba(0, 40, 0, 0.3);
+            border: 2px solid #1a4a2a;
+        }
+
+        .api-modal-content h2 {
+            color: #1a4a2a;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .api-modal-content p {
+            color: #4a6b4a;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+        }
+
+        .api-modal-content input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #d0e4d0;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
             outline: none;
         }
-        
-        .api-config input:focus {
+
+        .api-modal-content input:focus {
             border-color: #1a4a2a;
-            box-shadow: 0 0 0 2px rgba(26, 74, 42, 0.2);
         }
-        
-        .api-config button {
+
+        .api-modal-content button {
             background: #1a4a2a;
             color: white;
             border: none;
-            border-radius: 100px;
-            padding: 6px 15px;
+            padding: 12px 30px;
+            border-radius: 10px;
+            font-size: 1rem;
             font-weight: 600;
-            font-size: 0.8rem;
             cursor: pointer;
-            white-space: nowrap;
+            width: 100%;
         }
-        
-        .api-config button:hover {
+
+        .api-modal-content button:hover {
             background: #2a6a3a;
+        }
+
+        .api-modal-content .error-message {
+            color: #c04040;
+            margin-top: 10px;
+            font-size: 0.8rem;
+            display: none;
         }
 
         /* ===== BOTONES CON COLORES ===== */
@@ -877,8 +912,19 @@
     </style>
 </head>
 <body>
+    <!-- MODAL DE API PARA INGRESAR TOKEN -->
+    <div id="apiModal" class="api-modal">
+        <div class="api-modal-content">
+            <h2>🔐 Configuración API</h2>
+            <p>Ingresa el token de GitHub para acceder al sistema</p>
+            <input type="password" id="apiTokenInput" placeholder="Token GitHub" autofocus>
+            <button id="validateTokenBtn">Validar y continuar</button>
+            <div id="apiError" class="error-message">❌ Token inválido. Intenta nuevamente.</div>
+        </div>
+    </div>
+
     <!-- APLICACIÓN PRINCIPAL -->
-    <div class="app" id="mainApp">
+    <div class="app" id="mainApp" style="display: none;">
         <!-- HEADER -->
         <div class="header">
             <div class="logo-area">
@@ -887,11 +933,6 @@
                 </h1>
             </div>
             <div style="display: flex; gap: 10px; align-items: center;">
-                <!-- CONFIGURACIÓN API - TOKEN ELIMINADO DEL CÓDIGO -->
-                <div class="api-config">
-                    <input type="password" id="apiTokenInput" placeholder="clave dinamica" value="">
-                    <button id="saveTokenBtn">Guardar</button>
-                </div>
                
                 <!-- Temporizador de inactividad -->
                 <div id="sessionTimer" class="session-timer">
@@ -1265,13 +1306,13 @@
             VALOR_CUOTA: 5000,
             VALOR_CERTIFICADO: 20000,
             PAGE_SIZE: 6
-            // API_TOKEN ELIMINADO - ahora se configura manualmente
+            // API_TOKEN ELIMINADO - ahora se pide en el modal
         };
 
         let appState = {
             afiliados: [],
             pagos: [],
-            token: null, // Inicialmente null, se cargará de sessionStorage o se pedirá
+            token: null, // Se llenará después de validar
             fechaActual: new Date(),
             tablaVisible: false,
             filtroActual: '',
@@ -1286,12 +1327,6 @@
             ultimaSincronizacion: null
         };
 
-        // Cargar token guardado si existe
-        const savedToken = sessionStorage.getItem('github_token');
-        if (savedToken) {
-            appState.token = savedToken;
-        }
-
         // ============================================================
         // VARIABLES PARA INACTIVIDAD (5 MINUTOS)
         // ============================================================
@@ -1302,6 +1337,10 @@
 
         const dom = {
             mainApp: document.getElementById('mainApp'),
+            apiModal: document.getElementById('apiModal'),
+            apiTokenInput: document.getElementById('apiTokenInput'),
+            validateTokenBtn: document.getElementById('validateTokenBtn'),
+            apiError: document.getElementById('apiError'),
             tableContainer: document.getElementById('tableContainer'),
             tableBody: document.getElementById('tableBody'),
             tableHeader: document.getElementById('tableHeader'),
@@ -1356,9 +1395,7 @@
             sessionExpiredModal: document.getElementById('sessionExpiredModal'),
             syncStatus: document.getElementById('syncStatus'),
             syncIcon: document.getElementById('syncIcon'),
-            syncText: document.getElementById('syncText'),
-            apiTokenInput: document.getElementById('apiTokenInput'),
-            saveTokenBtn: document.getElementById('saveTokenBtn')
+            syncText: document.getElementById('syncText')
         };
 
         // ============================================================
@@ -1412,56 +1449,10 @@
         // ============================================================
         // FUNCIONES DE CACHÉ LOCAL
         // ============================================================
-        function guardarPagosEnLocalStorage() {
-            try {
-                const datosCache = {
-                    pagos: appState.pagos,
-                    ultimaSincronizacion: new Date().toISOString(),
-                    version: '1.0'
-                };
-                localStorage.setItem('jac_pagos_cache', JSON.stringify(datosCache));
-                console.log('💾 Pagos guardados en caché local');
-                return true;
-            } catch (e) {
-                console.error('Error guardando en localStorage:', e);
-                return false;
-            }
-        }
-
-        function cargarPagosDesdeLocalStorage() {
-            try {
-                const cache = localStorage.getItem('jac_pagos_cache');
-                if (cache) {
-                    const datosCache = JSON.parse(cache);
-                    console.log('📦 Cargando pagos desde caché local');
-                    appState.pagos = datosCache.pagos || [];
-                    appState.ultimaSincronizacion = datosCache.ultimaSincronizacion;
-                    if (appState.ultimaSincronizacion) {
-                        const ultima = new Date(appState.ultimaSincronizacion);
-                        const ahora = new Date();
-                        const minutosPasados = (ahora - ultima) / (1000 * 60);
-                        if (minutosPasados < 5) {
-                            appState.modoOffline = false;
-                        } else {
-                            appState.modoOffline = true;
-                        }
-                    }
-                    return true;
-                }
-            } catch (e) {
-                console.error('Error cargando desde localStorage:', e);
-            }
-            return false;
-        }
+        
 
         async function sincronizarConGitHub() {
             if (appState.sincronizando) return;
-            
-            // Verificar que hay token
-            if (!appState.token) {
-                mostrarAlerta('❌ Debes configurar el token de GitHub primero', 'error');
-                return;
-            }
             
             appState.sincronizando = true;
             actualizarIndicadorSync();
@@ -1484,7 +1475,7 @@
                 appState.ultimaSincronizacion = new Date().toISOString();
                 appState.modoOffline = false;
                 
-                guardarPagosEnLocalStorage();
+                
                 
                 console.log('✅ Sincronización completada');
                 
@@ -1522,23 +1513,78 @@
         }
 
         // ============================================================
-        // INICIO - CARGAR DATOS CON CACHÉ
+// CARGAR TOKEN GUARDADO AL INICIAR
+// ============================================================
+async function cargarTokenGuardado() {
+    const tokenGuardado = localStorage.getItem('github_token');
+    if (tokenGuardado) {
+        // Mostrar mensaje de validación
+        dom.apiError.style.display = 'block';
+        dom.apiError.style.color = '#4a6b4a';
+        dom.apiError.textContent = '🔑 Validando token guardado...';
+        dom.validateTokenBtn.disabled = true;
+        
+        const esValido = await validarToken(tokenGuardado);
+        if (esValido) {
+            // Token válido, cargar datos
+            await cargarDatosConToken(tokenGuardado);
+        } else {
+            // Token inválido, limpiar y mostrar modal
+            localStorage.removeItem('github_token');
+            dom.apiTokenInput.value = '';
+            dom.apiError.style.display = 'none';
+            dom.validateTokenBtn.disabled = false;
+            dom.validateTokenBtn.innerHTML = 'Validar y continuar';
+        }
+    } else {
+        // No hay token guardado, mostrar modal normalmente
+        dom.apiModal.style.display = 'flex';
+    }
+}
+
         // ============================================================
-        async function cargarDatosIniciales() {
+// FUNCIÓN PARA VALIDAR TOKEN
+// ============================================================
+async function validarToken(token) {
+    try {
+        const url = `https://api.github.com/repos/${CONFIG.REPO_OWNER}/${CONFIG.REPO_NAME}/contents/${CONFIG.CUOTA_PATH}`;
+        const res = await fetch(url, {
+            headers: { 'Authorization': `token ${token}` }
+        });
+        
+        if (res.status === 200 || res.status === 404) {
+            // Si es válido, guardar en localStorage
+            localStorage.setItem('github_token', token);
+            return true;
+        }
+        
+        return false;
+    } catch (e) {
+        console.error('Error validando token:', e);
+        return false;
+    }
+}
+
+
+        // ============================================================
+        // INICIO - CARGAR DATOS DESPUÉS DE VALIDAR TOKEN
+        // ============================================================
+        async function cargarDatosConToken(token) {
+            appState.token = token;
+            
             try {
                 mostrarAlerta('📥 Cargando afiliados...', 'info');
-                appState.afiliados = await cargarAfiliados();
-                
-                // Intentar cargar pagos desde caché primero
-                if (cargarPagosDesdeLocalStorage()) {
-                    mostrarAlerta('📥 Pagos cargados desde caché local', 'info');
-                } else {
-                    mostrarAlerta('📥 Cargando pagos desde GitHub...', 'info');
-                    appState.pagos = await cargarPagos();
-                }
+                appState.afiliados = await cargarAfiliados();            
+
+                mostrarAlerta('📥 Cargando pagos desde GitHub...', 'info');
+                appState.pagos = await cargarPagos();
                 
                 calcularEstadisticas();
                 actualizarSiguienteRecibo();
+                
+                // Ocultar modal y mostrar app
+                dom.apiModal.style.display = 'none';
+                dom.mainApp.style.display = 'block';
                 
                 appState.tablaVisible = true;
                 dom.tableContainer.style.display = 'block';
@@ -1824,46 +1870,54 @@
         }
 
         function renderPagination(totalPages, currentPage) {
-            if (!dom.pageNumbers) return;
-            
-            let html = '';
-            const maxVisible = 5;
-            let start = Math.max(1, currentPage - 2);
-            let end = Math.min(totalPages, start + maxVisible - 1);
-            
-            if (end - start + 1 < maxVisible) {
-                start = Math.max(1, end - maxVisible + 1);
-            }
+    if (!dom.pageNumbers) return;
+    
+    let html = '';
+    const maxVisible = 5;
+    let start = Math.max(1, currentPage - 2);
+    let end = Math.min(totalPages, start + maxVisible - 1);
+    
+    if (end - start + 1 < maxVisible) {
+        start = Math.max(1, end - maxVisible + 1);
+    }
 
-            if (start > 1) {
-                html += `<button class="page-btn" data-page="1">1</button>`;
-                if (start > 2) html += `<span style="padding: 0 6px; color: #6a8b6a;">…</span>`;
-            }
+    if (start > 1) {
+        html += `<button class="page-btn" data-page="1">1</button>`;
+        if (start > 2) html += `<span style="padding: 0 6px; color: #6a8b6a;">…</span>`;
+    }
 
-            for (let i = start; i <= end; i++) {
-                html += `<button class="page-btn ${i === currentPage ? 'active' : ''}" data-page="${i}">${i}</button>`;
-            }
+    for (let i = start; i <= end; i++) {
+        html += `<button class="page-btn ${i === currentPage ? 'active' : ''}" data-page="${i}">${i}</button>`;
+    }
 
-            if (end < totalPages) {
-                if (end < totalPages - 1) html += `<span style="padding: 0 6px; color: #6a8b6a;">…</span>`;
-                html += `<button class="page-btn" data-page="${totalPages}">${totalPages}</button>`;
-            }
+    if (end < totalPages) {
+        if (end < totalPages - 1) html += `<span style="padding: 0 6px; color: #6a8b6a;">…</span>`;
+        html += `<button class="page-btn" data-page="${totalPages}">${totalPages}</button>`;
+    }
 
-            dom.pageNumbers.innerHTML = html;
-            if (dom.pageInput) dom.pageInput.value = currentPage;
-            if (dom.prevPageBtn) dom.prevPageBtn.disabled = currentPage === 1;
-            if (dom.nextPageBtn) dom.nextPageBtn.disabled = currentPage === totalPages;
-            
-            document.querySelectorAll('.page-btn[data-page]').forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    const page = parseInt(e.target.dataset.page);
-                    if (page !== appState.currentPage) {
-                        appState.currentPage = page;
-                        renderizarTabla();
-                    }
-                });
-            });
-        }
+    dom.pageNumbers.innerHTML = html;
+    if (dom.pageInput) dom.pageInput.value = currentPage;
+    if (dom.prevPageBtn) dom.prevPageBtn.disabled = currentPage === 1;
+    if (dom.nextPageBtn) dom.nextPageBtn.disabled = currentPage === totalPages;
+    
+    // Quitar event listeners anteriores para evitar duplicados
+    document.querySelectorAll('.page-btn[data-page]').forEach(btn => {
+        btn.replaceWith(btn.cloneNode(true));
+    });
+    
+    // Agregar event listeners nuevos
+    document.querySelectorAll('.page-btn[data-page]').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            const page = parseInt(e.target.dataset.page);
+            if (page !== appState.currentPage) {
+                appState.currentPage = page;
+                renderizarTabla();
+            }
+        });
+    });
+}
 
         // ============================================================
         // FILTRO - BUSCA POR CÉDULA Y RECIBO
@@ -2133,12 +2187,6 @@
     
     if (!appState.pendingPayment) return mostrarAlerta('❌ No hay pago pendiente', 'error');
     
-    // Verificar que hay token
-    if (!appState.token) {
-        mostrarAlerta('❌ Debes configurar el token de GitHub primero', 'error');
-        return;
-    }
-    
     const recibo = dom.receiptNumber.value.trim();
     if (!recibo) return mostrarAlerta('❌ Número de recibo obligatorio', 'error');
     
@@ -2218,6 +2266,8 @@
             }
         }
     }
+    
+    if (!appState.token) return mostrarAlerta('❌ Token no disponible', 'error');
 
     const tipoPago = dom.tipoCuota.checked ? 'cuota' : 'certificado';
 
@@ -2319,9 +2369,6 @@
                     const errorData = await res.json();
                     throw new Error(errorData.message || 'Error al guardar');
                 }
-                
-                // Guardar también en localStorage como respaldo
-                guardarPagosEnLocalStorage();
                 
                 return true;
             } catch (e) {
@@ -2645,29 +2692,38 @@
         }
 
         // ============================================================
-        // FUNCIÓN PARA GUARDAR TOKEN
+        // VALIDACIÓN DE TOKEN AL HACER CLIC
         // ============================================================
-        function guardarToken() {
+        dom.validateTokenBtn.addEventListener('click', async () => {
             const token = dom.apiTokenInput.value.trim();
             if (!token) {
-                mostrarAlerta('❌ Debes ingresar un token', 'error');
+                dom.apiError.style.display = 'block';
+                dom.apiError.textContent = '❌ Debes ingresar un token';
                 return;
             }
             
-            // Validar formato básico de token GitHub (empieza con ghp_ o github_pat_)
-            if (!token.startsWith('ghp_') && !token.startsWith('github_pat_')) {
-                if (!confirm('⚠️ El token no tiene formato de GitHub (debe empezar con ghp_ o github_pat_). ¿Continuar de todas formas?')) {
-                    return;
-                }
+            dom.validateTokenBtn.disabled = true;
+            dom.validateTokenBtn.innerHTML = '<span class="loading">⌛</span> Validando...';
+            dom.apiError.style.display = 'none';
+            
+            const esValido = await validarToken(token);
+            
+            if (esValido) {
+                await cargarDatosConToken(token);
+            } else {
+                dom.apiError.style.display = 'block';
+                dom.apiError.textContent = '❌ Token inválido. Intenta nuevamente.';
+                dom.validateTokenBtn.disabled = false;
+                dom.validateTokenBtn.innerHTML = 'Validar y continuar';
             }
-            
-            appState.token = token;
-            sessionStorage.setItem('github_token', token);
-            mostrarAlerta('✅ Token guardado correctamente', 'success');
-            
-            // Opcional: sincronizar automáticamente después de guardar token
-            setTimeout(() => sincronizarConGitHub(), 1000);
-        }
+        });
+
+        // Permitir validar con Enter
+        dom.apiTokenInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                dom.validateTokenBtn.click();
+            }
+        });
 
         // ============================================================
         // EVENT LISTENERS
@@ -2802,13 +2858,6 @@
                         mostrarAlerta('⏳ Ya está sincronizando...', 'info');
                         return;
                     }
-                    
-                    // Verificar token antes de sincronizar
-                    if (!appState.token) {
-                        mostrarAlerta('❌ Debes configurar el token de GitHub primero', 'error');
-                        return;
-                    }
-                    
                     try {
                         saveBtn.innerHTML = '<span class="loading">⌛</span> Sincronizando';
                         saveBtn.disabled = true;
@@ -3013,53 +3062,28 @@
                     toggleAllCardsBtn.innerHTML = todasVolteadas ? '<span>👁️</span> Tarjetas' : '<span>🔒</span> Ocultar';
                 });
             }
-
-            // Evento para guardar token
-            if (dom.saveTokenBtn) {
-                dom.saveTokenBtn.addEventListener('click', guardarToken);
-            }
-            
-            // Permitir guardar token con Enter
-            if (dom.apiTokenInput) {
-                dom.apiTokenInput.addEventListener('keypress', (e) => {
-                    if (e.key === 'Enter') {
-                        guardarToken();
-                    }
-                });
-            }
         }
 
         // ============================================================
-        // INICIALIZACIÓN
-        // ============================================================
-        async function inicializar() {
-            const añoActual = appState.fechaActual.getFullYear();
-            for (let i = 2024; i <= añoActual; i++) {
-                const opt = document.createElement('option');
-                opt.value = i;
-                opt.textContent = i;
-                dom.yearSelect.appendChild(opt);
-            }
-            dom.yearSelect.value = añoActual;
-            
-            dom.fechaActualDisplay.textContent = formatearFecha(appState.fechaActual);
-            
-            // Mostrar token guardado si existe
-            if (appState.token) {
-                dom.apiTokenInput.value = appState.token;
-            }
-            
-            inicializarEventos();
-            
-            await cargarDatosIniciales();
-            
-            // Si hay token guardado, sincronizar automáticamente
-            if (appState.token) {
-                setTimeout(() => sincronizarConGitHub(), 2000);
-            } else {
-                mostrarAlerta('⚠️ Ingresa tu token de GitHub para guardar datos', 'info');
-            }
-        }
+// INICIALIZACIÓN
+// ============================================================
+async function inicializar() {
+    const añoActual = appState.fechaActual.getFullYear();
+    for (let i = 2024; i <= añoActual; i++) {
+        const opt = document.createElement('option');
+        opt.value = i;
+        opt.textContent = i;
+        dom.yearSelect.appendChild(opt);
+    }
+    dom.yearSelect.value = añoActual;
+    
+    dom.fechaActualDisplay.textContent = formatearFecha(appState.fechaActual);
+    
+    inicializarEventos();
+    
+    // Intentar cargar token guardado
+    await cargarTokenGuardado();
+}
 
         inicializar();
     </script>
