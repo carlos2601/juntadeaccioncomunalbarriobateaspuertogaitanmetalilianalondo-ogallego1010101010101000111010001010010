@@ -1,5 +1,5 @@
 {
-  "ultima_actualizacion": "2026-02-23T01:04:11.428Z",
+  "ultima_actualizacion": "2026-02-23T01:35:57.506Z",
   "valor_cuota": 5000,
   "pagos": [
     {
@@ -12,6 +12,11 @@
       "cedula": "42775182",
       "nombre": "LILIANA LONDOÑO GALLEGO",
       "fecha_pago_año_2026": "enero_2026_5000_22/02/2026_00002"
+    },
+    {
+      "cedula": "17281622",
+      "nombre": "ANGEL MAURICIO BELTRAN CHARRY",
+      "fecha_pago_año_2026": "enero_2026_5000_22/02/2026_00003"
     }
   ]
 }
