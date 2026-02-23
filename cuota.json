@@ -1,11 +1,10 @@
 {
-  "ultima_actualizacion": "2026-02-23T04:45:50.075Z",
+  "ultima_actualizacion": "2026-02-23T04:51:15.074Z",
   "valor_cuota": 5000,
   "pagos": [
     {
       "cedula": "42775182",
       "nombre": "LILIANA LONDOÑO GALLEGO",
-      "certificado": "febrero_2026_20000_19/02/2026_19:43:54_0003",
       "fecha_pago_año_2026": "enero_2026_5000_19/02/2026_0004"
     },
     {
