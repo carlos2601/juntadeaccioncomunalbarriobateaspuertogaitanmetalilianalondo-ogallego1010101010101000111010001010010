@@ -1,5 +1,5 @@
 {
-  "ultima_actualizacion": "2026-02-23T01:36:38.374Z",
+  "ultima_actualizacion": "2026-02-23T04:27:05.073Z",
   "valor_cuota": 5000,
   "pagos": [
     {
@@ -18,6 +18,11 @@
       "nombre": "CARLOS ANDRES PARRA ESPITIA",
       "certificado": "febrero_2026_20000_22/02/2026_20:36:23_00003",
       "fecha_pago_año_2026": "febrero_2026_5000_22/02/2026_20:36:30_00003"
+    },
+    {
+      "cedula": "6650213",
+      "nombre": "LEONEL BAUTISTA CARRANZA",
+      "fecha_pago_año_2026": "enero_2026_5000_22/02/2026_23:27:05_00004"
     }
   ]
 }
