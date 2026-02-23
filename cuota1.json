@@ -1,5 +1,5 @@
 {
-  "ultima_actualizacion": "2026-02-23T04:29:18.631Z",
+  "ultima_actualizacion": "2026-02-23T04:29:31.565Z",
   "valor_cuota": 5000,
   "pagos": [
     {
@@ -22,7 +22,7 @@
     {
       "cedula": "6650213",
       "nombre": "LEONEL BAUTISTA CARRANZA",
-      "fecha_pago_año_2026": "enero_2026_5000_22/02/2026_23:29:18_00004"
+      "fecha_pago_año_2026": "enero_2026_5000_22/02/2026_23:29:18_00004; febrero_2026_5000_22/02/2026_23:29:25_00004"
     }
   ]
 }
