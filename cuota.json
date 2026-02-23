@@ -1,5 +1,5 @@
 {
-  "ultima_actualizacion": "2026-02-23T04:51:24.505Z",
+  "ultima_actualizacion": "2026-02-23T04:51:54.458Z",
   "valor_cuota": 5000,
   "pagos": [
     {
@@ -79,7 +79,7 @@
     {
       "cedula": "1096231946",
       "nombre": "BRANDOWN JAIR RINCON VILLA",
-      "certificado": "febrero_2026_20000_19/02/2026_19:53:18_0005; febrero_2026_20000_19/02/2026_20:13:32_0006",
+      "certificado": "febrero_2026_20000_19/02/2026_19:53:18_0005",
       "fecha_pago_año_2026": "enero_2026_5000_19/02/2026_0007"
     }
   ]
