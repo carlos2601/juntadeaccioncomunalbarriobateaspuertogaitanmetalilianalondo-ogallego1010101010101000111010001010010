@@ -8466,7 +8466,9 @@
     "fecha": "07/02/2026",
     "direccion": "MANZANA 74 CASA 18",
     "celular": "3123536109",
-    "pagos": [],
+    "pagos": [
+      "24/2/2026, 20.000"
+    ],
     "firma": ""
   },
   {
