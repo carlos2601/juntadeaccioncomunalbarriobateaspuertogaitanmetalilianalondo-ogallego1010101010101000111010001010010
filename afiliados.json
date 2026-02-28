@@ -7973,9 +7973,7 @@
     "fecha": "31/01/2026",
     "direccion": "MANZANA 81 CASA 12",
     "celular": "3138453638",
-    "pagos": [
-      "28/2/2026, 20.000"
-    ],
+    "pagos": [],
     "firma": ""
   },
   {
@@ -8034,17 +8032,15 @@
   },
   {
     "id": 608,
-    "registro": "608",
-    "folio": "34",
-    "renglon": "32",
-    "nombre": "JOHN FLAMIR SALGADO RODRIGUEZ",
+    "registro": 608,
+    "folio": 34,
+    "renglon": 32,
+    "nombre": "JOHN FLAIMIR SALGADO RODRIGUEZ",
     "cedula": "1121832626",
-    "fecha": "",
+    "fecha": "31/01/2026",
     "direccion": "MANZANA 64 A CASA 18",
     "celular": "3114683424",
-    "pagos": [
-      "28/2/2026, 20.000"
-    ],
+    "pagos": [],
     "firma": ""
   },
   {
@@ -9164,9 +9160,7 @@
     "fecha": "28/02/2026",
     "direccion": "MANZANA 61 CASA 18",
     "celular": "3123411630",
-    "pagos": [
-      "28/2/2026, 20.000"
-    ],
+    "pagos": [],
     "firma": ""
   }
 ]
