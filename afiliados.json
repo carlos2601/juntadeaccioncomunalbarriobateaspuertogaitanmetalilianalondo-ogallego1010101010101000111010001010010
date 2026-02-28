@@ -8040,7 +8040,9 @@
     "fecha": "31/01/2026",
     "direccion": "MANZANA 64 A CASA 18",
     "celular": "3114683424",
-    "pagos": [],
+    "pagos": [
+      "28/2/2026, 20.000"
+    ],
     "firma": ""
   },
   {
