@@ -2634,9 +2634,7 @@
     "fecha": "21/11/2024",
     "direccion": "MANZANA 59 CASA 07",
     "celular": "3176428679",
-    "pagos": [
-      "28/2/2026, 20.000"
-    ],
+    "pagos": [],
     "firma": ""
   },
   {
@@ -8025,7 +8023,9 @@
     "fecha": "31/01/2026",
     "direccion": "MANZANA 81 CASA 12",
     "celular": "3219735029",
-    "pagos": [],
+    "pagos": [
+      "28/2/2026, 20.000"
+    ],
     "firma": ""
   },
   {
