@@ -1,5 +1,5 @@
 {
-  "ultima_actualizacion": "2026-02-23T05:04:16.127Z",
+  "ultima_actualizacion": "2026-02-28T21:26:48.479Z",
   "valor_cuota": 5000,
   "pagos": [
     {
@@ -60,6 +60,11 @@
       "nombre": "GIOVANNI OBANDO LOPEZ",
       "certificado": "febrero_2026_20000_21/02/2026_18:28:07_00019",
       "fecha_pago_año_2026": "febrero_2026_5000_21/02/2026_00020"
+    },
+    {
+      "cedula": "1124217292",
+      "nombre": "CRISTIAN SAN MARTIN AYALA",
+      "certificado": "febrero_2026_20000_28/02/2026_16:26:48_0022"
     }
   ]
 }
