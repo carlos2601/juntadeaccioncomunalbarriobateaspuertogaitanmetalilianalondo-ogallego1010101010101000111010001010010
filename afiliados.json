@@ -2621,7 +2621,9 @@
     "fecha": "21/11/2024",
     "direccion": "MANZANA 59 CASA 07",
     "celular": "3165599334",
-    "pagos": [],
+    "pagos": [
+      "28/2/2026, 20.000"
+    ],
     "firma": ""
   },
   {
