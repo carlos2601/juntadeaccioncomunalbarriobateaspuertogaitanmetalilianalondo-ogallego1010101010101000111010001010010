@@ -1,5 +1,5 @@
 {
-  "ultima_actualizacion": "2026-02-28T21:30:06.149Z",
+  "ultima_actualizacion": "2026-03-01T16:06:31.467Z",
   "valor_cuota": 5000,
   "pagos": [
     {
@@ -7,7 +7,8 @@
       "nombre": "ANGEL MAURICIO BELTRAN CHARRY",
       "certificado": "febrero_2026_20000_21/02/2026_16:29:04_00001",
       "fecha_pago_aÃ±o_2025": "diciembre_2025_5000_21/02/2026_00002",
-      "fecha_pago_aÃ±o_2026": "enero_2026_5000_21/02/2026_00003; febrero_2026_5000_21/02/2026_00004"
+      "fecha_pago_aÃ±o_2026": "enero_2026_5000_21/02/2026_00003; febrero_2026_5000_21/02/2026_00004",
+      "fecha_pago_año_2026": "enero_2026_5000_01/03/2026_11:06:31_00023"
     },
     {
       "cedula": "1121839613",
