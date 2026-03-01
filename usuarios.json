@@ -31,14 +31,14 @@
     {
       "usuario": "4438681",
       "password": "4438681",
-      "rol": "Administrado",
+      "rol": "revisor",
       "permisos": {
         "editar": false,
-        "buscar": false,
+        "buscar": true,
         "guardar_pagos": false,
         "ver_reportes": true,
         "exportar": true,
-        "auditar": true
+        "solo_informes": true
       },
       "activo": true
     }
