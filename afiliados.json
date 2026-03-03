@@ -5723,7 +5723,9 @@
     "fecha": "24/01/2026",
     "direccion": "MANZANA 63 CASA 25",
     "celular": "3114168949",
-    "pagos": [],
+    "pagos": [
+      "3/3/2026, 20.000"
+    ],
     "firma": ""
   },
   {
