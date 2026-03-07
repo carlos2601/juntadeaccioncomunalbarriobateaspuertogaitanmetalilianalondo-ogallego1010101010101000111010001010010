@@ -2160,7 +2160,9 @@
     "fecha": "21/11/2024",
     "direccion": "MANZANA 73 CASA 21",
     "celular": "3172777032",
-    "pagos": [],
+    "pagos": [
+      "7/3/2026, 20.000"
+    ],
     "firma": ""
   },
   {
