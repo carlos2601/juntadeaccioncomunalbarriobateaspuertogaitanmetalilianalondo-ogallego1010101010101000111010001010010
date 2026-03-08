@@ -31,11 +31,11 @@
      {
       "usuario": "4438681",
       "password": "44386811",
-      "rol": "Administrador",
+      "rol": "administrador",
       "permisos": {
-        "editar": false,
-        "buscar": false,
-        "guardar_pagos": false,
+        "editar": true,
+        "buscar": true,
+        "guardar_pagos": true,
         "ver_reportes": true,
         "exportar": true,
         "auditar": true
