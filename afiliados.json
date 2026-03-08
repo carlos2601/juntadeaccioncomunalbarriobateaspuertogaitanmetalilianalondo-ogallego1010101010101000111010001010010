@@ -2160,9 +2160,7 @@
     "fecha": "21/11/2024",
     "direccion": "MANZANA 73 CASA 21",
     "celular": "3172777032",
-    "pagos": [
-      "7/3/2026, 20.000"
-    ],
+    "pagos": [],
     "firma": ""
   },
   {
@@ -6295,8 +6293,8 @@
     "registro": 478,
     "folio": 28,
     "renglon": 10,
-    "nombre": "PEPE PEREZ",
-    "cedula": "000000000",
+    "nombre": "",
+    "cedula": "",
     "fecha": "24/01/2026",
     "direccion": "MANZANA 01 CASA00",
     "celular": "0000000000",
@@ -7344,8 +7342,8 @@
     "registro": 557,
     "folio": 32,
     "renglon": 17,
-    "nombre": "PEPETO PEREZ",
-    "cedula": "000000",
+    "nombre": "",
+    "cedula": "",
     "fecha": "30/01/2026",
     "direccion": "MANZANA 00 CASA 00",
     "celular": "0000000000",
