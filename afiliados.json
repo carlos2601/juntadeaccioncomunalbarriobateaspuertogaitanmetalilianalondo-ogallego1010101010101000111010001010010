@@ -4201,7 +4201,9 @@
     "fecha": "27/12/2025",
     "direccion": "MANZANA 69 CASA 07",
     "celular": "3024429673",
-    "pagos": [],
+    "pagos": [
+      "9/3/2026, 20.000"
+    ],
     "firma": ""
   },
   {
@@ -5675,7 +5677,9 @@
     "fecha": "24/01/2026",
     "direccion": "MANZANA 80 CASA 03",
     "celular": "3106004803",
-    "pagos": [],
+    "pagos": [
+      "9/3/2026, 20.000"
+    ],
     "firma": ""
   },
   {
@@ -9025,7 +9029,9 @@
     "fecha": "21/02/2026",
     "direccion": "MANZANA 71 CASA 1",
     "celular": "3232116674",
-    "pagos": [],
+    "pagos": [
+      "9/3/2026, 20.000"
+    ],
     "firma": ""
   },
   {
@@ -9256,11 +9262,11 @@
     "registro": 699,
     "folio": 40,
     "renglon": 15,
-    "nombre": "CAMILO ANDRES MARTINEZ HURTADO",
-    "cedula": "1122511010",
-    "fecha": "09/03/2026",
-    "direccion": "MANZANA 70 CASA 03",
-    "celular": "3005138879",
+    "nombre": "",
+    "cedula": "",
+    "fecha": "",
+    "direccion": "MANZANA  CASA ",
+    "celular": "",
     "pagos": [],
     "firma": ""
   },
