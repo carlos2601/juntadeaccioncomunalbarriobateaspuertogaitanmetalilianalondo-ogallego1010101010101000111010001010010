@@ -3896,7 +3896,9 @@
     "fecha": "27/12/2025",
     "direccion": "MANZANA 75 CASA 16",
     "celular": "3104569620",
-    "pagos": [],
+    "pagos": [
+      "9/3/2026, 20.000"
+    ],
     "firma": ""
   },
   {
