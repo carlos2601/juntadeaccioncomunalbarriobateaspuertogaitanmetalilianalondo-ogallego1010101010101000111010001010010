@@ -1207,7 +1207,7 @@
     "nombre": "CESAR ELIUD CHIQUILLO GELVEZ",
     "cedula": "86046391",
     "fecha": "21/11/2024",
-    "direccion": "MZ 71 CASA 09",
+    "direccion": "MANZANA 71 CASA 09",
     "celular": "3157172811",
     "pagos": [],
     "firma": ""
@@ -1298,7 +1298,7 @@
     "nombre": "ELIAN ANDRES VEGA FERNANDEZ",
     "cedula": "1007422181",
     "fecha": "21/11/2024",
-    "direccion": "MZ 80 CASA 23",
+    "direccion": "MANZANA 80 CASA 23",
     "celular": "",
     "pagos": [],
     "firma": ""
@@ -1313,9 +1313,7 @@
     "fecha": "21/11/2024",
     "direccion": "MANZANA 60 CASA 09",
     "celular": "3174251693",
-    "pagos": [
-      "9/3/2026, 20.000"
-    ],
+    "pagos": [],
     "firma": ""
   },
   {
