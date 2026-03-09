@@ -4201,7 +4201,9 @@
     "fecha": "27/12/2025",
     "direccion": "MANZANA 69 CASA 07",
     "celular": "3024429673",
-    "pagos": [],
+    "pagos": [
+      "9/3/2026, 20.000"
+    ],
     "firma": ""
   },
   {
