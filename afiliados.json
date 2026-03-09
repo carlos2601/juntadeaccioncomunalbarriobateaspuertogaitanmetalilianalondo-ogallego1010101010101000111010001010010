@@ -3855,7 +3855,9 @@
     "fecha": "27/12/2025",
     "direccion": "MANZANA 75 CASA 16",
     "celular": "3182217711",
-    "pagos": [],
+    "pagos": [
+      "9/3/2026, 20.000"
+    ],
     "firma": ""
   },
   {
