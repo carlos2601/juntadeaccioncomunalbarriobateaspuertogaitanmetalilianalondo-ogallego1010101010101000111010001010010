@@ -7390,7 +7390,9 @@
     "fecha": "30/01/2026",
     "direccion": "MANZANA 64 CASA 26",
     "celular": "3018498579",
-    "pagos": [],
+    "pagos": [
+      "9/3/2026, 20.000"
+    ],
     "firma": ""
   },
   {
