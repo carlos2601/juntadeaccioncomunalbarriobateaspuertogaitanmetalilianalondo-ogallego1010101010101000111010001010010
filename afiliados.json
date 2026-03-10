@@ -137,8 +137,8 @@
     "nombre": "LUIS ALBERTO AMAYA ROJAS",
     "cedula": "1124989647",
     "fecha": "21/11/2024",
-    "direccion": "BATEAS 3",
-    "celular": "",
+    "direccion": "MANZANA 78 CASA 11",
+    "celular": "3144599027",
     "pagos": [],
     "firma": ""
   },
@@ -9261,9 +9261,7 @@
     "fecha": "09/03/2026",
     "direccion": "MANZANA 70 CASA 03",
     "celular": "3005138879",
-    "pagos": [
-      "9/3/2026, 20.000"
-    ],
+    "pagos": [],
     "firma": ""
   },
   {
