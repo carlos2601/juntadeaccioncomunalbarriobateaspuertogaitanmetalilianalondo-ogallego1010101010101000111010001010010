@@ -139,9 +139,7 @@
     "fecha": "21/11/2024",
     "direccion": "MANZANA 78 A CASA 18",
     "celular": "3144599027",
-    "pagos": [
-      "9/3/2026, 20.000"
-    ],
+    "pagos": [],
     "firma": ""
   },
   {
@@ -1692,7 +1690,9 @@
     "fecha": "21/11/2024",
     "direccion": "MANZANA 78 A CASA 18",
     "celular": "3142305836",
-    "pagos": [],
+    "pagos": [
+      "9/3/2026, 20.000"
+    ],
     "firma": ""
   },
   {
