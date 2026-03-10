@@ -137,11 +137,9 @@
     "nombre": "LUIS ALBERTO AMAYA ROJAS",
     "cedula": "1124989647",
     "fecha": "21/11/2024",
-    "direccion": "MANZANA 78 CASA 11",
+    "direccion": "MANZANA 78 A CASA 18",
     "celular": "3144599027",
-    "pagos": [
-      "9/3/2026, 20.000"
-    ],
+    "pagos": [],
     "firma": ""
   },
   {
@@ -1690,7 +1688,7 @@
     "nombre": "KELLY MOLINA",
     "cedula": "1193118920",
     "fecha": "21/11/2024",
-    "direccion": "MANZANA 79 A CASA 08",
+    "direccion": "MANZANA 78 A CASA 18",
     "celular": "3142305836",
     "pagos": [],
     "firma": ""
