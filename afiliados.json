@@ -9261,7 +9261,9 @@
     "fecha": "09/03/2026",
     "direccion": "MANZANA 70 CASA 03",
     "celular": "3005138879",
-    "pagos": [],
+    "pagos": [
+      "9/3/2026, 20.000"
+    ],
     "firma": ""
   },
   {
