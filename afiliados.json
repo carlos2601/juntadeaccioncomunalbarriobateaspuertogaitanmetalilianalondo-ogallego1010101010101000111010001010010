@@ -9291,5 +9291,57 @@
     "celular": "",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": "702",
+    "registro": 702,
+    "folio": 40,
+    "renglon": 18,
+    "nombre": "",
+    "cedula": "",
+    "fecha": "",
+    "direccion": "MANZANA  CASA ",
+    "celular": "",
+    "pagos": [],
+    "firma": ""
+  },
+  {
+    "id": "703",
+    "registro": 703,
+    "folio": 40,
+    "renglon": 19,
+    "nombre": "",
+    "cedula": "",
+    "fecha": "",
+    "direccion": "MANZANA  CASA ",
+    "celular": "",
+    "pagos": [],
+    "firma": ""
+  },
+  {
+    "id": "704",
+    "registro": 704,
+    "folio": 40,
+    "renglon": 20,
+    "nombre": "DULBER LEYBA SERRATO",
+    "cedula": "1075262556",
+    "fecha": "09/03/2026",
+    "direccion": "MANZANA 76 CASA 06",
+    "celular": "3156362762",
+    "pagos": [],
+    "firma": ""
+  },
+  {
+    "id": "705",
+    "registro": 705,
+    "folio": 40,
+    "renglon": 21,
+    "nombre": "",
+    "cedula": "",
+    "fecha": "",
+    "direccion": "MANZANA  CASA ",
+    "celular": "",
+    "pagos": [],
+    "firma": ""
   }
 ]
