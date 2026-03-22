@@ -1924,7 +1924,7 @@
     "nombre": "JHYRE FAYSURY HERNANDEZ GARAY",
     "cedula": "1006877019",
     "fecha": "21/11/2024",
-    "direccion": "MANZANA 77 CASA 08",
+    "direccion": "MANZANA 79 CASA 03",
     "celular": "3243761596",
     "pagos": [],
     "firma": ""
@@ -4940,7 +4940,7 @@
     "renglon": 17,
     "nombre": "JESUS DAVID RAMOS LINARES",
     "cedula": "1006656635",
-    "fecha": "",
+    "fecha": "27/12/2025",
     "direccion": "MANZANA  79 CASA 01",
     "celular": "3506362711",
     "pagos": [
@@ -7957,9 +7957,7 @@
     "fecha": "31/01/2026",
     "direccion": "MANZANA 64 CASA 18",
     "celular": "3215730654",
-    "pagos": [
-      "22/3/2026, 20.000"
-    ],
+    "pagos": [],
     "firma": ""
   },
   {
