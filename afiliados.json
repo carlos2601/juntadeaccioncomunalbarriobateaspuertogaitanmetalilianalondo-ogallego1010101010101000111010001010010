@@ -4318,7 +4318,9 @@
     "fecha": "27/12/2025",
     "direccion": "MANZANA 73 CASA 24",
     "celular": "3102379887",
-    "pagos": [],
+    "pagos": [
+      "22/3/2026, 20.000"
+    ],
     "firma": ""
   },
   {
