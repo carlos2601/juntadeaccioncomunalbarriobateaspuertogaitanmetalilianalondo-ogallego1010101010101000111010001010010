@@ -1,0 +1,1712 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificado de Afiliación - Bateas Sector 3</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/docx@7.7.0/build/index.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
+    <style>
+        :root {
+            --primary: #8BC34A;
+            --primary-dark: #689F38;
+            --secondary: #FFC107;
+            --secondary-dark: #FFA000;
+            --accent: #4CAF50;
+            --light: #F1F8E9;
+            --dark: #33691E;
+            --text: #212121;
+            --text-light: #757575;
+            --background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            --background-restricted: linear-gradient(135deg, #2c3e50 0%, #1a2a3a 100%);
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--background);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: background 0.3s ease;
+        }
+
+        body.restricted {
+            background: var(--background-restricted);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .header {
+            border-radius: 16px;
+            padding: 0px;
+            margin-bottom: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .header.hidden {
+            display: none;
+        }
+
+        .logo {
+            flex-direction: column;
+            align-items: center;
+            gap: 50px;
+            margin-bottom: 15px;
+        }
+
+        .logo i {
+            font-size: 2.5rem;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .logo h1 {
+            color: var(--dark);
+            font-weight: 700;
+            font-size: 1.5rem;
+            line-height: 1.3;
+        }
+
+        .current-date {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+
+        .search-container {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            margin-bottom: 20px;
+            width: 100%;
+            max-width: 600px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .search-container.hidden {
+            display: none;
+        }
+
+        .search-container h2 {
+            color: var(--dark);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .search-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .input-group label {
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .input-group input {
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s;
+            background-color: var(--light);
+        }
+
+        .input-group input:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(139, 195, 74, 0.2);
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-primary {
+            background: linear-gradient(to right, var(--primary), var(--primary-dark));
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-success {
+            background: linear-gradient(to right, var(--accent), var(--primary));
+            color: white;
+        }
+
+        .btn-info {
+            background: linear-gradient(to right, #03A9F4, #0288D1);
+            color: white;
+        }
+
+        .btn-warning {
+            background: linear-gradient(to right, var(--secondary), var(--secondary-dark));
+            color: white;
+        }
+
+        .btn-dark {
+            background: linear-gradient(to right, #607D8B, #455A64);
+            color: white;
+        }
+
+        .btn-word {
+            background: linear-gradient(to right, #2B579A, #1E4A8F);
+            color: white;
+        }
+
+        .btn-print {
+            background: linear-gradient(to right, #4CAF50, #45a049);
+            color: white;
+        }
+
+        .btn-whatsapp {
+            background: linear-gradient(to right, #25D366, #128C7E);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: linear-gradient(to right, #9E9E9E, #757575);
+            color: white;
+        }
+
+        .btn-back {
+            background: linear-gradient(to right, var(--primary), var(--primary-dark));
+            color: white;
+            margin-top: 20px;
+        }
+
+        .btn-detail-modal {
+            background: #1a4a2a;
+            color: white;
+            border: none;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            cursor: pointer;
+            margin-top: 8px;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.2s;
+        }
+
+        .btn-detail-modal:hover {
+            background: #2a6a3a;
+            transform: scale(1.02);
+        }
+
+        .success-check {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: #4CAF50;
+            font-size: 2rem;
+            display: none;
+        }
+
+        .options-container {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            margin-bottom: 20px;
+            width: 100%;
+            max-width: 800px;
+            display: none;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .edit-form {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            margin-bottom: 20px;
+            width: 100%;
+            max-width: 800px;
+            display: none;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .whatsapp-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            display: none;
+        }
+
+        .modal-content {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-light);
+        }
+
+        /* Modal de detalle de deudas */
+        .debt-detail-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            display: none;
+            backdrop-filter: blur(3px);
+        }
+
+        .debt-detail-content {
+            background: white;
+            border-radius: 20px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            padding: 25px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            animation: modalFadeIn 0.3s ease;
+        }
+
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .debt-detail-content h3 {
+            color: #1a4a2a;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #ffd966;
+            padding-bottom: 10px;
+        }
+
+        .debt-detail-content .month-list {
+            margin: 15px 0;
+        }
+
+        .debt-detail-content .month-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+            background: #fff9e6;
+            margin-bottom: 5px;
+            border-radius: 8px;
+        }
+
+        .debt-detail-content .month-item .month-name {
+            font-weight: 600;
+            color: #c62828;
+        }
+
+        .debt-detail-content .month-item .month-value {
+            font-weight: 700;
+            color: #c62828;
+        }
+
+        .debt-detail-content .condoned-item {
+            background: #e8f5e9;
+            border-left: 4px solid #ffd966;
+        }
+
+        .debt-detail-content .condoned-item .month-name {
+            color: #2e7d32;
+        }
+
+        .debt-detail-content .total-debt {
+            background: #c62828;
+            color: white;
+            padding: 12px;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1001;
+            flex-direction: column;
+            color: white;
+            display: none;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+            margin-bottom: 15px;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Certificado styles */
+        #contenido-certificado {
+            font-family: Tahoma, sans-serif;
+            width: 210mm;
+            min-height: 275mm;
+            margin: 20px auto;
+            padding: 05mm 15mm;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            box-sizing: border-box;
+            position: relative;
+            aspect-ratio: 210 / 275;
+            display: none;
+            overflow: hidden;
+            transform-origin: top center;
+        }
+
+        .certificado-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            opacity: 5.7;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: contain;
+        }
+
+        .certificado-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .encabezado-certificado {
+            text-align: center;
+            font-size: 17px;
+            line-height: 1.4;
+            margin-bottom: 20px;
+            margin-top: 0;
+        }
+
+        .texto-justificado {
+            text-align: justify;
+            font-size: 9px;
+            line-height: 1.5;
+            margin: -19px 0;
+        }
+
+        .titulo-certificado {
+            text-align: center;
+            font-size: 18px;
+            line-height: 1.5;
+            margin: 30px 0;
+        }
+
+        .datos-certificado {
+            text-align: left;
+            font-size: 18px;
+            line-height: 1.6;
+            margin: 20px 0;
+        }
+
+        .firmas-container {
+            position: relative;
+            margin-top: 40px;
+        }
+
+        .sello-derecha {
+            width: 120px;
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            z-index: 3;
+        }
+
+        /* Restriction Message */
+        .restriction-message {
+            background-color: #fff5f5;
+            border-radius: 16px;
+            padding: 30px;
+            margin: 20px auto;
+            max-width: 550px;
+            text-align: center;
+            border-left: 5px solid #c62828;
+            box-shadow: var(--shadow);
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .restriction-message.show {
+            display: block;
+        }
+
+        .restriction-message h3 {
+            color: #c62828;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .restriction-message .debt-item {
+            background: #ffe0e0;
+            border-radius: 12px;
+            padding: 15px;
+            margin: 15px 0;
+            text-align: left;
+            border-left: 4px solid #c62828;
+        }
+
+        .restriction-message .debt-item i {
+            color: #c62828;
+            margin-right: 10px;
+        }
+
+        .restriction-message .debt-item p {
+            margin: 5px 0;
+        }
+
+        .restriction-message .btn-back {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+            transition: transform 0.2s;
+        }
+
+        .restriction-message .btn-back:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .alert-flotante {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            border-radius: 8px;
+            z-index: 10000;
+            animation: slideIn 0.3s ease-out;
+            max-width: 350px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            display: none;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideOut {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+
+            to {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+        }
+
+        @media print {
+            body * {
+                visibility: hidden;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+
+            #contenido-certificado,
+            #contenido-certificado * {
+                visibility: visible;
+            }
+
+            #contenido-certificado {
+                position: absolute !important;
+                left: 0 !important;
+                top: 0 !important;
+                width: 210mm !important;
+                min-height: 275mm !important;
+                margin: 0 !important;
+                padding: 05mm 15mm !important;
+                box-shadow: none !important;
+                background-color: white !important;
+                page-break-after: always;
+                page-break-inside: avoid;
+            }
+
+            .certificado-background {
+                opacity: 5.7 !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            img {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                opacity: 1 !important;
+            }
+
+            .btn,
+            .header,
+            .search-container,
+            .options-container,
+            .edit-form,
+            .whatsapp-modal,
+            .loading-overlay,
+            .alert-flotante,
+            .restriction-message,
+            .debt-detail-modal {
+                display: none !important;
+            }
+
+            @page {
+                margin: 0 !important;
+                size: A4 portrait;
+            }
+
+            html,
+            body {
+                height: auto !important;
+                overflow: visible !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .button-group {
+                flex-direction: row;
+                justify-content: center;
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                padding-bottom: 10px;
+            }
+
+            .btn {
+                min-width: auto;
+                flex: 0 0 auto;
+                font-size: 0.9rem;
+                padding: 10px 15px;
+            }
+
+            .options-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 10px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .restriction-message {
+                margin: 20px;
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .button-group {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .btn {
+                min-width: 120px;
+                margin-bottom: 5px;
+            }
+
+            .options-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header" id="mainHeader">
+            <div class="logo">
+                <i class="fas fa-certificate"></i>
+                <h1>JUNTA DE ACCIÓN COMUNAL<br>BARRIO BATEAS SECTOR 3</h1>
+                <div class="current-date" id="currentDate"></div>
+            </div>
+        </div>
+
+        <div class="search-container" id="searchContainer">
+            <div class="success-check" id="successCheck">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h2>Buscar Afiliado</h2>
+            <div class="search-form">
+                <div class="input-group">
+                    <label for="searchInput">Número de cédula o Nombre</label>
+                    <input type="text" id="searchInput" placeholder="Ej: 1234567890 o Juan Pérez">
+                </div>
+                <div class="button-group">
+                    <button id="btnBuscar" class="btn btn-primary">
+                        <i class="fas fa-search"></i> Buscar
+                    </button>
+                    <button id="btnVolverPanel" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i> Volver al Panel
+                    </button>
+                    <button id="btnOpciones" class="btn btn-info hidden">
+                        <i class="fas fa-cog"></i> Opciones
+                    </button>
+                    <button id="btnOcultarOpciones" class="btn btn-info hidden">
+                        <i class="fas fa-times"></i> Ocultar Opciones
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="restriction-message" class="restriction-message">
+            <i class="fas fa-exclamation-triangle" style="font-size: 3rem; color: #c62828; margin-bottom: 15px;"></i>
+            <h3>Restricción de Certificado</h3>
+            <div id="restriction-text"></div>
+            <button id="btnVolverBuscador" class="btn-back">
+                <i class="fas fa-search"></i> Volver al Buscador
+            </button>
+        </div>
+
+        <div class="options-container" id="optionsContainer">
+            <h3>Opciones del Certificado</h3>
+            <div class="options-grid">
+                <button id="btnEditar" class="btn btn-primary">
+                    <i class="fas fa-edit"></i> Editar
+                </button>
+                <button id="btnVistaPrevia" class="btn btn-info">
+                    <i class="fas fa-eye"></i> Vista Previa
+                </button>
+                <button id="btnOcultarVista" class="btn btn-info hidden">
+                    <i class="fas fa-eye-slash"></i> Ocultar Vista
+                </button>
+                <button id="btnPNG" class="btn btn-warning">
+                    <i class="fas fa-download"></i> Descargar PNG
+                </button>
+                <button id="btnPDF" class="btn btn-dark">
+                    <i class="fas fa-file-pdf"></i> Descargar PDF
+                </button>
+                <button id="btnImprimir" class="btn btn-print">
+                    <i class="fas fa-print"></i> Imprimir
+                </button>
+                <button id="btnWhatsApp" class="btn btn-whatsapp">
+                    <i class="fab fa-whatsapp"></i> Enviar por WhatsApp
+                </button>
+            </div>
+        </div>
+
+        <div class="edit-form" id="editForm">
+            <h3>Editar Datos del Afiliado</h3>
+            <div class="form-grid">
+                <div class="input-group">
+                    <label for="editNombre">Nombre completo</label>
+                    <input type="text" id="editNombre">
+                </div>
+                <div class="input-group">
+                    <label for="editFolio">Folio Nº</label>
+                    <input type="text" id="editFolio">
+                </div>
+                <div class="input-group">
+                    <label for="editCedula">Cédula</label>
+                    <input type="text" id="editCedula">
+                </div>
+                <div class="input-group">
+                    <label for="editRenglon">Renglón Nº</label>
+                    <input type="text" id="editRenglon">
+                </div>
+                <div class="input-group">
+                    <label for="editFechaAfiliacion">Fecha de afiliación</label>
+                    <input type="date" id="editFechaAfiliacion">
+                </div>
+                <div class="input-group">
+                    <label for="editDireccion">Dirección</label>
+                    <input type="text" id="editDireccion">
+                </div>
+                <div class="input-group">
+                    <label for="editRegistro">Registro Nº</label>
+                    <input type="text" id="editRegistro">
+                </div>
+                <div class="input-group">
+                    <label for="editTelefono">Teléfono/Celular</label>
+                    <input type="text" id="editTelefono">
+                </div>
+            </div>
+            <div class="form-actions">
+                <button id="btnGuardar" class="btn btn-primary">
+                    <i class="fas fa-save"></i> Guardar Cambios
+                </button>
+                <button id="btnCancelarEdicion" class="btn btn-secondary">
+                    <i class="fas fa-times"></i> Cancelar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de detalle de deudas -->
+    <div id="debtDetailModal" class="debt-detail-modal">
+        <div class="debt-detail-content">
+            <button class="close-modal" id="closeDebtModalBtn"
+                style="position: absolute; right: 15px; top: 15px;">&times;</button>
+            <h3 id="debtModalTitle">Detalle de Deudas</h3>
+            <div id="debtModalContent"></div>
+        </div>
+    </div>
+
+    <div class="whatsapp-modal" id="whatsappModal">
+        <div class="modal-content">
+            <button class="close-modal" id="closeWhatsAppModal">
+                <i class="fas fa-times"></i>
+            </button>
+            <h3>Enviar por WhatsApp</h3>
+            <div class="input-group" style="margin: 20px 0;">
+                <label for="whatsappNumber">Número de teléfono</label>
+                <input type="text" id="whatsappNumber" placeholder="Número registrado del usuario">
+            </div>
+            <button id="btnEnviarWhatsApp" class="btn btn-whatsapp" style="width: 100%;">
+                <i class="fab fa-whatsapp"></i> Enviar Certificado
+            </button>
+        </div>
+    </div>
+
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="spinner"></div>
+        <p id="loadingText">Procesando...</p>
+    </div>
+
+    <div id="contenido-certificado">
+        <div class="certificado-background" id="certificadoBackground"></div>
+        <div class="certificado-content">
+            <div class="encabezado-certificado">
+                <br>
+                <strong>REPUBLICA DE COLOMBIA</strong><br>
+                <strong>DEPARTAMENTO DEL META</strong><br>
+                <strong>PUERTO GAITÁN – META</strong><br>
+                <strong>JUNTA DE ACCIÓN COMUNAL</strong><br>
+                <strong>BARRIO BATEAS SECTOR 3</strong><br>
+                Personería Jurídica No. 451 del 31 de Octubre de 2.025
+            </div>
+            <div class="texto-justificado">
+                El suscrito Presidente de la Junta de Acción Comunal Bateas Sector 3, del Municipio de Puerto Gaitán,
+                Meta, identificada con Personería Jurídica No. 451 del 31 de octubre de 2025, fundamentado en la Ley
+                1551 de 2012 que modifica el artículo 91 de la Ley 136 de 1994, el cual establece en su literal F
+                numeral 6: 'Con relación a la prosperidad integral de su región; Expedirá la certificación para
+                acreditar la residencia a aquellas personas que residen en el territorio del área de influencia de los
+                proyectos de exploración y explotación petrolera y minería en general, y que aspiren acceder a labores
+                como mano de obra no calificada y calificada. Los alcaldes expedirán dichos certificados con base en LOS
+                REGISTROS ELECTORALES O DE SISBEN, ASÍ COMO LOS REGISTROS OF LOS AFILIADOS DE LAS JUNTAS DE ACCIÓN
+                COMUNAL.
+            </div>
+            <div class="titulo-certificado">
+                <span style="font-size:18px;">CONSTANCIA DE AFILIACIÓN</span><br>
+                <strong>La Junta de Acción Comunal del Barrio Bateas Sector 3</strong><br>
+                HACE CONSTAR:<br>
+                Que la información suministrada reposa en el libro de afiliados:
+            </div>
+            <div class="datos-certificado">
+                NOMBRE: <strong id="nombre-cert"></strong><br>
+                CÉDULA: <strong id="cedula-cert"></strong><br>
+                FECHA DE AFILIACIÓN: <strong id="fecha-cert"></strong><br>
+                REGISTRO Nº: <strong id="registro-cert"></strong><br>
+                FOLIO Nº: <strong id="folio-cert"></strong><br>
+                RENGLÓN Nº: <strong id="renglon-cert"></strong><br>
+                DIRECCIÓN: <strong id="direccion-cert"></strong><br><br>
+                La presente constancia se expide a solicitud del interesado, <strong id="fecha-emision"></strong> y
+                tiene vigencia de <strong>30 dias</strong> a partir de la fecha de su expedición.
+            </div>
+            <br>Atentamente,<br><br><br>
+            <div class="firmas-container">
+                <img id="sello-img" class="sello-derecha" alt="Sello">
+                <div style="text-align:center;margin-top:30px;">
+                    ________________________________<br>
+                    <strong>LEONEL BAUTISTA CARRANZA</strong><br>
+                    Presidente<br>
+                    juntacomunalsector3bateas@gmail.com
+                </div>
+            </div>
+            <br><br>
+            <div style="text-align:justify;font-size:12px;line-height:1.3;margin-top:25px;"><br>
+                <strong>Código penal colombiano. "ley 599 de 2000 Artículo 287.</strong> Falsedad material en documento
+                público. El que falsifique documentos públicos que pueda servir de prueba, incurrirá en prisión de tres
+                (3) a seis (6) años.
+            </div>
+        </div>
+    </div>
+
+    <div id="alerta-flotante" class="alert-flotante"></div>
+
+    <script>
+        const { jsPDF } = window.jspdf;
+
+        // Variables globales
+        let personaEncontrada = null;
+        let datosCargados = [];
+        let pagosCompletos = null;
+        let afiliadoActualParaDetalle = null;
+
+        // URLs de las imágenes en GitHub
+        const IMAGENES_GITHUB = {
+            logo: 'https://raw.githubusercontent.com/carlos2601/bateas3/refs/heads/main/logo.jpg',
+            sello3: 'https://raw.githubusercontent.com/carlos2601/bateas/refs/heads/main/sello3.png'
+        };
+
+        // Inicializar la aplicación
+        document.addEventListener('DOMContentLoaded', function () {
+            inicializarApp();
+            configurarEventListeners();
+        });
+
+        async function inicializarApp() {
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            const today = new Date();
+            document.getElementById('currentDate').textContent = today.toLocaleDateString('es-ES', options);
+            cargarImagenes();
+            await cargarDatosLocales();
+            console.log(`Datos cargados automáticamente: ${datosCargados.length} registros`);
+        }
+
+        function configurarEventListeners() {
+            document.getElementById('btnBuscar').addEventListener('click', buscarUsuario);
+            document.getElementById('btnVolverPanel').addEventListener('click', volverAlPanel);
+            document.getElementById('btnVolverBuscador').addEventListener('click', volverAlBuscador);
+            document.getElementById('btnOpciones').addEventListener('click', mostrarOpciones);
+            document.getElementById('btnOcultarOpciones').addEventListener('click', ocultarOpciones);
+            document.getElementById('btnEditar').addEventListener('click', mostrarEdicion);
+            document.getElementById('btnVistaPrevia').addEventListener('click', mostrarVistaPrevia);
+            document.getElementById('btnOcultarVista').addEventListener('click', ocultarVistaPrevia);
+            document.getElementById('btnPNG').addEventListener('click', descargarPNG);
+            document.getElementById('btnPDF').addEventListener('click', descargarPDF);
+            document.getElementById('btnImprimir').addEventListener('click', imprimirCertificado);
+            document.getElementById('btnWhatsApp').addEventListener('click', abrirWhatsAppModal);
+            document.getElementById('btnGuardar').addEventListener('click', guardarCambios);
+            document.getElementById('btnCancelarEdicion').addEventListener('click', cancelarEdicion);
+            document.getElementById('closeWhatsAppModal').addEventListener('click', cerrarWhatsAppModal);
+            document.getElementById('btnEnviarWhatsApp').addEventListener('click', enviarWhatsApp);
+            document.getElementById('searchInput').addEventListener('keypress', function (e) {
+                if (e.key === 'Enter') buscarUsuario();
+            });
+
+            // Modal de detalle
+            document.getElementById('closeDebtModalBtn').addEventListener('click', cerrarDebtModal);
+            window.addEventListener('click', function (e) {
+                const modal = document.getElementById('debtDetailModal');
+                if (e.target === modal) cerrarDebtModal();
+            });
+        }
+
+        function cerrarDebtModal() {
+            document.getElementById('debtDetailModal').style.display = 'none';
+        }
+
+        function volverAlPanel() {
+            if (confirm('¿Está seguro que desea volver al panel principal? Los cambios no guardados se perderán.')) {
+                window.location.href = 'panel.html';
+            }
+        }
+
+        function volverAlBuscador() {
+            const restrictionDiv = document.getElementById('restriction-message');
+            restrictionDiv.classList.remove('show');
+            document.getElementById('searchContainer').classList.remove('hidden');
+            document.getElementById('mainHeader').classList.remove('hidden');
+            document.body.classList.remove('restricted');
+            document.getElementById('searchInput').value = '';
+            document.getElementById('contenido-certificado').style.display = 'none';
+            document.getElementById('optionsContainer').style.display = 'none';
+            document.getElementById('btnOpciones').classList.add('hidden');
+            document.getElementById('btnOcultarOpciones').classList.add('hidden');
+            document.getElementById('restriction-text').innerHTML = '';
+            afiliadoActualParaDetalle = null;
+        }
+
+        // Función para calcular los meses que debe un afiliado (adaptada de tesoreria.html)
+        function calcularMesesDeuda(cedula, fechaAfiliacion) {
+            if (!pagosCompletos) return [];
+
+            const meses = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+            const mesesNombres = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+
+            // Parsear fecha de afiliación (formato DD/MM/YYYY)
+            const partes = fechaAfiliacion.split('/');
+            const afiliacion = new Date(parseInt(partes[2]), parseInt(partes[1]) - 1, parseInt(partes[0]));
+            const hoy = new Date();
+
+            const registro = pagosCompletos.pagos.find(p => p.cedula === cedula);
+            const mesesDeuda = [];
+
+            for (let año = afiliacion.getFullYear(); año <= hoy.getFullYear(); año++) {
+                const mesInicio = (año === afiliacion.getFullYear()) ? afiliacion.getMonth() : 0;
+                const mesFin = (año === hoy.getFullYear()) ? hoy.getMonth() : 11;
+
+                for (let mes = mesInicio; mes <= mesFin; mes++) {
+                    // Verificar si el mes está pagado
+                    let estaPagado = false;
+                    if (registro) {
+                        const campoAño = `fecha_pago_año_${año}`;
+                        if (registro[campoAño]) {
+                            const pagos = registro[campoAño].split(';');
+                            estaPagado = pagos.some(pago => pago.trim().startsWith(`${meses[mes]}_${año}`));
+                        }
+                    }
+
+                    // Verificar si el mes está condonado (misma lógica que tesoreria.html)
+                    let esCondonado = false;
+                    if (año === 2024) esCondonado = true;
+                    if (año === 2025 && mes >= 0 && mes <= 10) esCondonado = true;
+
+                    if (!estaPagado && !esCondonado) {
+                        mesesDeuda.push({
+                            año: año,
+                            mes: mes,
+                            nombre: mesesNombres[mes],
+                            valor: 5000
+                        });
+                    }
+                }
+            }
+
+            return mesesDeuda;
+        }
+
+        // Función para mostrar el modal con el detalle de deudas
+        function mostrarDetalleDeudas(cedula, nombre) {
+            const mesesDeuda = calcularMesesDeuda(cedula, afiliadoActualParaDetalle.fecha_afiliacion);
+
+            if (mesesDeuda.length === 0) {
+                document.getElementById('debtModalTitle').textContent = `📋 ${nombre} - Estado de Cuenta`;
+                document.getElementById('debtModalContent').innerHTML = `
+                    <div style="text-align: center; padding: 20px;">
+                        <i class="fas fa-check-circle" style="font-size: 3rem; color: #4CAF50;"></i>
+                        <p style="margin-top: 15px; color: #2e7d32;">✅ No tiene meses pendientes de pago</p>
+                        <p style="color: #666; font-size: 0.9rem;">Todos los meses desde su afiliación están pagados o condonados.</p>
+                    </div>
+                `;
+            } else {
+                let totalDeuda = mesesDeuda.length * 5000;
+                let html = `<p style="margin-bottom: 15px; color: #555;">Meses pendientes de pago desde la afiliación (${afiliadoActualParaDetalle.fecha_afiliacion}):</p>`;
+                html += `<div class="month-list">`;
+
+                mesesDeuda.forEach(m => {
+                    html += `
+                        <div class="month-item">
+                            <span class="month-name">📅 ${m.nombre} ${m.año}</span>
+                            <span class="month-value">$${m.valor.toLocaleString()}</span>
+                        </div>
+                    `;
+                });
+
+                html += `</div>`;
+                html += `<div class="total-debt">💰 Total adeudado: $${totalDeuda.toLocaleString()}</div>`;
+                html += `<p style="margin-top: 15px; font-size: 0.8rem; color: #666; text-align: center;">
+                            <i class="fas fa-info-circle"></i> Los meses condonados (2024 y Ene-Oct 2025) no generan deuda.
+                        </p>`;
+
+                document.getElementById('debtModalTitle').textContent = `📋 ${nombre} - Meses Pendientes`;
+                document.getElementById('debtModalContent').innerHTML = html;
+            }
+
+            document.getElementById('debtDetailModal').style.display = 'flex';
+        }
+
+        function mostrarRestriccion(nombreAfiliado, debeCuota, debeCertificado, cedula, fechaAfiliacion) {
+            const restrictionDiv = document.getElementById('restriction-message');
+            const restrictionText = document.getElementById('restriction-text');
+
+            // Guardar datos para el detalle
+            afiliadoActualParaDetalle = {
+                nombre: nombreAfiliado,
+                cedula: cedula,
+                fecha_afiliacion: fechaAfiliacion
+            };
+
+            let html = `<p><strong>${nombreAfiliado}</strong> no cumple con los requisitos para obtener el certificado de afiliación.</p>`;
+            html += `<div style="margin: 15px 0;">`;
+
+            if (debeCuota) {
+                const mesesDeuda = calcularMesesDeuda(cedula, fechaAfiliacion);
+                const totalMeses = mesesDeuda.length;
+                const totalDeuda = totalMeses * 5000;
+
+                html += `
+                    <div class="debt-item">
+                        <i class="fas fa-calendar-times"></i>
+                        <p><strong>❌ Cuota mensual pendiente</strong></p>
+                        <p>No se encuentra al día con las cuotas de afiliación.</p>
+                        <p>Meses pendientes: <strong>${totalMeses} mes(es)</strong> | Total adeudado: <strong>$${totalDeuda.toLocaleString()}</strong></p>
+                        <button class="btn-detail-modal" onclick="mostrarDetalleDeudas('${cedula}', '${nombreAfiliado.replace(/'/g, "\\'")}')">
+                            <i class="fas fa-eye"></i> Ver meses específicos
+                        </button>
+                    </div>
+                `;
+            }
+
+            if (debeCertificado) {
+                html += `
+                    <div class="debt-item">
+                        <i class="fas fa-file-alt"></i>
+                        <p><strong>❌ Certificado no pagado</strong></p>
+                        <p>No ha cancelado el valor del certificado del mes actual.</p>
+                        <p>Valor del certificado: <strong>$20,000 COP</strong></p>
+                    </div>
+                `;
+            }
+
+            html += `</div>`;
+            html += `<p>Por favor, acérquese a la tesorería de la Junta de Bateas Sector 3 para regularizar su situación y poder obtener su certificado.</p>`;
+
+            restrictionText.innerHTML = html;
+            restrictionDiv.classList.add('show');
+
+            document.getElementById('searchContainer').classList.add('hidden');
+            document.getElementById('mainHeader').classList.add('hidden');
+            document.body.classList.add('restricted');
+            document.getElementById('contenido-certificado').style.display = 'none';
+            document.getElementById('optionsContainer').style.display = 'none';
+            document.getElementById('btnOpciones').classList.add('hidden');
+            document.getElementById('btnOcultarOpciones').classList.add('hidden');
+        }
+
+        function cargarImagenes() {
+            const selloImg = document.getElementById('sello-img');
+            const background = document.getElementById('certificadoBackground');
+            selloImg.src = IMAGENES_GITHUB.sello3;
+            background.style.backgroundImage = `url(${IMAGENES_GITHUB.logo})`;
+            selloImg.crossOrigin = 'anonymous';
+        }
+
+        function mostrarLoader(texto = "Procesando...") {
+            document.getElementById('loadingText').textContent = texto;
+            document.getElementById('loadingOverlay').style.display = 'flex';
+        }
+
+        function ocultarLoader() {
+            document.getElementById('loadingOverlay').style.display = 'none';
+        }
+
+        function mostrarAlerta(mensaje, tipo = 'success') {
+            const alertDiv = document.getElementById('alerta-flotante');
+            alertDiv.style.background = tipo === 'error' ? '#ffebee' : '#e8f5e9';
+            alertDiv.style.color = tipo === 'error' ? '#c62828' : '#2e7d32';
+            alertDiv.style.borderLeft = `4px solid ${tipo === 'error' ? '#c62828' : '#2e7d32'}`;
+            alertDiv.innerHTML = `<i class="fas ${tipo === 'error' ? 'fa-exclamation-circle' : 'fa-check-circle'}"></i> ${mensaje}`;
+            alertDiv.style.display = 'block';
+            alertDiv.style.animation = 'slideIn 0.3s ease-out';
+
+            setTimeout(() => {
+                alertDiv.style.animation = 'slideOut 0.3s ease-out forwards';
+                setTimeout(() => {
+                    alertDiv.style.display = 'none';
+                    alertDiv.style.animation = '';
+                }, 300);
+            }, 4000);
+        }
+
+        function formatearCedula(cedula) {
+            if (!cedula) return '';
+            return cedula.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        }
+
+        function formatearFecha(fecha) {
+            if (!fecha) return '';
+            const date = new Date(fecha);
+            if (isNaN(date)) return fecha;
+            return date.toLocaleDateString('es-CO');
+        }
+
+        async function cargarDatosLocales() {
+            try {
+                const url = 'https://raw.githubusercontent.com/carlos2601/juntadeaccioncomunalbarriobateaspuertogaitanmetalilianalondo-ogallego1010101010101000111010001010010/refs/heads/main/afiliados.json';
+                const response = await fetch(url);
+                if (!response.ok) throw new Error(`Error HTTP: ${response.status}`);
+                const datos = await response.json();
+                datosCargados = normalizarDatos(datos);
+                console.log(`✅ Datos cargados: ${datosCargados.length} afiliados`);
+                return datosCargados;
+            } catch (error) {
+                console.error("Error cargando datos:", error);
+                mostrarAlerta('⚠️ No se pudo cargar la lista de afiliados. Verifica tu conexión.', 'error');
+                datosCargados = [];
+                return datosCargados;
+            }
+        }
+
+        async function cargarPagos() {
+            const url = 'https://raw.githubusercontent.com/carlos2601/jacbateas/main/data/cuota.json';
+            try {
+                const response = await fetch(url);
+                if (!response.ok) throw new Error('Error al cargar cuota.json');
+                const data = await response.json();
+                return data;
+            } catch (error) {
+                console.error('Error cargando pagos:', error);
+                return null;
+            }
+        }
+
+        function haPagadoCuotaMesActual(cedula) {
+            if (!pagosCompletos) return false;
+
+            const ahora = new Date();
+            const meses = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+            const mesActual = meses[ahora.getMonth()];
+            const añoActual = ahora.getFullYear();
+
+            const registro = pagosCompletos.pagos.find(p => p.cedula === cedula);
+            if (!registro) return false;
+
+            const campoAño = `fecha_pago_año_${añoActual}`;
+            if (!registro[campoAño]) return false;
+
+            const pagos = registro[campoAño].split(';');
+            return pagos.some(pago => pago.trim().startsWith(`${mesActual}_${añoActual}`));
+        }
+
+        function haPagadoCertificadoMesActual(cedula) {
+            if (!pagosCompletos) return false;
+
+            const ahora = new Date();
+            const meses = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+            const mesActual = meses[ahora.getMonth()];
+            const añoActual = ahora.getFullYear();
+            const patronCertificado = `${mesActual}_${añoActual}`;
+
+            const registro = pagosCompletos.pagos.find(p => p.cedula === cedula);
+            if (!registro || !registro.certificado) return false;
+
+            const certificados = registro.certificado.split(';');
+            return certificados.some(cert => cert.trim().startsWith(patronCertificado));
+        }
+
+        async function verificarElegibilidadCompleta(cedula, nombreAfiliado, fechaAfiliacion) {
+            if (!pagosCompletos) {
+                pagosCompletos = await cargarPagos();
+                if (!pagosCompletos) {
+                    mostrarAlerta('No se pudo verificar el estado de pagos', 'error');
+                    return { elegible: false, debeCuota: true, debeCertificado: true };
+                }
+            }
+
+            const cuotaPagada = haPagadoCuotaMesActual(cedula);
+            const certificadoPagado = haPagadoCertificadoMesActual(cedula);
+
+            const debeCuota = !cuotaPagada;
+            const debeCertificado = !certificadoPagado;
+
+            if (debeCuota || debeCertificado) {
+                mostrarRestriccion(nombreAfiliado, debeCuota, debeCertificado, cedula, fechaAfiliacion);
+                return { elegible: false, debeCuota, debeCertificado };
+            }
+
+            return { elegible: true, debeCuota: false, debeCertificado: false };
+        }
+
+        function normalizarDatos(datos) {
+            return datos.map(persona => {
+                if (persona.nombre && persona.cedula) {
+                    return {
+                        id: persona.id || '',
+                        nombre: persona.nombre,
+                        cedula: persona.cedula,
+                        fecha_afiliacion: persona.fecha || persona.fecha_afiliacion,
+                        registro: persona.registro || '',
+                        folio: persona.folio || '',
+                        renglon: persona.renglon || '',
+                        direccion: persona.direccion || '',
+                        telefono: persona.celular || persona.telefono || ''
+                    };
+                }
+                return persona;
+            }).filter(p => p.nombre && p.nombre.trim() !== '' && p.cedula && p.cedula.trim() !== '');
+        }
+
+        async function buscarUsuario() {
+            const searchInput = document.getElementById('searchInput').value.trim();
+            if (!searchInput) {
+                alert('Por favor ingrese un número de cédula o nombre para buscar');
+                return;
+            }
+
+            try {
+                mostrarLoader('Buscando usuario y verificando pagos...');
+
+                if (datosCargados.length === 0) {
+                    datosCargados = await cargarDatosLocales();
+                    if (datosCargados.length === 0) {
+                        throw new Error("No hay datos de afiliados disponibles");
+                    }
+                }
+
+                const persona = datosCargados.find(p =>
+                    String(p.cedula).replace(/\D/g, '') === searchInput.replace(/\D/g, '') ||
+                    p.nombre.toLowerCase().includes(searchInput.toLowerCase())
+                );
+
+                if (!persona) {
+                    throw new Error("No se encontró el afiliado");
+                }
+
+                const resultado = await verificarElegibilidadCompleta(persona.cedula, persona.nombre, persona.fecha_afiliacion);
+
+                if (!resultado.elegible) {
+                    ocultarLoader();
+                    return;
+                }
+
+                personaEncontrada = persona;
+
+                document.getElementById('restriction-message').classList.remove('show');
+                document.getElementById('searchContainer').classList.remove('hidden');
+                document.getElementById('mainHeader').classList.remove('hidden');
+                document.body.classList.remove('restricted');
+
+                document.getElementById("successCheck").style.display = 'block';
+                document.getElementById("btnOpciones").classList.remove('hidden');
+
+                document.getElementById("nombre-cert").textContent = persona.nombre;
+                document.getElementById("cedula-cert").textContent = formatearCedula(persona.cedula);
+                document.getElementById("fecha-cert").textContent = formatearFecha(persona.fecha_afiliacion);
+                document.getElementById("registro-cert").textContent = formatearCedula(persona.registro);
+                document.getElementById("folio-cert").textContent = persona.folio;
+                document.getElementById("renglon-cert").textContent = persona.renglon;
+                document.getElementById("direccion-cert").textContent = persona.direccion;
+                document.getElementById("fecha-emision").textContent = formatearFecha(new Date());
+
+                mostrarOpciones();
+                mostrarVistaPrevia();
+                ocultarLoader();
+                mostrarAlerta('✅ Afiliado verificado: Cuotas y certificado al día', 'success');
+
+            } catch (error) {
+                ocultarLoader();
+                alert(error.message);
+            }
+        }
+
+        function mostrarOpciones() {
+            document.getElementById('optionsContainer').style.display = 'block';
+            document.getElementById('btnOpciones').classList.add('hidden');
+            document.getElementById('btnOcultarOpciones').classList.remove('hidden');
+        }
+
+        function ocultarOpciones() {
+            document.getElementById('optionsContainer').style.display = 'none';
+            document.getElementById('btnOpciones').classList.remove('hidden');
+            document.getElementById('btnOcultarOpciones').classList.add('hidden');
+        }
+
+        function mostrarEdicion() {
+            if (!personaEncontrada) return;
+
+            document.getElementById('editNombre').value = personaEncontrada.nombre;
+            document.getElementById('editCedula').value = personaEncontrada.cedula;
+            document.getElementById('editFechaAfiliacion').value = personaEncontrada.fecha_afiliacion;
+            document.getElementById('editDireccion').value = personaEncontrada.direccion;
+            document.getElementById('editTelefono').value = personaEncontrada.telefono || '';
+            document.getElementById('editRegistro').value = personaEncontrada.registro;
+            document.getElementById('editFolio').value = personaEncontrada.folio;
+            document.getElementById('editRenglon').value = personaEncontrada.renglon;
+
+            document.getElementById('editForm').style.display = 'block';
+            ocultarOpciones();
+        }
+
+        function guardarCambios() {
+            personaEncontrada.nombre = document.getElementById('editNombre').value;
+            personaEncontrada.cedula = document.getElementById('editCedula').value;
+            personaEncontrada.fecha_afiliacion = document.getElementById('editFechaAfiliacion').value;
+            personaEncontrada.direccion = document.getElementById('editDireccion').value;
+            personaEncontrada.telefono = document.getElementById('editTelefono').value;
+            personaEncontrada.registro = document.getElementById('editRegistro').value;
+            personaEncontrada.folio = document.getElementById('editFolio').value;
+            personaEncontrada.renglon = document.getElementById('editRenglon').value;
+
+            const index = datosCargados.findIndex(p => p.id === personaEncontrada.id);
+            if (index !== -1) {
+                datosCargados[index] = { ...personaEncontrada };
+            }
+
+            guardarCambiosEnArchivo();
+            mostrarResultado(personaEncontrada);
+            document.getElementById('editForm').style.display = 'none';
+            alert('Cambios guardados correctamente');
+        }
+
+        function guardarCambiosEnArchivo() {
+            try {
+                const datosActualizados = JSON.stringify(datosCargados, null, 2);
+                const blob = new Blob([datosActualizados], { type: 'application/json' });
+                const link = document.createElement('a');
+                link.href = URL.createObjectURL(blob);
+                link.download = 'afiliados.json';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                console.log('Archivo afiliados.json actualizado y descargado');
+            } catch (error) {
+                console.error('Error al guardar cambios en el archivo:', error);
+                alert('Error al guardar cambios en el archivo.');
+            }
+        }
+
+        function cancelarEdicion() {
+            document.getElementById('editForm').style.display = 'none';
+        }
+
+        function mostrarResultado(persona) {
+            document.getElementById("nombre-cert").textContent = persona.nombre;
+            document.getElementById("cedula-cert").textContent = formatearCedula(persona.cedula);
+            document.getElementById("fecha-cert").textContent = formatearFecha(persona.fecha_afiliacion);
+            document.getElementById("registro-cert").textContent = formatearCedula(persona.registro);
+            document.getElementById("folio-cert").textContent = persona.folio;
+            document.getElementById("renglon-cert").textContent = persona.renglon;
+            document.getElementById("direccion-cert").textContent = persona.direccion;
+            document.getElementById("fecha-emision").textContent = formatearFecha(new Date());
+        }
+
+        function mostrarVistaPrevia() {
+            const certificado = document.getElementById("contenido-certificado");
+            certificado.style.display = 'block';
+            document.getElementById('btnVistaPrevia').classList.add('hidden');
+            document.getElementById('btnOcultarVista').classList.remove('hidden');
+            setTimeout(() => {
+                certificado.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 300);
+        }
+
+        function ocultarVistaPrevia() {
+            document.getElementById("contenido-certificado").style.display = 'none';
+            document.getElementById('btnVistaPrevia').classList.remove('hidden');
+            document.getElementById('btnOcultarVista').classList.add('hidden');
+        }
+
+        async function capturarCertificado() {
+            const elemento = document.getElementById("contenido-certificado");
+            const estadoOriginal = elemento.style.display;
+            elemento.style.display = 'block';
+            await new Promise(resolve => setTimeout(resolve, 2000));
+
+            const options = {
+                scale: 2,
+                useCORS: true,
+                allowTaint: false,
+                backgroundColor: '#FFFFFF',
+                logging: false
+            };
+
+            try {
+                const canvas = await html2canvas(elemento, options);
+                return canvas;
+            } catch (error) {
+                console.error("Error en html2canvas:", error);
+                throw new Error("No se pudo generar la imagen del certificado");
+            } finally {
+                elemento.style.display = estadoOriginal;
+            }
+        }
+
+        async function descargarPNG() {
+            try {
+                mostrarLoader('Generando imagen PNG...');
+                const canvas = await capturarCertificado();
+                const link = document.createElement('a');
+                link.href = canvas.toDataURL('image/png');
+                link.download = `certificado_${personaEncontrada.cedula}.png`;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            } catch (error) {
+                alert("Error al generar PNG: " + error.message);
+            } finally {
+                ocultarLoader();
+            }
+        }
+
+        async function descargarPDF() {
+            try {
+                mostrarLoader('Generando PDF...');
+                const elemento = document.getElementById("contenido-certificado");
+                const estadoOriginal = elemento.style.display;
+                elemento.style.display = 'block';
+                await new Promise(resolve => setTimeout(resolve, 2000));
+
+                const widthPx = 210 * 3.78;
+                const heightPx = 275 * 3.78;
+
+                const options = {
+                    scale: 7,
+                    useCORS: true,
+                    allowTaint: false,
+                    backgroundColor: '#FFFFFF',
+                    logging: false,
+                    width: widthPx,
+                    height: heightPx
+                };
+
+                const canvas = await html2canvas(elemento, options);
+                elemento.style.display = estadoOriginal;
+
+                const pdf = new jsPDF({
+                    orientation: 'portrait',
+                    unit: 'mm',
+                    format: [210, 275]
+                });
+
+                const imgData = canvas.toDataURL('image/jpeg', 0.95);
+                const pdfWidth = pdf.internal.pageSize.getWidth();
+                const pdfHeight = pdf.internal.pageSize.getHeight();
+
+                pdf.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight);
+                pdf.save(`certificado_${personaEncontrada.cedula}.pdf`);
+            } catch (error) {
+                alert("Error al generar PDF: " + error.message);
+            } finally {
+                ocultarLoader();
+            }
+        }
+
+        async function imprimirCertificado() {
+            try {
+                mostrarLoader('Preparando para impresión...');
+                const certificado = document.getElementById("contenido-certificado");
+                const estadoOriginal = certificado.style.display;
+                certificado.style.display = 'block';
+                await new Promise(resolve => setTimeout(resolve, 1000));
+
+                try {
+                    const canvas = await html2canvas(certificado, {
+                        scale: 2,
+                        useCORS: true,
+                        allowTaint: false,
+                        backgroundColor: '#FFFFFF',
+                        logging: false
+                    });
+
+                    const imageDataUrl = canvas.toDataURL('image/png');
+                    const printWindow = window.open('', '_blank');
+
+                    if (!printWindow) {
+                        throw new Error('No se pudo abrir ventana de impresión');
+                    }
+
+                    printWindow.document.write(`
+                        <!DOCTYPE html>
+                        <html>
+                        <head>
+                            <title>Certificado de Afiliación</title>
+                            <style>
+                                @page { margin: 0; size: A4 portrait; }
+                                body { margin: 0; padding: 0; background: white; }
+                                .certificado-imagen { width: 210mm; height: 275mm; display: block; }
+                            </style>
+                        </head>
+                        <body>
+                            <img src="${imageDataUrl}" class="certificado-imagen" alt="Certificado de Afiliación">
+                            <script>
+                                window.onload = function() {
+                                    setTimeout(function() {
+                                        window.print();
+                                        setTimeout(function() { window.close(); }, 100);
+                                    }, 500);
+                                };
+                            <\/script>
+                        </body>
+                        </html>
+                    `);
+                    printWindow.document.close();
+                } catch (canvasError) {
+                    console.warn('Error con canvas, usando método directo:', canvasError);
+                    const estilos = document.createElement('style');
+                    estilos.innerHTML = `
+                        @media print {
+                            body * { visibility: hidden !important; margin: 0 !important; padding: 0 !important; }
+                            #contenido-certificado, #contenido-certificado * { visibility: visible !important; }
+                            #contenido-certificado {
+                                position: absolute !important; left: 0 !important; top: 0 !important;
+                                width: 210mm !important; min-height: 275mm !important;
+                                margin: 0 !important; padding: 05mm 15mm !important;
+                                box-shadow: none !important; background-color: white !important;
+                            }
+                            .certificado-background { opacity: 5.7 !important; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+                            img { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; opacity: 1 !important; }
+                            .btn, .header, .search-container, .options-container, .edit-form, .whatsapp-modal, .loading-overlay { display: none !important; }
+                            @page { margin: 0 !important; size: A4 portrait; }
+                            html, body { height: auto !important; overflow: visible !important; }
+                        }
+                    `;
+                    document.head.appendChild(estilos);
+                    window.print();
+                    setTimeout(() => {
+                        certificado.style.display = estadoOriginal;
+                        document.head.removeChild(estilos);
+                    }, 500);
+                }
+                ocultarLoader();
+            } catch (error) {
+                ocultarLoader();
+                console.error("Error al imprimir:", error);
+                alert("Error al imprimir: " + error.message);
+            }
+        }
+
+        function abrirWhatsAppModal() {
+            document.getElementById('whatsappNumber').value = personaEncontrada.telefono || '';
+            document.getElementById('whatsappModal').style.display = 'flex';
+        }
+
+        function cerrarWhatsAppModal() {
+            document.getElementById('whatsappModal').style.display = 'none';
+        }
+
+        function enviarWhatsApp() {
+            const numero = document.getElementById('whatsappNumber').value.trim();
+            if (!numero) {
+                alert('Por favor ingrese un número de teléfono');
+                return;
+            }
+            window.open(`whatsapp://send?phone=57${numero}`, '_blank');
+            cerrarWhatsAppModal();
+        }
+
+        // Exponer función globalmente para que el botón dinámico funcione
+        window.mostrarDetalleDeudas = mostrarDetalleDeudas;
+    </script>
+</body>
+
+</html>
