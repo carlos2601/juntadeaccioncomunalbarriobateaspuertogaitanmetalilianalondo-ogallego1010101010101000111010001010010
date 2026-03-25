@@ -2138,7 +2138,8 @@
     "direccion": "MANZANA 59 CASA 10",
     "celular": "3135815787",
     "pagos": [],
-    "firma": ""
+    "firma": "",
+    "fecha_expedicion": "2/7/1986"
   },
   {
     "id": "165",
