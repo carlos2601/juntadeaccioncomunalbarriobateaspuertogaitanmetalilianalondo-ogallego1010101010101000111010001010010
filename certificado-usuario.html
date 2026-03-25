@@ -37,8 +37,6 @@
             margin-bottom: 24px;
         }
 
-
-
         .portal-header h1 {
             color: white;
             font-size: 1.2rem;
@@ -211,6 +209,27 @@
 
         .hidden {
             display: none !important;
+        }
+
+        /* Contador de reinicio */
+        .counter-message {
+            background: #e3f2fd;
+            color: #1565C0;
+            padding: 14px 16px;
+            border-radius: 16px;
+            font-size: 0.9rem;
+            margin-top: 16px;
+            text-align: center;
+            font-weight: bold;
+            border-left: 4px solid #1565C0;
+        }
+
+        .counter-number {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: #0d47a1;
+            display: inline-block;
+            min-width: 40px;
         }
 
         .debt-modal {
@@ -514,7 +533,6 @@
 <body>
     <div class="container">
         <div class="portal-header">
-
             <h1>JUNTA DE ACCIÓN COMUNAL<br>BARRIO BATEAS SECTOR 3</h1>
             <p>Portal del Afiliado - Descarga tu certificado</p>
         </div>
@@ -533,7 +551,7 @@
 
             <div class="form-group">
                 <label><i class="fas fa-map-marker-alt"></i> Dirección de residencia</label>
-                <input type="text" id="direccionInput" placeholder="Ej: MANZANA 58 CASA 11 B" autocomplete="off">
+                <input type="text" id="direccionInput" placeholder="Ej: MANZANA 58 CASA 11 B" autocomplete="off" style="text-transform: uppercase;">
             </div>
 
             <div class="form-group">
@@ -587,6 +605,10 @@
                 <i class="fas fa-download"></i> Descargar Certificado PDF
             </button>
 
+            <div id="counterMessage" class="counter-message hidden">
+                <i class="fas fa-hourglass-half"></i> Reiniciando en <span id="counterSeconds" class="counter-number">10</span> segundos...
+            </div>
+
             <div style="margin-top: 20px; text-align: center;">
                 <button id="btnVolverAutenticar" class="btn-back">
                     <i class="fas fa-arrow-left"></i> Volver al inicio
@@ -622,12 +644,15 @@
         let pagosCompletos = null;
         let certificadoHTML = null;
         let descargasRegistradas = [];
+        let contadorTimeout = null;
+        let contadorInterval = null;
 
         const AFILIADOS_URL = 'afiliados.json';
         const PAGOS_URL = 'https://raw.githubusercontent.com/carlos2601/jacbateas/refs/heads/main/data/cuota.json';
 
         const IMAGENES_GITHUB = {
-            logo: 'logo.jpg'
+            logo: 'logo.jpg',
+            sello: 'sello.png'
         };
 
         const STORAGE_KEY = 'jac_descargas';
@@ -673,6 +698,80 @@
             };
         }
 
+        // Función para reiniciar la aplicación después del contador
+        function iniciarContadorReinicio() {
+            let segundos = 10;
+            const counterDiv = document.getElementById('counterMessage');
+            const counterSpan = document.getElementById('counterSeconds');
+            
+            counterDiv.classList.remove('hidden');
+            counterSpan.textContent = segundos;
+            
+            // Deshabilitar el botón de descarga durante el contador
+            const btnDescargar = document.getElementById('btnDescargarPDF');
+            btnDescargar.disabled = true;
+            btnDescargar.style.opacity = '0.6';
+            
+            // Limpiar intervalos anteriores si existen
+            if (contadorInterval) clearInterval(contadorInterval);
+            if (contadorTimeout) clearTimeout(contadorTimeout);
+            
+            contadorInterval = setInterval(() => {
+                segundos--;
+                counterSpan.textContent = segundos;
+                
+                if (segundos <= 0) {
+                    clearInterval(contadorInterval);
+                    contadorInterval = null;
+                    // Reiniciar la aplicación
+                    volverAutenticacionCompleta();
+                }
+            }, 1000);
+        }
+        
+        // Función para volver completamente al formulario (reinicio)
+        function volverAutenticacionCompleta() {
+            // Limpiar contador
+            if (contadorInterval) {
+                clearInterval(contadorInterval);
+                contadorInterval = null;
+            }
+            if (contadorTimeout) {
+                clearTimeout(contadorTimeout);
+                contadorTimeout = null;
+            }
+            
+            // Ocultar mensaje de contador
+            document.getElementById('counterMessage').classList.add('hidden');
+            
+            // Volver al formulario
+            document.getElementById('resultCard').style.display = 'none';
+            document.getElementById('authCard').style.display = 'block';
+            document.getElementById('restrictionCard').classList.remove('show');
+            
+            // Limpiar campos
+            document.getElementById('cedulaInput').value = '';
+            document.getElementById('direccionInput').value = '';
+            document.getElementById('diaInput').value = '';
+            document.getElementById('mesInput').value = '';
+            document.getElementById('añoInput').value = '';
+            
+            // Limpiar mensajes
+            limpiarMensajes();
+            
+            // Limpiar datos del afiliado
+            afiliadoAutenticado = null;
+            certificadoHTML = null;
+            
+            // Mostrar mensaje de reinicio
+            const tempMsg = document.createElement('div');
+            tempMsg.className = 'success-message';
+            tempMsg.style.marginTop = '10px';
+            tempMsg.innerHTML = '<i class="fas fa-sync-alt"></i> Sesión reiniciada. Puedes realizar una nueva consulta.';
+            document.getElementById('authCard').appendChild(tempMsg);
+            setTimeout(() => tempMsg.remove(), 3000);
+        }
+
         document.addEventListener('DOMContentLoaded', function () {
             cargarHistorialDescargas();
             configurarEventListeners();
@@ -682,18 +781,63 @@
         function configurarEventListeners() {
             document.getElementById('btnAutenticar').addEventListener('click', autenticarUsuario);
             document.getElementById('btnDescargarPDF').addEventListener('click', descargarPDF);
-            document.getElementById('btnVolverAutenticar').addEventListener('click', volverAutenticacion);
+            document.getElementById('btnVolverAutenticar').addEventListener('click', volverAutenticacionManual);
             document.getElementById('btnVolverFormulario').addEventListener('click', volverAlFormulario);
             document.getElementById('closeDebtModal').addEventListener('click', cerrarDebtModal);
 
-            document.getElementById('diaInput').addEventListener('input', function (e) {
-                this.value = this.value.replace(/[^0-9]/g, '').slice(0, 2);
+            // Dirección en mayúsculas automáticas
+            const direccionInput = document.getElementById('direccionInput');
+            direccionInput.addEventListener('input', function (e) {
+                this.value = this.value.toUpperCase();
             });
-            document.getElementById('mesInput').addEventListener('input', function (e) {
+            
+            // Navegación automática entre campos de fecha
+            const diaInput = document.getElementById('diaInput');
+            const mesInput = document.getElementById('mesInput');
+            const añoInput = document.getElementById('añoInput');
+            
+            function avanzarAlSiguiente(actual, siguiente, maxLength) {
+                if (actual.value.length === maxLength) {
+                    if (siguiente) {
+                        siguiente.focus();
+                    }
+                }
+            }
+            
+            function retrocederAlAnterior(actual, anterior) {
+                if (actual.value.length === 0 && anterior) {
+                    anterior.focus();
+                }
+            }
+            
+            diaInput.addEventListener('input', function (e) {
                 this.value = this.value.replace(/[^0-9]/g, '').slice(0, 2);
+                if (this.value.length === 2) {
+                    avanzarAlSiguiente(this, mesInput, 2);
+                }
             });
-            document.getElementById('añoInput').addEventListener('input', function (e) {
+            
+            mesInput.addEventListener('input', function (e) {
+                this.value = this.value.replace(/[^0-9]/g, '').slice(0, 2);
+                if (this.value.length === 2) {
+                    avanzarAlSiguiente(this, añoInput, 2);
+                }
+            });
+            
+            mesInput.addEventListener('keydown', function (e) {
+                if (e.key === 'Backspace' && this.value.length === 0) {
+                    retrocederAlAnterior(this, diaInput);
+                }
+            });
+            
+            añoInput.addEventListener('input', function (e) {
                 this.value = this.value.replace(/[^0-9]/g, '').slice(0, 4);
+            });
+            
+            añoInput.addEventListener('keydown', function (e) {
+                if (e.key === 'Backspace' && this.value.length === 0) {
+                    retrocederAlAnterior(this, mesInput);
+                }
             });
 
             const inputs = ['cedulaInput', 'direccionInput', 'diaInput', 'mesInput', 'añoInput'];
@@ -702,6 +846,33 @@
                     if (e.key === 'Enter') autenticarUsuario();
                 });
             });
+        }
+        
+        // Versión manual de volver (sin contador)
+        function volverAutenticacionManual() {
+            // Limpiar contador si está activo
+            if (contadorInterval) {
+                clearInterval(contadorInterval);
+                contadorInterval = null;
+            }
+            if (contadorTimeout) {
+                clearTimeout(contadorTimeout);
+                contadorTimeout = null;
+            }
+            document.getElementById('counterMessage').classList.add('hidden');
+            
+            document.getElementById('resultCard').style.display = 'none';
+            document.getElementById('authCard').style.display = 'block';
+            document.getElementById('restrictionCard').classList.remove('show');
+            document.getElementById('cedulaInput').value = '';
+            document.getElementById('direccionInput').value = '';
+            document.getElementById('diaInput').value = '';
+            document.getElementById('mesInput').value = '';
+            document.getElementById('añoInput').value = '';
+            document.getElementById('btnDescargarPDF').disabled = false;
+            document.getElementById('btnDescargarPDF').style.opacity = '1';
+            limpiarMensajes();
+            afiliadoAutenticado = null;
         }
 
         function cerrarDebtModal() {
@@ -760,7 +931,9 @@
 
         async function precargarImagenes() {
             new Image().src = IMAGENES_GITHUB.logo;
-            new Image().src = IMAGENES_GITHUB.sello;
+            if (IMAGENES_GITHUB.sello) {
+                new Image().src = IMAGENES_GITHUB.sello;
+            }
         }
 
         async function cargarAfiliados() {
@@ -914,7 +1087,7 @@
                         </div>
                         <br>Atentamente,<br><br><br>
                         <div class="firmas">
-                            <img class="sello" src="${IMAGENES_GITHUB.sello}" alt="Sello">
+                            ${IMAGENES_GITHUB.sello ? `<img class="sello" src="${IMAGENES_GITHUB.sello}" alt="Sello">` : ''}
                             <div style="text-align:center;margin-top:30px;">
                                 ________________________________<br>
                                 <strong>LEONEL BAUTISTA CARRANZA</strong><br>
@@ -971,7 +1144,6 @@
 
                 afiliadoAutenticado = afiliado;
 
-                // Verificar límite de descargas
                 const infoDescargas = getInfoDescargas(afiliado.cedula);
                 if (!infoDescargas.puede) {
                     ocultarLoader();
@@ -985,7 +1157,6 @@
                     return;
                 }
 
-                // Verificar pagos
                 const cuotaPagada = haPagadoCuotaMesActual(afiliado.cedula);
                 const certificadoPagado = haPagadoCertificadoMesActual(afiliado.cedula);
 
@@ -1039,6 +1210,8 @@
                     <div style="background:#f0f8f0; padding:15px; border-radius:20px; margin-bottom:15px;">
                         <p><strong><i class="fas fa-user"></i> Nombre:</strong> ${afiliado.nombre}</p>
                         <p><strong><i class="fas fa-id-card"></i> Cédula:</strong> ${formatearCedula(afiliado.cedula)}</p>
+                        <p><strong><i class="fas fa-calendar-alt"></i> Fecha expedición:</strong> ${formatearFecha(afiliado.fecha_expedicion)}</p>
+                        <p><strong><i class="fas fa-map-marker-alt"></i> Dirección:</strong> ${afiliado.direccion || 'No registrada'}</p>
                     </div>
                 `;
 
@@ -1074,7 +1247,18 @@
             }
         }
 
-        function volverAutenticacion() {
+        function volverAutenticacionManual() {
+            // Limpiar contador si está activo
+            if (contadorInterval) {
+                clearInterval(contadorInterval);
+                contadorInterval = null;
+            }
+            if (contadorTimeout) {
+                clearTimeout(contadorTimeout);
+                contadorTimeout = null;
+            }
+            document.getElementById('counterMessage').classList.add('hidden');
+            
             document.getElementById('resultCard').style.display = 'none';
             document.getElementById('authCard').style.display = 'block';
             document.getElementById('restrictionCard').classList.remove('show');
@@ -1083,7 +1267,6 @@
             document.getElementById('diaInput').value = '';
             document.getElementById('mesInput').value = '';
             document.getElementById('añoInput').value = '';
-            document.getElementById('btnDescargarPDF').classList.remove('hidden');
             document.getElementById('btnDescargarPDF').disabled = false;
             document.getElementById('btnDescargarPDF').style.opacity = '1';
             limpiarMensajes();
@@ -1137,6 +1320,9 @@
                 tempMsg.innerHTML = '<i class="fas fa-download"></i> Certificado descargado correctamente';
                 document.getElementById('userInfo').appendChild(tempMsg);
                 setTimeout(() => tempMsg.remove(), 3000);
+                
+                // INICIAR CONTADOR DE 10 SEGUNDOS PARA REINICIAR
+                iniciarContadorReinicio();
 
             } catch (error) {
                 ocultarLoader();
