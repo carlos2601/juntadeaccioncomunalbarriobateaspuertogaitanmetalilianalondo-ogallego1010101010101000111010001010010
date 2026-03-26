@@ -933,8 +933,7 @@
     "direccion": "MANZANA 59 CASA 10",
     "celular": "3213329108",
     "pagos": [],
-    "firma": "",
-    "fecha_expedicion": "16/07/2002"
+    "firma": ""
   },
   {
     "id": "73",
@@ -2138,8 +2137,7 @@
     "direccion": "MANZANA 59 CASA 10",
     "celular": "3135815787",
     "pagos": [],
-    "firma": "",
-    "fecha_expedicion": "28/07/1986"
+    "firma": ""
   },
   {
     "id": "165",
@@ -5164,7 +5162,7 @@
     "firma": ""
   },
   {
-    "id": 413,
+    "id": "394",
     "registro": 394,
     "folio": 22,
     "renglon": 34,
