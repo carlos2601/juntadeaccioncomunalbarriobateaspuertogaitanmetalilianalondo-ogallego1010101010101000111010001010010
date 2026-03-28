@@ -9489,7 +9489,9 @@
     "fecha": "21/03/2026",
     "direccion": "MANZANA 77 CASA 05",
     "celular": "3103351749",
-    "pagos": [],
+    "pagos": [
+      "27/3/2026, 20.000"
+    ],
     "firma": ""
   },
   {
