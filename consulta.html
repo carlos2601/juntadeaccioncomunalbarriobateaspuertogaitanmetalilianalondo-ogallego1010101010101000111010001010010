@@ -784,6 +784,7 @@
         // ============================================================
         // JAC BATEAS - CONSULTA MÓVIL MODERNA
         // Colores: verdes oscuros (#2d6a4f, #1b4d3e) y amarillo oscuro (#856404)
+        // SOLO SE CUENTAN DEUDAS DESDE DICIEMBRE 2025 EN ADELANTE
         // ============================================================
 
         const CONFIG = {
@@ -964,7 +965,11 @@
                 const mesFin = (año === hoy.getFullYear()) ? hoy.getMonth() : 11;
                 
                 for (let mes = mesInicio; mes <= mesFin; mes++) {
-                    if (!mesEstaPagado(cedula, año, mes)) {
+                    // SOLO CONTAR DEUDAS DESDE DICIEMBRE 2025 EN ADELANTE
+                    // diciembre 2025 = año 2025, mes 11
+                    const esDeudaValida = (año > 2025) || (año === 2025 && mes >= 11);
+                    
+                    if (!mesEstaPagado(cedula, año, mes) && esDeudaValida) {
                         meses.push({ año, mes });
                     }
                 }
@@ -1050,6 +1055,8 @@
                             ✓ No tienes deudas pendientes
                         </div>
                     `;
+                    dom.pendingSection.style.display = 'block';
+                    dom.debtSummary.style.display = 'flex';
                     // Si no hay deuda, mostrar mensaje en el resumen
                     dom.mesesPendientesCount.textContent = '0 meses';
                     dom.deudaTotalValue.textContent = '$0';
