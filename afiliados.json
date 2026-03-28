@@ -4359,9 +4359,7 @@
     "fecha": "27/12/2025",
     "direccion": "MANZANA 63 CASA 08 A",
     "celular": "3123340582",
-    "pagos": [
-      "27/3/2026, 20.000"
-    ],
+    "pagos": [],
     "firma": ""
   },
   {
@@ -9491,9 +9489,7 @@
     "fecha": "21/03/2026",
     "direccion": "MANZANA 77 CASA 05",
     "celular": "3103351749",
-    "pagos": [
-      "27/3/2026, 20.000"
-    ],
+    "pagos": [],
     "firma": ""
   },
   {
