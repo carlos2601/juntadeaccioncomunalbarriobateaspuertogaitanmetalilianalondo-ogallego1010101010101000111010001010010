@@ -9554,7 +9554,9 @@
     "fecha": "27/03/206",
     "direccion": "MANZANA 78 A CASA 08",
     "celular": "3138517864",
-    "pagos": [],
+    "pagos": [
+      "27/3/2026, 20.000"
+    ],
     "firma": ""
   },
   {
