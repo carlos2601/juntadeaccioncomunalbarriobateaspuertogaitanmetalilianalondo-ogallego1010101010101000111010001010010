@@ -4359,7 +4359,9 @@
     "fecha": "27/12/2025",
     "direccion": "MANZANA 63 CASA 08 A",
     "celular": "3123340582",
-    "pagos": [],
+    "pagos": [
+      "27/3/2026, 20.000"
+    ],
     "firma": ""
   },
   {
