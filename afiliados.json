@@ -7937,7 +7937,9 @@
     "fecha": "31/01/2026",
     "direccion": "MANZANA 55 CASA 18",
     "celular": "3204930076",
-    "pagos": [],
+    "pagos": [
+      "27/3/2026, 20.000"
+    ],
     "firma": ""
   },
   {
