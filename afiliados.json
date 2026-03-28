@@ -6934,7 +6934,9 @@
     "fecha": "29/01/2026",
     "direccion": "MANZANA 59 CASA 18",
     "celular": "3173286902",
-    "pagos": [],
+    "pagos": [
+      "27/3/2026, 20.000"
+    ],
     "firma": ""
   },
   {
