@@ -6200,8 +6200,7 @@
     "direccion": "MANZANA 78 CASA 10",
     "celular": "3134485495",
     "pagos": [
-      "31/1/2026, 20.000",
-      "27/3/2026, 20.000"
+      "31/1/2026, 20.000"
     ],
     "firma": ""
   },
@@ -6935,9 +6934,7 @@
     "fecha": "29/01/2026",
     "direccion": "MANZANA 59 CASA 18",
     "celular": "3173286902",
-    "pagos": [
-      "27/3/2026, 20.000"
-    ],
+    "pagos": [],
     "firma": ""
   },
   {
@@ -7937,9 +7934,7 @@
     "fecha": "31/01/2026",
     "direccion": "MANZANA 55 CASA 18",
     "celular": "3204930076",
-    "pagos": [
-      "27/3/2026, 20.000"
-    ],
+    "pagos": [],
     "firma": ""
   },
   {
@@ -9489,11 +9484,11 @@
     "registro": 716,
     "folio": 40,
     "renglon": 32,
-    "nombre": "",
-    "cedula": "",
-    "fecha": "",
-    "direccion": "MANZANA  CASA ",
-    "celular": "",
+    "nombre": "JERLEY HERNANDEZ BOCANEGRA",
+    "cedula": "79051388",
+    "fecha": "21/03/2026",
+    "direccion": "MANZANA 77 CASA 05",
+    "celular": "3103351749",
     "pagos": [],
     "firma": ""
   },
@@ -9559,9 +9554,7 @@
     "fecha": "27/03/206",
     "direccion": "MANZANA 78 A CASA 08",
     "celular": "3138517864",
-    "pagos": [
-      "27/3/2026, 20.000"
-    ],
+    "pagos": [],
     "firma": ""
   },
   {
