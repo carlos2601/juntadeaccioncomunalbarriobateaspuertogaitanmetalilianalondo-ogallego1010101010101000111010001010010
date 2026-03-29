@@ -9378,7 +9378,9 @@
     "fecha": "15/03/2026",
     "direccion": "MANZANA 64 CASA 26",
     "celular": "3144917739",
-    "pagos": [],
+    "pagos": [
+      "28/3/2026, 20.000"
+    ],
     "firma": ""
   },
   {
