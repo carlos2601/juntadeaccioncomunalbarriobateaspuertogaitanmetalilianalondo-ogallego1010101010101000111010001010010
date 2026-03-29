@@ -9684,9 +9684,7 @@
     "fecha": "28/03/2026",
     "direccion": "MANZANA 63 CASA 27",
     "celular": "3225849809",
-    "pagos": [
-      "28/3/2026, 20.000"
-    ],
+    "pagos": [],
     "firma": ""
   },
   {
@@ -9790,9 +9788,7 @@
     "fecha": "28/03/2026",
     "direccion": "MANZANA 63 CASA 18",
     "celular": "3135924063",
-    "pagos": [
-      "28/3/2026, 20.000"
-    ],
+    "pagos": [],
     "firma": ""
   },
   {
@@ -9801,7 +9797,7 @@
     "folio": 42,
     "renglon": 20,
     "nombre": "GILMA RAMIREZ AVILA",
-    "cedula": "1056769816",
+    "cedula": "1056769818",
     "fecha": "28/03/2026",
     "direccion": "MANZANA 63 CASA 18",
     "celular": "3184299926",
