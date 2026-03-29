@@ -1926,7 +1926,9 @@
     "fecha": "21/11/2024",
     "direccion": "MANZANA 79 CASA 03",
     "celular": "3243761596",
-    "pagos": [],
+    "pagos": [
+      "28/3/2026, 20.000"
+    ],
     "firma": ""
   },
   {
