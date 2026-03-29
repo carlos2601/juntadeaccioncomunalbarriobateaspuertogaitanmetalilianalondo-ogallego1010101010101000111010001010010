@@ -1900,7 +1900,9 @@
     "fecha": "21/11/2024",
     "direccion": "MANZANA 77 CASA 09",
     "celular": "3023513037",
-    "pagos": [],
+    "pagos": [
+      "28/3/2026, 20.000"
+    ],
     "firma": ""
   },
   {
