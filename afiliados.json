@@ -6962,7 +6962,9 @@
     "fecha": "29/01/2026",
     "direccion": "MANZANA 66 CASA 3",
     "celular": "3157759647",
-    "pagos": [],
+    "pagos": [
+      "28/3/2026, 20.000"
+    ],
     "firma": ""
   },
   {
