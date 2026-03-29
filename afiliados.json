@@ -1900,9 +1900,7 @@
     "fecha": "21/11/2024",
     "direccion": "MANZANA 77 CASA 09",
     "celular": "3023513037",
-    "pagos": [
-      "28/3/2026, 20.000"
-    ],
+    "pagos": [],
     "firma": ""
   },
   {
@@ -9681,11 +9679,11 @@
     "registro": 731,
     "folio": 42,
     "renglon": 11,
-    "nombre": "",
-    "cedula": "",
-    "fecha": "",
-    "direccion": "MANZANA  CASA ",
-    "celular": "",
+    "nombre": "LINA LUCIA MONTENEGRO PEÑA",
+    "cedula": "1006873668",
+    "fecha": "28/03/2026",
+    "direccion": "MANZANA 63 CASA 27",
+    "celular": "3225849809",
     "pagos": [],
     "firma": ""
   },
@@ -9777,9 +9775,7 @@
     "fecha": "28/03/2026",
     "direccion": "MANZANA 58 CASA 14",
     "celular": "3184299926",
-    "pagos": [
-      "28/3/2026, 20.000"
-    ],
+    "pagos": [],
     "firma": ""
   },
   {
@@ -9805,6 +9801,32 @@
     "fecha": "28/03/2026",
     "direccion": "MANZANA 63 CASA 18",
     "celular": "3184299926",
+    "pagos": [],
+    "firma": ""
+  },
+  {
+    "id": "741",
+    "registro": 741,
+    "folio": 42,
+    "renglon": 21,
+    "nombre": "",
+    "cedula": "",
+    "fecha": "",
+    "direccion": "MANZANA  CASA ",
+    "celular": "",
+    "pagos": [],
+    "firma": ""
+  },
+  {
+    "id": "742",
+    "registro": 742,
+    "folio": 42,
+    "renglon": 22,
+    "nombre": "",
+    "cedula": "",
+    "fecha": "",
+    "direccion": "MANZANA  CASA ",
+    "celular": "",
     "pagos": [],
     "firma": ""
   }
