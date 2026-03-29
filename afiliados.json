@@ -9923,7 +9923,9 @@
     "fecha": "28/03/2026",
     "direccion": "MANZANA 62 CASA 02",
     "celular": "3108807898",
-    "pagos": [],
+    "pagos": [
+      "28/3/2026, 20.000"
+    ],
     "firma": ""
   }
 ]
