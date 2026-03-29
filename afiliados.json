@@ -9777,7 +9777,9 @@
     "fecha": "28/03/2026",
     "direccion": "MANZANA 58 CASA 14",
     "celular": "3184299926",
-    "pagos": [],
+    "pagos": [
+      "28/3/2026, 20.000"
+    ],
     "firma": ""
   },
   {
