@@ -9790,7 +9790,9 @@
     "fecha": "28/03/2026",
     "direccion": "MANZANA 63 CASA 18",
     "celular": "3135924063",
-    "pagos": [],
+    "pagos": [
+      "28/3/2026, 20.000"
+    ],
     "firma": ""
   },
   {
