@@ -9752,7 +9752,9 @@
     "fecha": "28/03/2026",
     "direccion": "MANZANA 64 a CASA 12",
     "celular": "3204336968",
-    "pagos": [],
+    "pagos": [
+      "30/3/2026, 20.000"
+    ],
     "firma": ""
   },
   {
