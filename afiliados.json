@@ -6372,7 +6372,7 @@
     "registro": 483,
     "folio": 28,
     "renglon": 15,
-    "nombre": "LUS MARINA ESPINOSA VARGAS",
+    "nombre": "LUZ MARINA ESPINOSA VARGAS",
     "cedula": "33367955",
     "fecha": "24/01/2026",
     "direccion": "MANZANA 64 CASA  15",
@@ -9752,9 +9752,7 @@
     "fecha": "28/03/2026",
     "direccion": "MANZANA 64 a CASA 12",
     "celular": "3204336968",
-    "pagos": [
-      "30/3/2026, 20.000"
-    ],
+    "pagos": [],
     "firma": ""
   },
   {
@@ -9767,9 +9765,7 @@
     "fecha": "28/03/2026",
     "direccion": "MANZANA 64 a CASA 12",
     "celular": "3227805279",
-    "pagos": [
-      "30/3/2026, 20.000"
-    ],
+    "pagos": [],
     "firma": ""
   },
   {
