@@ -100,7 +100,9 @@
     "fecha": "21/11/2024",
     "direccion": "MANZANA 58 CASA 11 B",
     "celular": "3214093804",
-    "pagos": [],
+    "pagos": [
+      "31/3/2026, 20.000"
+    ],
     "firma": ""
   },
   {
