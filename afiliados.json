@@ -100,9 +100,7 @@
     "fecha": "21/11/2024",
     "direccion": "MANZANA 58 CASA 11 B",
     "celular": "3214093804",
-    "pagos": [
-      "31/3/2026, 20.000"
-    ],
+    "pagos": [],
     "firma": ""
   },
   {
@@ -1546,7 +1544,7 @@
     "registro": 119,
     "folio": 8,
     "renglon": 11,
-    "nombre": "ANDERSON ALFONSO",
+    "nombre": "OSBER VICTOR ANDERSON ALFONSO SUAREZ",
     "cedula": "9506569",
     "fecha": "21/11/2024",
     "direccion": "MANZANA 79 CASA 01",
@@ -4584,9 +4582,7 @@
     "fecha": "27/12/2025",
     "direccion": "MANZANA 78 CASA 01",
     "celular": "3112020542",
-    "pagos": [
-      "31/3/2026, 20.000"
-    ],
+    "pagos": [],
     "firma": ""
   },
   {
@@ -6768,8 +6764,8 @@
     "nombre": "",
     "cedula": "",
     "fecha": "28/01/2026",
-    "direccion": "MANZANA 00 CASA OO",
-    "celular": "0000000000",
+    "direccion": "",
+    "celular": "",
     "pagos": [],
     "firma": ""
   },
