@@ -2224,10 +2224,10 @@
     "registro": 171,
     "folio": 10,
     "renglon": 27,
-    "nombre": "MIYER HELMAN VELASQUEZ RODRIGUEZ",
+    "nombre": "MILLER HELMAN VELASQUEZ RODRIGUEZ",
     "cedula": "86058381",
     "fecha": "21/11/2024",
-    "direccion": "MANZANA 64 CASA 24",
+    "direccion": "MANZANA 68 CASA 02",
     "celular": "3142005921",
     "pagos": [
       "10/4/2026, 20.000"
@@ -3541,9 +3541,7 @@
     "fecha": "20/12/2025",
     "direccion": "MANZANA 62 CASA 28",
     "celular": "3212331030",
-    "pagos": [
-      "10/4/2026, 20.000"
-    ],
+    "pagos": [],
     "firma": ""
   },
   {
