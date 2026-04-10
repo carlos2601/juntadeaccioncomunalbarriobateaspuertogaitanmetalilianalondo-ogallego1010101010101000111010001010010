@@ -2229,7 +2229,9 @@
     "fecha": "21/11/2024",
     "direccion": "MANZANA 64 CASA 24",
     "celular": "3142005921",
-    "pagos": [],
+    "pagos": [
+      "10/4/2026, 20.000"
+    ],
     "firma": ""
   },
   {
