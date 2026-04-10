@@ -6297,7 +6297,9 @@
     "fecha": "26/01/2026",
     "direccion": "MANZANA 64 CASA 23",
     "celular": "3204893787",
-    "pagos": [],
+    "pagos": [
+      "10/4/2026, 20.000"
+    ],
     "firma": ""
   },
   {
