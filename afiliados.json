@@ -3515,7 +3515,9 @@
     "fecha": "20/12/2025",
     "direccion": "MANZANA 83 CASA 01",
     "celular": "3116563505",
-    "pagos": [],
+    "pagos": [
+      "11/4/2026, 20.000"
+    ],
     "firma": ""
   },
   {
