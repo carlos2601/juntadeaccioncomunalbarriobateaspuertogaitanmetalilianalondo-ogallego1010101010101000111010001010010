@@ -3554,7 +3554,9 @@
     "fecha": "20/12/2025",
     "direccion": "MANZANA 62 CASA 28",
     "celular": "3224472190",
-    "pagos": [],
+    "pagos": [
+      "11/4/2026, 20.000"
+    ],
     "firma": ""
   },
   {
