@@ -9147,7 +9147,9 @@
     "fecha": "21/02/2026",
     "direccion": "MANZANA 60 CASA 22",
     "celular": "3204391487",
-    "pagos": [],
+    "pagos": [
+      "11/4/2026, 20.000"
+    ],
     "firma": ""
   },
   {
