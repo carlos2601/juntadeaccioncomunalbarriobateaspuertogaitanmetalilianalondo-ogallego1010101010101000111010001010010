@@ -9939,5 +9939,83 @@
       "28/3/2026, 20.000"
     ],
     "firma": ""
+  },
+  {
+    "id": "750",
+    "registro": 750,
+    "folio": 42,
+    "renglon": 30,
+    "nombre": "JOSE GILBERTO DUARTE GUAVITA",
+    "cedula": "17388322",
+    "fecha": "28/03/2026",
+    "direccion": "MANZANA 78 CASA 11",
+    "celular": "3188196271",
+    "pagos": [],
+    "firma": ""
+  },
+  {
+    "id": "751",
+    "registro": 751,
+    "folio": 42,
+    "renglon": 31,
+    "nombre": "JULIAN ALARCON PERDOMO",
+    "cedula": "1075292982",
+    "fecha": "28/03/2026",
+    "direccion": "MANZANA 69 CASA 22",
+    "celular": "3216321720",
+    "pagos": [],
+    "firma": ""
+  },
+  {
+    "id": "752",
+    "registro": 752,
+    "folio": 42,
+    "renglon": 32,
+    "nombre": "SERGIO DAVID NEIRA VARGAS",
+    "cedula": "1118200741",
+    "fecha": "28/03/2026",
+    "direccion": "MANZANA 78 CASA 3",
+    "celular": "3157203230",
+    "pagos": [],
+    "firma": ""
+  },
+  {
+    "id": "753",
+    "registro": 753,
+    "folio": 42,
+    "renglon": 33,
+    "nombre": "JORGE EDUARDO NEIRA MORALES",
+    "cedula": "74810042",
+    "fecha": "28/03/2026",
+    "direccion": "MANZANA 78  CASA 03",
+    "celular": "3157203230",
+    "pagos": [],
+    "firma": ""
+  },
+  {
+    "id": "754",
+    "registro": 754,
+    "folio": 42,
+    "renglon": 34,
+    "nombre": "KAREN TATIANA DUARTE GALVIS",
+    "cedula": "1116809531",
+    "fecha": "28/03/2026",
+    "direccion": "MANZANA 65 CASA 17",
+    "celular": "3146263810",
+    "pagos": [],
+    "firma": ""
+  },
+  {
+    "id": "755",
+    "registro": 755,
+    "folio": 42,
+    "renglon": 35,
+    "nombre": "EDWARD JAIR PONGUTA ZAMBRANO",
+    "cedula": "1094274674",
+    "fecha": "28/03/2026",
+    "direccion": "MANZANA 65 CASA 17",
+    "celular": "3213356870",
+    "pagos": [],
+    "firma": ""
   }
 ]
