@@ -4093,7 +4093,9 @@
     "fecha": "27/12/2025",
     "direccion": "MANZANA 60 CASA 18",
     "celular": "3178472386",
-    "pagos": [],
+    "pagos": [
+      "15/4/2026, 20.000"
+    ],
     "firma": ""
   },
   {
