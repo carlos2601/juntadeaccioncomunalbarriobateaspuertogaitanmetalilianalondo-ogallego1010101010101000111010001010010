@@ -9261,7 +9261,9 @@
     "fecha": "28/02/2026",
     "direccion": "MANZANA 60 CASA 09",
     "celular": "3174251693",
-    "pagos": [],
+    "pagos": [
+      "15/4/2026, 20.000"
+    ],
     "firma": ""
   },
   {
