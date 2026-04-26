@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Tarjetas de Votación</title>
+
+  <style>
+    @page {
+      size: letter;
+      margin: 0.9cm 2.5cm;
+      /* márgenes laterales más amplios */
+    }
+
+    body {
+      font-family: Arial;
+    }
+
+    /* BOTONES */
+    .controls {
+      margin-bottom: 10px;
+    }
+
+    button {
+      padding: 6px 10px;
+      margin: 4px;
+      cursor: pointer;
+    }
+
+    /* NO IMPRIMIR BOTONES */
+    @media print {
+      .controls {
+        display: none;
+      }
+
+      * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+    }
+
+    /* GRID 4 x 6 */
+    .page {
+      width: 16cm;
+      /* controla el ancho REAL */
+      margin: 0 auto;
+      /* centra la hoja */
+      display: grid;
+      grid-template-columns: repeat(4, 5cm);
+      /* tarjetas más angostas */
+      gap: 6px;
+      justify-content: center;
+    }
+
+    /* TARJETA */
+    .card {
+      border: 2px solid black;
+      border-radius: 8px;
+      padding: 8px;
+      height: 170px;
+      /* aumentado aprox 1.5 cm */
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    /* TEXTOS */
+    .title {
+      text-align: center;
+      font-size: 11px;
+      font-weight: bold;
+    }
+
+    .subtitle {
+      text-align: center;
+      font-size: 13px;
+      font-weight: bold;
+      margin: 5px 0;
+    }
+
+    /* OPCIONES MÁS GRANDES */
+    .option {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 6px 0;
+      font-size: 13px;
+      /* texto más grande */
+      font-weight: bold;
+    }
+
+    /* CUADRO MÁS GRANDE */
+    .box {
+      width: 18px;
+      height: 18px;
+      border: 2px solid black;
+    }
+
+    /* COLORES */
+    .c1 {
+      background: #d6ecff;
+    }
+
+    .c2 {
+      background: #fff5b8;
+    }
+
+    .c3 {
+      background: #d8f8d8;
+    }
+
+    .c4 {
+      background: #ffd9d9;
+    }
+
+    .c5 {
+      background: #ffe4c2;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="controls">
+    <button onclick="generar('c1','Comisión convivencia y conciliación')">Convivencia</button>
+    <button onclick="generar('c2','Bloque directivo')">Directivo</button>
+    <button onclick="generar('c3','Bloque fiscal')">Fiscal</button>
+    <button onclick="generar('c4','Comisiones de trabajo')">Comisiones</button>
+    <button onclick="generar('c5','Delegados ante asojuntas')">Delegados</button>
+
+    <button onclick="modo24()">24 por hoja</button>
+    <button onclick="modo1()">1 por hoja</button>
+
+    <button onclick="window.print()">🖨️ Imprimir</button>
+  </div>
+
+  <div class="page" id="contenedor"></div>
+
+  <script>
+
+    function generar(color, titulo) {
+      const contenedor = document.getElementById("contenedor");
+      contenedor.innerHTML = "";
+
+      for (let i = 0; i < 24; i++) {
+        let card = document.createElement("div");
+        card.className = `card ${color}`;
+
+        card.innerHTML = `
+      <div class="title">VOTO VÁLIDO PARA</div>
+      <div class="subtitle">${titulo}</div>
+      <div class="option">PLANCHA 1 <div class="box"></div></div>
+      <div class="option">VOTO EN BLANCO <div class="box"></div></div>
+    `;
+
+        contenedor.appendChild(card);
+      }
+    }
+
+    /* MODOS */
+    function modo1() {
+      document.body.classList.add('single');
+    }
+
+    function modo24() {
+      document.body.classList.remove('single');
+    }
+
+  </script>
+
+</body>
+
+</html>
