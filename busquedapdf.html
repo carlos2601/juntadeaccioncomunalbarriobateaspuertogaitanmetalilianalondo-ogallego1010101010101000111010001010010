@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>Buscador de Afiliados | JAC Bateas</title>
+    <!-- PDF.js library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif;
+            background: linear-gradient(145deg, #f0f4f8 0%, #e2e8f0 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .app-container {
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
+        /* Tarjeta principal */
+        .card-modern {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(0px);
+            border-radius: 40px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            overflow: hidden;
+            transition: transform 0.2s ease;
+        }
+
+        /* Encabezado con detalles de la junta */
+        .hero-section {
+            background: linear-gradient(135deg, #3b82f6 0%, #3b82f6 100%);
+            padding: 28px 24px;
+            text-align: center;
+            color: rgb(0, 0, 0);
+        }
+
+        .hero-section h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+            margin-bottom: 6px;
+        }
+
+        .hero-section .subtitle {
+            font-size: 0.85rem;
+            opacity: 0.85;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 6px;
+        }
+
+        .hero-section .date-badge {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 4px 12px;
+            border-radius: 60px;
+            font-size: 0.7rem;
+            font-weight: 500;
+        }
+
+        /* SECCIÓN VERDE DE ESTADO */
+        .status-green {
+            background: linear-gradient(135deg, #fde047 0%, #fde047 100%);
+            padding: 16px 24px;
+            color: rgb(0, 0, 0);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .status-message {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .status-message i {
+            font-size: 1.2rem;
+        }
+
+        .total-badge {
+            background: rgba(255, 255, 255, 0.25);
+            padding: 6px 16px;
+            border-radius: 60px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            backdrop-filter: blur(4px);
+        }
+
+        /* Filtro único */
+        .search-area {
+            padding: 20px 24px;
+            background: #ffffff;
+        }
+
+        .search-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .search-input-group {
+            display: flex;
+            align-items: center;
+            background: #f1f5f9;
+            border-radius: 80px;
+            padding: 6px 6px 6px 20px;
+            border: 1px solid #e2e8f0;
+            transition: all 0.2s;
+        }
+
+        .search-input-group:focus-within {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+            background: white;
+        }
+
+        .search-input-group i {
+            color: #94a3b8;
+            font-size: 1.1rem;
+        }
+
+        .search-input-group input {
+            flex: 1;
+            border: none;
+            background: transparent;
+            padding: 14px 12px;
+            font-size: 1rem;
+            outline: none;
+            font-weight: 500;
+            color: #0f172a;
+        }
+
+        .search-input-group input::placeholder {
+            color: #94a3b8;
+            font-weight: normal;
+        }
+
+        .search-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn-search {
+            background: #3b82f6;
+            border: none;
+            padding: 12px;
+            border-radius: 50px;
+            color: white;
+            font-weight: 600;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-search:hover {
+            background: #2563eb;
+        }
+
+        .btn-clear {
+            background: #eef2ff;
+            color: #3b82f6;
+            border: none;
+            padding: 12px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            transition: all 0.2s;
+        }
+
+        .btn-clear:hover {
+            background: #e0e7ff;
+        }
+
+        /* Contador de resultados */
+        .result-stats {
+            padding: 12px 24px;
+            background: #f8fafc;
+            border-top: 1px solid #eef2f6;
+            border-bottom: 1px solid #eef2f6;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #334155;
+        }
+
+        .badge-modern {
+            background: #3b82f6;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 40px;
+            font-size: 0.75rem;
+        }
+
+        /* Lista de resultados (scroll) */
+        .results-list {
+            max-height: 55vh;
+            overflow-y: auto;
+            padding: 8px 0;
+        }
+
+        .result-card {
+            margin: 12px 20px;
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 16px 18px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+            border: 1px solid #edf2f7;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .result-card:hover {
+            background: #fefce8;
+            border-color: #fde047;
+            transform: scale(1.01);
+        }
+
+        .result-name {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .result-cedula {
+            font-family: monospace;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #1e40af;
+            background: #eff6ff;
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 40px;
+            letter-spacing: 0.3px;
+        }
+
+        .result-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 12px;
+            font-size: 0.7rem;
+            color: #5b6e8c;
+        }
+
+        .highlight {
+            background: #fde047;
+            color: #1e293b;
+            font-weight: bold;
+            padding: 0 2px;
+            border-radius: 6px;
+        }
+
+        .empty-results {
+            text-align: center;
+            padding: 48px 24px;
+            color: #6c86a3;
+        }
+
+        /* MODAL HERMOSO */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.65);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            visibility: hidden;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .modal-container {
+            background: white;
+            width: 90%;
+            max-width: 480px;
+            border-radius: 48px;
+            overflow: hidden;
+            box-shadow: 0 30px 50px rgba(0, 0, 0, 0.3);
+            transform: scale(0.95);
+            transition: transform 0.2s ease;
+        }
+
+        .modal-overlay.active .modal-container {
+            transform: scale(1);
+        }
+
+        .modal-header {
+            background: #0f172a;
+            color: white;
+            padding: 24px 24px 16px;
+            text-align: center;
+        }
+
+        .modal-header i {
+            font-size: 2.2rem;
+            margin-bottom: 8px;
+        }
+
+        .modal-body {
+            padding: 28px 24px;
+        }
+
+        .info-row {
+            margin-bottom: 20px;
+            border-bottom: 1px solid #eef2f8;
+            padding-bottom: 14px;
+        }
+
+        .info-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            font-weight: 600;
+            color: #5b6e8c;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+        }
+
+        .info-value {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #0f172a;
+            word-break: break-word;
+        }
+
+        .modal-footer {
+            padding: 16px 24px 24px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .btn-close-modal {
+            background: #f1f5f9;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 60px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1rem;
+            transition: background 0.2s;
+        }
+
+        .btn-close-modal:hover {
+            background: #e2e8f0;
+        }
+
+        /* scroll personalizado */
+        .results-list::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        .results-list::-webkit-scrollbar-track {
+            background: #eef2f8;
+            border-radius: 10px;
+        }
+
+        .results-list::-webkit-scrollbar-thumb {
+            background: #94a3b8;
+            border-radius: 10px;
+        }
+
+        @media (max-width: 500px) {
+            .hero-section h1 {
+                font-size: 1.4rem;
+            }
+
+            .info-value {
+                font-size: 1.1rem;
+            }
+
+            .result-name {
+                font-size: 1rem;
+            }
+
+            .status-green {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="app-container">
+        <div class="card-modern">
+            <div class="hero-section">
+                <h1>🏛️ JAC Bateas S3</h1>
+                <div class="subtitle">
+                    <span>Puerto Gaitán, Meta</span>
+                    <span class="date-badge"><i class="far fa-calendar-alt"></i> 26 Abril 2026</span>
+                </div>
+                <div class="subtitle" style="font-size:0.7rem; margin-top:6px;">
+                    <i class="fas fa-user-check"></i> Afiliados habilitados para votar
+                </div>
+            </div>
+
+            <!-- SECCIÓN VERDE: carga automática + contador de afiliados -->
+            <div class="status-green" id="statusSection">
+                <div class="status-message">
+                    <i class="fas fa-sync-alt fa-spin" id="loadingIcon"></i>
+                    <span id="statusText">Cargando lista de afiliados...</span>
+                </div>
+                <div class="total-badge" id="totalAfiliadosBadge">
+                    <i class="fas fa-users"></i> <span id="totalCount">0</span> registros
+                </div>
+            </div>
+
+            <!-- Filtro (se muestra cuando los datos están listos) -->
+            <div class="search-area" id="searchSection" style="display: none;">
+                <div class="search-wrapper">
+                    <div class="search-input-group">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="searchInput" placeholder="Buscar por NOMBRE o CÉDULA ...">
+                    </div>
+                    <div class="search-actions">
+                        <button id="buscarBtn" class="btn-search"><i class="fas fa-filter"></i> Buscar</button>
+                        <button id="limpiarBtn" class="btn-clear"><i class="fas fa-eraser"></i> Limpiar</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="result-stats" id="resultStats" style="display: none;">
+                <span><i class="fas fa-users"></i> Coincidencias</span>
+                <span class="badge-modern" id="contadorResultados">0</span>
+            </div>
+
+            <div class="results-list" id="resultsList">
+                <div class="empty-results">
+                    <i class="fas fa-spinner fa-pulse"
+                        style="font-size: 2rem; margin-bottom: 12px; display: block;"></i>
+                    <p>Cargando documento...</p>
+                    <small>Extrayendo información del PDF</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL DE DETALLE -->
+    <div id="detailModal" class="modal-overlay">
+        <div class="modal-container">
+            <div class="modal-header">
+                <i class="fas fa-id-card"></i>
+                <h3 style="margin-top: 6px;">Información del Afiliado</h3>
+            </div>
+            <div class="modal-body" id="modalBodyContent">
+                <!-- Contenido dinámico -->
+            </div>
+            <div class="modal-footer">
+                <button id="closeModalBtn" class="btn-close-modal"><i class="fas fa-times-circle"></i> Cerrar</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Configuración de PDF.js worker
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
+
+        let listaAfiliados = [];
+        let filteredAfiliados = [];
+
+        // Elementos del DOM
+        const statusTextSpan = document.getElementById('statusText');
+        const loadingIcon = document.getElementById('loadingIcon');
+        const totalCountSpan = document.getElementById('totalCount');
+        const searchSection = document.getElementById('searchSection');
+        const resultStatsDiv = document.getElementById('resultStats');
+        const resultsContainer = document.getElementById('resultsList');
+        const searchInput = document.getElementById('searchInput');
+        const buscarBtn = document.getElementById('buscarBtn');
+        const limpiarBtn = document.getElementById('limpiarBtn');
+        const contadorSpan = document.getElementById('contadorResultados');
+
+        // Modal
+        const modal = document.getElementById('detailModal');
+        const modalBody = document.getElementById('modalBodyContent');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+
+        // Helper: limpiar puntos y espacios de cédula
+        function limpiarCedula(raw) {
+            if (!raw) return '';
+            return raw.toString().replace(/\./g, '').replace(/\s/g, '');
+        }
+
+        // Formatear cédula con puntos cada 3 dígitos
+        function formatearCedulaConPuntos(numero) {
+            if (!numero) return '';
+            let numStr = numero.toString().replace(/\./g, '');
+            return numStr.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+        }
+
+        // Extraer datos del PDF (adaptado al formato del documento)
+        async function extraerAfiliadosDesdePDF(url) {
+            try {
+                const loadingTask = pdfjsLib.getDocument(url);
+                const pdf = await loadingTask.promise;
+                let textoCompleto = '';
+
+                for (let i = 1; i <= pdf.numPages; i++) {
+                    const page = await pdf.getPage(i);
+                    const content = await page.getTextContent();
+                    const strings = content.items.map(item => item.str);
+                    textoCompleto += strings.join(' ') + '\n';
+                }
+
+                // Expresión regular robusta: Número + Nombre + Cédula (con/sin puntos)
+                const regex = /(\d+)\s+([A-ZÁÉÍÓÚÑ][A-ZÁÉÍÓÚÑ\s]+?)\s+(\d{1,3}(?:\.\d{3})*(?:\.\d+)?|\d+)/g;
+                let match;
+                const afiliadosMap = new Map();
+
+                while ((match = regex.exec(textoCompleto)) !== null) {
+                    let numero = parseInt(match[1]);
+                    let nombre = match[2].trim().replace(/\s+/g, ' ');
+                    let cedulaConPuntos = match[3].trim();
+                    let cedulaLimpia = limpiarCedula(cedulaConPuntos);
+
+                    if (nombre.length > 3 && cedulaLimpia.length >= 6 && !nombre.includes('N°') && !nombre.includes('NOMBRE')) {
+                        const key = `${nombre}|${cedulaLimpia}`;
+                        if (!afiliadosMap.has(key)) {
+                            afiliadosMap.set(key, {
+                                numero: numero,
+                                nombre: nombre,
+                                cedulaRaw: cedulaLimpia,
+                                cedulaFormateada: formatearCedulaConPuntos(cedulaLimpia)
+                            });
+                        }
+                    }
+                }
+
+                let afiliadosArray = Array.from(afiliadosMap.values());
+                afiliadosArray.sort((a, b) => a.numero - b.numero);
+                return afiliadosArray;
+            } catch (error) {
+                console.error("Error al parsear PDF:", error);
+                throw new Error("No se pudo procesar el PDF. Verifica el enlace.");
+            }
+        }
+
+        // Cargar automáticamente desde el enlace proporcionado
+        async function cargarPDFAutomatico() {
+            const pdfUrl = "https://raw.githubusercontent.com/carlos2601/juntadeaccioncomunalbarriobateaspuertogaitanmetalilianalondo-ogallego1010101010101000111010001010010/refs/heads/main/afiliados.pdf";
+
+            // Mostrar estado de carga
+            statusTextSpan.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> Extrayendo datos del PDF...';
+            loadingIcon.style.display = 'inline-block';
+            resultsContainer.innerHTML = `<div class="empty-results"><i class="fas fa-spinner fa-pulse"></i> Procesando documento, por favor espera...</div>`;
+
+            try {
+                const afiliados = await extraerAfiliadosDesdePDF(pdfUrl);
+                listaAfiliados = afiliados;
+                filteredAfiliados = [...listaAfiliados];
+
+                // Actualizar sección verde (éxito)
+                statusTextSpan.innerHTML = '<i class="fas fa-check-circle"></i> Lista cargada correctamente';
+                loadingIcon.style.display = 'none';
+                totalCountSpan.innerText = listaAfiliados.length;
+
+                // Mostrar filtros y resultados
+                searchSection.style.display = 'block';
+                resultStatsDiv.style.display = 'flex';
+                renderizarLista(filteredAfiliados);
+
+            } catch (err) {
+                console.error(err);
+                statusTextSpan.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Error al cargar el PDF';
+                loadingIcon.style.display = 'none';
+                totalCountSpan.innerText = '0';
+                resultsContainer.innerHTML = `<div class="empty-results"><i class="fas fa-bug"></i> No se pudo leer el PDF.<br><small>${err.message}</small></div>`;
+            }
+        }
+
+        // Renderizar tarjetas (CLICK abre modal)
+        function renderizarLista(afiliados) {
+            if (!afiliados.length) {
+                resultsContainer.innerHTML = `<div class="empty-results"><i class="fas fa-user-slash"></i> No se encontraron afiliados<br><small>Intenta con otro nombre o cédula</small></div>`;
+                contadorSpan.innerText = '0';
+                return;
+            }
+
+            const searchTerm = searchInput.value.trim().toLowerCase();
+            const html = afiliados.map(afil => {
+                let nombreResaltado = afil.nombre;
+                let cedulaResaltada = afil.cedulaFormateada;
+                if (searchTerm) {
+                    const regexNombre = new RegExp(`(${searchTerm.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+                    nombreResaltado = afil.nombre.replace(regexNombre, '<mark class="highlight">$1</mark>');
+                    const regexCed = new RegExp(`(${searchTerm.replace(/\./g, '\\.')})`, 'gi');
+                    cedulaResaltada = afil.cedulaFormateada.replace(regexCed, '<mark class="highlight">$1</mark>');
+                }
+
+                return `
+                <div class="result-card" data-numero="${afil.numero}" data-nombre="${afil.nombre.replace(/"/g, '&quot;')}" data-cedula="${afil.cedulaRaw}" data-cedulaform="${afil.cedulaFormateada}">
+                    <div class="result-name">
+                        <i class="fas fa-user-circle" style="color:#3b82f6;"></i> ${nombreResaltado}
+                    </div>
+                    <div class="result-cedula">
+                        <i class="fas fa-id-card"></i> ${cedulaResaltada}
+                    </div>
+                    <div class="result-meta">
+                        <span><i class="fas fa-hashtag"></i> N° ${afil.numero}</span>
+                        <span><i class="fas fa-calendar-day"></i> Documento habilitado</span>
+                    </div>
+                </div>
+            `;
+            }).join('');
+
+            resultsContainer.innerHTML = html;
+            contadorSpan.innerText = afiliados.length;
+
+            // Asignar evento click a cada tarjeta (modal)
+            document.querySelectorAll('.result-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    const numero = card.getAttribute('data-numero');
+                    const nombreCompleto = card.getAttribute('data-nombre');
+                    const cedulaRaw = card.getAttribute('data-cedula');
+                    const cedulaForm = card.getAttribute('data-cedulaform');
+                    mostrarModal({ numero, nombre: nombreCompleto, cedulaRaw, cedulaFormateada: cedulaForm });
+                });
+            });
+        }
+
+        // Mostrar modal con estilo y buena letra
+        function mostrarModal(afiliado) {
+            modalBody.innerHTML = `
+            <div class="info-row">
+                <div class="info-label"><i class="fas fa-user"></i> NOMBRE COMPLETO</div>
+                <div class="info-value">${afiliado.nombre}</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label"><i class="fas fa-id-card"></i> CÉDULA</div>
+                <div class="info-value">${afiliado.cedulaFormateada}</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label"><i class="fas fa-hashtag"></i> NÚMERO DE ORDEN</div>
+                <div class="info-value">${afiliado.numero}</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label"><i class="fas fa-check-circle"></i> ESTADO</div>
+                <div class="info-value" style="color:#2b9348;">Habilitado para votar</div>
+            </div>
+        `;
+            modal.classList.add('active');
+        }
+
+        function cerrarModal() {
+            modal.classList.remove('active');
+        }
+
+        // Filtrar por ambos: nombre o cédula
+        function aplicarFiltro() {
+            const term = searchInput.value.trim().toLowerCase();
+            if (!term) {
+                filteredAfiliados = [...listaAfiliados];
+            } else {
+                filteredAfiliados = listaAfiliados.filter(afil => {
+                    const nombreCoincide = afil.nombre.toLowerCase().includes(term);
+                    const cedulaCoincide = afil.cedulaRaw.includes(term.replace(/\./g, '')) || afil.cedulaFormateada.toLowerCase().includes(term);
+                    return nombreCoincide || cedulaCoincide;
+                });
+            }
+            renderizarLista(filteredAfiliados);
+        }
+
+        function limpiarFiltro() {
+            searchInput.value = '';
+            filteredAfiliados = [...listaAfiliados];
+            renderizarLista(filteredAfiliados);
+        }
+
+        // Eventos
+        buscarBtn.addEventListener('click', aplicarFiltro);
+        limpiarBtn.addEventListener('click', limpiarFiltro);
+        searchInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') aplicarFiltro();
+        });
+        closeModalBtn.addEventListener('click', cerrarModal);
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) cerrarModal();
+        });
+
+        // Iniciar carga automática
+        cargarPDFAutomatico();
+    </script>
+</body>
+
+</html>
