@@ -7255,7 +7255,7 @@
     "nombre": "YESID EDUARDO PRIETO BAQUERO",
     "cedula": "86042139",
     "fecha": "30/01/2026",
-    "direccion": "MANZANA 64 ACASA 16",
+    "direccion": "MANZANA 64 A CASA 16",
     "celular": "3166192495",
     "pagos": [],
     "firma": ""
@@ -10032,7 +10032,7 @@
     "folio": 42,
     "renglon": 36,
     "nombre": "",
-    "cedula": "",
+    "cedula": "1192806706",
     "fecha": "28/03/2026",
     "direccion": "MANZANA  CASA ",
     "celular": "",
@@ -10101,9 +10101,7 @@
     "fecha": "28/03/2026",
     "direccion": "MANZANA 64 A CASA 16",
     "celular": "3202260279",
-    "pagos": [
-      "27/4/2026, 20.000"
-    ],
+    "pagos": [],
     "firma": ""
   },
   {
