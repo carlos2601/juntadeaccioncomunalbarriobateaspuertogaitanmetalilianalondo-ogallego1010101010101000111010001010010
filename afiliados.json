@@ -373,7 +373,9 @@
     "fecha": "21/11/2024",
     "direccion": "BATEAS 3",
     "celular": "",
-    "pagos": [],
+    "pagos": [
+      "26/4/2026, 20.000"
+    ],
     "firma": ""
   },
   {
