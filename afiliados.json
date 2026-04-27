@@ -6686,7 +6686,9 @@
     "fecha": "28/01/2026",
     "direccion": "MANZANA 73 CASA 17",
     "celular": "3142719000",
-    "pagos": [],
+    "pagos": [
+      "26/4/2026, 20.000"
+    ],
     "firma": ""
   },
   {
