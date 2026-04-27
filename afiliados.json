@@ -10049,7 +10049,9 @@
     "fecha": "28/03/2026",
     "direccion": "MANZANA 59 CASA 27",
     "celular": "3188403183",
-    "pagos": [],
+    "pagos": [
+      "26/4/2026, 20.000"
+    ],
     "firma": ""
   },
   {
