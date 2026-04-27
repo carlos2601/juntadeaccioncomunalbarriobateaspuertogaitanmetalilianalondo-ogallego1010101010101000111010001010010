@@ -373,9 +373,7 @@
     "fecha": "21/11/2024",
     "direccion": "BATEAS 3",
     "celular": "",
-    "pagos": [
-      "26/4/2026, 20.000"
-    ],
+    "pagos": [],
     "firma": ""
   },
   {
@@ -3788,9 +3786,7 @@
     "fecha": "27/12/2025",
     "direccion": "MANZANA 59 CASA 27",
     "celular": "3178608318",
-    "pagos": [
-      "26/4/2026, 20.000"
-    ],
+    "pagos": [],
     "firma": ""
   },
   {
@@ -6365,7 +6361,7 @@
     "registro": 481,
     "folio": 28,
     "renglon": 13,
-    "nombre": "AUDREY YULIENY RODRIGUEZ",
+    "nombre": "AUDREY JULIEINY RODRIGUEZ GARCIA",
     "cedula": "1127722727",
     "fecha": "26/01/2026",
     "direccion": "MANZANA 60 CASA 9",
@@ -6690,9 +6686,7 @@
     "fecha": "28/01/2026",
     "direccion": "MANZANA 73 CASA 17",
     "celular": "3142719000",
-    "pagos": [
-      "26/4/2026, 20.000"
-    ],
+    "pagos": [],
     "firma": ""
   },
   {
@@ -10055,9 +10049,7 @@
     "fecha": "28/03/2026",
     "direccion": "MANZANA 59 CASA 27",
     "celular": "3188403183",
-    "pagos": [
-      "26/4/2026, 20.000"
-    ],
+    "pagos": [],
     "firma": ""
   },
   {
