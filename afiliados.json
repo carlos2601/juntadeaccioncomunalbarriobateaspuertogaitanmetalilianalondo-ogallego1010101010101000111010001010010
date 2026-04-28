@@ -7543,7 +7543,9 @@
     "fecha": "30/01/2026",
     "direccion": "MANZANA 68 CASA 11",
     "celular": "3108011885",
-    "pagos": [],
+    "pagos": [
+      "28/4/2026, 20.000"
+    ],
     "firma": ""
   },
   {
