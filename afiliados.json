@@ -5024,7 +5024,9 @@
     "fecha": "17/01/2026",
     "direccion": "MANZANA 61 CASA 20",
     "celular": "3112603534",
-    "pagos": [],
+    "pagos": [
+      "28/4/2026, 20.000"
+    ],
     "firma": ""
   },
   {
