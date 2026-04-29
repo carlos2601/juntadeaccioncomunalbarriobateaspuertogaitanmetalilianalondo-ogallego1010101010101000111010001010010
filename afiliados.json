@@ -6001,7 +6001,9 @@
     "fecha": "26/01/2026",
     "direccion": "MANZANA 72  CASA 24",
     "celular": "3144797486",
-    "pagos": [],
+    "pagos": [
+      "29/4/2026, 20.000"
+    ],
     "firma": ""
   },
   {
