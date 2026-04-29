@@ -5948,8 +5948,7 @@
     "direccion": "MANZANA 72 CASA 24",
     "celular": "3227868787",
     "pagos": [
-      "31/1/2026, 20.000",
-      "29/4/2026, 20.000"
+      "31/1/2026, 20.000"
     ],
     "firma": ""
   },
@@ -6000,7 +5999,7 @@
     "nombre": "OSCAR ANDRES ORDOÑEZ MOSQUERA",
     "cedula": "1114881286",
     "fecha": "26/01/2026",
-    "direccion": "MANZANA 60  CASA 25",
+    "direccion": "MANZANA 72  CASA 24",
     "celular": "3144797486",
     "pagos": [],
     "firma": ""
