@@ -3047,7 +3047,9 @@
     "fecha": "15/12/2025",
     "direccion": "MANZANA 81 CASA 11",
     "celular": "3156784643",
-    "pagos": [],
+    "pagos": [
+      "8/5/2026, 20.000"
+    ],
     "firma": ""
   },
   {
