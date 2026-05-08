@@ -3801,7 +3801,9 @@
     "fecha": "27/12/2025",
     "direccion": "MANZANA 78 CASA 06",
     "celular": "3235213722",
-    "pagos": [],
+    "pagos": [
+      "8/5/2026, 20.000"
+    ],
     "firma": ""
   },
   {
