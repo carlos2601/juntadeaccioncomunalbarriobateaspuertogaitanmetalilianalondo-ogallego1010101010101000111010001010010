@@ -5128,7 +5128,9 @@
     "fecha": "17/01/2026",
     "direccion": "MANZANA 74 CASA 07",
     "celular": "3205781425",
-    "pagos": [],
+    "pagos": [
+      "8/5/2026, 20.000"
+    ],
     "firma": ""
   },
   {
