@@ -9849,7 +9849,9 @@
     "fecha": "28/03/2026",
     "direccion": "MANZANA 59 CASA 24",
     "celular": "3212868374",
-    "pagos": [],
+    "pagos": [
+      "8/5/2026, 20.000"
+    ],
     "firma": ""
   },
   {
