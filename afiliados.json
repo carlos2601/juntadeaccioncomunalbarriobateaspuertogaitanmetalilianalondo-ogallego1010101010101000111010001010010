@@ -9096,7 +9096,9 @@
     "fecha": "21/02/2026",
     "direccion": "MANZANA 71 CASA 1",
     "celular": "3136159496",
-    "pagos": [],
+    "pagos": [
+      "8/5/2026, 20.000"
+    ],
     "firma": ""
   },
   {
