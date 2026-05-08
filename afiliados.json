@@ -9626,7 +9626,9 @@
     "fecha": "21/03/2026",
     "direccion": "MANZANA 59 CASA 28",
     "celular": "3154371011",
-    "pagos": [],
+    "pagos": [
+      "8/5/2026, 20.000"
+    ],
     "firma": ""
   },
   {
