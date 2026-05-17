@@ -6376,7 +6376,9 @@
     "fecha": "26/01/2026",
     "direccion": "MANZANA 60 CASA 09",
     "celular": "3128159724",
-    "pagos": [],
+    "pagos": [
+      "17/5/2026, 20.000"
+    ],
     "firma": ""
   },
   {
