@@ -10282,7 +10282,9 @@
     "fecha": "28/03/2026",
     "direccion": "MANZANA 58 CASA 18",
     "celular": "",
-    "pagos": [],
+    "pagos": [
+      "17/5/2026, 20.000"
+    ],
     "firma": ""
   },
   {
