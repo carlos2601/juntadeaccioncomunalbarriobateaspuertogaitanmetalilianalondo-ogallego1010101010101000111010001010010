@@ -4912,7 +4912,9 @@
     "fecha": "27/12/2025",
     "direccion": "MANZANA 69 CASA 14",
     "celular": "3219810441",
-    "pagos": [],
+    "pagos": [
+      "17/5/2026, 20.000"
+    ],
     "firma": ""
   },
   {
