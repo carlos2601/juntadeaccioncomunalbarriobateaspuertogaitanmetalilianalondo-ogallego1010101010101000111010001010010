@@ -10301,7 +10301,9 @@
     "fecha": "28/03/2026",
     "direccion": "MANZANA 71 CASA 15",
     "celular": "",
-    "pagos": [],
+    "pagos": [
+      "17/5/2026, 20.000"
+    ],
     "firma": ""
   },
   {
