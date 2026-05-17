@@ -2980,7 +2980,9 @@
     "fecha": "15/12/2025",
     "direccion": "MANZANA 61 CASA 22",
     "celular": "3138535907",
-    "pagos": [],
+    "pagos": [
+      "17/5/2026, 20.000"
+    ],
     "firma": ""
   },
   {
