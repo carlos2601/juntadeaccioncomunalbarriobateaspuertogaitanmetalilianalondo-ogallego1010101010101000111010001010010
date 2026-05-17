@@ -10256,7 +10256,9 @@
     "fecha": "28/03/2026",
     "direccion": "MANZANA 72 CASA 17",
     "celular": "",
-    "pagos": [],
+    "pagos": [
+      "17/5/2026, 20.000"
+    ],
     "firma": ""
   },
   {
