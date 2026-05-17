@@ -2322,7 +2322,9 @@
     "fecha": "21/11/2024",
     "direccion": "MANZANA 71 CASA 16",
     "celular": "3105755543",
-    "pagos": [],
+    "pagos": [
+      "17/5/2026, 20.000"
+    ],
     "firma": ""
   },
   {
