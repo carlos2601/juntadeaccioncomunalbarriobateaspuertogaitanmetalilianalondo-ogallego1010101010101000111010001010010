@@ -607,7 +607,9 @@
     "fecha": "21/11/2024",
     "direccion": "MANZANA 77 CASA 02",
     "celular": "3122070588",
-    "pagos": [],
+    "pagos": [
+      "19/5/2026, 20.000"
+    ],
     "firma": ""
   },
   {
