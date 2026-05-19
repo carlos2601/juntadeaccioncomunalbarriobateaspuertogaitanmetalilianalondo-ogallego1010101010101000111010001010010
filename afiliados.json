@@ -4529,7 +4529,9 @@
     "fecha": "27/12/2025",
     "direccion": "MANZANA 78 CASA 06",
     "celular": "3213921430",
-    "pagos": [],
+    "pagos": [
+      "19/5/2026, 20.000"
+    ],
     "firma": ""
   },
   {
