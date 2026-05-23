@@ -9420,7 +9420,9 @@
     "fecha": "14/03/2026",
     "direccion": "MANZANA 60 CASA 18",
     "celular": "3123270336",
-    "pagos": [],
+    "pagos": [
+      "23/5/2026, 20.000"
+    ],
     "firma": ""
   },
   {
