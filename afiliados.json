@@ -4149,7 +4149,9 @@
     "fecha": "27/12/2025",
     "direccion": "MANZANA 80 CASA 15",
     "celular": "3215510507",
-    "pagos": [],
+    "pagos": [
+      "23/5/2026, 20.000"
+    ],
     "firma": ""
   },
   {
