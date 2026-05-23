@@ -9109,7 +9109,9 @@
     "fecha": "21/02/2026",
     "direccion": "MANZANA 71 CASA 1",
     "celular": "3123126463",
-    "pagos": [],
+    "pagos": [
+      "23/5/2026, 20.000"
+    ],
     "firma": ""
   },
   {
