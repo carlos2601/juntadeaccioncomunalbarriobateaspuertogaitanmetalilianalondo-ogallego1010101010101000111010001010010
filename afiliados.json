@@ -10466,7 +10466,9 @@
     "fecha": "23/05/2026",
     "direccion": "MANZANA 75 CASA 11",
     "celular": "3132165269",
-    "pagos": [],
+    "pagos": [
+      "23/5/2026, 20.000"
+    ],
     "firma": ""
   },
   {
