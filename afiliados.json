@@ -9104,7 +9104,7 @@
     "registro": 683,
     "folio": 38,
     "renglon": 35,
-    "nombre": "CRISTIAN FABIAN VARGAS",
+    "nombre": "CRISTIAN FABIAN VANEGAS",
     "cedula": "1193221131",
     "fecha": "21/02/2026",
     "direccion": "MANZANA 71 CASA 1",
@@ -10466,9 +10466,7 @@
     "fecha": "23/05/2026",
     "direccion": "MANZANA 75 CASA 11",
     "celular": "3132165269",
-    "pagos": [
-      "23/5/2026, 20.000"
-    ],
+    "pagos": [],
     "firma": ""
   },
   {
