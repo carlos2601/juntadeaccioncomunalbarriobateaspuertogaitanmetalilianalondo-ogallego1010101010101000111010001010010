@@ -1709,9 +1709,7 @@
     "fecha": "21/11/2024",
     "direccion": "MANZANA 70 CASA 19",
     "celular": "3507206174",
-    "pagos": [
-      "23/5/2026, 20.000"
-    ],
+    "pagos": [],
     "firma": ""
   },
   {
@@ -10075,8 +10073,8 @@
     "folio": 42,
     "renglon": 36,
     "nombre": "",
-    "cedula": "86031362",
-    "fecha": "28/03/2026",
+    "cedula": "",
+    "fecha": "",
     "direccion": "MANZANA  CASA ",
     "celular": "",
     "pagos": [],
