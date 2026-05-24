@@ -1395,9 +1395,7 @@
     "fecha": "21/11/2024",
     "direccion": "MANZANA 70 CASA 19",
     "celular": "3505462234",
-    "pagos": [
-      "23/5/2026, 20.000"
-    ],
+    "pagos": [],
     "firma": ""
   },
   {
@@ -10075,7 +10073,7 @@
     "folio": 42,
     "renglon": 36,
     "nombre": "",
-    "cedula": "",
+    "cedula": "86031362",
     "fecha": "28/03/2026",
     "direccion": "MANZANA  CASA ",
     "celular": "",
@@ -10333,10 +10331,10 @@
     "registro": 775,
     "folio": 44,
     "renglon": 19,
-    "nombre": "",
-    "cedula": "",
-    "fecha": "",
-    "direccion": "MANZANA  CASA ",
+    "nombre": "SALOMON MARTINEZ ORDOÑEZ",
+    "cedula": "86031362",
+    "fecha": "28/03/2026",
+    "direccion": "MANZANA 81 CASA 19",
     "celular": "",
     "pagos": [],
     "firma": ""
