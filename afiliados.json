@@ -1709,7 +1709,9 @@
     "fecha": "21/11/2024",
     "direccion": "MANZANA 70 CASA 19",
     "celular": "3507206174",
-    "pagos": [],
+    "pagos": [
+      "23/5/2026, 20.000"
+    ],
     "firma": ""
   },
   {
