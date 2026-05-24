@@ -1826,7 +1826,9 @@
     "fecha": "21/11/2024",
     "direccion": "MANZANA 62 CASA 11",
     "celular": "3177004328",
-    "pagos": [],
+    "pagos": [
+      "23/5/2026, 20.000"
+    ],
     "firma": ""
   },
   {
