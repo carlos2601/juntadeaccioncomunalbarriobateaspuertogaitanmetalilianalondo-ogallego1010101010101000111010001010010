@@ -6176,7 +6176,9 @@
     "fecha": "26/01/2026",
     "direccion": "MANZANA 80 CASA 15",
     "celular": "3134102204",
-    "pagos": [],
+    "pagos": [
+      "24/5/2026, 20.000"
+    ],
     "firma": ""
   },
   {
