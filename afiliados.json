@@ -371,8 +371,8 @@
     "nombre": "WILSON JULIAN CARDONA FORERO",
     "cedula": "1121879981",
     "fecha": "21/11/2024",
-    "direccion": "MANZANA 65 CASA 09 APT 301",
-    "celular": "3213215705",
+    "direccion": "BATEAS 3",
+    "celular": "",
     "pagos": [],
     "firma": ""
   },
@@ -384,8 +384,8 @@
     "nombre": "WILSON CARDONA AVILA",
     "cedula": "17495779",
     "fecha": "21/11/2024",
-    "direccion": "MANZANA 65 CASA 09 APT 301",
-    "celular": "3123331221",
+    "direccion": "BATEAS 3",
+    "celular": "",
     "pagos": [],
     "firma": ""
   },
@@ -7167,7 +7167,9 @@
     "fecha": "29/01/2026",
     "direccion": "MANZANA 64 CASA 21",
     "celular": "3183432216",
-    "pagos": [],
+    "pagos": [
+      "30/5/2026, 20.000"
+    ],
     "firma": ""
   },
   {
