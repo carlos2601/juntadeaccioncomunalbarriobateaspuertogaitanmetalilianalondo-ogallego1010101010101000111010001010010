@@ -4602,7 +4602,9 @@
     "fecha": "27/12/2025",
     "direccion": "MANZANA 68 CASA 16",
     "celular": "3233125953",
-    "pagos": [],
+    "pagos": [
+      "30/5/2026, 20.000"
+    ],
     "firma": ""
   },
   {
