@@ -778,7 +778,9 @@
     "fecha": "21/11/2024",
     "direccion": "MANZANA 66 CASA 08",
     "celular": "3124990718",
-    "pagos": [],
+    "pagos": [
+      "30/5/2026, 20.000"
+    ],
     "firma": ""
   },
   {
