@@ -808,7 +808,9 @@
     "fecha": "21/11/2024",
     "direccion": "MANZANA 66 CASA 10",
     "celular": "3183786515",
-    "pagos": [],
+    "pagos": [
+      "30/5/2026, 20.000"
+    ],
     "firma": ""
   },
   {
