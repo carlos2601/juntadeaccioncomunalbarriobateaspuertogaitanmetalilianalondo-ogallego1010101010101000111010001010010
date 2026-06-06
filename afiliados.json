@@ -4779,7 +4779,9 @@
     "fecha": "27/12/2025",
     "direccion": "MANZANA 63 CASA 23",
     "celular": "3172671293",
-    "pagos": [],
+    "pagos": [
+      "6/6/2026, 20.000"
+    ],
     "firma": ""
   },
   {
