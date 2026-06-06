@@ -10387,7 +10387,9 @@
     "fecha": "28/03/2026",
     "direccion": "MANZANA 73  CASA 19",
     "celular": "",
-    "pagos": [],
+    "pagos": [
+      "6/6/2026, 20.000"
+    ],
     "firma": ""
   },
   {
