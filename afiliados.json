@@ -823,7 +823,9 @@
     "fecha": "21/11/2024",
     "direccion": "MANZANA 77 CASA 10",
     "celular": "3146516701",
-    "pagos": [],
+    "pagos": [
+      "6/6/2026, 20.000"
+    ],
     "firma": ""
   },
   {
