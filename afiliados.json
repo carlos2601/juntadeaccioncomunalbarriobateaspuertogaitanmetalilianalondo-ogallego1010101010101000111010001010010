@@ -4757,7 +4757,9 @@
     "fecha": "27/12/2025",
     "direccion": "MANZANA 60 CASA 22",
     "celular": "3143445738",
-    "pagos": [],
+    "pagos": [
+      "6/6/2026, 20.000"
+    ],
     "firma": ""
   },
   {
