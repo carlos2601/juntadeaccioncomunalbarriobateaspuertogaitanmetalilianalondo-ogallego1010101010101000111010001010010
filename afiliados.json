@@ -3876,7 +3876,9 @@
     "fecha": "27/12/2025",
     "direccion": "MANZANA 81 CASA 10",
     "celular": "3132495060",
-    "pagos": [],
+    "pagos": [
+      "6/6/2026, 20.000"
+    ],
     "firma": ""
   },
   {
