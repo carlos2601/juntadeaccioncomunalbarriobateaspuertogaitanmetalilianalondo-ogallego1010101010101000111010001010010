@@ -10529,5 +10529,83 @@
     "celular": "",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": "788",
+    "registro": 788,
+    "folio": 44,
+    "renglon": 32,
+    "nombre": "",
+    "cedula": "",
+    "fecha": "",
+    "direccion": "MANZANA  CASA ",
+    "celular": "",
+    "pagos": [],
+    "firma": ""
+  },
+  {
+    "id": "789",
+    "registro": 789,
+    "folio": 44,
+    "renglon": 33,
+    "nombre": "",
+    "cedula": "",
+    "fecha": "",
+    "direccion": "MANZANA  CASA ",
+    "celular": "",
+    "pagos": [],
+    "firma": ""
+  },
+  {
+    "id": "790",
+    "registro": 790,
+    "folio": 44,
+    "renglon": 34,
+    "nombre": "",
+    "cedula": "",
+    "fecha": "",
+    "direccion": "MANZANA  CASA ",
+    "celular": "",
+    "pagos": [],
+    "firma": ""
+  },
+  {
+    "id": "791",
+    "registro": 791,
+    "folio": 44,
+    "renglon": 35,
+    "nombre": "",
+    "cedula": "",
+    "fecha": "",
+    "direccion": "MANZANA  CASA ",
+    "celular": "",
+    "pagos": [],
+    "firma": ""
+  },
+  {
+    "id": "792",
+    "registro": 792,
+    "folio": 44,
+    "renglon": 36,
+    "nombre": "JUAN CAMILO TOVAR SILVA",
+    "cedula": "1016074497",
+    "fecha": "30/05/2026",
+    "direccion": "MANZANA 64A  CASA 10",
+    "celular": "",
+    "pagos": [],
+    "firma": ""
+  },
+  {
+    "id": "793",
+    "registro": 793,
+    "folio": 46,
+    "renglon": 1,
+    "nombre": "",
+    "cedula": "",
+    "fecha": "",
+    "direccion": "MANZANA  CASA ",
+    "celular": "",
+    "pagos": [],
+    "firma": ""
   }
 ]
