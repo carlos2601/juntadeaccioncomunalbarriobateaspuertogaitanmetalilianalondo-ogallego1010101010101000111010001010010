@@ -1483,7 +1483,9 @@
     "fecha": "21/11/2024",
     "direccion": "MANZANA 58 CASA 11 B",
     "celular": "3156220519",
-    "pagos": [],
+    "pagos": [
+      "12/6/2026, 20.000"
+    ],
     "firma": ""
   },
   {
