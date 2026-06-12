@@ -598,7 +598,9 @@
     "fecha": "21/11/2024",
     "direccion": "MZ 58 CASA 11",
     "celular": "",
-    "pagos": [],
+    "pagos": [
+      "12/6/2026, 20.000"
+    ],
     "firma": ""
   },
   {
