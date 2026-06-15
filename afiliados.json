@@ -4160,7 +4160,9 @@
     "fecha": "27/12/2025",
     "direccion": "MANZANA 77 CASA 06",
     "celular": "3112888929",
-    "pagos": [],
+    "pagos": [
+      "15/6/2026, 20.000"
+    ],
     "firma": ""
   },
   {
