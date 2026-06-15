@@ -10615,5 +10615,57 @@
     "celular": "",
     "pagos": [],
     "firma": ""
+  },
+  {
+    "id": "794",
+    "registro": 794,
+    "folio": 46,
+    "renglon": 2,
+    "nombre": "",
+    "cedula": "",
+    "fecha": "",
+    "direccion": "MANZANA  CASA ",
+    "celular": "",
+    "pagos": [],
+    "firma": ""
+  },
+  {
+    "id": "795",
+    "registro": 795,
+    "folio": 46,
+    "renglon": 3,
+    "nombre": "",
+    "cedula": "",
+    "fecha": "",
+    "direccion": "MANZANA  CASA ",
+    "celular": "",
+    "pagos": [],
+    "firma": ""
+  },
+  {
+    "id": "796",
+    "registro": 796,
+    "folio": 46,
+    "renglon": 4,
+    "nombre": "",
+    "cedula": "",
+    "fecha": "",
+    "direccion": "MANZANA  CASA ",
+    "celular": "",
+    "pagos": [],
+    "firma": ""
+  },
+  {
+    "id": "797",
+    "registro": 797,
+    "folio": 46,
+    "renglon": 5,
+    "nombre": "SUHAN KATHERIN LANCHEROS",
+    "cedula": "1013626915",
+    "fecha": "30/05/2026",
+    "direccion": "MANZANA 64A CASA 23",
+    "celular": "",
+    "pagos": [],
+    "firma": ""
   }
 ]
