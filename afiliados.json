@@ -4494,7 +4494,9 @@
     "fecha": "27/12/2025",
     "direccion": "MANZANA 58 CASA 15",
     "celular": "3232419662",
-    "pagos": [],
+    "pagos": [
+      "15/6/2026, 20.000"
+    ],
     "firma": ""
   },
   {
