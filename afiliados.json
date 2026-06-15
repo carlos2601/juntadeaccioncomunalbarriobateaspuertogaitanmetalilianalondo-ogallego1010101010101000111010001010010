@@ -1684,7 +1684,9 @@
     "fecha": "21/11/2024",
     "direccion": "MANZANA 78  CASA 02 A",
     "celular": "3133888946",
-    "pagos": [],
+    "pagos": [
+      "15/6/2026, 20.000"
+    ],
     "firma": ""
   },
   {
