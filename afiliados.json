@@ -9048,7 +9048,9 @@
     "fecha": "14/02/2026",
     "direccion": "MANZANA 63  CASA 24",
     "celular": "3228172408",
-    "pagos": [],
+    "pagos": [
+      "19/6/2026, 20.000"
+    ],
     "firma": ""
   },
   {
