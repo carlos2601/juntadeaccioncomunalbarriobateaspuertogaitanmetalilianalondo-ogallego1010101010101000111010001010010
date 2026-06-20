@@ -558,10 +558,32 @@
             </div>
             
             <div class="filtros-panel">
-                <div class="d-flex align-items-center justify-content-center">
+                <div class="d-flex align-items-center justify-content-center" style="flex-wrap: wrap; gap: 4px;">
                     <input type="text" id="filtroTexto" class="filtro-input" 
                            placeholder="Buscar en todos los campos...">
                     <button id="btnLimpiarFiltro" class="btn-filtro" style="background: var(--accent-red);">✕ Limpiar</button>
+                    
+                    <span style="border-left: 1px solid rgba(255,255,255,0.3); margin: 0 4px; height: 20px;"></span>
+
+                    <button id="configGithubBtn" class="btn-filtro" style="background: #6c757d;" title="Configuracion GitHub">⚙️ Config</button>
+
+                    <input type="file" id="jsonFile" class="file-input" accept=".json">
+                    <label for="jsonFile" class="btn-filtro file-label" style="background: var(--accent-blue); cursor: pointer;" title="Cargar archivo JSON local">
+                        📂 Cargar JSON
+                    </label>
+
+                    <button id="loadFromGithubBtn" class="btn-filtro" style="background: #0dcaf0;" title="Cargar datos desde GitHub">
+                        🌐 Cargar GitHub
+                    </button>
+
+                    <button id="saveBtn" class="btn-filtro" style="background: var(--accent-green);" disabled title="Descargar JSON local">
+                        📥 Descargar JSON
+                    </button>
+
+                    <button id="configPdfBtn" class="btn-filtro" style="background: var(--accent-red);" title="Exportar a PDF">
+                        📄 Exportar PDF
+                    </button>
+
                     <span id="filtroInfo" class="ms-2" style="font-size: 12px; opacity: 0.9;"></span>
                 </div>
             </div>
@@ -886,35 +908,12 @@
                 ← Volver al Panel
             </button>
             
-            <!-- Botón de configuración de GitHub -->
-            <button id="configGithubBtn" class="btn-config-github btn-action">
-                ⚙️ 
-            </button>
-            
-            <input type="file" id="jsonFile" class="file-input" accept=".json">
-            <label for="jsonFile" class="btn btn-primary btn-action file-label">
-                📂 Cargar JSON Local
-            </label>
-
             <button id="addRowBtn" class="btn btn-warning btn-action" disabled>
                 ➕ Nuevo Registro
             </button>
             
-            <button id="loadFromGithubBtn" class="btn btn-info btn-action">
-                🌐 Cargar GitHub
-            </button>
-            
             <button id="saveToGithubBtn" class="btn btn-success btn-action" disabled>
                 💾 Guardar en GitHub
-            </button>
-            
-            <button id="saveBtn" class="btn btn-outline-success btn-action" disabled>
-                📥 Descargar JSON
-            </button>
-            
-            
-            <button id="configPdfBtn" class="btn btn-danger btn-action">
-                📄 Exportar PDF
             </button>
         </div>
     </div>
@@ -1145,6 +1144,37 @@
         // ============================================
         // FUNCIÓN PARA GUARDAR EN GITHUB (CORREGIDA)
         // ============================================
+        // ============================================
+        // FUNCIONES DE RESPALDO LOCAL (localStorage)
+        // ============================================
+        function guardarBackupLocal() {
+            if (jsonData && jsonData.length > 0) {
+                localStorage.setItem('afiliaciones_backup', JSON.stringify(jsonData));
+                localStorage.setItem('afiliaciones_backup_fecha', new Date().toISOString());
+            }
+        }
+
+        function cargarBackupLocal() {
+            const backup = localStorage.getItem('afiliaciones_backup');
+            if (backup) {
+                try {
+                    const datos = JSON.parse(backup);
+                    if (Array.isArray(datos) && datos.length > 0) {
+                        return datos;
+                    }
+                } catch (e) {}
+            }
+            return null;
+        }
+
+        function limpiarBackupLocal() {
+            localStorage.removeItem('afiliaciones_backup');
+            localStorage.removeItem('afiliaciones_backup_fecha');
+        }
+
+        // ============================================
+        // FUNCIÓN PARA GUARDAR EN GITHUB
+        // ============================================
         async function guardarEnGitHub() {
             if (jsonData.length === 0) {
                 mostrarMensaje('⚠️ No hay datos para guardar', 'warning');
@@ -1157,6 +1187,9 @@
                 abrirConfigGitHub();
                 return;
             }
+
+            // RESPALDO AUTOMATICO antes de intentar guardar en GitHub
+            guardarBackupLocal();
 
             try {
                 mostrarMensaje('⏳ Guardando en GitHub...', 'info');
@@ -1250,6 +1283,8 @@
                     hasChanges = false;
                     actualizarEstado();
                     mostrarMensaje('✅ Datos guardados exitosamente en GitHub', 'success');
+                    // Guardar exito en localStorage tambien
+                    guardarBackupLocal();
                     console.log('Archivo guardado en GitHub:', result);
                     return true;
                 } else {
@@ -1259,7 +1294,9 @@
                 
             } catch (error) {
                 console.error('Error al guardar en GitHub:', error);
-                mostrarMensaje(`❌ Error al guardar en GitHub: ${error.message}`, 'danger');
+                // RESPALDO AUTOMATICO: guardar en localStorage cuando falla GitHub
+                guardarBackupLocal();
+                mostrarMensaje(`❌ Error al guardar en GitHub. Datos respaldados localmente (${jsonData.length} registros).`, 'danger');
                 return false;
             }
         }
@@ -1273,6 +1310,12 @@
                 mostrarMensaje('⚠️ Configura primero GitHub', 'warning');
                 abrirConfigGitHub();
                 return;
+            }
+
+            // RESPALDO AUTOMATICO antes de sobreescribir con datos de GitHub
+            if (jsonData && jsonData.length > 0) {
+                guardarBackupLocal();
+                console.log('Backup local guardado antes de cargar desde GitHub');
             }
 
             try {
@@ -1385,15 +1428,56 @@
             // Cargar configuración de GitHub desde localStorage
             const configCargada = cargarConfigGitHubDesdeStorage();
             
+            // VERIFICAR RESPALDO LOCAL PRIMERO
+            const backupLocal = cargarBackupLocal();
+            const backupFecha = localStorage.getItem('afiliaciones_backup_fecha');
+            
+            if (backupLocal && backupLocal.length > 0) {
+                let fechaStr = '';
+                if (backupFecha) {
+                    try {
+                        const f = new Date(backupFecha);
+                        fechaStr = ` (${f.toLocaleDateString('es-ES')} ${f.toLocaleTimeString('es-ES')})`;
+                    } catch (e) {}
+                }
+                
+                const restaurar = confirm(
+                    `📁 Se encontro un respaldo local con ${backupLocal.length} registros${fechaStr}.\n\n` +
+                    `¿Deseas restaurar estos datos?\n\n` +
+                    `[OK] = Restaurar respaldo local\n` +
+                    `[Cancelar] = Cargar desde GitHub`
+                );
+                
+                if (restaurar) {
+                    jsonData = backupLocal;
+                    document.getElementById('fileName').textContent = 'Archivo: respaldo local restaurado';
+                    
+                    document.getElementById('saveBtn').disabled = false;
+                    document.getElementById('addRowBtn').disabled = false;
+                    
+                    if (jsonData.length > 0) {
+                        crearTabla();
+                    } else {
+                        crearTabla();
+                    }
+                    
+                    actualizarContador();
+                    actualizarInfoFolio();
+                    actualizarConfigColumnasPDF();
+                    mostrarMensaje(`✅ ${jsonData.length} registros restaurados desde respaldo local`, 'success');
+                    return;
+                }
+            }
+            
+            // Si no hay respaldo o el usuario no quiere restaurar, intentar GitHub
             if (configCargada && GITHUB_CONFIG.owner && GITHUB_CONFIG.repo && GITHUB_CONFIG.token) {
-                // Intentar cargar automáticamente desde GitHub al inicio
                 mostrarMensaje('⏳ Cargando datos desde GitHub...', 'info');
                 
                 setTimeout(() => {
                     cargarDesdeGitHub(GITHUB_JSON_URL);
                 }, 1000);
             } else {
-                mostrarMensaje('⚠️ Configura GitHub para cargar datos automáticamente', 'info');
+                mostrarMensaje('⚠️ Configura GitHub para cargar datos automaticamente', 'info');
             }
         });
 
@@ -1407,6 +1491,12 @@
                 mostrarMensaje('⚠️ Configura primero GitHub', 'warning');
                 abrirConfigGitHub();
                 return;
+            }
+            const totalRegistros = jsonData ? jsonData.length : 0;
+            if (totalRegistros > 0) {
+                if (!confirm('⚠️ ADVERTENCIA: Tienes ' + totalRegistros + ' registros en pantalla.\n\nCargar desde GitHub BORRARA todo lo que no hayas guardado.\n\n¿Deseas continuar?')) {
+                    return;
+                }
             }
             cargarDesdeGitHub(GITHUB_JSON_URL);
         });
@@ -1432,6 +1522,14 @@
         document.getElementById('jsonFile').addEventListener('change', function(e) {
             const file = e.target.files[0];
             if (!file) return;
+
+            const totalRegistros = jsonData ? jsonData.length : 0;
+            if (totalRegistros > 0) {
+                if (!confirm('⚠️ ADVERTENCIA: Tienes ' + totalRegistros + ' registros en pantalla.\n\nCargar un archivo JSON BORRARA todo lo no guardado.\n\n¿Deseas continuar?')) {
+                    e.target.value = '';
+                    return;
+                }
+            }
             
             originalFileName = file.name;
             document.getElementById('fileName').textContent = `Archivo: ${file.name}`;
@@ -2529,6 +2627,8 @@
             if (hasChanges) { 
                 statusEl.textContent = 'Hay cambios sin guardar'; 
                 statusEl.className = 'text-warning fw-bold'; 
+                // RESPALDO AUTOMATICO: guardar en localStorage cada vez que hay cambios
+                guardarBackupLocal();
             } else { 
                 statusEl.textContent = 'Sin cambios'; 
                 statusEl.className = 'text-muted'; 
