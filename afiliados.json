@@ -6037,7 +6037,9 @@
     "fecha": "26/01/2026",
     "direccion": "MANZANA 59 CASA 7",
     "celular": "3162274023",
-    "pagos": [],
+    "pagos": [
+      "19/6/2026, 20.000"
+    ],
     "firma": ""
   },
   {
