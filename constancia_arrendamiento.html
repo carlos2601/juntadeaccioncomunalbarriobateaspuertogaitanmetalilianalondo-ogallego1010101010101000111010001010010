@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Constancia de Arrendamiento - Bateas Sector 3</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --bg-card: rgba(30, 41, 59, 0.8);
+            --bg-glass: rgba(255, 255, 255, 0.05);
+            --border-glass: rgba(255, 255, 255, 0.1);
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --accent-green: #22c55e;
+            --accent-red: #ef4444;
+            --accent-blue: #3b82f6;
+            --accent-purple: #8b5cf6;
+            --accent-yellow: #eab308;
+            --accent-orange: #f97316;
+            --accent-cyan: #06b6d4;
+            --accent-pink: #ec4899;
+            --accent-indigo: #6366f1;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+        }
+
+        body {
+            background: var(--bg-primary);
+            min-height: 100vh;
+            padding: 20px;
+            color: var(--text-primary);
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(ellipse at 20% 20%, rgba(59, 130, 246, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(139, 92, 246, 0.15) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 16px;
+            object-fit: cover;
+            box-shadow: 0 4px 20px rgba(59, 130, 246, 0.3);
+            margin-bottom: 10px;
+        }
+
+        .header h1 {
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .current-date {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+
+        .main-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-glass);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .section-title {
+            color: var(--text-primary);
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-glass);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title i {
+            color: var(--accent-blue);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .input-group label {
+            font-weight: 600;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .input-group input,
+        .input-group select,
+        .input-group textarea {
+            padding: 12px 15px;
+            border: 1px solid var(--border-glass);
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s;
+            background: var(--bg-glass);
+            color: var(--text-primary);
+            font-family: inherit;
+        }
+
+        .input-group input:focus,
+        .input-group select:focus,
+        .input-group textarea:focus {
+            border-color: var(--accent-blue);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .input-group input::placeholder,
+        .input-group textarea::placeholder {
+            color: var(--text-muted);
+        }
+
+        .input-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .tenant-section {
+            background: rgba(59, 130, 246, 0.05);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .tenant-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .tenant-header h4 {
+            color: var(--accent-blue);
+            font-size: 1rem;
+        }
+
+        .btn-remove-tenant {
+            background: var(--accent-red);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 6px 12px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.3s;
+        }
+
+        .btn-remove-tenant:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-add-tenant {
+            background: linear-gradient(135deg, var(--accent-green), #16a34a);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .btn-add-tenant:hover {
+            transform: translateY(-2px);
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-glass);
+        }
+
+        .btn {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-indigo));
+            color: white;
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, var(--accent-green), #16a34a);
+            color: white;
+        }
+
+        .btn-warning {
+            background: linear-gradient(135deg, var(--accent-yellow), var(--accent-orange));
+            color: white;
+        }
+
+        .btn-dark {
+            background: linear-gradient(135deg, #64748b, #475569);
+            color: white;
+        }
+
+        .btn-print {
+            background: linear-gradient(135deg, #6366f1, #4f46e5);
+            color: white;
+        }
+
+        .btn-whatsapp {
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #64748b, #475569);
+            color: white;
+        }
+
+        /* Certificate Styles */
+        #contenido-certificado {
+            font-family: Tahoma, sans-serif;
+            width: 210mm;
+            height: 275mm;
+            margin: 20px auto;
+            padding: 10mm 15mm;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            box-sizing: border-box;
+            position: relative;
+            display: none;
+            overflow: hidden;
+        }
+
+        .certificado-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            opacity: 0.1;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: contain;
+        }
+
+        .certificado-content {
+            position: relative;
+            z-index: 2;
+            color: #000;
+        }
+
+        .encabezado-certificado {
+            text-align: center;
+            font-size: 18px;
+            line-height: 1.4;
+            margin-bottom: 15px;
+            color: #000;
+        }
+
+        .titulo-certificado {
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            line-height: 1.4;
+            margin: 20px 0;
+            color: #000;
+            text-transform: uppercase;
+        }
+
+        .texto-constancia {
+            text-align: justify;
+            font-size: 15px;
+            line-height: 1.5;
+            margin: 12px 0;
+            color: #000;
+        }
+
+        .datos-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+
+        .datos-table td,
+        .datos-table th {
+            padding: 10px 12px;
+            border: 1px solid #333;
+            font-size: 14px;
+            color: #000;
+        }
+
+        .datos-table th {
+            background: #e0e0e0;
+            font-weight: 700;
+        }
+
+        .datos-table .col-no {
+            width: 5%;
+            text-align: center;
+        }
+
+        .datos-table .col-nombre {
+            width: 55%;
+        }
+
+        .datos-table .col-cedula {
+            width: 40%;
+        }
+
+        .firmas-container {
+            margin-top: 40px;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .firma-box {
+            text-align: center;
+            font-size: 14px;
+            color: #000;
+        }
+
+        .firma-line {
+            width: 200px;
+            border-top: 1px solid #000;
+            margin: 35px auto 8px;
+        }
+
+        .restriction-message {
+            background: linear-gradient(135deg, rgb(0 0 0 / 15%), rgba(220, 38, 38, 0.1));
+            border: 1px solid rgb(255 255 255 / 30%);
+            color: #dde1e7;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 20px auto;
+            max-width: 500px;
+            display: none;
+        }
+
+        .restriction-message h3 {
+            color: var(--accent-red);
+            margin-bottom: 10px;
+        }
+
+        /* Loading Screen */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-primary);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s, visibility 0.5s;
+        }
+
+        .loading-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loading-logo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            animation: logoPulse 2s ease-in-out infinite, logoSpin 3s linear infinite;
+            box-shadow: 0 0 30px rgba(102, 126, 234, 0.5);
+            object-fit: cover;
+        }
+
+        .loading-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        @keyframes logoPulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 30px rgba(102, 126, 234, 0.5); }
+            50% { transform: scale(1.1); box-shadow: 0 0 50px rgba(102, 126, 234, 0.8); }
+        }
+
+        @keyframes logoSpin {
+            0% { transform: rotate(0deg) scale(1); }
+            25% { transform: rotate(5deg) scale(1.05); }
+            50% { transform: rotate(0deg) scale(1.1); }
+            75% { transform: rotate(-5deg) scale(1.05); }
+            100% { transform: rotate(0deg) scale(1); }
+        }
+
+        .loading-text {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            margin-top: 20px;
+        }
+
+        .loading-bar {
+            width: 200px;
+            height: 4px;
+            background: var(--bg-secondary);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .loading-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
+            border-radius: 2px;
+            animation: loadingProgress 1.5s ease-in-out infinite;
+        }
+
+        @keyframes loadingProgress {
+            0% { width: 0%; margin-left: 0; }
+            50% { width: 70%; margin-left: 15%; }
+            100% { width: 0%; margin-left: 100%; }
+        }
+
+        /* Loading overlay */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1001;
+            flex-direction: column;
+            color: white;
+            display: none;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: var(--accent-blue);
+            animation: spin 1s ease-in-out infinite;
+            margin-bottom: 15px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* WhatsApp Modal */
+        .whatsapp-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.9);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: var(--bg-card);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-glass);
+            padding: 25px;
+            border-radius: 16px;
+            width: 90%;
+            max-width: 400px;
+            position: relative;
+        }
+
+        .modal-content h3 {
+            color: var(--text-primary);
+            margin-bottom: 15px;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-muted);
+        }
+
+        .close-modal:hover {
+            color: var(--text-primary);
+        }
+
+        @media print {
+            body * {
+                visibility: hidden;
+                margin: 0;
+                padding: 0;
+            }
+
+            #contenido-certificado,
+            #contenido-certificado * {
+                visibility: visible;
+            }
+
+            #contenido-certificado {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 210mm;
+                height: 275mm;
+                margin: 0;
+                padding: 10mm 15mm;
+                box-shadow: none;
+            }
+
+            .certificado-background {
+                opacity: 0.1 !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            @page {
+                margin: 0;
+                size: A4 portrait;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .button-group {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-logo">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Escudo_Acci%C3%B3n_Comunal_Colombia.svg/500px-Escudo_Acci%C3%B3n_Comunal_Colombia.svg.png?_=20230605004557" alt="Logo">
+        </div>
+        <p class="loading-text">Cargando sistema...</p>
+        <div class="loading-bar">
+            <div class="loading-bar-fill"></div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Escudo_Acci%C3%B3n_Comunal_Colombia.svg/500px-Escudo_Acci%C3%B3n_Comunal_Colombia.svg.png?_=20230605004557" alt="Logo" class="logo-img">
+            <h1>CONSTANCIA DE ARRENDAMIENTO</h1>
+            <div class="current-date" id="currentDate"></div>
+        </div>
+
+        <div class="main-card">
+            <!-- Datos del Propietario -->
+            <h3 class="section-title"><i class="fas fa-home"></i> Datos del Propietario</h3>
+            <div class="form-grid">
+                <div class="input-group">
+                    <label>Nombre Completo del Propietario</label>
+                    <input type="text" id="propietarioNombre" placeholder="Ej: Juan Pérez López">
+                </div>
+                <div class="input-group">
+                    <label>Cédula del Propietario</label>
+                    <input type="text" id="propietarioCedula" placeholder="Ej: 1234567890">
+                </div>
+                <div class="input-group">
+                    <label>Teléfono del Propietario</label>
+                    <input type="text" id="propietarioTelefono" placeholder="Ej: 3101234567">
+                </div>
+            </div>
+
+            <!-- Datos de la Vivienda -->
+            <h3 class="section-title"><i class="fas fa-map-marker-alt"></i> Datos de la Vivienda</h3>
+            <div class="form-grid">
+                <div class="input-group" style="grid-column: span 2;">
+                    <label>Dirección Completa de la Vivienda</label>
+                    <input type="text" id="direccionVivienda" placeholder="Ej: Calle 10 #5-20, Barrio Bateas Sector 3">
+                </div>
+                <div class="input-group">
+                    <label>Barrio / Sector</label>
+                    <input type="text" id="barrioVivienda" value="Bateas Sector 3">
+                </div>
+                <div class="input-group">
+                    <label>Municipio / Ciudad</label>
+                    <input type="text" id="municipioVivienda" value="Puerto Gaitán - Meta">
+                </div>
+            </div>
+
+            <!-- Datos del Arrendamiento -->
+            <h3 class="section-title"><i class="fas fa-file-contract"></i> Datos del Arrendamiento</h3>
+            <div class="form-grid">
+                <div class="input-group">
+                    <label>Año de Inicio del Arrendamiento</label>
+                    <input type="number" id="anioInicio" placeholder="Ej: 2020" min="1900" max="2099">
+                </div>
+                <div class="input-group">
+                    <label>Número de Personas que Habitan</label>
+                    <input type="number" id="numPersonas" placeholder="Ej: 4" min="1">
+                </div>
+                <div class="input-group">
+                    <label>Monto de Arriendo Mensual ($)</label>
+                    <input type="text" id="montoArriendo" placeholder="Ej: 800.000">
+                </div>
+            </div>
+
+            <!-- Datos de los Inquilinos -->
+            <h3 class="section-title"><i class="fas fa-users"></i> Datos de los Inquilinos</h3>
+            <div id="inquilinosContainer">
+                <div class="tenant-section" data-tenant="1">
+                    <div class="tenant-header">
+                        <h4><i class="fas fa-user"></i> Inquilino 1</h4>
+                    </div>
+                    <div class="form-grid">
+                        <div class="input-group">
+                            <label>Nombre Completo</label>
+                            <input type="text" class="inquilino-nombre" placeholder="Nombre completo">
+                        </div>
+                        <div class="input-group">
+                            <label>Cédula</label>
+                            <input type="text" class="inquilino-cedula" placeholder="Número de cédula">
+                        </div>
+                        <div class="input-group">
+                            <label>Teléfono</label>
+                            <input type="text" class="inquilino-telefono" placeholder="Teléfono">
+                        </div>
+                        <div class="input-group">
+                            <label>Parentesco / Relación</label>
+                            <input type="text" class="inquilino-parentesco" placeholder="Ej: Hijo, Esposo, etc.">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button type="button" class="btn-add-tenant" onclick="agregarInquilino()">
+                <i class="fas fa-plus"></i> Agregar Inquilino
+            </button>
+
+            <!-- Botones de Acción -->
+            <div class="button-group">
+                <button class="btn btn-primary" onclick="generarConstancia()">
+                    <i class="fas fa-file-alt"></i> Generar Constancia
+                </button>
+                <button class="btn btn-success" onclick="descargarPNG()">
+                    <i class="fas fa-download"></i> Descargar PNG
+                </button>
+                <button class="btn btn-dark" onclick="descargarPDF()">
+                    <i class="fas fa-file-pdf"></i> Descargar PDF
+                </button>
+                <button class="btn btn-print" onclick="imprimirConstancia()">
+                    <i class="fas fa-print"></i> Imprimir
+                </button>
+                <button class="btn btn-whatsapp" onclick="abrirWhatsAppModal()">
+                    <i class="fab fa-whatsapp"></i> Enviar WhatsApp
+                </button>
+                <button class="btn btn-secondary" onclick="window.location.href='panel.html'">
+                    <i class="fas fa-arrow-left"></i> Volver al Panel
+                </button>
+            </div>
+        </div>
+
+        <!-- Certificado (oculto inicialmente) -->
+        <div id="contenido-certificado">
+            <div class="certificado-background" id="certificadoBackground"></div>
+            <div class="certificado-content">
+                <div class="encabezado-certificado">
+                    <strong id="cert-ciudad-fecha"></strong>
+                </div>
+
+                <div class="titulo-certificado">
+                    CONSTANCIA DE ARRENDAMIENTO
+                </div>
+
+                <div class="texto-constancia">
+                    Yo, <strong id="cert-propietario-nombre"></strong>, mayor de edad, identificado(a) con cédula de ciudadanía No. <strong id="cert-propietario-cedula"></strong>, con domicilio en el Municipio de Puerto Gaitán – Meta, en mi calidad de PROPIETARIO(A) del inmueble situado en <strong id="cert-direccion"></strong>, Barrio <strong id="cert-barrio"></strong>, Municipio de Puerto Gaitán – Meta, me permito certificar:
+                </div>
+
+                <div class="texto-constancia">
+                    <strong>PRIMERO:</strong> Que el(la) señor(a) <strong id="cert-inquilino-nombre"></strong>, mayor de edad, identificado(a) con cédula de ciudadanía No. <strong id="cert-inquilino-cedula"></strong>, se encuentra como ARRENDATARIO(A) el referido inmueble desde el año <strong id="cert-anio-inicio"></strong>, esto es, una antigüedad de <strong id="cert-antiguedad"></strong> (<span id="cert-antiguedad-letras"></span>) años.
+                </div>
+
+                <div class="texto-constancia">
+                    <strong>SEGUNDO:</strong> Que en la referida vivienda habitan un total de <strong id="cert-num-personas"></strong> (<span id="cert-num-personas-letras"></span>) personas, incluyendo al(la) arrendatario(a) y su grupo familiar, conforme se detalla en la siguiente relación:
+                </div>
+
+                <table class="datos-table" id="cert-tabla-inquilinos">
+                    <thead>
+                        <tr>
+                            <th class="col-no">No.</th>
+                            <th class="col-nombre">Nombre Completo</th>
+                            <th class="col-cedula">Cédula de Ciudadanía</th>
+                        </tr>
+                    </thead>
+                    <tbody id="cert-inquilinos-body">
+                    </tbody>
+                </table>
+
+                <div class="texto-constancia">
+                    <strong>TERCERO:</strong> Que el monto acordado por concepto de arrendamiento es de <strong>$<span id="cert-monto"></span></strong> mensuales, el cual ha sido cancelado oportunamente.
+                </div>
+
+                <div class="texto-constancia">
+                    <strong>CUARTO:</strong> Que tanto el(la) arrendatario(a) como los habitantes del inmueble se han comportado de manera correcta, pacífica y respetuosa, sin que se haya presentado inconveniente alguno.
+                </div>
+
+                <div class="texto-constancia">
+                    <strong>QUINTO:</strong> Que la presente constancia se expide a solicitud del interesado(a) para los fines legales que estime convenientes.
+                </div>
+
+                <div class="texto-constancia">
+                    Dada en el Municipio de Puerto Gaitán – Meta, a los <strong id="cert-dia"></strong> días del mes de <strong id="cert-mes"></strong> de <strong id="cert-anio"></strong>.
+                </div>
+
+                <div class="firmas-container">
+                    <div class="firma-box">
+                        <div class="firma-line"></div>
+                        <strong id="cert-propietario-firma"></strong><br>
+                        PROPIETARIO(A)<br>
+                        C.C. <span id="cert-propietario-cedula-firma"></span>
+                    </div>
+                    <div class="firma-box">
+                        <div class="firma-line"></div>
+                        <strong id="cert-inquilino-firma"></strong><br>
+                        ARRENDATARIO(A)<br>
+                        C.C. <span id="cert-inquilino-cedula-firma"></span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- WhatsApp Modal -->
+    <div class="whatsapp-modal" id="whatsappModal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="cerrarWhatsAppModal()"><i class="fas fa-times"></i></button>
+            <h3>Enviar por WhatsApp</h3>
+            <div class="input-group" style="margin:20px 0;">
+                <label>Número de teléfono</label>
+                <input type="text" id="whatsappNumber" placeholder="Número registrado">
+            </div>
+            <button class="btn btn-whatsapp" style="width:100%;" onclick="enviarWhatsApp()">
+                <i class="fab fa-whatsapp"></i> Enviar
+            </button>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="spinner"></div>
+        <p id="loadingText">Procesando...</p>
+    </div>
+
+    <script>
+        const { jsPDF } = window.jspdf;
+        let numInquilinos = 1;
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Loading screen
+            setTimeout(() => {
+                document.getElementById('loadingScreen').classList.add('hidden');
+            }, 1500);
+
+            // Set current date
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('currentDate').textContent = new Date().toLocaleDateString('es-ES', options);
+        });
+
+        function agregarInquilino() {
+            numInquilinos++;
+            const container = document.getElementById('inquilinosContainer');
+            const nuevoInquilino = document.createElement('div');
+            nuevoInquilino.className = 'tenant-section';
+            nuevoInquilino.dataset.tenant = numInquilinos;
+            nuevoInquilino.innerHTML = `
+                <div class="tenant-header">
+                    <h4><i class="fas fa-user"></i> Inquilino ${numInquilinos}</h4>
+                    <button type="button" class="btn-remove-tenant" onclick="eliminarInquilino(this)">
+                        <i class="fas fa-trash"></i> Eliminar
+                    </button>
+                </div>
+                <div class="form-grid">
+                    <div class="input-group">
+                        <label>Nombre Completo</label>
+                        <input type="text" class="inquilino-nombre" placeholder="Nombre completo">
+                    </div>
+                    <div class="input-group">
+                        <label>Cédula</label>
+                        <input type="text" class="inquilino-cedula" placeholder="Número de cédula">
+                    </div>
+                    <div class="input-group">
+                        <label>Teléfono</label>
+                        <input type="text" class="inquilino-telefono" placeholder="Teléfono">
+                    </div>
+                    <div class="input-group">
+                        <label>Parentesco / Relación</label>
+                        <input type="text" class="inquilino-parentesco" placeholder="Ej: Hijo, Esposo, etc.">
+                    </div>
+                </div>
+            `;
+            container.appendChild(nuevoInquilino);
+        }
+
+        function eliminarInquilino(btn) {
+            if (numInquilinos > 1) {
+                btn.closest('.tenant-section').remove();
+                numInquilinos--;
+                // Renumerar inquilinos
+                const sections = document.querySelectorAll('.tenant-section');
+                sections.forEach((section, index) => {
+                    section.querySelector('h4').innerHTML = `<i class="fas fa-user"></i> Inquilino ${index + 1}`;
+                });
+            } else {
+                alert('Debe haber al menos un inquilino');
+            }
+        }
+
+        function generarConstancia() {
+            // Validate fields
+            const propietarioNombre = document.getElementById('propietarioNombre').value.trim();
+            const propietarioCedula = document.getElementById('propietarioCedula').value.trim();
+            const direccionVivienda = document.getElementById('direccionVivienda').value.trim();
+            const anioInicio = document.getElementById('anioInicio').value.trim();
+            const numPersonas = document.getElementById('numPersonas').value.trim();
+            const montoArriendo = document.getElementById('montoArriendo').value.trim();
+
+            if (!propietarioNombre || !propietarioCedula || !direccionVivienda || !anioInicio || !numPersonas) {
+                alert('Por favor complete todos los campos obligatorios del propietario y la vivienda');
+                return;
+            }
+
+            // Get tenant data
+            const inquilinos = [];
+            const sections = document.querySelectorAll('.tenant-section');
+            sections.forEach(section => {
+                const nombre = section.querySelector('.inquilino-nombre').value.trim();
+                const cedula = section.querySelector('.inquilino-cedula').value.trim();
+                const parentesco = section.querySelector('.inquilino-parentesco').value.trim();
+                if (nombre && cedula) {
+                    inquilinos.push({ nombre, cedula, parentesco });
+                }
+            });
+
+            if (inquilinos.length === 0) {
+                alert('Debe agregar al menos un inquilino con nombre y cédula');
+                return;
+            }
+
+            // Calculate years
+            const anioActual = new Date().getFullYear();
+            const antiguedad = anioActual - parseInt(anioInicio);
+
+            // Number to letters function
+            function numeroALetras(num) {
+                const unidades = ['', 'UNO', 'DOS', 'TRES', 'CUATRO', 'CINCO', 'SEIS', 'SIETE', 'OCHO', 'NUEVE'];
+                const decenas = ['', 'DIEZ', 'VEINTE', 'TREINTA', 'CUARENTA', 'CINCUENTA', 'SESENTA', 'SETENTA', 'OCHENTA', 'NOVENTA'];
+                
+                if (num <= 10) return unidades[num];
+                if (num < 20) return 'DIECI' + unidades[num - 10];
+                if (num < 30) return num === 20 ? 'VEINTE' : 'VEINTI' + unidades[num - 20];
+                if (num < 100) {
+                    const d = Math.floor(num / 10);
+                    const u = num % 10;
+                    return decenas[d] + (u > 0 ? ' Y ' + unidades[u] : '');
+                }
+                return num.toString();
+            }
+
+            // Fill certificate
+            document.getElementById('cert-propietario-nombre').textContent = propietarioNombre.toUpperCase();
+            document.getElementById('cert-propietario-cedula').textContent = propietarioCedula;
+            document.getElementById('cert-direccion').textContent = direccionVivienda.toUpperCase();
+            document.getElementById('cert-barrio').textContent = document.getElementById('barrioVivienda').value.toUpperCase();
+            document.getElementById('cert-anio-inicio').textContent = anioInicio;
+            document.getElementById('cert-antiguedad').textContent = antiguedad;
+            document.getElementById('cert-antiguedad-letras').textContent = numeroALetras(antiguedad);
+            document.getElementById('cert-num-personas').textContent = numPersonas;
+            document.getElementById('cert-num-personas-letras').textContent = numeroALetras(parseInt(numPersonas));
+            document.getElementById('cert-monto').textContent = montoArriendo || 'No especificado';
+
+            // First tenant
+            document.getElementById('cert-inquilino-nombre').textContent = inquilinos[0].nombre.toUpperCase();
+            document.getElementById('cert-inquilino-cedula').textContent = inquilinos[0].cedula;
+
+            // Fill table
+            const tbody = document.getElementById('cert-inquilinos-body');
+            tbody.innerHTML = '';
+            inquilinos.forEach((inq, index) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td class="col-no">${index + 1}</td>
+                    <td class="col-nombre">${inq.nombre.toUpperCase()}</td>
+                    <td class="col-cedula">${inq.cedula}</td>
+                `;
+                tbody.appendChild(row);
+            });
+
+            // Fill signature
+            document.getElementById('cert-propietario-firma').textContent = propietarioNombre.toUpperCase();
+            document.getElementById('cert-propietario-cedula-firma').textContent = propietarioCedula;
+            document.getElementById('cert-inquilino-firma').textContent = inquilinos[0].nombre.toUpperCase();
+            document.getElementById('cert-inquilino-cedula-firma').textContent = inquilinos[0].cedula;
+
+            // Set date
+            const hoy = new Date();
+            const meses = ['ENERO', 'FEBRERO', 'MARZO', 'ABRIL', 'MAYO', 'JUNIO', 'JULIO', 'AGOSTO', 'SEPTIEMBRE', 'OCTUBRE', 'NOVIEMBRE', 'DICIEMBRE'];
+            const dia = hoy.getDate();
+            const mes = meses[hoy.getMonth()];
+            const anio = hoy.getFullYear();
+            
+            document.getElementById('cert-ciudad-fecha').textContent = `${dia} de ${mes} de ${anio} – Puerto Gaitán, Meta`;
+            document.getElementById('cert-dia').textContent = dia;
+            document.getElementById('cert-mes').textContent = mes;
+            document.getElementById('cert-anio').textContent = anio;
+
+            // Show certificate
+            document.getElementById('contenido-certificado').style.display = 'block';
+            document.getElementById('contenido-certificado').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        async function capturarCertificado() {
+            const elemento = document.getElementById("contenido-certificado");
+            const estadoOriginal = elemento.style.display;
+            elemento.style.display = 'block';
+            await new Promise(resolve => setTimeout(resolve, 500));
+            
+            const canvas = await html2canvas(elemento, {
+                scale: 2,
+                useCORS: true,
+                backgroundColor: '#FFFFFF'
+            });
+            
+            elemento.style.display = estadoOriginal;
+            return canvas;
+        }
+
+        async function descargarPNG() {
+            if (document.getElementById('contenido-certificado').style.display === 'none') {
+                alert('Primero genere la constancia');
+                return;
+            }
+            try {
+                mostrarLoader('Generando PNG...');
+                const canvas = await capturarCertificado();
+                const link = document.createElement('a');
+                link.download = `constancia_arrendamiento.png`;
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+            } catch (e) {
+                alert("Error: " + e.message);
+            } finally {
+                ocultarLoader();
+            }
+        }
+
+        async function descargarPDF() {
+            if (document.getElementById('contenido-certificado').style.display === 'none') {
+                alert('Primero genere la constancia');
+                return;
+            }
+            try {
+                mostrarLoader('Generando PDF...');
+                const canvas = await capturarCertificado();
+                const pdf = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'letter' });
+                const imgData = canvas.toDataURL('image/jpeg', 0.95);
+                pdf.addImage(imgData, 'JPEG', 0, 0, 215.9, 279.4);
+                pdf.save('constancia_arrendamiento.pdf');
+            } catch (e) {
+                alert("Error: " + e.message);
+            } finally {
+                ocultarLoader();
+            }
+        }
+
+        async function imprimirConstancia() {
+            if (document.getElementById('contenido-certificado').style.display === 'none') {
+                alert('Primero genere la constancia');
+                return;
+            }
+            try {
+                mostrarLoader('Preparando...');
+                const canvas = await capturarCertificado();
+                const imgData = canvas.toDataURL('image/png');
+                const printWindow = window.open('', '_blank');
+                printWindow.document.write(`
+                    <html><head><title>Constancia de Arrendamiento</title>
+                    <style>@page { margin: 0; size: A4; } body { margin: 0; } img { width: 210mm; height: 275mm; object-fit: contain; }</style>
+                    </head><body><img src="${imgData}"><script>window.onload=()=>{setTimeout(()=>{window.print();setTimeout(()=>window.close(),500);},500)};<\/script></body></html>
+                `);
+                printWindow.document.close();
+            } catch (e) {
+                alert("Error: " + e.message);
+            }
+            ocultarLoader();
+        }
+
+        function abrirWhatsAppModal() {
+            document.getElementById('whatsappModal').style.display = 'flex';
+        }
+
+        function cerrarWhatsAppModal() {
+            document.getElementById('whatsappModal').style.display = 'none';
+        }
+
+        function enviarWhatsApp() {
+            const numero = document.getElementById('whatsappNumber').value.trim();
+            if (!numero) {
+                alert('Ingrese número de teléfono');
+                return;
+            }
+            const numeroLimpio = numero.replace(/\D/g, '');
+            window.open(`https://wa.me/57${numeroLimpio}?text=Adjunto%20constancia%20de%20arrendamiento%20Bateas%20Sector%203`, '_blank');
+            cerrarWhatsAppModal();
+        }
+
+        function mostrarLoader(texto) {
+            document.getElementById('loadingText').textContent = texto;
+            document.getElementById('loadingOverlay').style.display = 'flex';
+        }
+
+        function ocultarLoader() {
+            document.getElementById('loadingOverlay').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
