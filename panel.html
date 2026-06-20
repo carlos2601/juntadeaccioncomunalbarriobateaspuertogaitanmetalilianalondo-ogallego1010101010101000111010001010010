@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Acceso - Junta de Acción Comunal</title>
+    <title>Panel Principal - Junta de Acción Comunal</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -18,8 +18,17 @@
             --text-muted: #64748b;
             --accent-green: #22c55e;
             --accent-red: #ef4444;
+            --accent-yellow: #eab308;
+            --accent-brown: #a16207;
+            --accent-purple: #a855f7;
             --accent-blue: #3b82f6;
-            --accent-purple: #8b5cf6;
+            --accent-cyan: #06b6d4;
+            --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --gradient-4: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            --shadow-lg: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            --shadow-glow: 0 0 40px rgba(102, 126, 234, 0.3);
         }
 
         * {
@@ -31,12 +40,9 @@
         body {
             font-family: 'Inter', sans-serif;
             background: var(--bg-primary);
+            color: var(--text-primary);
             min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            overflow: hidden;
+            overflow-x: hidden;
         }
 
         body::before {
@@ -47,333 +53,703 @@
             width: 100%;
             height: 100%;
             background: 
-                radial-gradient(ellipse at 20% 20%, rgba(59, 130, 246, 0.15) 0%, transparent 50%),
-                radial-gradient(ellipse at 80% 80%, rgba(139, 92, 246, 0.15) 0%, transparent 50%),
-                radial-gradient(ellipse at 50% 50%, rgba(236, 72, 153, 0.08) 0%, transparent 60%);
+                radial-gradient(circle at 20% 20%, rgba(102, 126, 234, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(118, 75, 162, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(240, 147, 251, 0.1) 0%, transparent 50%);
             pointer-events: none;
             z-index: 0;
         }
 
-        .login-container {
+        /* Loading Screen */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-primary);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        .loading-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loading-logo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            animation: logoPulse 2s ease-in-out infinite, logoSpin 3s linear infinite;
+            box-shadow: 0 0 30px rgba(102, 126, 234, 0.5);
+            object-fit: cover;
+        }
+
+        @keyframes logoPulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 30px rgba(102, 126, 234, 0.5); }
+            50% { transform: scale(1.1); box-shadow: 0 0 50px rgba(102, 126, 234, 0.8); }
+        }
+
+        @keyframes logoSpin {
+            0% { transform: rotate(0deg) scale(1); }
+            25% { transform: rotate(5deg) scale(1.05); }
+            50% { transform: rotate(0deg) scale(1.1); }
+            75% { transform: rotate(-5deg) scale(1.05); }
+            100% { transform: rotate(0deg) scale(1); }
+        }
+
+        .loading-text {
+            margin-top: 30px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: textGlow 2s ease-in-out infinite;
+        }
+
+        @keyframes textGlow {
+            0%, 100% { filter: brightness(1); }
+            50% { filter: brightness(1.3); }
+        }
+
+        .loading-bar {
+            width: 200px;
+            height: 4px;
+            background: var(--bg-secondary);
+            border-radius: 2px;
+            margin-top: 20px;
+            overflow: hidden;
+        }
+
+        .loading-bar::after {
+            content: '';
+            display: block;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 2px;
+            animation: loadingProgress 1.5s ease-in-out infinite;
+        }
+
+        @keyframes loadingProgress {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(300%); }
+        }
+
+        .admin-badge {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 20px;
+            background: var(--bg-glass);
+            border: 1px solid var(--border-glass);
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+
+        .admin-badge i {
+            color: var(--accent-green);
+        }
+
+        .logout-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            border: none;
+            border-radius: 50px;
+            color: white;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4);
+        }
+
+        .logout-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(239, 68, 68, 0.6);
+        }
+
+        /* Main Content */
+        .main-content {
             position: relative;
-            z-index: 1;
+            z-index: 10;
+            padding: 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .welcome-section {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 25px;
+            background: var(--bg-glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-glass);
+            border-radius: 20px;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+        }
+
+        .welcome-title {
+            font-size: 1.6rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 6px;
+        }
+
+        .welcome-subtitle {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .welcome-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+
+        .welcome-actions {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .welcome-actions-top {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Cards Grid */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        /* Card Component */
+        .card {
+            position: relative;
             background: var(--bg-card);
             backdrop-filter: blur(20px);
             border: 1px solid var(--border-glass);
-            width: 100%;
-            max-width: 400px;
-            padding: 2.5rem;
             border-radius: 20px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-            animation: fadeIn 0.5s ease;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: var(--shadow-lg);
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .logo-section {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-
-        .logo-img {
-            width: 80px;
-            height: 80px;
-            border-radius: 16px;
-            object-fit: cover;
-            box-shadow: 0 4px 20px rgba(59, 130, 246, 0.3);
-            margin-bottom: 1rem;
-        }
-
-        .organization-name {
-            color: var(--text-primary);
-            font-weight: 700;
-            font-size: 1.1rem;
-            line-height: 1.4;
-            margin-bottom: 0.5rem;
-        }
-
-        .current-date {
-            color: var(--text-muted);
-            font-size: 0.85rem;
-        }
-
-        .input-group {
-            margin-bottom: 1.2rem;
-            position: relative;
-        }
-
-        .input-group input {
-            width: 100%;
-            padding: 14px 18px;
-            padding-left: 45px;
-            border: 1px solid var(--border-glass);
-            border-radius: 10px;
-            font-size: 0.95rem;
-            font-family: 'Inter', sans-serif;
-            transition: all 0.3s;
-            background: var(--bg-glass);
-            color: var(--text-primary);
-        }
-
-        .input-group input:focus {
-            outline: none;
-            border-color: var(--accent-blue);
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-        }
-
-        .input-group input::placeholder {
-            color: var(--text-muted);
-        }
-
-        .input-icon {
+        .card::before {
+            content: '';
             position: absolute;
-            left: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--text-muted);
-            font-size: 1rem;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 100%);
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
 
-        .password-container {
+        .card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5), 0 0 40px rgba(102, 126, 234, 0.2);
+        }
+
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        .card-header {
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
             position: relative;
+            overflow: hidden;
         }
 
-        .toggle-password {
+        .card-header::before {
+            content: '';
             position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            cursor: pointer;
-            color: var(--text-muted);
-            transition: color 0.3s;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            opacity: 0.15;
         }
 
-        .toggle-password:hover {
-            color: var(--text-primary);
-        }
-
-        .btn {
-            width: 100%;
-            padding: 14px;
-            border: none;
-            border-radius: 10px;
-            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
-            color: white;
-            font-size: 1rem;
-            font-weight: 600;
-            font-family: 'Inter', sans-serif;
-            cursor: pointer;
-            transition: all 0.3s;
+        .card-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
-            margin-top: 0.5rem;
-            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+            font-size: 1.2rem;
+            color: white;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
         }
 
-        .btn:hover:not(:disabled) {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.5);
+        .card-header-text {
+            position: relative;
+            z-index: 1;
         }
 
-        .btn:disabled {
-            opacity: 0.7;
-            cursor: not-allowed;
-            background: var(--text-muted);
+        .card-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 3px;
         }
 
-        .error-message {
-            color: var(--accent-red);
-            text-align: center;
-            margin-bottom: 1rem;
-            font-size: 0.85rem;
-            display: none;
-            background: rgba(239, 68, 68, 0.1);
-            border: 1px solid rgba(239, 68, 68, 0.3);
-            padding: 12px;
-            border-radius: 10px;
+        .card-badges {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
         }
 
-        .blocked-message {
-            color: var(--accent-red);
-            text-align: center;
-            margin-bottom: 1rem;
-            font-size: 0.85rem;
-            display: none;
-            background: rgba(239, 68, 68, 0.1);
-            border: 1px solid rgba(239, 68, 68, 0.3);
-            padding: 12px;
-            border-radius: 10px;
+        .badge {
+            padding: 3px 8px;
+            border-radius: 20px;
+            font-size: 0.65rem;
+            font-weight: 600;
+            background: rgb(50 0 0 / 10%);
+            color: var(--text-secondary);
         }
 
-        .attempts-counter {
-            text-align: right;
+        .card-body {
+            padding: 0 15px 15px;
+        }
+
+        .card-description {
             font-size: 0.8rem;
-            color: var(--text-muted);
-            margin-top: -0.5rem;
-            margin-bottom: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.4;
+            margin-bottom: 12px;
         }
 
+        .card-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            border-radius: 10px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-decoration: none;
+            color: white;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .card-btn:hover::before {
+            left: 100%;
+        }
+
+        .card-btn:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Card Color Variants */
+        .card-green .card-header { background: linear-gradient(135deg, rgba(34, 197, 94, 0.3) 0%, rgba(22, 163, 74, 0.1) 100%); }
+        .card-green .card-icon { background: linear-gradient(135deg, #22c55e, #16a34a); }
+        .card-green .card-btn { background: linear-gradient(135deg, #22c55e, #16a34a); box-shadow: 0 4px 15px rgba(34, 197, 94, 0.4); }
+
+        .card-red .card-header { background: linear-gradient(135deg, rgba(239, 68, 68, 0.3) 0%, rgba(220, 38, 38, 0.1) 100%); }
+        .card-red .card-icon { background: linear-gradient(135deg, #ef4444, #dc2626); }
+        .card-red .card-btn { background: linear-gradient(135deg, #ef4444, #dc2626); box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4); }
+
+        .card-yellow .card-header { background: linear-gradient(135deg, rgba(234, 179, 8, 0.3) 0%, rgba(202, 138, 4, 0.1) 100%); }
+        .card-yellow .card-icon { background: linear-gradient(135deg, #eab308, #ca8a04); }
+        .card-yellow .card-btn { background: linear-gradient(135deg, #eab308, #ca8a04); box-shadow: 0 4px 15px rgba(234, 179, 8, 0.4); }
+
+        .card-brown .card-header { background: linear-gradient(135deg, rgba(161, 98, 7, 0.3) 0%, rgba(146, 64, 14, 0.1) 100%); }
+        .card-brown .card-icon { background: linear-gradient(135deg, #a16207, #92400e); }
+        .card-brown .card-btn { background: linear-gradient(135deg, #a16207, #92400e); box-shadow: 0 4px 15px rgba(161, 98, 7, 0.4); }
+
+        .card-purple .card-header { background: linear-gradient(135deg, rgba(168, 85, 247, 0.3) 0%, rgba(147, 51, 234, 0.1) 100%); }
+        .card-purple .card-icon { background: linear-gradient(135deg, #a855f7, #9333ea); }
+        .card-purple .card-btn { background: linear-gradient(135deg, #a855f7, #9333ea); box-shadow: 0 4px 15px rgba(168, 85, 247, 0.4); }
+
+        .card-blue .card-header { background: linear-gradient(135deg, rgba(59, 130, 246, 0.3) 0%, rgba(37, 99, 235, 0.1) 100%); }
+        .card-blue .card-icon { background: linear-gradient(135deg, #3b82f6, #2563eb); }
+        .card-blue .card-btn { background: linear-gradient(135deg, #3b82f6, #2563eb); box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4); }
+
+        .card-cyan .card-header { background: linear-gradient(135deg, rgba(6, 182, 212, 0.3) 0%, rgba(8, 145, 178, 0.1) 100%); }
+        .card-cyan .card-icon { background: linear-gradient(135deg, #06b6d4, #0891b2); }
+        .card-cyan .card-btn { background: linear-gradient(135deg, #06b6d4, #0891b2); box-shadow: 0 4px 15px rgba(6, 182, 212, 0.4); }
+
+        /* Footer */
         .footer {
-            margin-top: 1.5rem;
+            position: relative;
+            z-index: 10;
             text-align: center;
-            font-size: 0.8rem;
+            padding: 30px;
+            margin-top: 50px;
+            border-top: 1px solid var(--border-glass);
             color: var(--text-muted);
+            font-size: 0.9rem;
         }
 
-        @media (max-width: 480px) {
-            .login-container {
-                padding: 1.5rem;
+        /* Responsive */
+        @media (max-width: 768px) {
+            .welcome-actions-top {
+                position: relative;
+                top: 0;
+                right: 0;
+                justify-content: center;
+                margin-bottom: 15px;
+            }
+
+            .main-content {
+                padding: 20px;
+            }
+
+            .welcome-title {
+                font-size: 1.8rem;
+            }
+
+            .welcome-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
             }
         }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .card:nth-child(1) { animation-delay: 0.1s; }
+        .card:nth-child(2) { animation-delay: 0.2s; }
+        .card:nth-child(3) { animation-delay: 0.3s; }
+        .card:nth-child(4) { animation-delay: 0.4s; }
+        .card:nth-child(5) { animation-delay: 0.5s; }
+        .card:nth-child(6) { animation-delay: 0.6s; }
+        .card:nth-child(7) { animation-delay: 0.7s; }
+        .card:nth-child(8) { animation-delay: 0.8s; }
+        .card:nth-child(9) { animation-delay: 0.9s; }
     </style>
 </head>
 <body>
-    <div class="login-container">
-        <div class="logo-section">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Escudo_Acci%C3%B3n_Comunal_Colombia.svg/500px-Escudo_Acci%C3%B3n_Comunal_Colombia.svg.png?_=20230605004557" alt="Logo" class="logo-img">
-            <div class="organization-name">JUNTA DE ACCIÓN COMUNAL<br>BARRIO BATEAS SECTOR 3</div>
-            <div class="current-date" id="currentDate"></div>
-        </div>
-        
-        <div class="error-message" id="errorMessage">
-            <i class="fas fa-exclamation-circle"></i> Credenciales incorrectas. Por favor intente nuevamente.
-        </div>
-        
-        <div class="blocked-message" id="blockedMessage">
-            <i class="fas fa-lock"></i> Sistema bloqueado temporalmente. Intente nuevamente en <span id="countdown">3:00</span> minutos.
-        </div>
-        
-        <form id="loginFormElement">
-            <div class="input-group">
-                <i class="fas fa-user input-icon"></i>
-                <input type="text" id="username" placeholder="Usuario" value="Liliana" required>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Escudo_Acci%C3%B3n_Comunal_Colombia.svg/500px-Escudo_Acci%C3%B3n_Comunal_Colombia.svg.png?_=20230605004557" alt="Logo" class="loading-logo">
+        <div class="loading-text">Cargando Panel de Control...</div>
+        <div class="loading-bar"></div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Welcome Section -->
+        <section class="welcome-section">
+            <div class="welcome-actions-top">
+                <div class="admin-badge">
+                    <i class="fas fa-user-shield"></i>
+                    <span>Administrador</span>
+                </div>
+                <button class="logout-btn" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Salir</span>
+                </button>
             </div>
-            
-            <div class="input-group">
-                <div class="password-container">
-                    <i class="fas fa-lock input-icon"></i>
-                    <input type="password" id="password" placeholder="Contraseña" required>
-                    <i class="fas fa-eye toggle-password" id="togglePassword"></i>
+            <h2 class="welcome-title">Bienvenido al Panel de Control</h2>
+            <h3 class="welcome-subtitle">BARRIO BATEAS SECTOR 3</h3>
+            <p class="welcome-desc">Gestiona todas las actividades de tu junta de acción comunal desde este panel centralizado.</p>
+        </section>
+
+        <!-- Cards Grid -->
+        <div class="cards-grid">
+            <!-- Registro -->
+            <div class="card card-green">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-user-plus"></i>
+                    </div>
+                    <div class="card-header-text">
+                        <h3 class="card-title">Registro</h3>
+                        <div class="card-badges">
+                            <span class="badge">Nuevos registros</span>
+                            <span class="badge">Gestión de datos</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <p class="card-description">Registro de nuevos miembros y gestión de datos personales en el sistema.</p>
+                    <a href="registro.html" class="card-btn">
+                        <span>Acceder al Registro</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
                 </div>
             </div>
-            
-            <div class="attempts-counter" id="attemptsCounter">
-                Intentos restantes: <span id="remainingAttempts">3</span>
+
+            <!-- Afiliaciones -->
+            <div class="card card-red">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="card-header-text">
+                        <h3 class="card-title">Afiliaciones</h3>
+                        <div class="card-badges">
+                            <span class="badge">5 pendientes</span>
+                            <span class="badge">120 aprobadas</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <p class="card-description">Gestiona las solicitudes de afiliación de nuevos miembros a la junta comunal.</p>
+                    <a href="afiliaciones.html" class="card-btn">
+                        <span>Gestionar Afiliaciones</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
             </div>
-            
-            <button type="submit" class="btn" id="loginBtn">
-                <i class="fas fa-sign-in-alt"></i> Ingresar
-            </button>
-        </form>
-        
-        <div class="footer">
-            <p>Sistema de acceso protegido © <span id="currentYear"></span></p>
+
+            <!-- Certificados -->
+            <div class="card card-yellow">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-certificate"></i>
+                    </div>
+                    <div class="card-header-text">
+                        <h3 class="card-title">Certificados</h3>
+                        <div class="card-badges">
+                            <span class="badge">30 emitidos</span>
+                            <span class="badge">5 por renovar</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <p class="card-description">Genera y administra certificados para miembros y documentos oficiales.</p>
+                    <a href="certificados5.html" class="card-btn">
+                        <span>Gestionar Certificados</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Relación de Certificados -->
+            <div class="card card-yellow">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-list-ol"></i>
+                    </div>
+                    <div class="card-header-text">
+                        <h3 class="card-title">Relación de Certificados</h3>
+                        <div class="card-badges">
+                            <span class="badge">30 emitidos</span>
+                            <span class="badge">5 por renovar</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <p class="card-description">Lleva control de los certificados impresos.</p>
+                    <a href="contador.html" class="card-btn">
+                        <span>Gestionar Certificados</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Certificados de Traslados -->
+            <div class="card card-brown">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-exchange-alt"></i>
+                    </div>
+                    <div class="card-header-text">
+                        <h3 class="card-title">Certificados de Traslados</h3>
+                        <div class="card-badges">
+                            <span class="badge">15 emitidos</span>
+                            <span class="badge">2 por renovar</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <p class="card-description">Genera y administra certificados de traslados para miembros y documentos oficiales.</p>
+                    <a href="traslado.html" class="card-btn">
+                        <span>Gestionar Traslados</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Documentos -->
+            <div class="card card-purple">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-folder-open"></i>
+                    </div>
+                    <div class="card-header-text">
+                        <h3 class="card-title">Documentos</h3>
+                        <div class="card-badges">
+                            <span class="badge">45 archivos</span>
+                            <span class="badge">3 nuevos</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <p class="card-description">Archivo digital de actas, reglamentos y documentos legales de la junta.</p>
+                    <a href="documentos.html" class="card-btn">
+                        <span>Ver Documentos</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Gestión de Visitas -->
+            <div class="card card-blue">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div class="card-header-text">
+                        <h3 class="card-title">Gestión de Visitas</h3>
+                        <div class="card-badges">
+                            <span class="badge">Registro completo</span>
+                            <span class="badge">Exportar datos</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <p class="card-description">Registro y control de visitas realizadas a miembros de la comunidad.</p>
+                    <a href="visitas.html" class="card-btn">
+                        <span>Acceder a Visitas</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Certificados de Votaciones -->
+            <div class="card card-purple">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-vote-yea"></i>
+                    </div>
+                    <div class="card-header-text">
+                        <h3 class="card-title">Certificados de Votaciones</h3>
+                        <div class="card-badges">
+                            <span class="badge">Respaldo electoral</span>
+                            <span class="badge">Impresión rápida</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <p class="card-description">Genera certificados de participación en procesos de votación comunal.</p>
+                    <a href="certificadovotacion.html" class="card-btn">
+                        <span>Ir a Votaciones</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Asistencia a Asamblea -->
+            <div class="card card-cyan">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-clipboard-check"></i>
+                    </div>
+                    <div class="card-header-text">
+                        <h3 class="card-title">Asistencia a Asamblea</h3>
+                        <div class="card-badges">
+                            <span class="badge">Registro de participantes</span>
+                            <span class="badge">Constancias oficiales</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <p class="card-description">Control de asistencia y generación de constancias para asambleas generales.</p>
+                    <a href="asistencia.html" class="card-btn">
+                        <span>Controlar Asistencia</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
         </div>
-    </div>
-    
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2026 Junta de Acción Comunal - Barrio Bateas Sector 3. Todos los derechos reservados.</p>
+    </footer>
+
     <script>
-        function updateDateTime() {
-            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-            const today = new Date();
-            document.getElementById('currentDate').textContent = today.toLocaleDateString('es-ES', options);
-            document.getElementById('currentYear').textContent = today.getFullYear();
-        }
-        
-        document.getElementById('togglePassword').addEventListener('click', function() {
-            const passwordInput = document.getElementById('password');
-            const icon = this;
-            
-            if (passwordInput.type === 'password') {
-                passwordInput.type = 'text';
-                icon.classList.remove('fa-eye');
-                icon.classList.add('fa-eye-slash');
-            } else {
-                passwordInput.type = 'password';
-                icon.classList.remove('fa-eye-slash');
-                icon.classList.add('fa-eye');
-            }
+        // Loading Screen
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.getElementById('loadingScreen').classList.add('hidden');
+            }, 2000);
         });
-        
-        let failedAttempts = 0;
-        const maxAttempts = 3;
-        let isBlocked = false;
-        
-        document.getElementById('loginFormElement').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            if (isBlocked) return;
-            
-            const validUsername = "Liliana";
-            const validPassword = "Linda0127";
-            
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-            
-            if(username === validUsername && password === validPassword) {
-                window.location.href = "panel.html";
-            } else {
-                failedAttempts++;
-                const remainingAttempts = maxAttempts - failedAttempts;
-                document.getElementById('remainingAttempts').textContent = remainingAttempts;
-                
-                document.getElementById('errorMessage').style.display = 'block';
-                
-                if (failedAttempts >= maxAttempts) {
-                    blockSystem();
-                }
+
+        // Logout Function
+        function logout() {
+            if (confirm('¿Estás seguro de que deseas cerrar sesión?')) {
+                window.location.href = 'index.html';
             }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
         });
-        
-        function blockSystem() {
-            isBlocked = true;
-            document.getElementById('errorMessage').style.display = 'none';
-            document.getElementById('blockedMessage').style.display = 'block';
-            document.getElementById('loginBtn').disabled = true;
-            
-            let minutes = 3;
-            let seconds = 0;
-            
-            const countdownElement = document.getElementById('countdown');
-            countdownElement.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
-            
-            const countdownInterval = setInterval(() => {
-                if (seconds === 0) {
-                    if (minutes === 0) {
-                        clearInterval(countdownInterval);
-                        unblockSystem();
-                        return;
-                    }
-                    minutes--;
-                    seconds = 59;
-                } else {
-                    seconds--;
-                }
-                
-                countdownElement.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
-            }, 1000);
-            
-            setTimeout(() => {
-                clearInterval(countdownInterval);
-                unblockSystem();
-            }, 3 * 60 * 1000);
-        }
-        
-        function unblockSystem() {
-            isBlocked = false;
-            failedAttempts = 0;
-            document.getElementById('blockedMessage').style.display = 'none';
-            document.getElementById('loginBtn').disabled = false;
-            document.getElementById('remainingAttempts').textContent = maxAttempts;
-            document.getElementById('username').value = 'Liliana';
-            document.getElementById('password').value = '';
-        }
-        
-        updateDateTime();
     </script>
 </body>
 </html>
