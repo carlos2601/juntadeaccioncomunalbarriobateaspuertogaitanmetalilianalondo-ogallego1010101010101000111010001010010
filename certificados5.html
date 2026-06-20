@@ -91,17 +91,19 @@
         }
 
         .loading-logo {
-            width: 100px;
-            height: 100px;
-            margin-bottom: 24px;
+            width: 80px;
+            height: 80px;
+            border-radius: 16px;
             animation: pulse 2s ease-in-out infinite;
+            box-shadow: 0 4px 20px rgba(59, 130, 246, 0.3);
+            margin-bottom: 20px;
         }
 
         .loading-logo img {
             width: 100%;
             height: 100%;
-            object-fit: contain;
-            filter: drop-shadow(0 0 20px rgba(59, 130, 246, 0.5));
+            object-fit: cover;
+            border-radius: 16px;
         }
 
         .loading-text {
@@ -1098,7 +1100,7 @@
     <!-- Loading Screen -->
     <div class="loading-screen" id="loadingScreen">
         <div class="loading-logo">
-            <img src="https://raw.githubusercontent.com/carlos2601/bateas3/refs/heads/main/logo.jpg" alt="Logo">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Escudo_Acci%C3%B3n_Comunal_Colombia.svg/500px-Escudo_Acci%C3%B3n_Comunal_Colombia.svg.png?_=20230605004557" alt="Logo">
         </div>
         <p class="loading-text">Cargando sistema...</p>
         <div class="loading-bar">
