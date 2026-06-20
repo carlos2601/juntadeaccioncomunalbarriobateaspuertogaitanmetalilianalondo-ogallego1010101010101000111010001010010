@@ -4,221 +4,240 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Acceso - Junta de Acción Comunal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --verde-primario: #4CAF50;
-            --verde-secundario: #388E3C;
-            --amarillo-primario: #FFC107;
-            --amarillo-secundario: #FFA000;
-            --gris-claro: #f5f5f5;
-            --gris-oscuro: #424242;
-            --blanco: #ffffff;
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --bg-card: rgba(30, 41, 59, 0.8);
+            --bg-glass: rgba(255, 255, 255, 0.05);
+            --border-glass: rgba(255, 255, 255, 0.1);
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --accent-green: #22c55e;
+            --accent-red: #ef4444;
+            --accent-blue: #3b82f6;
+            --accent-purple: #8b5cf6;
         }
-        
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        
+
         body {
-            background: linear-gradient(135deg, var(--verde-primario), var(--amarillo-primario));
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-primary);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 20px;
+            overflow: hidden;
         }
-        
-        .login-container {
-            background-color: var(--blanco);
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            max-width: 420px;
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-            transition: all 0.4s ease;
+            height: 100%;
+            background: 
+                radial-gradient(ellipse at 20% 20%, rgba(59, 130, 246, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(139, 92, 246, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(236, 72, 153, 0.08) 0%, transparent 60%);
+            pointer-events: none;
+            z-index: 0;
         }
-        
-        @media (max-width: 480px) {
-            .login-container {
-                padding: 1.5rem;
-            }
+
+        .login-container {
+            position: relative;
+            z-index: 1;
+            background: var(--bg-card);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-glass);
+            width: 100%;
+            max-width: 400px;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            animation: fadeIn 0.5s ease;
         }
-        
-        .organization-name {
-            text-align: center;
-            margin-bottom: 1rem;
-            color: var(--gris-oscuro);
-            font-weight: 700;
-            font-size: 1.2rem;
-            line-height: 1.4;
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-        
-        .current-date {
-            text-align: center;
-            margin-bottom: 1.5rem;
-            color: #616161;
-            font-size: 0.9rem;
-        }
-        
-        .logo {
+
+        .logo-section {
             text-align: center;
             margin-bottom: 2rem;
         }
-        
-        .logo i {
-            font-size: 3rem;
-            color: var(--verde-primario);
-            background: linear-gradient(to right, var(--verde-primario), var(--amarillo-primario));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+
+        .logo-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 16px;
+            object-fit: cover;
+            box-shadow: 0 4px 20px rgba(59, 130, 246, 0.3);
+            margin-bottom: 1rem;
         }
-        
-        .logo h1 {
-            margin-top: 0.8rem;
-            color: var(--gris-oscuro);
-            font-weight: 600;
+
+        .organization-name {
+            color: var(--text-primary);
+            font-weight: 700;
             font-size: 1.1rem;
+            line-height: 1.4;
+            margin-bottom: 0.5rem;
         }
-        
+
+        .current-date {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
         .input-group {
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.2rem;
             position: relative;
         }
-        
+
         .input-group input {
             width: 100%;
             padding: 14px 18px;
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            font-size: 1rem;
+            padding-left: 45px;
+            border: 1px solid var(--border-glass);
+            border-radius: 10px;
+            font-size: 0.95rem;
+            font-family: 'Inter', sans-serif;
             transition: all 0.3s;
-            background-color: var(--gris-claro);
-            color: var(--gris-oscuro);
+            background: var(--bg-glass);
+            color: var(--text-primary);
         }
-        
+
         .input-group input:focus {
-            border-color: var(--verde-primario);
             outline: none;
-            box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
-            background-color: var(--blanco);
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
         }
-        
-        .input-group label {
+
+        .input-group input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .input-icon {
             position: absolute;
-            left: 18px;
-            top: 14px;
-            color: #757575;
-            transition: all 0.3s;
-            pointer-events: none;
-            background-color: transparent;
-            padding: 0 5px;
-        }
-        
-        .input-group input:focus + label,
-        .input-group input:not(:placeholder-shown) + label {
-            top: -10px;
-            left: 10px;
-            font-size: 0.8rem;
-            background-color: var(--blanco);
-            color: var(--verde-primario);
-        }
-        
-        .btn {
-            width: 100%;
-            padding: 14px;
-            border: none;
-            border-radius: 8px;
-            background: linear-gradient(to right, var(--verde-primario), var(--amarillo-primario));
-            color: var(--blanco);
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
             font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            letter-spacing: 0.5px;
-            margin-top: 0.5rem;
         }
-        
-        .btn:hover:not(:disabled) {
-            background: linear-gradient(to right, var(--verde-secundario), var(--amarillo-secundario));
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-        
-        .btn:disabled {
-            opacity: 0.7;
-            cursor: not-allowed;
-            background: #bdbdbd;
-        }
-        
-        .footer {
-            margin-top: 2rem;
-            text-align: center;
-            font-size: 0.8rem;
-            color: #757575;
-        }
-        
-        .error-message {
-            color: #d32f2f;
-            text-align: center;
-            margin-bottom: 1rem;
-            font-size: 0.9rem;
-            display: none;
-            background-color: #ffebee;
-            padding: 10px;
-            border-radius: 6px;
-            border-left: 4px solid #d32f2f;
-        }
-        
-        .blocked-message {
-            color: #d32f2f;
-            text-align: center;
-            margin-bottom: 1rem;
-            font-size: 0.9rem;
-            display: none;
-            background-color: #ffebee;
-            padding: 10px;
-            border-radius: 6px;
-            border-left: 4px solid #d32f2f;
-        }
-        
-        .attempts-counter {
-            text-align: right;
-            font-size: 0.8rem;
-            color: #757575;
-            margin-top: -0.8rem;
-            margin-bottom: 1rem;
-        }
-        
+
         .password-container {
             position: relative;
         }
-        
+
         .toggle-password {
             position: absolute;
             right: 15px;
             top: 50%;
             transform: translateY(-50%);
             cursor: pointer;
-            color: #757575;
+            color: var(--text-muted);
+            transition: color 0.3s;
+        }
+
+        .toggle-password:hover {
+            color: var(--text-primary);
+        }
+
+        .btn {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 10px;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 0.5rem;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+        }
+
+        .btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.5);
+        }
+
+        .btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            background: var(--text-muted);
+        }
+
+        .error-message {
+            color: var(--accent-red);
+            text-align: center;
+            margin-bottom: 1rem;
+            font-size: 0.85rem;
+            display: none;
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            padding: 12px;
+            border-radius: 10px;
+        }
+
+        .blocked-message {
+            color: var(--accent-red);
+            text-align: center;
+            margin-bottom: 1rem;
+            font-size: 0.85rem;
+            display: none;
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            padding: 12px;
+            border-radius: 10px;
+        }
+
+        .attempts-counter {
+            text-align: right;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: -0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer {
+            margin-top: 1.5rem;
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        @media (max-width: 480px) {
+            .login-container {
+                padding: 1.5rem;
+            }
         }
     </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <div class="login-container" id="loginForm">
-        <div class="organization-name">
-            JUNTA DE ACCIÓN COMUNAL<br>
-            BARRIO BATEAS SECTOR 3
-        </div>
-        
-        <div class="current-date" id="currentDate"></div>
-        
-        <div class="logo">
-            <i class="fas fa-shield-alt"></i>
-            <h1>Acceso Seguro</h1>
+    <div class="login-container">
+        <div class="logo-section">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Escudo_Acci%C3%B3n_Comunal_Colombia.svg/500px-Escudo_Acci%C3%B3n_Comunal_Colombia.svg.png?_=20230605004557" alt="Logo" class="logo-img">
+            <div class="organization-name">JUNTA DE ACCIÓN COMUNAL<br>BARRIO BATEAS SECTOR 3</div>
+            <div class="current-date" id="currentDate"></div>
         </div>
         
         <div class="error-message" id="errorMessage">
@@ -226,19 +245,19 @@
         </div>
         
         <div class="blocked-message" id="blockedMessage">
-            <i class="fas fa-lock"></i> Sistema bloqueado temporalmente por seguridad. Intente nuevamente en <span id="countdown">3:00</span> minutos.
+            <i class="fas fa-lock"></i> Sistema bloqueado temporalmente. Intente nuevamente en <span id="countdown">3:00</span> minutos.
         </div>
         
         <form id="loginFormElement">
             <div class="input-group">
-                <input type="text" id="username" placeholder=" " value="Liliana" required>
-                <label for="username">Usuario</label>
+                <i class="fas fa-user input-icon"></i>
+                <input type="text" id="username" placeholder="Usuario" value="Liliana" required>
             </div>
             
             <div class="input-group">
                 <div class="password-container">
-                    <input type="password" id="password" placeholder=" " required>
-                    <label for="password">Contraseña</label>
+                    <i class="fas fa-lock input-icon"></i>
+                    <input type="password" id="password" placeholder="Contraseña" required>
                     <i class="fas fa-eye toggle-password" id="togglePassword"></i>
                 </div>
             </div>
@@ -247,7 +266,9 @@
                 Intentos restantes: <span id="remainingAttempts">3</span>
             </div>
             
-            <button type="submit" class="btn" id="loginBtn">Ingresar</button>
+            <button type="submit" class="btn" id="loginBtn">
+                <i class="fas fa-sign-in-alt"></i> Ingresar
+            </button>
         </form>
         
         <div class="footer">
@@ -256,7 +277,6 @@
     </div>
     
     <script>
-        // Mostrar fecha actual y año
         function updateDateTime() {
             const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
             const today = new Date();
@@ -264,7 +284,6 @@
             document.getElementById('currentYear').textContent = today.getFullYear();
         }
         
-        // Toggle para mostrar/ocultar contraseña
         document.getElementById('togglePassword').addEventListener('click', function() {
             const passwordInput = document.getElementById('password');
             const icon = this;
@@ -280,19 +299,15 @@
             }
         });
         
-        // Variables para control de intentos
         let failedAttempts = 0;
         const maxAttempts = 3;
         let isBlocked = false;
-        let blockTimeout;
         
-        // Validar credenciales
         document.getElementById('loginFormElement').addEventListener('submit', function(e) {
             e.preventDefault();
             
             if (isBlocked) return;
             
-            // Credenciales válidas (deberías cambiarlas por las reales)
             const validUsername = "Liliana";
             const validPassword = "Linda0127";
             
@@ -300,24 +315,20 @@
             const password = document.getElementById('password').value;
             
             if(username === validUsername && password === validPassword) {
-                // Redirigir a panelprincipal.html
                 window.location.href = "panel.html";
             } else {
                 failedAttempts++;
                 const remainingAttempts = maxAttempts - failedAttempts;
                 document.getElementById('remainingAttempts').textContent = remainingAttempts;
                 
-                // Mostrar mensaje de error
                 document.getElementById('errorMessage').style.display = 'block';
                 
-                // Bloquear después de 3 intentos fallidos
                 if (failedAttempts >= maxAttempts) {
                     blockSystem();
                 }
             }
         });
         
-        // Función para bloquear el sistema
         function blockSystem() {
             isBlocked = true;
             document.getElementById('errorMessage').style.display = 'none';
@@ -327,7 +338,6 @@
             let minutes = 3;
             let seconds = 0;
             
-            // Actualizar contador
             const countdownElement = document.getElementById('countdown');
             countdownElement.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
             
@@ -347,27 +357,23 @@
                 countdownElement.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
             }, 1000);
             
-            // Desbloquear después de 3 minutos
-            blockTimeout = setTimeout(() => {
+            setTimeout(() => {
                 clearInterval(countdownInterval);
                 unblockSystem();
             }, 3 * 60 * 1000);
         }
         
-        // Función para desbloquear el sistema
         function unblockSystem() {
             isBlocked = false;
             failedAttempts = 0;
             document.getElementById('blockedMessage').style.display = 'none';
             document.getElementById('loginBtn').disabled = false;
             document.getElementById('remainingAttempts').textContent = maxAttempts;
-            document.getElementById('username').value = 'Liliana'; // Restablecer el nombre de usuario
+            document.getElementById('username').value = 'Liliana';
             document.getElementById('password').value = '';
         }
         
-        // Inicializar
         updateDateTime();
     </script>
 </body>
-
 </html>
