@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consentimiento Tratamiento de Datos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --bg-card: rgba(30, 41, 59, 0.8);
+            --accent-blue: #3b82f6;
+            --accent-green: #10b981;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --border-color: rgba(59, 130, 246, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--bg-primary) 0%, #1a1a2e 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .pages-container {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            width: 100%;
+            max-width: 21.59cm;
+            align-items: center;
+        }
+
+        .document-page {
+            width: 21.59cm;
+            height: 27.94cm;
+            background-color: white;
+            padding: 1.8cm 2.5cm;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .page-number {
+            position: absolute;
+            bottom: 1.5cm;
+            right: 2.5cm;
+            font-size: 11pt;
+            font-weight: bold;
+            color: #000;
+            z-index: 2;
+        }
+
+        .content-wrapper {
+            position: relative;
+            z-index: 1;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 0.8cm;
+        }
+
+        h1 {
+            font-size: 14pt;
+            color: #2c3e50;
+            margin: 5px 0;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        .document-title {
+            font-size: 14pt;
+            font-weight: bold;
+            text-align: center;
+            margin: 0.3cm 0 0.5cm 0;
+            text-decoration: underline;
+            color: #000;
+        }
+
+        .content {
+            font-size: 12.5pt;
+            text-align: justify;
+            line-height: 1.6;
+            flex-grow: 1;
+            color: #000;
+        }
+
+        h2 {
+            font-size: 13pt;
+            margin: 0.7cm 0 0.4cm 0;
+            color: #2c3e50;
+            font-weight: bold;
+        }
+
+        ul {
+            margin: 0.4cm 0 0.4cm 1.5cm;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 0.25cm;
+            line-height: 1.5;
+            color: #000;
+        }
+
+        .signature-section {
+            margin-top: 1.2cm;
+        }
+
+        .signature-center {
+            text-align: center;
+            margin-top: 1.8cm;
+        }
+
+        .signature-line {
+            margin: 0 auto;
+            border-top: 1px solid #333;
+            width: 60%;
+            text-align: center;
+            padding-top: 8px;
+            font-size: 12.5pt;
+            color: #000;
+        }
+
+        .cc-centered {
+            margin-top: 15px;
+            font-size: 12.5pt;
+            text-align: center;
+            color: #000;
+        }
+
+        .footer {
+            text-align: center;
+            font-size: 10pt;
+            margin-top: auto;
+            padding-top: 0.5cm;
+            color: #555;
+        }
+
+        .button-container {
+            position: fixed;
+            bottom: 20px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            z-index: 100;
+        }
+
+        .logout-btn {
+            background: #e74c3c;
+            color: white;
+            padding: 10px 22px;
+            border-radius: 4px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            border: none;
+            cursor: pointer;
+            min-width: 130px;
+            font-size: 13pt;
+        }
+
+        .logout-btn:hover {
+            background: #c0392b;
+            transform: translateY(-1px);
+        }
+
+        .panel-btn {
+            background: #3498db;
+            color: white;
+            padding: 10px 22px;
+            border-radius: 4px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            border: none;
+            cursor: pointer;
+            min-width: 130px;
+            font-size: 13pt;
+        }
+
+        .print-btn {
+            background: #2ecc71;
+            color: white;
+            padding: 10px 22px;
+            border-radius: 4px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            border: none;
+            cursor: pointer;
+            min-width: 130px;
+            font-size: 13pt;
+        }
+
+        @media print {
+            body {
+                background: none !important;
+                padding: 0 !important;
+                margin: 0 !important;
+            }
+
+            .pages-container {
+                gap: 0 !important;
+                margin: 0 !important;
+            }
+
+            .button-container {
+                display: none !important;
+            }
+
+            .document-page {
+                box-shadow: none !important;
+                margin: 0 !important;
+                padding: 1.8cm 2.5cm !important;
+                page-break-after: always !important;
+                height: 27.94cm !important;
+                width: 21.59cm !important;
+                break-inside: avoid !important;
+            }
+
+            .document-page:last-child {
+                page-break-after: auto !important;
+            }
+
+            @page {
+                size: letter;
+                margin: 0 !important;
+                marks: none !important;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .pages-container {
+                max-width: 100%;
+                padding: 0 10px;
+            }
+
+            .document-page {
+                width: 100%;
+                height: auto;
+                min-height: auto;
+                padding: 1.5cm;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            }
+
+            .page-number {
+                position: relative;
+                bottom: auto;
+                right: auto;
+                text-align: center;
+                margin-top: 20px;
+            }
+
+            h1 {
+                font-size: 13pt;
+            }
+
+            .document-title {
+                font-size: 13pt;
+            }
+
+            .content {
+                font-size: 12pt;
+                line-height: 1.5;
+            }
+
+            h2 {
+                font-size: 12pt;
+            }
+
+            .button-container {
+                position: relative;
+                bottom: auto;
+                margin-top: 20px;
+                flex-wrap: wrap;
+            }
+
+            .panel-btn, .print-btn, .logout-btn {
+                min-width: 110px;
+                padding: 8px 16px;
+                font-size: 11pt;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .document-page {
+                padding: 1.2cm;
+            }
+
+            h1 {
+                font-size: 12pt;
+            }
+
+            .document-title {
+                font-size: 12pt;
+            }
+
+            .content {
+                font-size: 11pt;
+            }
+
+            h2 {
+                font-size: 11pt;
+            }
+
+            ul {
+                margin-left: 1.2cm;
+            }
+
+            .button-container {
+                gap: 10px;
+            }
+
+            .panel-btn, .print-btn, .logout-btn {
+                min-width: 90px;
+                padding: 7px 14px;
+                font-size: 10pt;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="pages-container">
+        <!-- Pagina 1 -->
+        <div class="document-page">
+            <div class="page-number">Pagina 1 de 2</div>
+            <div class="content-wrapper">
+                <div class="header">
+                    <h1>JUNTA DE ACCION COMUNAL</h1>
+                    <h1>BARRIO BATEAS - SECTOR 3</h1>
+                    <p><strong>PUERTO GAITAN, META</strong></p>
+                </div>
+
+                <div class="document-title">AUTORIZACION PARA EL TRATAMIENTO DE DATOS PERSONALES</div>
+
+                <div class="content">
+                    <p>Yo, <strong><span id="nombreAfiliado">_________________________________________</span></strong>,
+                    identificado(a) con <strong><span id="tipoDocumento">Cedula de Ciudadania</span></strong>
+                    No. <strong><span id="documentoAfiliado">____________________</span></strong> expedida en
+                    <strong><span id="lugarExpedicion">____________________</span></strong>, en mi calidad de afiliado(a)
+                    a la Junta de Accion Comunal del Barrio Bateas - Sector 3 de Puerto Gaitan, Meta, en ejercicio de mis derechos
+                    constitucionales y legales, <strong>MANIFIESTO</strong> que de manera libre, previa, expresa,
+                    voluntaria, informada e inequivoca <strong>AUTORIZO</strong> a la Junta de Accion Comunal del Barrio
+                    Bateas - Sector 3 para que realice el tratamiento de mis datos personales suministrados, de acuerdo con lo
+                    establecido en la Ley 1581 de 2012 y el Decreto 1377 de 2013.</p>
+
+                    <h2>1. FINALIDAD DEL TRATAMIENTO</h2>
+                    <p>La Junta de Accion Comunal utilizara mis datos personales para los siguientes fines:</p>
+                    <ul>
+                        <li>Gestion de afiliacion y membresia a la Junta de Accion Comunal</li>
+                        <li>Comunicacion de actividades, eventos y convocatorias</li>
+                        <li>Control y seguimiento de pagos de cuotas ordinarias y extraordinarias</li>
+                        <li>Elaboracion de certificados y constancias de afiliacion</li>
+                        <li>Gestion administrativa interna de la organizacion</li>
+                        <li>Cumplimiento de obligaciones legales y estatutarias</li>
+                    </ul>
+
+                    <h2>2. DATOS QUE SERAN TRATADOS</h2>
+                    <p>Autorizo el tratamiento de los siguientes datos personales:</p>
+                    <ul>
+                        <li>Nombres y apellidos completos</li>
+                        <li>Numero de documento de identidad</li>
+                        <li>Fecha de expedicion del documento</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pagina 2 -->
+        <div class="document-page">
+            <div class="page-number">Pagina 2 de 2</div>
+            <div class="content-wrapper">
+                <div class="content">
+                    <ul>
+                        <li>Direccion de residencia</li>
+                        <li>Numeros telefonicos y direccion de correo electronico</li>
+                        <li>Fecha de nacimiento</li>
+                        <li>Informacion de afiliacion (fecha, numero de registro, etc.)</li>
+                        <li>Historial de pagos y contribuciones</li>
+                    </ul>
+
+                    <h2>3. DERECHOS DEL TITULAR</h2>
+                    <p>Como titular de los datos, conozco que tengo derecho a:</p>
+                    <ul>
+                        <li>Conocer, actualizar y rectificar mis datos personales</li>
+                        <li>Solicitar prueba de la autorizacion otorgada</li>
+                        <li>Ser informado sobre el uso que se ha dado a mis datos</li>
+                        <li>Presentar quejas ante la Superintendencia de Industria y Comercio</li>
+                        <li>Revocar la autorizacion y/o solicitar la supresion del dato</li>
+                        <li>Acceder en forma gratuita a mis datos personales</li>
+                    </ul>
+
+                    <h2>4. VIGENCIA</h2>
+                    <p>La presente autorizacion tendra una vigencia igual al tiempo que mantenga mi condicion de afiliado(a)
+                    a la Junta de Accion Comunal del Barrio Bateas - Sector 3 y hasta que se cumplan las finalidades necesarias para
+                    el tratamiento de los datos.</p>
+
+                    <div class="signature-section">
+                        <p>En constancia de lo anterior, firmo en Puerto Gaitan, Meta, a los <strong><span id="diaFirma">____</span></strong>
+                        dias del mes de <strong><span id="mesFirma">____________________</span></strong> del <strong><span id="anioFirma">________</span></strong>.</p>
+
+                        <div class="signature-center">
+                            <div class="signature-line">Firma del Afiliado</div>
+                            <div class="cc-centered">CC: _________________________</div>
+                        </div>
+                    </div>
+
+                    <div class="footer">
+                        <p><strong>Junta de Accion Comunal Barrio Bateas - Sector 3</strong> - Puerto Gaitan, Meta</p>
+                        <p>Telefono: 313 581 5787 - Correo: juntacomunalsector3bateas@gmail.com</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contenedor de botones centrados -->
+    <div class="button-container">
+        <a href="documentos.html" class="panel-btn">Volver</a>
+        <button onclick="window.print()" class="print-btn">Imprimir Formato</button>
+        <button onclick="cerrarSesion()" class="logout-btn">Cerrar Sesion</button>
+    </div>
+
+    <script>
+        function cerrarSesion() {
+            if (confirm("Esta seguro que desea cerrar sesion?")) {
+                window.location.href = "login.html";
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const fields = {
+                'nombre': 'nombreAfiliado',
+                'documento': 'documentoAfiliado',
+                'lugarExpedicion': 'lugarExpedicion'
+            };
+
+            for (const [param, elementId] of Object.entries(fields)) {
+                if (urlParams.has(param)) {
+                    document.getElementById(elementId).textContent = urlParams.get(param);
+                }
+            }
+
+            const today = new Date();
+            document.getElementById('diaFirma').textContent = today.getDate();
+            document.getElementById('anioFirma').textContent = today.getFullYear();
+
+            const meses = ["enero", "febrero", "marzo", "abril", "mayo", "junio",
+                          "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
+            document.getElementById('mesFirma').textContent = meses[today.getMonth()];
+        });
+    </script>
+</body>
+</html>
