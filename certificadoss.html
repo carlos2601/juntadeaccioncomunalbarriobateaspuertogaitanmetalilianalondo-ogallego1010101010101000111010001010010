@@ -81,11 +81,13 @@
         }
 
         .loading-logo {
-            width: 100px;
-            height: 100px;
-            margin-bottom: 24px;
-            animation: pulse 2s ease-in-out infinite;
-        }
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    animation: logoPulse 2s ease-in-out infinite, logoSpin 3s linear infinite;
+    box-shadow: 0 0 30px rgba(102, 126, 234, 0.5);
+    object-fit: cover;
+}
 
         .loading-logo img {
             width: 100%;
