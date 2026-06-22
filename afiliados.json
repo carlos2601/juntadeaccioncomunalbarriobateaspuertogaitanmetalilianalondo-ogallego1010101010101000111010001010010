@@ -10456,7 +10456,9 @@
     "fecha": "23/05/2026",
     "direccion": "MANZANA 66 CASA 25",
     "celular": "3213111547",
-    "pagos": [],
+    "pagos": [
+      "22/6/2026, 20.000"
+    ],
     "firma": ""
   },
   {
