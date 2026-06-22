@@ -10725,7 +10725,9 @@
     "fecha": "06/06/2026",
     "direccion": "MANZANA 68 CASA 12",
     "celular": "3249250176",
-    "pagos": [],
+    "pagos": [
+      "22/6/2026, 20.000"
+    ],
     "firma": ""
   },
   {
