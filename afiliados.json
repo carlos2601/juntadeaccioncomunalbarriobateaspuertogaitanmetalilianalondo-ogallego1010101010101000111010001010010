@@ -8905,7 +8905,9 @@
     "fecha": "14/02/2026",
     "direccion": "MANZANA 72  CASA 15",
     "celular": "3132552571",
-    "pagos": [],
+    "pagos": [
+      "22/6/2026, 20.000"
+    ],
     "firma": ""
   },
   {
