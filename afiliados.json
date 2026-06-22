@@ -10403,7 +10403,9 @@
     "fecha": "28/03/2026",
     "direccion": "MANZANA 74 CASA 23",
     "celular": "3163610634",
-    "pagos": [],
+    "pagos": [
+      "22/6/2026, 20.000"
+    ],
     "firma": ""
   },
   {
