@@ -10699,7 +10699,9 @@
     "fecha": "30/05/2026",
     "direccion": "MANZANA 64 CASA 01",
     "celular": "3132006617",
-    "pagos": [],
+    "pagos": [
+      "22/6/2026, 20.000"
+    ],
     "firma": ""
   },
   {
