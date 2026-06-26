@@ -10261,7 +10261,9 @@
     "fecha": "28/03/2026",
     "direccion": "MANZANA 58 CASA 03",
     "celular": "3124384068",
-    "pagos": [],
+    "pagos": [
+      "26/6/2026, 20.000"
+    ],
     "firma": ""
   },
   {
