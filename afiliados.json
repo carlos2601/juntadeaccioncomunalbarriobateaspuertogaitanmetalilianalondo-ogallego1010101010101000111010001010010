@@ -8,7 +8,7 @@
     "folio": "2",
     "renglon": "1",
     "direccion": "BATEAS 3",
-    "telefono": "1111",
+    "telefono": "",
     "pagos": [],
     "firma": ""
   },
@@ -10788,7 +10788,7 @@
   },
   {
     "id": "805",
-    "nombre": "DDD",
+    "nombre": "",
     "cedula": "",
     "fecha_afiliacion": "",
     "registro": 805,
