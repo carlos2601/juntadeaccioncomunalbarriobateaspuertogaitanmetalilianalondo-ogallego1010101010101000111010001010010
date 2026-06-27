@@ -10785,57 +10785,5 @@
     "telefono": "3143236942",
     "pagos": [],
     "firma": ""
-  },
-  {
-    "id": "805",
-    "nombre": "ROBERTO ANDRES",
-    "cedula": "8525852",
-    "fecha_afiliacion": "06/06/2026",
-    "registro": "805",
-    "folio": "46",
-    "renglon": "13",
-    "direccion": "MANZANA 11 CASA 10",
-    "telefono": "1852356870",
-    "pagos": "",
-    "firma": ""
-  },
-  {
-    "id": "806",
-    "nombre": "",
-    "cedula": "",
-    "fecha_afiliacion": "",
-    "registro": "806",
-    "folio": "46",
-    "renglon": "14",
-    "direccion": "MANZANA  CASA ",
-    "telefono": "",
-    "pagos": "",
-    "firma": ""
-  },
-  {
-    "id": "807",
-    "nombre": "",
-    "cedula": "",
-    "fecha_afiliacion": "",
-    "registro": "807",
-    "folio": "46",
-    "renglon": "15",
-    "direccion": "MANZANA  CASA ",
-    "telefono": "",
-    "pagos": "",
-    "firma": ""
-  },
-  {
-    "id": "808",
-    "nombre": "",
-    "cedula": "",
-    "fecha_afiliacion": "",
-    "registro": "808",
-    "folio": "46",
-    "renglon": "16",
-    "direccion": "MANZANA  CASA ",
-    "telefono": "",
-    "pagos": "",
-    "firma": ""
   }
 ]
