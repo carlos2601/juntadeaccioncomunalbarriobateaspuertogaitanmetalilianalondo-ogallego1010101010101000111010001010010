@@ -10789,8 +10789,8 @@
   {
     "id": "805",
     "nombre": "ROBERTO",
-    "cedula": "0000000",
-    "fecha_afiliacion": "",
+    "cedula": "12345678",
+    "fecha_afiliacion": "06/06/2026",
     "registro": "805",
     "folio": "46",
     "renglon": "13",
