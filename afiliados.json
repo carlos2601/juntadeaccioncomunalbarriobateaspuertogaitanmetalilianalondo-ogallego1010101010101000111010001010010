@@ -10811,31 +10811,5 @@
     "telefono": "3208047905",
     "pagos": "",
     "firma": ""
-  },
-  {
-    "id": "807",
-    "nombre": "PRUEBA 5",
-    "cedula": "321458",
-    "fecha_afiliacion": "22/06/2026",
-    "registro": "807",
-    "folio": "46",
-    "renglon": "29",
-    "direccion": "MANZANA  CASA",
-    "telefono": "",
-    "pagos": "",
-    "firma": ""
-  },
-  {
-    "id": "808",
-    "nombre": "PRUEBA 6",
-    "cedula": "321654789",
-    "fecha_afiliacion": "22/06/2026",
-    "registro": "808",
-    "folio": "46",
-    "renglon": "30",
-    "direccion": "MANZANA  CASA",
-    "telefono": "",
-    "pagos": "",
-    "firma": ""
   }
 ]
