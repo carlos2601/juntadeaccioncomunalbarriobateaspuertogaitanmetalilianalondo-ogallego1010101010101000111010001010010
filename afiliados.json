@@ -10811,5 +10811,18 @@
     "telefono": "3208047905",
     "pagos": "",
     "firma": ""
+  },
+  {
+    "id": "807",
+    "nombre": "",
+    "cedula": "",
+    "fecha_afiliacion": "",
+    "registro": "807",
+    "folio": "46",
+    "renglon": "29",
+    "direccion": "MANZANA  CASA",
+    "telefono": "",
+    "pagos": "",
+    "firma": ""
   }
 ]
