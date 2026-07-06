@@ -10811,5 +10811,18 @@
     "telefono": "3208047905",
     "pagos": "",
     "firma": ""
+  }, 
+  {
+  "id": "807",
+    "nombre": "WILMER LEONARDO Suarez GUTIERREZ",
+    "cedula": "1052400283",
+    "fecha_afiliacion": "27/06/2026",
+    "registro": "807",
+    "folio": "46",
+    "renglon": "29",
+    "direccion": "MANZANA 60 CASA 09",
+    "telefono": "",
+    "pagos": "",
+    "firma": ""
   }
 ]
