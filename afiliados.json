@@ -1,6 +1,6 @@
 [
   {
-    "_lastModified": "2026-07-21T14:24:47.079Z"
+    "_lastModified": "2026-07-21T14:25:47.094Z"
   },
   {
     "id": "1",
@@ -10833,8 +10833,8 @@
   },
   {
     "id": "808",
-    "nombre": "",
-    "cedula": "",
+    "nombre": "WILLIAM NUÑEZ MONRROY",
+    "cedula": "86077005",
     "fecha_afiliacion": "",
     "registro": "808",
     "folio": "46",
@@ -10878,8 +10878,8 @@
     "registro": "811",
     "folio": "46",
     "renglon": "33",
-    "direccion": "MANZANA  CASA",
-    "telefono": "",
+    "direccion": "MANZANA 66 CASA 08",
+    "telefono": "3128335017",
     "pagos": [],
     "firma": ""
   },
