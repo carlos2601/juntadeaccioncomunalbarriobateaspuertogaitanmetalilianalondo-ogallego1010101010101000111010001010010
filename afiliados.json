@@ -1,6 +1,6 @@
 [
   {
-    "_lastModified": "2026-07-21T16:34:26.838Z"
+    "_lastModified": "2026-08-13T23:03:39.427Z"
   },
   {
     "id": "1",
@@ -10946,6 +10946,19 @@
     "direccion": "MANZANA 82 CASA 14",
     "telefono": "3115685510",
     "pagos": [],
+    "firma": ""
+  },
+  {
+    "id": "817",
+    "nombre": "PRUEBA",
+    "cedula": "1123456789",
+    "fecha_afiliacion": "18/07/2026",
+    "registro": "817",
+    "folio": "48",
+    "renglon": "3",
+    "direccion": "MANZANA  CASA",
+    "telefono": "3115685510",
+    "pagos": "",
     "firma": ""
   }
 ]
