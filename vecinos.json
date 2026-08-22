@@ -11,17 +11,17 @@
   },
   {
     "id": "2",
-    "nombre": "",
-    "cedula": "",
+    "nombre": "RUBIELA RAMIREZ SEGUA",
+    "cedula": "40416638",
     "sector": "2",
-    "direccion": "",
+    "direccion": "MANZANA 50 CASA 04",
     "telefono": "",
     "fecha_registro": "2026-02-07",
     "pagos": ""
   },
   {
     "id": "3",
-    "nombre": "",
+    "nombre": "ADRIANA LOPEZ CARRANZA",
     "cedula": "",
     "sector": "1",
     "direccion": "",
